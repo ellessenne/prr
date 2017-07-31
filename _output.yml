@@ -1,0 +1,18 @@
+bookdown::gitbook:
+  css: style.css
+  split_by: section
+  config:
+    toc:
+      collapse: none
+    download: [pdf, epub, mobi]
+    sharing:
+      github: yes
+      facebook: no
+      twitter: yes
+bookdown::pdf_book:
+  includes:
+    in_header: preamble.tex
+  latex_engine: xelatex
+  citation_package: natbib
+bookdown::epub_book:
+  stylesheet: style.css
