@@ -1,0 +1,2 @@
+# Simulation study: impact of misspecification in survival models with shared frailty terms {#simstudy2}
+
