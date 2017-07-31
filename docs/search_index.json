@@ -1,0 +1,16 @@
+[
+["introduction.html", "Probation review report Introduction", " Probation review report Alessandro Gasparini 2017-07-31 Introduction This report presents the work I have done during my first year as a PhD student at the Department of Health Sciences, University of Leicester, under the supervision of Dr. Michael Crowther and Prof. Keith Abrams. I will begin by briefly introducing the topic of survival analysis in Chapter 1. Second, I will introduce survival models with random effects (e.g. frailties, in the simplest form) and computational challenges they present in Chapters 2 and 3, respectively. Third, I will present the results of two simulation studies in Chapters 4 and 5; the first simulation study investigates the accuracy of quadrature methods when approximating analytically intractable terms, while the second simulation study investigates the impact of model misspecification in survival models with shared frailty terms. Fourth, I will introduce an interactive tool I have been developing to aid the dissemination of results from simulation studies in Chapter 6. Then, I will introduce the problem of informative visiting process in clinical research using healthcare consumption data in Chapter 7, and how we aim to evaluate and compare the different approaches that have been proposed and utilised in literature to tackle such problem in Chapter 8. Finally, I will briefly summarise the training and personal development activities I have participated to during the first year of my PhD in Chapter 9. This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License. "],
+["survivalanalysis.html", "1 Introduction to survival analysis", " 1 Introduction to survival analysis "],
+["smrandomeffects.html", "2 Survival models with random effects", " 2 Survival models with random effects "],
+["compchallenges.html", "3 Computational challenges in survival models with random effects", " 3 Computational challenges in survival models with random effects "],
+["simstudy1.html", "4 Simulation study: accuracy of Gaussian quadrature", " 4 Simulation study: accuracy of Gaussian quadrature "],
+["simstudy2.html", "5 Simulation study: impact of misspecification in survival models with shared frailty terms", " 5 Simulation study: impact of misspecification in survival models with shared frailty terms "],
+["sirex.html", "6 Exploring results from simulation studies interactively", " 6 Exploring results from simulation studies interactively "],
+["infvp.html", "7 Informative visiting process", " 7 Informative visiting process "],
+["future.html", "8 Future research developments", " 8 Future research developments "],
+["personaldevelopment.html", "9 Personal development ", " 9 Personal development "],
+["supervisory-meetings.html", "9.1 Supervisory meetings", " 9.1 Supervisory meetings "],
+["training.html", "9.2 Training", " 9.2 Training "],
+["conferences.html", "9.3 Conferences", " 9.3 Conferences -->"],
+["references.html", "References", " References "]
+]
