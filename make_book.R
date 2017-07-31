@@ -10,8 +10,8 @@ if (!require(bookdown)) install.packages(bookdown)
 bookdown::clean_book(T)
 
 # Compile all the formats
-bookdown::render_book("00_index.Rmd", "bookdown::gitbook")
-bookdown::render_book("00_index.Rmd", "bookdown::pdf_book")
-bookdown::render_book("00_index.Rmd", "bookdown::epub_book")
+bookdown::render_book("index.Rmd", "bookdown::gitbook")
+bookdown::render_book("index.Rmd", "bookdown::pdf_book")
+bookdown::render_book("index.Rmd", "bookdown::epub_book")
 bookdown::kindlegen(epub = "docs/Probation_review_report_AG.epub") # This requires KindleGen (https://www.amazon.com/gp/feature.html?docId=1000765211); I have added the location of the KindleGen .exe to my PATH variable
 
