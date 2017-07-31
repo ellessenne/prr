@@ -1,0 +1,19 @@
+---
+title: "Probation review report"
+author: "Alessandro Gasparini"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: bibliography.bib
+biblio-style: apalike
+link-citations: yes
+github-repo: ellessenne/prr
+---
+
+# Introduction {-}
+
+This report presents the work I have done during my first year as a PhD student at the Department of Health Sciences, University of Leicester, under the supervision of Dr. Michael Crowther and Prof. Keith Abrams.
+
+I will begin by briefly introducing the topic of survival analysis in Chapter \@ref(survivalanalysis). Second, I will introduce survival models with random effects (e.g. frailties, in the simplest form) and computational challenges they present in Chapters \@ref(smrandomeffects) and \@ref(compchallenges), respectively. Third, I will present the results of two simulation studies in Chapters \@ref(simstudy1) and \@ref(simstudy2); the first simulation study investigates the accuracy of quadrature methods when approximating analytically intractable terms, while the second simulation study investigates the impact of model misspecification in survival models with shared frailty terms. Fourth, I will introduce an interactive tool I have been developing to aid the dissemination of results from simulation studies in Chapter \@ref(sirex). Then, I will introduce the problem of informative visiting process in clinical research using healthcare consumption data in Chapter \@ref(infvp), and how we aim to evaluate and compare the different approaches that have been proposed and utilised in literature to tackle such problem in Chapter \@ref(future). Finally, I will briefly summarise the training and personal development activities I have participated to during the first year of my PhD in Chapter \@ref(personaldevelopment). 
+
+This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/).
