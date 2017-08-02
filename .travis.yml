@@ -2,8 +2,10 @@ language: r
 cache: packages
 
 before_script:
+  - cd ~
   - wget http://kindlegen.s3.amazonaws.com/kindlegen_linux_2.6_i386_v2_9.tar.gz
   - tar -xvzf kindlegen_linux_2.6_i386_v2_9.tar.gz
+  - export PATH=~/:$PATH
 
 script:
   - Rscript -e 'bookdown::render_book("index.rmd", "bookdown::gitbook")'
