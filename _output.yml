@@ -3,7 +3,7 @@ bookdown::gitbook:
   split_by: section
   config:
     toc:
-      collapse: none
+      collapse: section
     download: [pdf, epub, mobi]
     sharing:
       github: yes

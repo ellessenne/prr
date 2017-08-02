@@ -1,1 +1,72 @@
-# Introduction to survival analysis {#survivalanalysis}
+# Introduction to survival analysis {#sa}
+
+Survival analysis is a branch of statistics in which the main outcome consists in the time until the occurrence of a given event. Time could be years, months, weeks, or any amount of calendar time or even age time; event could be death, disease occurrence or relapse, or any other experience of interest. Survival analysis is also known as reliability theory in engineering, duration analysis in economics, and event history analysis in sociology. A broad overview of survival analysis is given in @kleinbaum_2012.
+
+Some examples of time to event data are:
+
+- disease remission in leukemia patients. In this study, leukemia patients are followed over several weeks to study how long they stay in remission status;
+
+- heart disease occurrence. In this study, healthy subjects are followed over several years until occurrence of heart disease, or end of the study;
+
+- renal failure. In this study, individuals with kidney disease are followed until renal failure, or end of the study;
+
+- reliability of complex technical installations. For instance, studies assessing failure rates of components such as bulbs and valves.
+
+In this Chapter I will define survival data and its peculiarities in Section \@ref(sa-survdata) and \@ref(sa-censoring). Terminology and notation used throughout this report will be introduced in Section \@ref(sa-terminology-notation). I will introduce common non-parametric and parametric methods in survival analysis in Section \@ref(sa-nonparsa) and \@ref(sa-parsa), respectively. I will introduce the widely used semi-parametric Cox model in Section \@ref(sa-cox). Finally, I will provide a brief overview of modern, advanced statistical methods in survival analysis in Section \@ref(sa-advanced). 
+
+## Survival data {#sa-survdata}
+
+Survival data generally consists, as previously mentioned, in time until the event of interest and an event indicator. In the leukemia remission example, time to event would be how many weeks it takes before a given patient experiences disease relapse and the event indicator would signal whether the individual relapsed or not before the end of the study. Nevertheless, in certain situations, we may have some information about the survival time but the actual survival time may be unknown. This problem is know as censoring and it is presented in Section \@ref(sa-censoring).
+
+## Censoring {#sa-censoring}
+
+Censoring is a mechanisms that causes survival times to be unobserved. There are many reasons why censoring may occur; among others:
+
+1. a person does not experience the event before the end of the study;
+
+2. a person drops out of the study before the occurrence of the event of interest;
+
+3. a person experience a competing event that impedes the occurrence of the event of interest (e.g.: death, when death is not the study outcome).
+
+```{r censoring, fig.width = 4, fig.height = 4, fig.align = "center", fig.cap = "Simulated right censored survival data."}
+set.seed(1)
+n = 10
+maxt = 20
+censoring = 15
+data = data.frame(
+  id = LETTERS[1:n],
+  entry = runif(n, 0, 5))
+data$s = data$entry + runif(n, 0, maxt)
+data$t = pmin(data$s, censoring)
+data$d = factor(as.numeric(data$s <= censoring), levels = 0:1, labels = c("Censored", "Event"))
+
+ggplot(data, aes(x = t, y = id, shape = d)) + 
+  geom_vline(xintercept = 0, lty = "dashed") +
+  geom_vline(xintercept = 5, lty = "dotted") +
+  geom_segment(aes(x = entry, xend = t, y = id, yend = id), color = "grey50") +
+  geom_point(size = 2) +
+  scale_shape_manual(values = c(1, 4)) +
+  theme_bw() +
+  theme(legend.position = c(1, 0), legend.justification = c(1, 0), legend.background = element_blank(), legend.key = element_blank()) + 
+  labs(y = "Individual", x = "Time", pch = "")
+
+rm(n, maxt, censoring, data)
+```
+
+I simulated survival data for illustration purposes: I assumed a clinical trial with 10 individuals enrolled during a recruitment window of 5 years, and followed for up to 15 years. Not all individuals experience the event of interest during the study period, and are therefore censored at 15 years. The observation time for each individual is depicted in Figure \@ref(fig:censoring) with a solid dark grey line, a cross represents the occurrence of the study event, and a circle represents administrative censoring. Individuals `C`, `E`, `G`, `H`, and `J`  all have censored survival time: I know that they were still event-free at the end of follow-up, i.e. their real survival time is greater than the observed one, but the former is unknown.
+
+This example represents a particular form of censoring: _right censoring_. The defining characteristic of right-censored data is that it is censored (or incomplete) at the right side of the follow-up time, hence the true survival time is greater than the observed time. This example represents _administrative censoring_ as well, as individuals are censored at the end of the study to artificially restrict follow-up time (e.g. for financial reasons). 
+
+It is also possible to encounter data that is _left censored_ or _interval censored_. In the former case, the true survival time is shorter that the observed one, e.g. I know that the event occurred before the observation time, but I do not know when - imagine onset of a viral infection, which can be detected only at a visit time. In the latter, I know that the event occurred within a certain interval of time but I do not know when; using the same example of infection onset, if infection was detected at a visit date but the individual was known to be infection-free at the previous visit, the true infection onset time is unknown and the event time is said to be interval censored.
+
+Finally, another important concept related to right censoring is that of _left truncation_ (or _delayed entry_). Left truncation occurs when an individual enrolls in the study some time after the inclusion criteria are satisfied; individuals that die (or emigrate, ...) before the start of observation time will never enter the study, and inclusion time may differ between individuals. Data arising from such phenomenon is therefore said to be left truncated. 
+
+## Terminology and notation {#sa-terminology-notation}
+
+## Non-parametric survival analysis {#sa-nonparsa}
+
+## Parametric survival analysis {#sa-parsa}
+
+## The Cox model {#sa-cox}
+
+## Advanced survival analysis {#sa-advanced}

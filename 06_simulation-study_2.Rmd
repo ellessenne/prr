@@ -1,2 +1,13 @@
-# Simulation study: impact of misspecification in survival models with shared frailty terms {#simstudy2}
+# Simulation study: impact of misspecification in survival models with shared frailty terms {#simst2}
 
+## Aim {#simst2-aim}
+
+## Data-generating mechanisms {#simst2-dgms}
+
+## Methods {#simst2-methods}
+
+## Estimands {#simst2-est}
+
+## Performance measures {#simst2-pm}
+
+## Results {#simst2-res}

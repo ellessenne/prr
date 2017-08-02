@@ -1,1 +1,1 @@
-# Survival models with random effects {#smrandomeffects}
+# Survival models with random effects {#smre}

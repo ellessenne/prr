@@ -1,1 +1,13 @@
-# Simulation study: accuracy of Gaussian quadrature {#simstudy1}
+# Simulation study: accuracy of Gaussian quadrature {#simst1}
+
+## Aim {#simst1-aim}
+
+## Data-generating mechanisms {#simst1-dgms}
+
+## Methods {#simst1-methods}
+
+## Estimands {#simst1-est}
+
+## Performance measures {#simst1-pm}
+
+## Results {#simst1-res}
