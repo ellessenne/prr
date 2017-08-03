@@ -10,7 +10,6 @@ link-citations: yes
 colorlinks: yes
 github-repo: ellessenne/prr
 fontsize: 12pt
-monofont: "Source Code Pro"
 ---
 
 # Introduction {-}
