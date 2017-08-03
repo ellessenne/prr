@@ -25,7 +25,7 @@
 <meta name="author" content="Alessandro Gasparini">
 
 
-<meta name="date" content="2017-08-02">
+<meta name="date" content="2017-08-03">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -123,7 +123,7 @@
             <section class="normal" id="section-">
 <div id="sa-survdata" class="section level2">
 <h2><span class="header-section-number">1.1</span> Survival data</h2>
-<p>Survival data generally consists, as previously mentioned, in time until the event of interest and an event indicator. In the leukemia remission example, time to event would be how many weeks it takes before a given patient experiences disease relapse and the event indicator would signal whether the individual relapsed or not before the end of the study. Nevertheless, in certain situations, we may have some information about the survival time but the actual survival time may be unknown. This problem is know as censoring and it is presented in Section <a href="sa-censoring.html#sa-censoring">1.2</a>.</p>
+<p>Survival data generally consists - as previously mentioned - in an event of interest and time until its occurrence. In the leukemia remission example, time to event would be how many weeks it takes before a given patient experiences disease relapse and the event would be whether the individual relapsed or not before the end of the study. Nevertheless, in certain situations we may have some information about the survival time but the actual survival time may be unknown. This problem is know as censoring and it is presented in Section <a href="sa-censoring.html#sa-censoring">1.2</a>.</p>
 </div>
             </section>
 
@@ -171,6 +171,17 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

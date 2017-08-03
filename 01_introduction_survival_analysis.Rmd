@@ -16,7 +16,7 @@ In this Chapter I will define survival data and its peculiarities in Section \@r
 
 ## Survival data {#sa-survdata}
 
-Survival data generally consists, as previously mentioned, in time until the event of interest and an event indicator. In the leukemia remission example, time to event would be how many weeks it takes before a given patient experiences disease relapse and the event indicator would signal whether the individual relapsed or not before the end of the study. Nevertheless, in certain situations, we may have some information about the survival time but the actual survival time may be unknown. This problem is know as censoring and it is presented in Section \@ref(sa-censoring).
+Survival data generally consists - as previously mentioned - in an event of interest and time until its occurrence. In the leukemia remission example, time to event would be how many weeks it takes before a given patient experiences disease relapse and the event would be whether the individual relapsed or not before the end of the study. Nevertheless, in certain situations we may have some information about the survival time but the actual survival time may be unknown. This problem is know as censoring and it is presented in Section \@ref(sa-censoring).
 
 ## Censoring {#sa-censoring}
 
@@ -28,40 +28,122 @@ Censoring is a mechanisms that causes survival times to be unobserved. There are
 
 3. a person experience a competing event that impedes the occurrence of the event of interest (e.g.: death, when death is not the study outcome).
 
-```{r censoring, fig.width = 4, fig.height = 4, fig.align = "center", fig.cap = "Simulated right censored survival data."}
+```{r censoring, fig.width = 2 * opts_chunk$get()$fig.width, fig.cap = "Simulated right censored survival data, plotted by their calendar time in panel A and by their study time in panel B."}
 set.seed(1)
 n = 10
-maxt = 20
-censoring = 15
+u = runif(n)
+lambda = 0.1
+p = 1.5
+entry = runif(n)
+s = (-log(u) / (lambda)) ^ (1 / p) + entry
+c = 5
+t = pmin(s, c)
+d = factor(as.numeric(s <= c), levels = 0:1, labels = c("Censored", "Event"))
+
 data = data.frame(
   id = LETTERS[1:n],
-  entry = runif(n, 0, 5))
-data$s = data$entry + runif(n, 0, maxt)
-data$t = pmin(data$s, censoring)
-data$d = factor(as.numeric(data$s <= censoring), levels = 0:1, labels = c("Censored", "Event"))
+  entry = entry,
+  s = s,
+  c = c,
+  t = t,
+  d = d)
 
-ggplot(data, aes(x = t, y = id, shape = d)) + 
+g1 = ggplot(data, aes(x = t, y = id, shape = d)) + 
   geom_vline(xintercept = 0, lty = "dashed") +
-  geom_vline(xintercept = 5, lty = "dotted") +
+  geom_vline(xintercept = 1, lty = "dotted") +
   geom_segment(aes(x = entry, xend = t, y = id, yend = id), color = "grey50") +
   geom_point(size = 2) +
   scale_shape_manual(values = c(1, 4)) +
   theme_bw() +
-  theme(legend.position = c(1, 0), legend.justification = c(1, 0), legend.background = element_blank(), legend.key = element_blank()) + 
-  labs(y = "Individual", x = "Time", pch = "")
+  theme(legend.position = "bottom") + 
+  labs(y = "Individual", x = "Calendar time", shape = "")
 
-rm(n, maxt, censoring, data)
+g2 = ggplot(data, aes(x = t - entry, y = id, shape = d)) + 
+  geom_vline(xintercept = 0, lty = "dashed") +
+  geom_segment(aes(x = 0, xend = t - entry, y = id, yend = id), color = "grey50") +
+  geom_point(size = 2) +
+  scale_shape_manual(values = c(1, 4)) +
+  theme_bw() +
+  theme(legend.position = "bottom") +
+  labs(y = "Individual", x = "Study time", shape = "")
+
+plot_grid(g1, g2, align = "hv", labels = LETTERS)
+
+rm(n, u, entry, s, c, t, d, g1, g2)
 ```
 
-I simulated survival data for illustration purposes: I assumed a clinical trial with 10 individuals enrolled during a recruitment window of 5 years, and followed for up to 15 years. Not all individuals experience the event of interest during the study period, and are therefore censored at 15 years. The observation time for each individual is depicted in Figure \@ref(fig:censoring) with a solid dark grey line, a cross represents the occurrence of the study event, and a circle represents administrative censoring. Individuals `C`, `E`, `G`, `H`, and `J`  all have censored survival time: I know that they were still event-free at the end of follow-up, i.e. their real survival time is greater than the observed one, but the former is unknown.
+I simulated survival data for illustration purposes: I assumed a clinical trial with 10 individuals enrolled during a recruitment window of 1 year, and followed for up to 5 years. Not all individuals experience the event of interest during the study period, and are therefore censored after five years from the start of the study. The observation time for each individual is depicted in Figure \@ref(fig:censoring) with a solid dark grey line, a cross represents the occurrence of the study event, and a circle represents censoring. Individuals `A`, `E`, and `J`  all have censored survival time: I know that they were still event-free at the end of follow-up, i.e. their real survival time is greater than the observed one, but the former is unknown. The simulated data is presented in Figure \@ref(fig:censoring): in panel A, survival data is plotted against the calendar time; conversely, in panel B, survival data is plotted against the study time, e.g. each individual is assigned a _time zero_ corresponding to their enrollment in the study, and survival time is counted from there.
 
 This example represents a particular form of censoring: _right censoring_. The defining characteristic of right-censored data is that it is censored (or incomplete) at the right side of the follow-up time, hence the true survival time is greater than the observed time. This example represents _administrative censoring_ as well, as individuals are censored at the end of the study to artificially restrict follow-up time (e.g. for financial reasons). 
 
 It is also possible to encounter data that is _left censored_ or _interval censored_. In the former case, the true survival time is shorter that the observed one, e.g. I know that the event occurred before the observation time, but I do not know when - imagine onset of a viral infection, which can be detected only at a visit time. In the latter, I know that the event occurred within a certain interval of time but I do not know when; using the same example of infection onset, if infection was detected at a visit date but the individual was known to be infection-free at the previous visit, the true infection onset time is unknown and the event time is said to be interval censored.
 
-Finally, another important concept related to right censoring is that of _left truncation_ (or _delayed entry_). Left truncation occurs when an individual enrolls in the study some time after the inclusion criteria are satisfied; individuals that die (or emigrate, ...) before the start of observation time will never enter the study, and inclusion time may differ between individuals. Data arising from such phenomenon is therefore said to be left truncated. 
+Finally, another important concept related to right censoring is that of _left truncation_ (or _delayed entry_). Left truncation occurs when an individual enrolls in the study some time after the inclusion criteria are satisfied; individuals that die (or emigrate, ...) before the start of observation time will never enter the study, and inclusion time may differ between individuals. Data arising from such phenomenon is therefore said to be left truncated.
 
 ## Terminology and notation {#sa-terminology-notation}
+
+I denote the random variable for an individual's survival time with \(S\); since it denotes time, \(S\) can assume any non-negative value. The lower-case \(s\) represent a specific value of interest drawn from \(S\) for a given individual. In the case of right censoring, I denote with \(C\) the random variable representing censoring time, and \(c\) its realisation. The observed time is denoted with \(T = \min(S, C)\), and its realisation is \(t\). Finally, I denote with \(D = I(S \le C)\) the random variable indicating either occurrence of the event of interest or censorship; analogously as before, its realisation is lower-case \(d\).
+
+Next, I defined two quantities of interest in survival analysis, the _survival function_ and the _hazard function_. They are both functions of the observed time \(t\) and are denoted by \(S(t)\) and \(h(t)\), respectively. 
+
+The survival function is the complement of the cumulative distribution function of the observed time \(T\) and represent the probability that a given individual survives^[I use the term _survives_ loosely speaking, for conciseness - formally, I refer to _not experiencing the event of interest_.] longer than a specified time \(t\): 
+\[
+S(t) = 1 - F_T(t) = 1 - P(T \le t) = P(T > t)
+\]
+\(t\) ranges (theoretically) between 0 and infinity, hence the survival function can be plotted as a smooth, continuous function that tends to 0 as \(t\) goes to infinity. In practice, though, the survival function appears as a step function as (1) individuals can be observed at discrete times only and (2) not all individuals may experience the event before the end of the study. Figure \@ref(fig:survival) depicts this difference: in panel A I plotted a theoretical survival function, restricted to 15 years of follow-up for comparison purposes, while in panel B I plotted the survival function relative to the survival data simulated in Section \@ref(sa-censoring). The former is a smooth function of time, and should we extend the x-axis to infinity the function would eventually reach zero. Conversely, the latter is a step function with steps at each event time, and should we extend the x-axis to infinity the function would remain flat after the last observed event.
+
+```{r survival, fig.width = 2 * opts_chunk$get()$fig.width, fig.cap = "Theoretical survival function (A) and observed survival function for simulated data (B)."}
+# theoretical survival function (weibull with lambda = 0.1, p = 1.5)
+sfun = function(t) exp(-lambda * t ^ p)
+g1 = ggplot(data.frame(t = 0:15), aes(t)) + 
+  stat_function(fun = sfun) +
+  theme_bw() + 
+  scale_y_continuous(labels = scales::percent) + 
+  coord_cartesian(ylim = c(0, 1)) + 
+  labs(x = "Time", y = "S(t)")
+
+# actual survival function from simulated data
+sf = survfit(Surv(time = entry, time2 = t, event = as.numeric(d)) ~ 1, data = data)
+g2 = ggplot(data.frame(time = sf$time, surv = sf$surv), aes(x = time, y = surv)) + 
+  geom_step() +
+  theme_bw() + 
+  scale_y_continuous(labels = scales::percent) +
+  coord_cartesian(ylim = c(0, 1)) +
+  labs(x = "Time", y = "S(t)")
+plot_grid(g1, g2, align = "hv", labels = LETTERS)
+rm(sfun, sf, g1, g2)
+```
+
+The hazard function \(h(t)\) is the limit of the probability of the survival time \(T\) laying within an interval \([t, t + \Delta(t))\) given that an individual survived up to time \(t\) divided by the length of the interval \(\Delta(t)\), for \(\Delta(t)\) approaching zero:
+\[
+h(t) = \lim_{\Delta(t) \to 0} \frac{P(t \le T < t + \Delta(t) | T \ge t)}{\Delta(t)}
+\]
+It represent the instantaneous potential (e.g. risk) for the event to occur within the interval \([t, t + \Delta(t))\) (with \(\Delta(t) \to 0\)), given that the individual survived up to time \(t\). The hazard function is always non-negative, it can assume different shapes over time, and it has no upper bound. In Figure \@ref(fig:hazard) I present a simple hazard function; it increases over time, which means that the instantaneous risk of event increases over time.
+
+```{r hazard, fig.cap = "Example of hazard function."}
+# theoretical hazard function (weibull with lambda = 0.01, p = 1.7)
+hfun = function(t) lambda * p * t ^ (p - 1)
+ggplot(data.frame(t = 0:15), aes(t)) + 
+  stat_function(fun = hfun) +
+  theme_bw() + 
+  labs(x = "Time", y = "h(t)")
+
+rm(hfun)
+```
+
+The survival function from Figure \@ref(fig:survival), panel A, and the hazard function from Figure \@ref(fig:hazard) are strictly related. In fact, there is a clearly defined mathematical relationship between the survival and the hazard function: it is possible to derive the form of \(S(t)\) when knowing the form of \(h(t)\), and vice versa. Formally:
+\[
+S(t) = \exp \left[ -\int_0^t h(u) \ du \right]
+\]
+\[
+h(t) =  -\left[ \frac{d S(t) / dt}{S(t)} \right]
+\]
+
+Finally, a third quantity of interest in survival analysis that is strictly related to the survival and hazard functions is the cumulative hazard function \(H(t)\). The cumulative hazard function represents the accumulation of hazard (e.g. \(h(t)\)) over time, and can be defined as
+\[
+H(t) = \int_0^t h(u) \ du;
+\]
+it can conveniently be expressed in terms of survival function via the relationship \(H(t) = - \log S(t)\), or alternatively with \(S(t) = \exp(-H(t))\).
 
 ## Non-parametric survival analysis {#sa-nonparsa}
 

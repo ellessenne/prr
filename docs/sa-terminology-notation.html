@@ -25,7 +25,7 @@
 <meta name="author" content="Alessandro Gasparini">
 
 
-<meta name="date" content="2017-08-02">
+<meta name="date" content="2017-08-03">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -123,6 +123,40 @@
             <section class="normal" id="section-">
 <div id="sa-terminology-notation" class="section level2">
 <h2><span class="header-section-number">1.3</span> Terminology and notation</h2>
+<p>I denote the random variable for an individual’s survival time with <span class="math inline">\(S\)</span>; since it denotes time, <span class="math inline">\(S\)</span> can assume any non-negative value. The lower-case <span class="math inline">\(s\)</span> represent a specific value of interest drawn from <span class="math inline">\(S\)</span> for a given individual. In the case of right censoring, I denote with <span class="math inline">\(C\)</span> the random variable representing censoring time, and <span class="math inline">\(c\)</span> its realisation. The observed time is denoted with <span class="math inline">\(T = \min(S, C)\)</span>, and its realisation is <span class="math inline">\(t\)</span>. Finally, I denote with <span class="math inline">\(D = I(S \le C)\)</span> the random variable indicating either occurrence of the event of interest or censorship; analogously as before, its realisation is lower-case <span class="math inline">\(d\)</span>.</p>
+<p>Next, I defined two quantities of interest in survival analysis, the <em>survival function</em> and the <em>hazard function</em>. They are both functions of the observed time <span class="math inline">\(t\)</span> and are denoted by <span class="math inline">\(S(t)\)</span> and <span class="math inline">\(h(t)\)</span>, respectively.</p>
+<p>The survival function is the complement of the cumulative distribution function of the observed time <span class="math inline">\(T\)</span> and represent the probability that a given individual survives<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> longer than a specified time <span class="math inline">\(t\)</span>: <span class="math display">\[
+S(t) = 1 - F_T(t) = 1 - P(T \le t) = P(T &gt; t)
+\]</span> <span class="math inline">\(t\)</span> ranges (theoretically) between 0 and infinity, hence the survival function can be plotted as a smooth, continuous function that tends to 0 as <span class="math inline">\(t\)</span> goes to infinity. In practice, though, the survival function appears as a step function as (1) individuals can be observed at discrete times only and (2) not all individuals may experience the event before the end of the study. Figure <a href="sa-terminology-notation.html#fig:survival">1.2</a> depicts this difference: in panel A I plotted a theoretical survival function, restricted to 15 years of follow-up for comparison purposes, while in panel B I plotted the survival function relative to the survival data simulated in Section <a href="sa-censoring.html#sa-censoring">1.2</a>. The former is a smooth function of time, and should we extend the x-axis to infinity the function would eventually reach zero. Conversely, the latter is a step function with steps at each event time, and should we extend the x-axis to infinity the function would remain flat after the last observed event.</p>
+<div class="figure" style="text-align: center"><span id="fig:survival"></span>
+<img src="figs/survival-1.png" alt="Theoretical survival function (A) and observed survival function for simulated data (B)." width="768" />
+<p class="caption">
+Figure 1.2: Theoretical survival function (A) and observed survival function for simulated data (B).
+</p>
+</div>
+<p>The hazard function <span class="math inline">\(h(t)\)</span> is the limit of the probability of the survival time <span class="math inline">\(T\)</span> laying within an interval <span class="math inline">\([t, t + \Delta(t))\)</span> given that an individual survived up to time <span class="math inline">\(t\)</span> divided by the length of the interval <span class="math inline">\(\Delta(t)\)</span>, for <span class="math inline">\(\Delta(t)\)</span> approaching zero: <span class="math display">\[
+h(t) = \lim_{\Delta(t) \to 0} \frac{P(t \le T &lt; t + \Delta(t) | T \ge t)}{\Delta(t)}
+\]</span> It represent the instantaneous potential (e.g. risk) for the event to occur within the interval <span class="math inline">\([t, t + \Delta(t))\)</span> (with <span class="math inline">\(\Delta(t) \to 0\)</span>), given that the individual survived up to time <span class="math inline">\(t\)</span>. The hazard function is always non-negative, it can assume different shapes over time, and it has no upper bound. In Figure <a href="sa-terminology-notation.html#fig:hazard">1.3</a> I present a simple hazard function; it increases over time, which means that the instantaneous risk of event increases over time.</p>
+<div class="figure" style="text-align: center"><span id="fig:hazard"></span>
+<img src="figs/hazard-1.png" alt="Example of hazard function." width="384" />
+<p class="caption">
+Figure 1.3: Example of hazard function.
+</p>
+</div>
+<p>The survival function from Figure <a href="sa-terminology-notation.html#fig:survival">1.2</a>, panel A, and the hazard function from Figure <a href="sa-terminology-notation.html#fig:hazard">1.3</a> are strictly related. In fact, there is a clearly defined mathematical relationship between the survival and the hazard function: it is possible to derive the form of <span class="math inline">\(S(t)\)</span> when knowing the form of <span class="math inline">\(h(t)\)</span>, and vice versa. Formally: <span class="math display">\[
+S(t) = \exp \left[ -\int_0^t h(u) \ du \right]
+\]</span> <span class="math display">\[
+h(t) =  -\left[ \frac{d S(t) / dt}{S(t)} \right]
+\]</span></p>
+<p>Finally, a third quantity of interest in survival analysis that is strictly related to the survival and hazard functions is the cumulative hazard function <span class="math inline">\(H(t)\)</span>. The cumulative hazard function represents the accumulation of hazard (e.g. <span class="math inline">\(h(t)\)</span>) over time, and can be defined as <span class="math display">\[
+H(t) = \int_0^t h(u) \ du;
+\]</span> it can conveniently be expressed in terms of survival function via the relationship <span class="math inline">\(H(t) = - \log S(t)\)</span>, or alternatively with <span class="math inline">\(S(t) = \exp(-H(t))\)</span>.</p>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>I use the term <em>survives</em> loosely speaking, for conciseness - formally, I refer to <em>not experiencing the event of interest</em>.<a href="sa-terminology-notation.html#fnref1">↩</a></p></li>
+</ol>
 </div>
             </section>
 
@@ -170,6 +204,17 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

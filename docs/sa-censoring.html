@@ -25,7 +25,7 @@
 <meta name="author" content="Alessandro Gasparini">
 
 
-<meta name="date" content="2017-08-02">
+<meta name="date" content="2017-08-03">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -130,12 +130,12 @@
 <li><p>a person experience a competing event that impedes the occurrence of the event of interest (e.g.: death, when death is not the study outcome).</p></li>
 </ol>
 <div class="figure" style="text-align: center"><span id="fig:censoring"></span>
-<img src="Probation_review_report_AG_files/figure-html/censoring-1.png" alt="Simulated right censored survival data." width="384" />
+<img src="figs/censoring-1.png" alt="Simulated right censored survival data, plotted by their calendar time in panel A and by their study time in panel B." width="768" />
 <p class="caption">
-Figure 1.1: Simulated right censored survival data.
+Figure 1.1: Simulated right censored survival data, plotted by their calendar time in panel A and by their study time in panel B.
 </p>
 </div>
-<p>I simulated survival data for illustration purposes: I assumed a clinical trial with 10 individuals enrolled during a recruitment window of 5 years, and followed for up to 15 years. Not all individuals experience the event of interest during the study period, and are therefore censored at 15 years. The observation time for each individual is depicted in Figure <a href="sa-censoring.html#fig:censoring">1.1</a> with a solid dark grey line, a cross represents the occurrence of the study event, and a circle represents administrative censoring. Individuals <code>C</code>, <code>E</code>, <code>G</code>, <code>H</code>, and <code>J</code> all have censored survival time: I know that they were still event-free at the end of follow-up, i.e. their real survival time is greater than the observed one, but the former is unknown.</p>
+<p>I simulated survival data for illustration purposes: I assumed a clinical trial with 10 individuals enrolled during a recruitment window of 1 year, and followed for up to 5 years. Not all individuals experience the event of interest during the study period, and are therefore censored after five years from the start of the study. The observation time for each individual is depicted in Figure <a href="sa-censoring.html#fig:censoring">1.1</a> with a solid dark grey line, a cross represents the occurrence of the study event, and a circle represents censoring. Individuals <code>A</code>, <code>E</code>, and <code>J</code> all have censored survival time: I know that they were still event-free at the end of follow-up, i.e. their real survival time is greater than the observed one, but the former is unknown. The simulated data is presented in Figure <a href="sa-censoring.html#fig:censoring">1.1</a>: in panel A, survival data is plotted against the calendar time; conversely, in panel B, survival data is plotted against the study time, e.g. each individual is assigned a <em>time zero</em> corresponding to their enrollment in the study, and survival time is counted from there.</p>
 <p>This example represents a particular form of censoring: <em>right censoring</em>. The defining characteristic of right-censored data is that it is censored (or incomplete) at the right side of the follow-up time, hence the true survival time is greater than the observed time. This example represents <em>administrative censoring</em> as well, as individuals are censored at the end of the study to artificially restrict follow-up time (e.g. for financial reasons).</p>
 <p>It is also possible to encounter data that is <em>left censored</em> or <em>interval censored</em>. In the former case, the true survival time is shorter that the observed one, e.g. I know that the event occurred before the observation time, but I do not know when - imagine onset of a viral infection, which can be detected only at a visit time. In the latter, I know that the event occurred within a certain interval of time but I do not know when; using the same example of infection onset, if infection was detected at a visit date but the individual was known to be infection-free at the previous visit, the true infection onset time is unknown and the event time is said to be interval censored.</p>
 <p>Finally, another important concept related to right censoring is that of <em>left truncation</em> (or <em>delayed entry</em>). Left truncation occurs when an individual enrolls in the study some time after the inclusion criteria are satisfied; individuals that die (or emigrate, …) before the start of observation time will never enter the study, and inclusion time may differ between individuals. Data arising from such phenomenon is therefore said to be left truncated.</p>
@@ -186,6 +186,17 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
