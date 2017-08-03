@@ -1,6 +1,6 @@
 # Introduction to survival analysis {#sa}
 
-Survival analysis is a branch of statistics in which the main outcome consists in the time until the occurrence of a given event. Time could be years, months, weeks, or any amount of calendar time or even age time; event could be death, disease occurrence or relapse, or any other experience of interest. Survival analysis is also known as reliability theory in engineering, duration analysis in economics, and event history analysis in sociology. A broad overview of survival analysis is given in @kleinbaum_2012.
+Survival analysis is a branch of statistics in which the main outcome consists in the time until the occurrence of a given event. Time could be years, months, weeks, or any amount of calendar time or even age time; event could be death, disease occurrence or relapse, or any other experience of interest. Survival analysis is also known as reliability theory in engineering, duration analysis in economics, and event history analysis in sociology. A broad overview of survival analysis is given in @kalbfleisch_2011 and in @kleinbaum_2012.
 
 Some examples of time to event data are:
 
@@ -12,7 +12,7 @@ Some examples of time to event data are:
 
 - reliability of complex technical installations. For instance, studies assessing failure rates of components such as bulbs and valves.
 
-In this Chapter I will define survival data and its peculiarities in Section \@ref(sa-survdata) and \@ref(sa-censoring). Terminology and notation used throughout this report will be introduced in Section \@ref(sa-terminology-notation). I will introduce common non-parametric and parametric methods in survival analysis in Section \@ref(sa-nonparsa) and \@ref(sa-parsa), respectively. I will introduce the widely used semi-parametric Cox model in Section \@ref(sa-cox). Finally, I will provide a brief overview of modern, advanced statistical methods in survival analysis in Section \@ref(sa-advanced). 
+In this Chapter I will define survival data and its peculiarities in Section \@ref(sa-survdata) and \@ref(sa-censoring). Terminology and notation used throughout this report will be introduced in Section \@ref(sa-terminology-notation). I will introduce common non-parametric and parametric methods in survival analysis in Sections \@ref(sa-estsurv), \@ref(sa-compsurv), and \@ref(sa-parsa). I will introduce the widely used semi-parametric Cox model in Section \@ref(sa-cox). Finally, I will provide a brief overview of modern, advanced statistical methods in survival analysis in Section \@ref(sa-advanced). 
 
 ## Survival data {#sa-survdata}
 
@@ -95,7 +95,7 @@ S(t) = 1 - F_T(t) = 1 - P(T \le t) = P(T > t)
 ```{r survival, fig.width = 2 * opts_chunk$get()$fig.width, fig.cap = "Theoretical survival function (A) and observed survival function for simulated data (B)."}
 # theoretical survival function (weibull with lambda = 0.1, p = 1.5)
 sfun = function(t) exp(-lambda * t ^ p)
-g1 = ggplot(data.frame(t = 0:15), aes(t)) + 
+g1 = ggplot(data.frame(t = 0:5), aes(t)) + 
   stat_function(fun = sfun) +
   theme_bw() + 
   scale_y_continuous(labels = scales::percent) + 
@@ -103,8 +103,10 @@ g1 = ggplot(data.frame(t = 0:15), aes(t)) +
   labs(x = "Time", y = "S(t)")
 
 # actual survival function from simulated data
-sf = survfit(Surv(time = entry, time2 = t, event = as.numeric(d)) ~ 1, data = data)
-g2 = ggplot(data.frame(time = sf$time, surv = sf$surv), aes(x = time, y = surv)) + 
+sf = survfit(Surv(time = t - entry, event = as.numeric(d)) ~ 1, data = data)
+g2 = with(summary(sf, times = sort(unique(c(0:5, data$t - data$entry)))),
+  data.frame(time = time, surv = surv)) %>% 
+  ggplot(aes(x = time, y = surv)) + 
   geom_step() +
   theme_bw() + 
   scale_y_continuous(labels = scales::percent) +
@@ -123,7 +125,7 @@ It represent the instantaneous potential (e.g. risk) for the event to occur with
 ```{r hazard, fig.cap = "Example of hazard function."}
 # theoretical hazard function (weibull with lambda = 0.01, p = 1.7)
 hfun = function(t) lambda * p * t ^ (p - 1)
-ggplot(data.frame(t = 0:15), aes(t)) + 
+ggplot(data.frame(t = 0:5), aes(t)) + 
   stat_function(fun = hfun) +
   theme_bw() + 
   labs(x = "Time", y = "h(t)")
@@ -145,7 +147,9 @@ H(t) = \int_0^t h(u) \ du;
 \]
 it can conveniently be expressed in terms of survival function via the relationship \(H(t) = - \log S(t)\), or alternatively with \(S(t) = \exp(-H(t))\).
 
-## Non-parametric survival analysis {#sa-nonparsa}
+## Estimation of the survival function {#sa-estsurv}
+
+## Comparison of survival curves {#sa-compsurv}
 
 ## Parametric survival analysis {#sa-parsa}
 
