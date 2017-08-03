@@ -38,7 +38,9 @@ entry = runif(n)
 s = (-log(u) / (lambda)) ^ (1 / p) + entry
 c = 5
 t = pmin(s, c)
-d = factor(as.numeric(s <= c), levels = 0:1, labels = c("Censored", "Event"))
+t0 = t - entry
+d = as.numeric(s <= c)
+df = factor(d, levels = 0:1, labels = c("Censored", "Event"))
 
 data = data.frame(
   id = LETTERS[1:n],
@@ -46,9 +48,11 @@ data = data.frame(
   s = s,
   c = c,
   t = t,
-  d = d)
+  t0 = t0,
+  d = d,
+  df = df)
 
-g1 = ggplot(data, aes(x = t, y = id, shape = d)) + 
+g1 = ggplot(data, aes(x = t, y = id, shape = df)) + 
   geom_vline(xintercept = 0, lty = "dashed") +
   geom_vline(xintercept = 1, lty = "dotted") +
   geom_segment(aes(x = entry, xend = t, y = id, yend = id), color = "grey50") +
@@ -58,9 +62,9 @@ g1 = ggplot(data, aes(x = t, y = id, shape = d)) +
   theme(legend.position = "bottom") + 
   labs(y = "Individual", x = "Calendar time", shape = "")
 
-g2 = ggplot(data, aes(x = t - entry, y = id, shape = d)) + 
+g2 = ggplot(data, aes(x = t0, y = id, shape = df)) + 
   geom_vline(xintercept = 0, lty = "dashed") +
-  geom_segment(aes(x = 0, xend = t - entry, y = id, yend = id), color = "grey50") +
+  geom_segment(aes(x = 0, xend = t0, y = id, yend = id), color = "grey50") +
   geom_point(size = 2) +
   scale_shape_manual(values = c(1, 4)) +
   theme_bw() +
@@ -103,13 +107,10 @@ g1 = ggplot(data.frame(t = 0:5), aes(t)) +
   labs(x = "Time", y = "S(t)")
 
 # actual survival function from simulated data
-sf = survfit(Surv(time = t - entry, event = as.numeric(d)) ~ 1, data = data)
-g2 = with(summary(sf, times = sort(unique(c(0:5, data$t - data$entry)))),
-  data.frame(time = time, surv = surv)) %>% 
-  ggplot(aes(x = time, y = surv)) + 
-  geom_step() +
-  theme_bw() + 
-  scale_y_continuous(labels = scales::percent) +
+sf = survfit(Surv(time = t0, event = d) ~ 1, data = data)
+g2 = autoplot(sf, conf.int = F, censor = F) + 
+  theme_bw() +
+  coord_cartesian(ylim = c(0, 1)) +
   coord_cartesian(ylim = c(0, 1)) +
   labs(x = "Time", y = "S(t)")
 plot_grid(g1, g2, align = "hv", labels = LETTERS)
@@ -148,6 +149,40 @@ H(t) = \int_0^t h(u) \ du;
 it can conveniently be expressed in terms of survival function via the relationship \(H(t) = - \log S(t)\), or alternatively with \(S(t) = \exp(-H(t))\).
 
 ## Estimation of the survival function {#sa-estsurv}
+
+The survival function presented in Figure \@ref(fig:survival), panel B, is a non-parametric estimate of the true survival function based on the data only. The estimator employed is this case is the Kaplan-Meier estimator of the survival function [@kaplan_1958], with which the estimated survival probabilities are obtained using a product limit formula. The general form for the Kaplan-Meier estimator at time \(t_{(i)}\) is
+\[
+\hat{S}(t_{(i)}) = \hat{S}(t_{(i - 1)}) \times \hat{P}(T > t_{(i)} | T \ge t_{(i)}),
+\]
+with \(t_{(i)}\) being the \(i\)^th^ ordered failure time. The interpretation is straightforward: it is the product of the probability of surviving past the previous event-time (\(\hat{S}(t_{(i - 1)})\)) times the conditional probability of surviving past the current time \(t_{(i)}\) given survival to at least the current time (\(\hat{P}(T > t_{(i)} | T \ge t_{(i)})\)). The product limit formula is:
+\[
+\hat{S}(t_{(i)}) = \prod_{j = 1}^i \hat{P}(T > t_{(j)} | T \ge t_{(j)})
+\]
+The conditional probability in the product limit formula can be estimated from the observed data as:
+\[
+\hat{P}(T > t_{(i)} | T \ge t_{(i)}) = \frac{r_{(i)} - e_{(i)}}{r_{(i)}},
+\]
+where \(r_{(i)}\) and \(e_{(i)}\) are the number of individuals at risk and the number of events at time \(t_{(i)}\), respectively.
+
+The Kaplan-Meier estimator can be computed using R and the function `survfit` from the `survival` package. An example using the simulated data from Section \@ref(sa-censoring) (stored in a data frame named `data`):
+
+```{r km-example-fit, echo = TRUE}
+# library(survival)
+fit = survfit(Surv(time = t0, event = d) ~ 1, data = data)
+summary(fit)
+```
+
+By doing so, I obtain an estimate of the survival function (column `survival`) at each distinct failure time (column `time`). For instance, the survival probability at \(t\) = `r cute(summary(fit)$time[3])` is `r cute(summary(fit)$surv[3])`, with 95% confidence interval (`r cute(summary(fit)$lower[3])` - `r cute(summary(fit)$upper[3])`).
+
+Finally, plotting the estimated survival curve I obtain Figure \@ref(fig:km-example-plot), which is exactly the same survival curve presented in panel B of Figure \@ref(fig:survival).
+
+```{r km-example-plot, echo = TRUE, fig.cap = "Estimated survival function using the Kaplan-Meier estimator on the simulated data."}
+# library(ggfortify)
+autoplot(fit, conf.int = FALSE, censor = FALSE) + 
+  theme_bw() +
+  coord_cartesian(ylim = c(0, 1)) +
+  labs(x = "Time", y = expression(hat(S)[KM](t)))
+```
 
 ## Comparison of survival curves {#sa-compsurv}
 

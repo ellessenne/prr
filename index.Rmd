@@ -21,15 +21,29 @@ I will begin by briefly introducing the topic of survival analysis in Chapter \@
 The text of this report is licensed under the [Creative Commons Attribution-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/), while the underlying code is licensed under the [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html). The report is written using [bookdown](https://www.bookdown.org) [@xie_2016], and can be accessed online at [https://ellessenne.github.io/prr/](https://ellessenne.github.io/prr/).
 
 ```{r options, include = FALSE}
+# require knitr
 if (!require("knitr")) install.packages("knitr")
+
+# set chunk options
 knitr::opts_chunk$set(
-  echo = FALSE, 
+  echo = FALSE,
   message = FALSE,
   warning = FALSE,
-  fig.align = "center", fig.width = 4, fig.height = 4, fig.path = "figs/")
+  fig.align = "center",
+  fig.width = 4,
+  fig.height = 4,
+  fig.path = "figs/")
+
+# function for better printing of numbers:
+cute = function(x, digits = 3) sprintf(paste0("%.", digits, "f"), x)
 ```
 
-```{r packages}
+```{r packages, include = FALSE}
 if (!require("pacman")) install.packages("pacman")
-pacman::p_load("ggplot2", "survival", "cowplot", "dplyr")
+pacman::p_load(
+  "ggplot2",
+  "survival",
+  "cowplot",
+  "dplyr",
+  "ggfortify")
 ```
