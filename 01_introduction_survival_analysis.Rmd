@@ -12,7 +12,7 @@ Some examples of time to event data are:
 
 - reliability of complex technical installations. For instance, studies assessing failure rates of components such as bulbs and valves.
 
-In this Chapter I will define survival data and its peculiarities in Section \@ref(sa-survdata) and \@ref(sa-censoring). Terminology and notation used throughout this report will be introduced in Section \@ref(sa-terminology-notation). I will introduce common non-parametric and parametric methods in survival analysis in Sections \@ref(sa-estsurv), \@ref(sa-compsurv), and \@ref(sa-parsa). I will introduce the widely used semi-parametric Cox model in Section \@ref(sa-cox). Finally, I will provide a brief overview of modern, advanced statistical methods in survival analysis in Section \@ref(sa-advanced). 
+In this Chapter I will define survival data and its peculiarities in Section \@ref(sa-survdata) and \@ref(sa-censoring). Terminology and notation used throughout this report will be introduced in Section \@ref(sa-terminology-notation). I will introduce common non-parametric and parametric methods in survival analysis in Sections \@ref(sa-estsurv) and \@ref(sa-parsa). I will introduce the widely used semi-parametric Cox model in Section \@ref(sa-cox). Finally, I will provide a brief overview of modern, advanced statistical methods in survival analysis in Section \@ref(sa-advanced). 
 
 ## Survival data {#sa-survdata}
 
@@ -184,9 +184,211 @@ autoplot(fit, conf.int = FALSE, censor = FALSE) +
   labs(x = "Time", y = expression(hat(S)[KM](t)))
 ```
 
-## Comparison of survival curves {#sa-compsurv}
-
 ## Parametric survival analysis {#sa-parsa}
+
+In applied settings it is often of interest to assess the association between observed covariates and the survival time of interest. For instance, it may be of interest to study whether a treatment is effective in slowing disease relapse (e.g. relapse of leukemia), whether there are difference between genders or age categories. A common way of assessing the effect of covariates on a time to event outcome, while adjusting for potentially confounding factors at the same time, consists in using a regression model. 
+
+In the context of survival data, two models are commonly used: the _accelerated failure time_ model (AFT), and the _proportional hazards_ (PH) model. In the former, the natural logarithm of the observed survival time \(\log t\) is expressed as a linear function of the covariates \(X\):
+\[
+\log t = X \beta + \epsilon
+\],
+with \(\beta\) a vector of regression coefficients and \(\epsilon\) a vector of residual error terms. Assuming a parametric distribution for \(\epsilon\) determines the regression model: log-normal, log-logistic, Weibull, etc. In the AFT model, a positive association of the covariates with survival time implies an increased expected time to event. In the PH model, the covariates have a multiplicative effect on the hazard function:
+\[
+h(t) = h_0(t) g(X),
+\]
+for some \(h_0(t)\) and \(g(X)\), with \(g(\cdot)\)) a non-negative function of the covariates. A popular choice for the latter is \(g(X) = \exp(X \beta)\); conversely, is is possible to either left the former unspecified, or assume a parametric distribution. The focus of this Section is on specifying a parametric distribution for \(h_0(t)\), yielding the so-called _parametric survival regression models_; I will present commonly assumed parametric distributions in Section \@ref(sa-parsa-distributions), the estimation procedure in Section \@ref(sa-parsa-estimation), and an example using data from the International Stroke Trial (IST) [@ist_1997, @istdb_2011] in Section \@ref(sa-parsa-example). Leaving \(h_0(t)\) unspecified yields the semi-parametric Cox model, that I will present in Section \@ref(sa-cox). 
+
+From now on I will focus on the proportional hazards formulation of the survival model.
+
+### Failure time distribution {#sa-parsa-distributions}
+
+I mentioned in Section \@ref(sa) that the random variable representing the survival time is non-negative; hence, we can choose any non-negative distribution to assign to \(h_0(t)\). Commonly used distribution are the Exponential, Weibull, log-Normal, and Gompertz distributions; other possible distributions are the inverse Weibull, the log-skew-Normal [@azzalini_1985], the log-logistic and complex mixture distributions (such as the two components mixture Weibull distribution, @mclachlan_1994). Each distribution yields a different Survival and hazard function:
+
+- Exponential distribution:
+    * \(h_0(t) = \lambda\)
+    * \(S(t) = \exp(-\lambda t)\)
+    * \(\lambda > 0\)
+- Weibull distribution:
+    * \(h_0(t) = \lambda p t ^ {p - 1}\)
+    * \(S(t) = \exp(-\lambda t ^ p)\)
+    * \(\lambda, p > 0\)
+- log-Normal distribution:
+    * \(h_0(t) = \frac{\phi(\frac{\log t - \mu}{\sigma})}{\sigma t \left(1 - \Phi \left[ \frac{\log t - mu}{\sigma} \right] \right)}\)
+    * \(S(t) = 1 - \Phi\left( \frac{\log t - \mu}{\sigma} \right)\)
+    * \(\mu \in R; \sigma > 0\)
+- Gompertz distribution:
+    * \(h_0(t) = \lambda \exp(\gamma t)\)
+    * \(S(t) = \exp \left[ -\frac{\lambda}{\gamma} (\exp(\gamma t) - 1) \right]\)
+    * \(\lambda, \gamma > 0\)
+- inverse Weibull distribution:
+    * \(h_0(t) = \frac{\lambda p t ^ {-(p + 1)}}{\exp(\lambda t ^ {-p}) - 1}\)
+    * \(S(t) = 1 - \exp(-\lambda t ^ {-p})\)
+    * \(\lambda, p > 0\)
+- log-logistic distribution:
+    * \(h_0(t) = \frac{\exp(\alpha) \kappa t ^ {\kappa - 1}}{1 + \exp(\alpha) t ^ \kappa}\)
+    * \(S(t) = \frac{1}{1 + \exp(\alpha) t ^ \kappa}\)
+    * \(\alpha \in R; \kappa > 0\)
+- log-skew-Normal distribution^[\(SN(\cdot)\) is the cumulative distribution function of a skew-Normal random variable with parameters \(\xi\), \(\omega\), and \(\alpha\) [@azzalini_1985]]:
+    * \(h_0(t) = \frac{1 \phi \left( \frac{\log t - \xi}{\omega} \right) \Phi \left( \alpha \frac{\log t - \xi}{\omega}\right)}{t \omega \left[ 1 - SN \left( \log t; \xi, \omega, \alpha \right) \right]}\)
+    * \(S(t) = 1 - SN\left( \log t; \xi, \omega, \alpha \right)\)
+    * \(\xi, \alpha \in R; \omega > 0 \)
+- Two components mixture Weibull distribution:
+    * \(h_0(t) = \frac{\lambda_1 p_1 t ^ {p_1 - 1} \pi \exp(-\lambda_1 t ^ {p_1}) + \lambda_2 p_2 t ^ {p_2 - 1} (1 - \pi) \exp(-\lambda_2 t ^ {p_2})}{\pi \exp(-\lambda_1 t ^ {p_1}) + (1 - \pi) \exp(-\lambda_2 t ^ {p_2})}\)
+    * \(S(t) = \pi \exp(-\lambda_1 t ^ {p_1}) + (1 - \pi) \exp(-\lambda_2 t ^ {p_2})\)
+    * \(\lambda_1, \lambda_2, p_1, p_2 > 0; \pi \in [0, 1]\)
+
+### Estimation procedure {#sa-parsa-estimation}
+
+Assume \(n\) observations with the bivariate response \((t_i, d_i)\), with \(i = 1, \dots, n\). For a given survival function \(S(t)\) the density function is given by 
+\[
+f(t) = - \frac{d S(t)}{dt},
+\]
+and the hazard function by 
+\[
+h(t) = \frac{f(t)}{S(t)}.
+\]
+
+The parameters of the parametric proportional hazards survival model presented in Section \@ref(sa-parsa) can be estimated via the maximum likelihood method. A subject that experiences the event of interest at time \(t_i\) contributes to the likelihood the density at time \(t_i\), i.e. \(f(t_i)\); conversely, a censored observation know to survive until tile \(t_i\) contributes \(S(t_i)\) to the likelihood. The individual contribution to the likelihood \(L_i\) can therefore be written as
+\[
+L_i = h(t_i) ^ d_i S(t_i),
+\]
+where \(d_i\) is the event indicator variable. The overall likelihood is the product of the individual contributions:
+\[
+L = \prod_{i = 1} ^ n L_i.
+\]
+Taking the natural logarithm of the likelihood for ease of computation:
+\[
+\begin{aligned}
+\log L &= \sum_{i = 1} ^ n \left[ d_i \log f_i(t_i) + (1 - d_i) \log S_i(t_i) \right] = \\
+       &= \sum_{i = 1} ^ n \left[ d_i \log h_i(t_i) + \log S_i(t_i) \right]
+\end{aligned}
+\]
+Implicit in the above log-likelihood are the regression parameters \(\beta\) and the parameters of the parametric distribution of choice for \(h_0(t)\). 
+
+The log-likelihood function \(\log L\) has a closed-form; maximum likelihood estimates for \(\beta\) and the distribution parameters can hence be obtained by maximising \(\log L\), e.g. using one of the many general purpose optimisers available in R (`optim`, `nlm`, ...).  
+
+### Data analysis example {#sa-parsa-example}
+
+The International Stroke Trial (IST) was a large, prospective, randomised controlled trial conducted between 1991 and 1996. The aim of the trial was to assess whether early administration of aspirin, heparin, both or neither influenced clinical outcomes in patients with acute ischaemic stroke [@ist_1997, @istdb_2011]. 
+
+```{r get_process_ist_data, eval = FALSE}
+# this chunk does not run always
+# I run it once to download and process the data, that will be saved in the data/ folder as "ist.csv"
+
+# read data
+ist = read_csv("http://datashare.is.ed.ac.uk/bitstream/handle/10283/128/IST_corrected.csv?sequence=5&isAllowed=y", col_types = paste(c("___ci", rep("_", 20), "cc", rep("_", 60), "ii", rep("_", 23)), collapse = ""))
+
+# recode heparin treatment
+ist$RXHEP = ifelse(ist$RXHEP %in% c("H", "M"), "H", ist$RXHEP)
+
+# drop rows with missing values
+ist = na.omit(ist)
+
+# drop rows with survival time of zero
+ist = ist[ist$TD > 0,]
+
+# export
+write_csv(ist, "data/ist.csv")
+```
+
+As illustration, I will evaluate the association between tretment with aspirin and/or heparin and survival after acute ischaemic stroke. I will start by reading the data, store in the `ist.csv` file. This file is a subset of the full IST dataset containing information on age, gender, treatment, and survival; further, individuals with missing values and individuals with a survival time of zero were dropped.
+
+```{r read_ist_data, echo = TRUE}
+# library(readr)
+ist = read_csv("data/ist.csv", 
+  col_names = c("gender", "age", "rxasp", "rxhep", "d", "t"), 
+  col_types = "ciccii", skip = 1)
+attr(ist, "spec") = NULL # removing "spec" attribute
+str(ist)
+```
+
+I fit first a parametric survival model assuming a Weibull distribution for \(h_0(t)\). The hazard function, including covariates and the imposing proportional hazards, has the form
+\[
+h(t) = \lambda p t ^ {p - 1} \exp(X \beta),
+\]
+while the survival function has the form
+\[
+S(t) = \exp(-\lambda t ^ p \exp(X \beta)).
+\]
+\(X\) is the model design matrix, and \(\beta\) is the vector of regression coefficients. The log-likelihood has the form
+\[
+\log L = \sum_{i = 1} ^ n \left[ d_i \log h_i(t_i) + \log S_i(t_i) \right]
+\]
+
+First, I code a function with the model log-likelihood. The function depends on (1) the model parameters \(\beta\), \(\lambda\), and \(p\) (`pars` argument), (2) the model design matrix \(X\) (`X` argument), and (3) survival time \(t\) and event indicator \(d\) (`t` and `d` arguments):
+
+```{r likelihood, echo = TRUE}
+ll = function(pars, X, t, d) {
+  lambda = exp(pars[1])
+  p = exp(pars[2])
+  beta = pars[-(1:2)]
+  log_hi = log(lambda) + log(p) + (p - 1) * log(t) + c(X %*% beta)
+  log_Si = -lambda * t ^ p * exp(c(X %*% beta))
+  ll = sum(d * log_hi + log_Si) # + sum(log(t))
+  # + sum(log(t)) is the same adjustment that Stata does to remove the time units from log L
+  return(-ll)
+}
+```
+
+The function `ll()` returns the negative log-likelihood as most optimisers minimise a target function (and so does `optim`); however, minimising the negative log-likelihood function is equivalent to maximising the log-likelihood.
+
+I define the model matrix \(X\) for a model with aspirin treatment, heparin treatment, and their interactions. The first column is removed to avoid collinearity:
+
+```{r model_matrix, echo = TRUE}
+X = with(ist, model.matrix(t ~ rxasp * rxhep - 1))[,-1]
+```
+
+Next, I define the starting values for the optmisation routine. I choose the value 1 for the parameters of the Weibull distribution and the value 0 for the regression coefficients:
+
+```{r starting_values, echo = TRUE}
+start = c(1, 1, rep(0, ncol(X)))
+names(start) = c("lambda", "p", colnames(X))
+```
+
+The value of the log-likelihood function at the starting values is `r cute(ll(start, X, ist$t, ist$d))`. Finally, I use the `BFGS` optimiser (details in @fletcher_2000) to maximise the log-likelihood:
+
+```{r optimisation, echo = TRUE}
+fit = optim(par = start, fn = ll, X = X, t = ist$t, d = ist$d, method = "BFGS", hessian = TRUE)
+```
+
+The maximum likelihood estimates are:
+
+```{r ml_estimates, echo = TRUE}
+fit$par
+```
+
+The standard errors of the maximum likelihood estimates are obtained by inverting the resulting Hessian:
+
+```{r se_estimates, echo = TRUE}
+fit$vcov = solve(fit$hessian)
+fit$se = sqrt(diag(solve(fit$hessian)))
+```
+
+Finally, I build a table of results:
+
+```{r results, echo = TRUE}
+res = data.frame(
+  coef = fit$par,
+  hr = exp(fit$par),
+  se = fit$se)
+res$z = res$coef / res$se
+res$p = 1 - pnorm(abs(res$z), 1 - 0.05 / 2)
+kable(res, digits = 3)
+```
+
+Wald test for the interaction terms, using the \(\chi^2\) test statistic (as sample size is big, using the F statistic would be equivalent):
+
+```{r wald_interaction, echo = TRUE}
+# identify the interaction terms
+idx = grepl(":", names(fit$par))
+
+# compute the W statistic
+W = t(fit$par[idx]) %*% solve(fit$vcov[idx, idx]) %*% fit$par[idx]
+
+# test it against the quantiles of a chi2 distribution with sum(idx) degrees of freedom
+c(W = W, p = 1 - pchisq(W, sum(idx)))
+```
+
 
 ## The Cox model {#sa-cox}
 

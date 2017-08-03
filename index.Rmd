@@ -45,5 +45,7 @@ pacman::p_load(
   "survival",
   "cowplot",
   "dplyr",
-  "ggfortify")
+  "ggfortify",
+  "readr",
+  "aod")
 ```
