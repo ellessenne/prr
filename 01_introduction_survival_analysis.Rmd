@@ -184,17 +184,23 @@ autoplot(fit, conf.int = FALSE, censor = FALSE) +
   labs(x = "Time", y = expression(hat(S)[KM](t)))
 ```
 
+An alternative way of estimating the survival function is to use the _Nelson-Aalen_ estimator for the cumulative hazard
+\[
+\hat{H}(t) = \sum_{t_i < t} \frac{e_i}{r_i} = \sum_{t_i < t} \hat{h}_i,
+\]
+and then use the relationship presented in Section \@ref(sa-terminology-notation) to obtain the survival function.
+
 ## Parametric survival analysis {#sa-parsa}
 
 In applied settings it is often of interest to assess the association between observed covariates and the survival time of interest. For instance, it may be of interest to study whether a treatment is effective in slowing disease relapse (e.g. relapse of leukemia), whether there are difference between genders or age categories. A common way of assessing the effect of covariates on a time to event outcome, while adjusting for potentially confounding factors at the same time, consists in using a regression model. 
 
 In the context of survival data, two models are commonly used: the _accelerated failure time_ model (AFT), and the _proportional hazards_ (PH) model. In the former, the natural logarithm of the observed survival time \(\log t\) is expressed as a linear function of the covariates \(X\):
 \[
-\log t = X \beta + \epsilon
-\],
+\log t = X \beta + \epsilon,
+\]
 with \(\beta\) a vector of regression coefficients and \(\epsilon\) a vector of residual error terms. Assuming a parametric distribution for \(\epsilon\) determines the regression model: log-normal, log-logistic, Weibull, etc. In the AFT model, a positive association of the covariates with survival time implies an increased expected time to event. In the PH model, the covariates have a multiplicative effect on the hazard function:
 \[
-h(t) = h_0(t) g(X),
+h(t; X) = h_0(t) g(X),
 \]
 for some \(h_0(t)\) and \(g(X)\), with \(g(\cdot)\)) a non-negative function of the covariates. A popular choice for the latter is \(g(X) = \exp(X \beta)\); conversely, is is possible to either left the former unspecified, or assume a parametric distribution. The focus of this Section is on specifying a parametric distribution for \(h_0(t)\), yielding the so-called _parametric survival regression models_; I will present commonly assumed parametric distributions in Section \@ref(sa-parsa-distributions), the estimation procedure in Section \@ref(sa-parsa-estimation), and an example using data from the International Stroke Trial (IST) [@ist_1997, @istdb_2011] in Section \@ref(sa-parsa-example). Leaving \(h_0(t)\) unspecified yields the semi-parametric Cox model, that I will present in Section \@ref(sa-cox). 
 
@@ -307,11 +313,11 @@ ist$rxhep = factor(ist$rxhep, levels = c("N", "L", "H"))
 
 I fit first a parametric survival model assuming a Weibull distribution for \(h_0(t)\). The hazard function, including covariates and the imposing proportional hazards, has the form
 \[
-h(t) = \lambda p t ^ {p - 1} \exp(X \beta),
+h(t; X) = \lambda p t ^ {p - 1} \exp(X \beta),
 \]
 while the survival function has the form
 \[
-S(t) = \exp(-\lambda t ^ p \exp(X \beta)).
+S(t; X) = \exp(-\lambda t ^ p \exp(X \beta)).
 \]
 \(X\) is the model design matrix, and \(\beta\) is the vector of regression coefficients. The log-likelihood has the form
 \[
@@ -448,14 +454,9 @@ kable(re_res,
 
 I now test the significance of the two coefficients related to heparin treatment jointly:
 
-```{r wald-rxhep, echo = TRUE}
-# identify the interaction terms
+```{r re-wald-rxhep, echo = TRUE}
 idx = grepl("^rxhep", names(re_fit$b))
-
-# compute the W statistic
 W = t(re_fit$b[idx]) %*% solve(re_fit$vcov[idx, idx]) %*% re_fit$b[idx]
-
-# produce the test
 c(W = W, df = sum(idx), `p-value` = 1 - pchisq(W, sum(idx)))
 ```
 
@@ -465,8 +466,103 @@ Finally, the treatment with aspirin is also not statistically significantly asso
 
 This is a simple application of parametric survival models; a fully developed analysis should take further aspects into account, such as considering different hazard distributions. It is possible to estimate various models and compare their fit to a specific distribution using information criteria such as the Akaike information criterion (AIC) and the Bayesian information criterion (BIC). 
 
-## The Cox model {#sa-cox}
+## The Cox proportional hazards model {#sa-cox}
+
+The parametric survival models of Section \@ref(sa-parsa) could have both the accelerated failure time form and the proportional hazards form. Recall that the latter is formulated in terms of the hazard function:
+\[
+h(t; X) = h_0(t) \exp(X \beta)
+\]
+As I mentioned before, this model requires specifying the baseline hazard function \(h_0(t)\) (e.g. using one of the parametric distributions of Section \@ref(sa-parsa-distributions)) and by leaving it unspecified I obtain the Cox proportional hazards model. Such model is also called _semi-parametric_ as it is formed by a non-parametric component (the baseline hazard left unspecified) and a parametric component (the modelling assumption for the functional form of \(g(\cdot)\), the usual \(\exp(X \beta)\) in this case). The survival function for a Cox model can be written as:
+\[
+S(t; X) = \exp \left[ -\int_0^t h_0(u) \exp(X \beta) \ du \right]
+\]
+
+The main problems when fitting a Cox model are related to estimation of the regression coefficients \(\beta\) and of the survival function \(S(t)\). 
+
+The main method for estimating the regression coefficients is the method of partial likelihood, proposed and discussed in detail in @cox_1972 and @cox_1975. In brief, the observed data are assumed to have density function \(f(t; \theta, \beta)\) in which \(\beta\) is the vector of regression coefficients of interest and \(\theta\) can be considered a vector of nuisance parameters. In particular, \(\theta\) represents the unspecified function \(h_0(t)\). It can be showed that is is possible to factorise the density into two terms, one of which only depends on \(\beta\): this term is called _partial likelihood_. Ignoring the term that depends on \(\theta\), and even if the partial likelihood is not directly interpretable as a likelihood in the ordinary sense, it can be used like an ordinary likelihood for estimation purposes as the usual
+asymptotic properties formulas and properties associated with the likelihood function
+and likelihood estimation apply.
+The partial likelihood applies directly to the relative risk model \(h(t; X)\), assuming independent right censoring. The individual contribution to the likelihood has the form
+\[
+L_i(\beta) = \frac{h(t_i; x_i) \Delta t_i}{\sum_{l \in R(t_i)} h(t_i; x_l) \Delta t_i},
+\]
+and provides information on failures occurrence in the interval \([t_i, t_i + \Delta t_i)\); \(R(t_i)\) is the risk set of individuals at risk of failing at time \(t_i^{-}\), right before \(t_i\). Under the relative risk model, the baseline hazard in \(h(t; X)\) cancels out in the numerator and denominator; the product over \(i\) gives the partial likelihood for \(\beta\):
+\[
+L(\beta) = \prod_{i = 1}^n \frac{\exp(x_i \beta)}{\sum_{l \in R(t_i)} \exp(x_l \beta)}.
+\]
+The values of \(\beta\) that maximise the partial likelihood \(\hat{\beta}\) can be obtained by using a Newton-Raphson-like algorithm; asymptotics are fully analogous to a parametric likelihood.
+A caveat of the partial likelihood method is that it assumes continuous failure times: in practice, that is unrealistic and there will be tied failure times (e.g. due to rounding). In that case, several methods have been proposed to adjust the partial likelihood in order to handle ties; see for instance @peto_1972, @breslow_1974, and @efron_1977
+
+Next, consider deriving an estimator for the survival function from a Cox model. The form of \(h_0(t)\) is unspecified, hence it is not possible to directly estimate the parameters of the distribution as in fully parametric survival models. Under a Cox model, the survival function has the form
+\[
+S(t; X) = S_0(t) ^ {\exp(X \beta)}
+\]
+The coefficients \(\beta\) are estimated using the penalised likelihood procedure, and the baseline survival function \(S_0(t)\) is estimated by assuming that the baseline hazard function is constant between each pair of consecutive observed failure times. The resulting estimator, known as the Breslow estimator, estimates the cumulative baseline hazard function as
+\[
+\hat{H}_0(t) = \sum_{t(i) \le t} \frac{e_{(i)}}{\sum_{l \in R(t_{(i)}) \exp(x_l \hat{\beta})}},
+\]
+with \(e_{(i)}\) the number of events at time \(t_{(i)}\). The baseline survival function follows as
+\[
+\hat{S}_0(t) = \exp \left[ -\hat{H}_0(t) \right],
+\]
+and the survival function as
+\[
+\hat{S}(t; X) = \hat{S}_0(t) ^ {\exp(X \hat{\beta})}.
+\]
+An alternative estimator based on approximating the baseline survival function as a step function and consequently solving \(k\) simultaneous equations has been proposed by @kalbfleisch_2011, and is omitted here.
+
+Finally, the Cox model relies on two main assumptions. First, the assumption of non-informative censoring, e.g. the censoring process must be independent of any covariate, observed and not. Second, the proportional hazards assumption requires hazards to be proportional across time, e.g. the hazard must be constant. There are several ways of testing the proportional hazards assumption, both analytical and graphical; see Chapter 4 of @kleinbaum_2012 for further details.
+
+### Data analysis example {#sa-cox-example}
+
+In this section I re-analyse the IST data of Section \@ref(sa-parsa-example) using a semi-parametric Cox model. I first read the dataset:
+
+```{r cox-read-ist-data, echo = TRUE}
+# library(readr)
+ist = read_csv("data/ist.csv", 
+  col_names = c("gender", "age", "rxasp", "rxhep", "d", "t"), 
+  col_types = "ciccii", skip = 1)
+attr(ist, "spec") = NULL # removing "spec" attribute
+
+# turn treatments into factors
+ist$rxasp = factor(ist$rxasp, levels = c("N", "Y"))
+ist$rxhep = factor(ist$rxhep, levels = c("N", "L", "H"))
+```
+
+I fit the Cox model using the `coxph()` function from the `survival` package:
+
+```{r cox-fit, echo = TRUE}
+# library(survival)
+fit = coxph(Surv(t, d) ~ rxasp * rxhep, data = ist)
+summary(fit)
+```
+
+I test again the joint significancy of the interaction terms using the Wald test:
+
+```{r cox-wald-interaction, echo = TRUE}
+idx = grepl(":", names(coef(fit)))
+W = t(coef(fit)[idx]) %*% solve(vcov(fit)[idx, idx]) %*% coef(fit)[idx]
+c(W = W, df = sum(idx), `p-value` = 1 - pchisq(W, sum(idx)))
+```
+
+Analogously as before, the interaction is not significantly different than zero. I re-fit the model without the interaction term:
+
+```{r re-cox-fit, echo = TRUE}
+# library(survival)
+re_fit = coxph(Surv(t, d) ~ rxasp + rxhep, data = ist)
+summary(re_fit)
+```
+
+Testing the significancy of the heparin treatment using the Wald test:
+
+```{r re-cox-wald-rxhep, echo = TRUE}
+idx = grepl("^rxhep", names(coef(fit)))
+W = t(coef(fit)[idx]) %*% solve(vcov(fit)[idx, idx]) %*% coef(fit)[idx]
+c(W = W, df = sum(idx), `p-value` = 1 - pchisq(W, sum(idx)))
+```
+
+Treatment with heparin is not statistically significantly associated with risk of death; besides that, the effect size of heparin treatment is small: approximately 4% and 6% risk increase for heparin treatment modalities `L` and `H` compared to no heparin treatment, respectively. 
+
+The treatment with aspirin is also not barely significantly different than zero, with a p-value of 0.0954; the effect size is comparable to the effect size estimated with the Weibull model, approximately 5% risk reduction for treatment with aspirin compared to no aspirin treatment.
 
 ## Advanced survival analysis {#sa-advanced}
-
-

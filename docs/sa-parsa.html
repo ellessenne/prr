@@ -106,7 +106,9 @@ code > span.in { color: #008000; } /* Information */
 <li class="chapter" data-level="1.5.2" data-path="sa-parsa.html"><a href="sa-parsa.html#sa-parsa-estimation"><i class="fa fa-check"></i><b>1.5.2</b> Estimation procedure</a></li>
 <li class="chapter" data-level="1.5.3" data-path="sa-parsa.html"><a href="sa-parsa.html#sa-parsa-example"><i class="fa fa-check"></i><b>1.5.3</b> Data analysis example</a></li>
 </ul></li>
-<li class="chapter" data-level="1.6" data-path="sa-cox.html"><a href="sa-cox.html"><i class="fa fa-check"></i><b>1.6</b> The Cox model</a></li>
+<li class="chapter" data-level="1.6" data-path="sa-cox.html"><a href="sa-cox.html"><i class="fa fa-check"></i><b>1.6</b> The Cox proportional hazards model</a><ul>
+<li class="chapter" data-level="1.6.1" data-path="sa-cox.html"><a href="sa-cox.html#sa-cox-example"><i class="fa fa-check"></i><b>1.6.1</b> Data analysis example</a></li>
+</ul></li>
 <li class="chapter" data-level="1.7" data-path="sa-advanced.html"><a href="sa-advanced.html"><i class="fa fa-check"></i><b>1.7</b> Advanced survival analysis</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="smre.html"><a href="smre.html"><i class="fa fa-check"></i><b>2</b> Survival models with random effects</a></li>
@@ -161,9 +163,9 @@ code > span.in { color: #008000; } /* Information */
 <h2><span class="header-section-number">1.5</span> Parametric survival analysis</h2>
 <p>In applied settings it is often of interest to assess the association between observed covariates and the survival time of interest. For instance, it may be of interest to study whether a treatment is effective in slowing disease relapse (e.g. relapse of leukemia), whether there are difference between genders or age categories. A common way of assessing the effect of covariates on a time to event outcome, while adjusting for potentially confounding factors at the same time, consists in using a regression model.</p>
 <p>In the context of survival data, two models are commonly used: the <em>accelerated failure time</em> model (AFT), and the <em>proportional hazards</em> (PH) model. In the former, the natural logarithm of the observed survival time <span class="math inline">\(\log t\)</span> is expressed as a linear function of the covariates <span class="math inline">\(X\)</span>: <span class="math display">\[
-\log t = X \beta + \epsilon
-\]</span>, with <span class="math inline">\(\beta\)</span> a vector of regression coefficients and <span class="math inline">\(\epsilon\)</span> a vector of residual error terms. Assuming a parametric distribution for <span class="math inline">\(\epsilon\)</span> determines the regression model: log-normal, log-logistic, Weibull, etc. In the AFT model, a positive association of the covariates with survival time implies an increased expected time to event. In the PH model, the covariates have a multiplicative effect on the hazard function: <span class="math display">\[
-h(t) = h_0(t) g(X),
+\log t = X \beta + \epsilon,
+\]</span> with <span class="math inline">\(\beta\)</span> a vector of regression coefficients and <span class="math inline">\(\epsilon\)</span> a vector of residual error terms. Assuming a parametric distribution for <span class="math inline">\(\epsilon\)</span> determines the regression model: log-normal, log-logistic, Weibull, etc. In the AFT model, a positive association of the covariates with survival time implies an increased expected time to event. In the PH model, the covariates have a multiplicative effect on the hazard function: <span class="math display">\[
+h(t; X) = h_0(t) g(X),
 \]</span> for some <span class="math inline">\(h_0(t)\)</span> and <span class="math inline">\(g(X)\)</span>, with <span class="math inline">\(g(\cdot)\)</span>) a non-negative function of the covariates. A popular choice for the latter is <span class="math inline">\(g(X) = \exp(X \beta)\)</span>; conversely, is is possible to either left the former unspecified, or assume a parametric distribution. The focus of this Section is on specifying a parametric distribution for <span class="math inline">\(h_0(t)\)</span>, yielding the so-called <em>parametric survival regression models</em>; I will present commonly assumed parametric distributions in Section <a href="sa-parsa.html#sa-parsa-distributions">1.5.1</a>, the estimation procedure in Section <a href="sa-parsa.html#sa-parsa-estimation">1.5.2</a>, and an example using data from the International Stroke Trial (IST) <span class="citation">(International Stroke Trial Collaborative Group <a href="#ref-ist_1997">1997</a>, <span class="citation">Sandercock, Niewada, and Czlonkowska (<a href="#ref-istdb_2011">2011</a>)</span>)</span> in Section <a href="sa-parsa.html#sa-parsa-example">1.5.3</a>. Leaving <span class="math inline">\(h_0(t)\)</span> unspecified yields the semi-parametric Cox model, that I will present in Section <a href="sa-cox.html#sa-cox">1.6</a>.</p>
 <p>From now on I will focus on the proportional hazards formulation of the survival model.</p>
 <div id="sa-parsa-distributions" class="section level3">
@@ -253,9 +255,9 @@ ist =<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">
 ist<span class="op">$</span>rxasp =<span class="st"> </span><span class="kw">factor</span>(ist<span class="op">$</span>rxasp, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;N&quot;</span>, <span class="st">&quot;Y&quot;</span>))
 ist<span class="op">$</span>rxhep =<span class="st"> </span><span class="kw">factor</span>(ist<span class="op">$</span>rxhep, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;N&quot;</span>, <span class="st">&quot;L&quot;</span>, <span class="st">&quot;H&quot;</span>))</code></pre></div>
 <p>I fit first a parametric survival model assuming a Weibull distribution for <span class="math inline">\(h_0(t)\)</span>. The hazard function, including covariates and the imposing proportional hazards, has the form <span class="math display">\[
-h(t) = \lambda p t ^ {p - 1} \exp(X \beta),
+h(t; X) = \lambda p t ^ {p - 1} \exp(X \beta),
 \]</span> while the survival function has the form <span class="math display">\[
-S(t) = \exp(-\lambda t ^ p \exp(X \beta)).
+S(t; X) = \exp(-\lambda t ^ p \exp(X \beta)).
 \]</span> <span class="math inline">\(X\)</span> is the model design matrix, and <span class="math inline">\(\beta\)</span> is the vector of regression coefficients. The log-likelihood has the form <span class="math display">\[
 \log L = \sum_{i = 1} ^ n \left[ d_i \log h_i(t_i) + \log S_i(t_i) \right]
 \]</span></p>
@@ -283,7 +285,7 @@ fit =<span class="st"> </span><span class="kw">marqLevAlg</span>(<span class="dt
   <span class="dt">fn =</span> <span class="cf">function</span>(x) <span class="kw">ll</span>(x, <span class="dt">X =</span> X, <span class="dt">t =</span> ist<span class="op">$</span>t, <span class="dt">d =</span> ist<span class="op">$</span>d))</code></pre></div>
 <pre><code>## 
 ## Be patient. The program is computing ...
-## The program took 8.52 seconds</code></pre>
+## The program took 7.92 seconds</code></pre>
 <p>Assess convergency:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit<span class="op">$</span>istop</code></pre></div>
 <pre><code>## [1] 1</code></pre>
@@ -398,7 +400,7 @@ re_fit =<span class="st"> </span><span class="kw">marqLevAlg</span>(<span class=
   <span class="dt">fn =</span> <span class="cf">function</span>(x) <span class="kw">ll</span>(x, <span class="dt">X =</span> X, <span class="dt">t =</span> ist<span class="op">$</span>t, <span class="dt">d =</span> ist<span class="op">$</span>d))</code></pre></div>
 <pre><code>## 
 ## Be patient. The program is computing ...
-## The program took 4.42 seconds</code></pre>
+## The program took 4.93 seconds</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">re_fit<span class="op">$</span>istop</code></pre></div>
 <pre><code>## [1] 1</code></pre>
 <p>The routine converged. I produce the variance-covariance matrix:</p>
@@ -477,13 +479,8 @@ re_res<span class="op">$</span>p =<span class="st"> </span><span class="dv">2</s
 </tbody>
 </table>
 <p>I now test the significance of the two coefficients related to heparin treatment jointly:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># identify the interaction terms</span>
-idx =<span class="st"> </span><span class="kw">grepl</span>(<span class="st">&quot;^rxhep&quot;</span>, <span class="kw">names</span>(re_fit<span class="op">$</span>b))
-
-<span class="co"># compute the W statistic</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">idx =<span class="st"> </span><span class="kw">grepl</span>(<span class="st">&quot;^rxhep&quot;</span>, <span class="kw">names</span>(re_fit<span class="op">$</span>b))
 W =<span class="st"> </span><span class="kw">t</span>(re_fit<span class="op">$</span>b[idx]) <span class="op">%*%</span><span class="st"> </span><span class="kw">solve</span>(re_fit<span class="op">$</span>vcov[idx, idx]) <span class="op">%*%</span><span class="st"> </span>re_fit<span class="op">$</span>b[idx]
-
-<span class="co"># produce the test</span>
 <span class="kw">c</span>(<span class="dt">W =</span> W, <span class="dt">df =</span> <span class="kw">sum</span>(idx), <span class="st">`</span><span class="dt">p-value</span><span class="st">`</span> =<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">pchisq</span>(W, <span class="kw">sum</span>(idx)))</code></pre></div>
 <pre><code>##       W      df p-value 
 ## 3.08001 2.00000 0.21438</code></pre>

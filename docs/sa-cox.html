@@ -106,7 +106,9 @@ code > span.in { color: #008000; } /* Information */
 <li class="chapter" data-level="1.5.2" data-path="sa-parsa.html"><a href="sa-parsa.html#sa-parsa-estimation"><i class="fa fa-check"></i><b>1.5.2</b> Estimation procedure</a></li>
 <li class="chapter" data-level="1.5.3" data-path="sa-parsa.html"><a href="sa-parsa.html#sa-parsa-example"><i class="fa fa-check"></i><b>1.5.3</b> Data analysis example</a></li>
 </ul></li>
-<li class="chapter" data-level="1.6" data-path="sa-cox.html"><a href="sa-cox.html"><i class="fa fa-check"></i><b>1.6</b> The Cox model</a></li>
+<li class="chapter" data-level="1.6" data-path="sa-cox.html"><a href="sa-cox.html"><i class="fa fa-check"></i><b>1.6</b> The Cox proportional hazards model</a><ul>
+<li class="chapter" data-level="1.6.1" data-path="sa-cox.html"><a href="sa-cox.html#sa-cox-example"><i class="fa fa-check"></i><b>1.6.1</b> Data analysis example</a></li>
+</ul></li>
 <li class="chapter" data-level="1.7" data-path="sa-advanced.html"><a href="sa-advanced.html"><i class="fa fa-check"></i><b>1.7</b> Advanced survival analysis</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="smre.html"><a href="smre.html"><i class="fa fa-check"></i><b>2</b> Survival models with random effects</a></li>
@@ -158,7 +160,133 @@ code > span.in { color: #008000; } /* Information */
 
             <section class="normal" id="section-">
 <div id="sa-cox" class="section level2">
-<h2><span class="header-section-number">1.6</span> The Cox model</h2>
+<h2><span class="header-section-number">1.6</span> The Cox proportional hazards model</h2>
+<p>The parametric survival models of Section <a href="sa-parsa.html#sa-parsa">1.5</a> could have both the accelerated failure time form and the proportional hazards form. Recall that the latter is formulated in terms of the hazard function: <span class="math display">\[
+h(t; X) = h_0(t) \exp(X \beta)
+\]</span> As I mentioned before, this model requires specifying the baseline hazard function <span class="math inline">\(h_0(t)\)</span> (e.g. using one of the parametric distributions of Section <a href="sa-parsa.html#sa-parsa-distributions">1.5.1</a>) and by leaving it unspecified I obtain the Cox proportional hazards model. Such model is also called <em>semi-parametric</em> as it is formed by a non-parametric component (the baseline hazard left unspecified) and a parametric component (the modelling assumption for the functional form of <span class="math inline">\(g(\cdot)\)</span>, the usual <span class="math inline">\(\exp(X \beta)\)</span> in this case). The survival function for a Cox model can be written as: <span class="math display">\[
+S(t; X) = \exp \left[ -\int_0^t h_0(u) \exp(X \beta) \ du \right]
+\]</span></p>
+<p>The main problems when fitting a Cox model are related to estimation of the regression coefficients <span class="math inline">\(\beta\)</span> and of the survival function <span class="math inline">\(S(t)\)</span>.</p>
+<p>The main method for estimating the regression coefficients is the method of partial likelihood, proposed and discussed in detail in <span class="citation">Cox (<a href="#ref-cox_1972">1972</a>)</span> and <span class="citation">Cox (<a href="#ref-cox_1975">1975</a>)</span>. In brief, the observed data are assumed to have density function <span class="math inline">\(f(t; \theta, \beta)\)</span> in which <span class="math inline">\(\beta\)</span> is the vector of regression coefficients of interest and <span class="math inline">\(\theta\)</span> can be considered a vector of nuisance parameters. In particular, <span class="math inline">\(\theta\)</span> represents the unspecified function <span class="math inline">\(h_0(t)\)</span>. It can be showed that is is possible to factorise the density into two terms, one of which only depends on <span class="math inline">\(\beta\)</span>: this term is called <em>partial likelihood</em>. Ignoring the term that depends on <span class="math inline">\(\theta\)</span>, and even if the partial likelihood is not directly interpretable as a likelihood in the ordinary sense, it can be used like an ordinary likelihood for estimation purposes as the usual asymptotic properties formulas and properties associated with the likelihood function and likelihood estimation apply. The partial likelihood applies directly to the relative risk model <span class="math inline">\(h(t; X)\)</span>, assuming independent right censoring. The individual contribution to the likelihood has the form <span class="math display">\[
+L_i(\beta) = \frac{h(t_i; x_i) \Delta t_i}{\sum_{l \in R(t_i)} h(t_i; x_l) \Delta t_i},
+\]</span> and provides information on failures occurrence in the interval <span class="math inline">\([t_i, t_i + \Delta t_i)\)</span>; <span class="math inline">\(R(t_i)\)</span> is the risk set of individuals at risk of failing at time <span class="math inline">\(t_i^{-}\)</span>, right before <span class="math inline">\(t_i\)</span>. Under the relative risk model, the baseline hazard in <span class="math inline">\(h(t; X)\)</span> cancels out in the numerator and denominator; the product over <span class="math inline">\(i\)</span> gives the partial likelihood for <span class="math inline">\(\beta\)</span>: <span class="math display">\[
+L(\beta) = \prod_{i = 1}^n \frac{\exp(x_i \beta)}{\sum_{l \in R(t_i)} \exp(x_l \beta)}.
+\]</span> The values of <span class="math inline">\(\beta\)</span> that maximise the partial likelihood <span class="math inline">\(\hat{\beta}\)</span> can be obtained by using a Newton-Raphson-like algorithm; asymptotics are fully analogous to a parametric likelihood. A caveat of the partial likelihood method is that it assumes continuous failure times: in practice, that is unrealistic and there will be tied failure times (e.g. due to rounding). In that case, several methods have been proposed to adjust the partial likelihood in order to handle ties; see for instance <span class="citation">Peto (<a href="#ref-peto_1972">1972</a>)</span>, <span class="citation">Breslow (<a href="#ref-breslow_1974">1974</a>)</span>, and <span class="citation">Efron (<a href="#ref-efron_1977">1977</a>)</span></p>
+<p>Next, consider deriving an estimator for the survival function from a Cox model. The form of <span class="math inline">\(h_0(t)\)</span> is unspecified, hence it is not possible to directly estimate the parameters of the distribution as in fully parametric survival models. Under a Cox model, the survival function has the form <span class="math display">\[
+S(t; X) = S_0(t) ^ {\exp(X \beta)}
+\]</span> The coefficients <span class="math inline">\(\beta\)</span> are estimated using the penalised likelihood procedure, and the baseline survival function <span class="math inline">\(S_0(t)\)</span> is estimated by assuming that the baseline hazard function is constant between each pair of consecutive observed failure times. The resulting estimator, known as the Breslow estimator, estimates the cumulative baseline hazard function as <span class="math display">\[
+\hat{H}_0(t) = \sum_{t(i) \le t} \frac{e_{(i)}}{\sum_{l \in R(t_{(i)}) \exp(x_l \hat{\beta})}},
+\]</span> with <span class="math inline">\(e_{(i)}\)</span> the number of events at time <span class="math inline">\(t_{(i)}\)</span>. The baseline survival function follows as <span class="math display">\[
+\hat{S}_0(t) = \exp \left[ -\hat{H}_0(t) \right],
+\]</span> and the survival function as <span class="math display">\[
+\hat{S}(t; X) = \hat{S}_0(t) ^ {\exp(X \hat{\beta})}.
+\]</span> An alternative estimator based on approximating the baseline survival function as a step function and consequently solving <span class="math inline">\(k\)</span> simultaneous equations has been proposed by <span class="citation">Kalbfleisch and Prentice (<a href="#ref-kalbfleisch_2011">2011</a>)</span>, and is omitted here.</p>
+<p>Finally, the Cox model relies on two main assumptions. First, the assumption of non-informative censoring, e.g. the censoring process must be independent of any covariate, observed and not. Second, the proportional hazards assumption requires hazards to be proportional across time, e.g. the hazard must be constant. There are several ways of testing the proportional hazards assumption, both analytical and graphical; see Chapter 4 of <span class="citation">Kleinbaum and Klein (<a href="#ref-kleinbaum_2012">2012</a>)</span> for further details.</p>
+<div id="sa-cox-example" class="section level3">
+<h3><span class="header-section-number">1.6.1</span> Data analysis example</h3>
+<p>In this section I re-analyse the IST data of Section <a href="sa-parsa.html#sa-parsa-example">1.5.3</a> using a semi-parametric Cox model. I first read the dataset:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># library(readr)</span>
+ist =<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/ist.csv&quot;</span>, 
+  <span class="dt">col_names =</span> <span class="kw">c</span>(<span class="st">&quot;gender&quot;</span>, <span class="st">&quot;age&quot;</span>, <span class="st">&quot;rxasp&quot;</span>, <span class="st">&quot;rxhep&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;t&quot;</span>), 
+  <span class="dt">col_types =</span> <span class="st">&quot;ciccii&quot;</span>, <span class="dt">skip =</span> <span class="dv">1</span>)
+<span class="kw">attr</span>(ist, <span class="st">&quot;spec&quot;</span>) =<span class="st"> </span><span class="ot">NULL</span> <span class="co"># removing &quot;spec&quot; attribute</span>
+
+<span class="co"># turn treatments into factors</span>
+ist<span class="op">$</span>rxasp =<span class="st"> </span><span class="kw">factor</span>(ist<span class="op">$</span>rxasp, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;N&quot;</span>, <span class="st">&quot;Y&quot;</span>))
+ist<span class="op">$</span>rxhep =<span class="st"> </span><span class="kw">factor</span>(ist<span class="op">$</span>rxhep, <span class="dt">levels =</span> <span class="kw">c</span>(<span class="st">&quot;N&quot;</span>, <span class="st">&quot;L&quot;</span>, <span class="st">&quot;H&quot;</span>))</code></pre></div>
+<p>I fit the Cox model using the <code>coxph()</code> function from the <code>survival</code> package:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># library(survival)</span>
+fit =<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(t, d) <span class="op">~</span><span class="st"> </span>rxasp <span class="op">*</span><span class="st"> </span>rxhep, <span class="dt">data =</span> ist)
+<span class="kw">summary</span>(fit)</code></pre></div>
+<pre><code>## Call:
+## coxph(formula = Surv(t, d) ~ rxasp * rxhep, data = ist)
+## 
+##   n= 19378, number of events= 4315 
+## 
+##                   coef exp(coef) se(coef)      z Pr(&gt;|z|)
+## rxaspY        -0.03710   0.96358  0.04356 -0.852    0.394
+## rxhepL         0.08017   1.08347  0.05161  1.553    0.120
+## rxhepH         0.04215   1.04305  0.05221  0.807    0.419
+## rxaspY:rxhepL -0.09049   0.91348  0.07458 -1.213    0.225
+## rxaspY:rxhepH  0.03595   1.03661  0.07415  0.485    0.628
+## 
+##               exp(coef) exp(-coef) lower .95 upper .95
+## rxaspY           0.9636     1.0378    0.8847     1.049
+## rxhepL           1.0835     0.9230    0.9792     1.199
+## rxhepH           1.0431     0.9587    0.9416     1.155
+## rxaspY:rxhepL    0.9135     1.0947    0.7893     1.057
+## rxaspY:rxhepH    1.0366     0.9647    0.8964     1.199
+## 
+## Concordance= 0.513  (se = 0.004 )
+## Rsquare= 0   (max possible= 0.987 )
+## Likelihood ratio test= 7.98  on 5 df,   p=0.1574
+## Wald test            = 8.02  on 5 df,   p=0.1554
+## Score (logrank) test = 8.02  on 5 df,   p=0.1551</code></pre>
+<p>I test again the joint significancy of the interaction terms using the Wald test:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">idx =<span class="st"> </span><span class="kw">grepl</span>(<span class="st">&quot;:&quot;</span>, <span class="kw">names</span>(<span class="kw">coef</span>(fit)))
+W =<span class="st"> </span><span class="kw">t</span>(<span class="kw">coef</span>(fit)[idx]) <span class="op">%*%</span><span class="st"> </span><span class="kw">solve</span>(<span class="kw">vcov</span>(fit)[idx, idx]) <span class="op">%*%</span><span class="st"> </span><span class="kw">coef</span>(fit)[idx]
+<span class="kw">c</span>(<span class="dt">W =</span> W, <span class="dt">df =</span> <span class="kw">sum</span>(idx), <span class="st">`</span><span class="dt">p-value</span><span class="st">`</span> =<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">pchisq</span>(W, <span class="kw">sum</span>(idx)))</code></pre></div>
+<pre><code>##         W        df   p-value 
+## 2.3929136 2.0000000 0.3022633</code></pre>
+<p>Analogously as before, the interaction is not significantly different than zero. I re-fit the model without the interaction term:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># library(survival)</span>
+re_fit =<span class="st"> </span><span class="kw">coxph</span>(<span class="kw">Surv</span>(t, d) <span class="op">~</span><span class="st"> </span>rxasp <span class="op">+</span><span class="st"> </span>rxhep, <span class="dt">data =</span> ist)
+<span class="kw">summary</span>(re_fit)</code></pre></div>
+<pre><code>## Call:
+## coxph(formula = Surv(t, d) ~ rxasp + rxhep, data = ist)
+## 
+##   n= 19378, number of events= 4315 
+## 
+##            coef exp(coef) se(coef)      z Pr(&gt;|z|)  
+## rxaspY -0.05079   0.95048  0.03046 -1.668   0.0954 .
+## rxhepL  0.03641   1.03708  0.03725  0.978   0.3283  
+## rxhepH  0.05991   1.06174  0.03707  1.616   0.1061  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+##        exp(coef) exp(-coef) lower .95 upper .95
+## rxaspY    0.9505     1.0521    0.8954     1.009
+## rxhepL    1.0371     0.9642    0.9641     1.116
+## rxhepH    1.0617     0.9419    0.9873     1.142
+## 
+## Concordance= 0.511  (se = 0.004 )
+## Rsquare= 0   (max possible= 0.987 )
+## Likelihood ratio test= 5.58  on 3 df,   p=0.1337
+## Wald test            = 5.59  on 3 df,   p=0.1333
+## Score (logrank) test = 5.59  on 3 df,   p=0.1332</code></pre>
+<p>Testing the significancy of the heparin treatment using the Wald test:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">idx =<span class="st"> </span><span class="kw">grepl</span>(<span class="st">&quot;^rxhep&quot;</span>, <span class="kw">names</span>(<span class="kw">coef</span>(fit)))
+W =<span class="st"> </span><span class="kw">t</span>(<span class="kw">coef</span>(fit)[idx]) <span class="op">%*%</span><span class="st"> </span><span class="kw">solve</span>(<span class="kw">vcov</span>(fit)[idx, idx]) <span class="op">%*%</span><span class="st"> </span><span class="kw">coef</span>(fit)[idx]
+<span class="kw">c</span>(<span class="dt">W =</span> W, <span class="dt">df =</span> <span class="kw">sum</span>(idx), <span class="st">`</span><span class="dt">p-value</span><span class="st">`</span> =<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">pchisq</span>(W, <span class="kw">sum</span>(idx)))</code></pre></div>
+<pre><code>##         W        df   p-value 
+## 2.4963250 2.0000000 0.2870317</code></pre>
+<p>Treatment with heparin is not statistically significantly associated with risk of death; besides that, the effect size of heparin treatment is small: approximately 4% and 6% risk increase for heparin treatment modalities <code>L</code> and <code>H</code> compared to no heparin treatment, respectively.</p>
+<p>The treatment with aspirin is also not barely significantly different than zero, with a p-value of 0.0954; the effect size is comparable to the effect size estimated with the Weibull model, approximately 5% risk reduction for treatment with aspirin compared to no aspirin treatment.</p>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-cox_1972">
+<p>Cox, David R. 1972. “Regression Models and Life-Tables.” <em>Journal of the Royal Statistical Society: Series B (Statistical Methodology)</em> 34 (2): 187–220. <a href="http://www.jstor.org/stable/2985181" class="uri">http://www.jstor.org/stable/2985181</a>.</p>
+</div>
+<div id="ref-cox_1975">
+<p>Cox, David R. 1975. “Partial Likelihood.” <em>Biometrika</em> 62 (2): 269–76. doi:<a href="https://doi.org/10.1093/biomet/62.2.269">10.1093/biomet/62.2.269</a>.</p>
+</div>
+<div id="ref-peto_1972">
+<p>Peto, R. 1972. “Contribution to Discussion of Paper by D.R. Cox.” <em>Journal of the Royal Statistical Society: Series B (Statistical Methodology)</em> 34: 205–7.</p>
+</div>
+<div id="ref-breslow_1974">
+<p>Breslow, N. 1974. “Covariance Analysis of Censored Survival Data.” <em>Biometrics</em> 30 (1): 89–99. doi:<a href="https://doi.org/10.2307/2529620">10.2307/2529620</a>.</p>
+</div>
+<div id="ref-efron_1977">
+<p>Efron, Bradley. 1977. “The Efficiency of Cox’s Likelihood Function for Censored Data.” <em>Journal of the American Statistical Association</em> 72 (359): 557–65. doi:<a href="https://doi.org/10.2307/2286217">10.2307/2286217</a>.</p>
+</div>
+<div id="ref-kalbfleisch_2011">
+<p>Kalbfleisch, John D, and Ross L Prentice. 2011. <em>The Statistical Analysis of Failure Time Data</em>. 2nd ed. Wiley Series in Probability and Statistics. John Wiley &amp; Sons, Inc. doi:<a href="https://doi.org/10.1002/9781118032985">10.1002/9781118032985</a>.</p>
+</div>
+<div id="ref-kleinbaum_2012">
+<p>Kleinbaum, David G, and Mitchel Klein. 2012. <em>Survival Analysis: A Self-Learning Text</em>. 3rd ed. Springer-Verlag New York. doi:<a href="https://doi.org/10.1007/978-1-4419-6646-9">10.1007/978-1-4419-6646-9</a>.</p>
+</div>
 </div>
             </section>
 
