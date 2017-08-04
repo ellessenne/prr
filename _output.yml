@@ -1,4 +1,5 @@
 bookdown::gitbook:
+  highlight: haddock
   css: style.css
   split_by: section
   config:
@@ -14,5 +15,9 @@ bookdown::pdf_book:
     in_header: preamble.tex
   latex_engine: xelatex
   citation_package: natbib
+  toc_unnumbered: TRUE
+  toc_appendix: TRUE
+  toc_bib: TRUE
+  highlight: haddock
 bookdown::epub_book:
   stylesheet: style.css
