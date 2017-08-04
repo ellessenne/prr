@@ -12,7 +12,7 @@ Some examples of time to event data are:
 
 - reliability of complex technical installations. For instance, studies assessing failure rates of components such as bulbs and valves.
 
-In this Chapter I will define survival data and its peculiarities in Section \@ref(sa-survdata) and \@ref(sa-censoring). Terminology and notation used throughout this report will be introduced in Section \@ref(sa-terminology-notation). I will introduce common non-parametric and parametric methods in survival analysis in Sections \@ref(sa-estsurv) and \@ref(sa-parsa). I will introduce the widely used semi-parametric Cox model in Section \@ref(sa-cox). Finally, I will provide a brief overview of modern, advanced statistical methods in survival analysis in Section \@ref(sa-advanced). 
+In this Chapter I will define survival data and its peculiarities in Section \@ref(sa-survdata) and \@ref(sa-censoring). Terminology and notation used throughout this report will be introduced in Section \@ref(sa-terminology-notation). I will introduce common non-parametric and parametric methods in survival analysis in Sections \@ref(sa-estsurv) and \@ref(sa-parsa). I will introduce the widely used semi-parametric Cox model in Section \@ref(sa-cox). Finally, I will provide a brief overview on advances in survival analysis in Section \@ref(sa-advances). 
 
 ## Survival data {#sa-survdata}
 
@@ -565,4 +565,8 @@ Treatment with heparin is not statistically significantly associated with risk o
 
 The treatment with aspirin is also not barely significantly different than zero, with a p-value of 0.0954; the effect size is comparable to the effect size estimated with the Weibull model, approximately 5% risk reduction for treatment with aspirin compared to no aspirin treatment.
 
-## Advanced survival analysis {#sa-advanced}
+## Advances in survival analysis {#sa-advances}
+
+There are several extensions of the statistical methods presented in this Chapter: I will briefly introduce some of them in this Section, without going into great detail as that would be beyond the scope of this report.
+
+The proportional hazards models have been extended to include time-dependent covariates and time-dependent covariate effects; additionally, the Cox model has been extended to allow stratification by a given factor (details in @kalbfleisch_2011 and @kleinbaum_2012). Parametric survival models have been generalised to allow combinations of linear predictors, penalised smoothers for the effect of time and covariates, and parametric effects - both in the proportional hazards and proportional odds framework [@liu_2016]. More generally, models have been developed to account for competing events and multi-state diseases with intermediate states, and for modelling a wide range of multivariate survival data [@geskus_2015, @crowder_2016]. Finally, the main advances that I will discuss further are models with random effects and joint models for longitudinal and survival data, in Chapters \@ref(smre) and \@ref(jm) respectively.

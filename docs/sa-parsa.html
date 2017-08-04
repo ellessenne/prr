@@ -109,7 +109,7 @@ code > span.in { color: #008000; } /* Information */
 <li class="chapter" data-level="1.6" data-path="sa-cox.html"><a href="sa-cox.html"><i class="fa fa-check"></i><b>1.6</b> The Cox proportional hazards model</a><ul>
 <li class="chapter" data-level="1.6.1" data-path="sa-cox.html"><a href="sa-cox.html#sa-cox-example"><i class="fa fa-check"></i><b>1.6.1</b> Data analysis example</a></li>
 </ul></li>
-<li class="chapter" data-level="1.7" data-path="sa-advanced.html"><a href="sa-advanced.html"><i class="fa fa-check"></i><b>1.7</b> Advanced survival analysis</a></li>
+<li class="chapter" data-level="1.7" data-path="sa-advances.html"><a href="sa-advances.html"><i class="fa fa-check"></i><b>1.7</b> Advances in survival analysis</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="smre.html"><a href="smre.html"><i class="fa fa-check"></i><b>2</b> Survival models with random effects</a></li>
 <li class="chapter" data-level="3" data-path="jm.html"><a href="jm.html"><i class="fa fa-check"></i><b>3</b> Joint models for longitudinal and survival data</a></li>
@@ -285,7 +285,7 @@ fit =<span class="st"> </span><span class="kw">marqLevAlg</span>(<span class="dt
   <span class="dt">fn =</span> <span class="cf">function</span>(x) <span class="kw">ll</span>(x, <span class="dt">X =</span> X, <span class="dt">t =</span> ist<span class="op">$</span>t, <span class="dt">d =</span> ist<span class="op">$</span>d))</code></pre></div>
 <pre><code>## 
 ## Be patient. The program is computing ...
-## The program took 7.92 seconds</code></pre>
+## The program took 8.09 seconds</code></pre>
 <p>Assess convergency:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit<span class="op">$</span>istop</code></pre></div>
 <pre><code>## [1] 1</code></pre>
@@ -400,7 +400,7 @@ re_fit =<span class="st"> </span><span class="kw">marqLevAlg</span>(<span class=
   <span class="dt">fn =</span> <span class="cf">function</span>(x) <span class="kw">ll</span>(x, <span class="dt">X =</span> X, <span class="dt">t =</span> ist<span class="op">$</span>t, <span class="dt">d =</span> ist<span class="op">$</span>d))</code></pre></div>
 <pre><code>## 
 ## Be patient. The program is computing ...
-## The program took 4.93 seconds</code></pre>
+## The program took 4.74 seconds</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">re_fit<span class="op">$</span>istop</code></pre></div>
 <pre><code>## [1] 1</code></pre>
 <p>The routine converged. I produce the variance-covariance matrix:</p>
