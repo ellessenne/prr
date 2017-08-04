@@ -271,7 +271,7 @@ The log-likelihood function \(\log L\) has a closed-form; maximum likelihood est
 
 The International Stroke Trial (IST) was a large, prospective, randomised controlled trial conducted between 1991 and 1996. The aim of the trial was to assess whether early administration of aspirin, heparin, both or neither influenced clinical outcomes in patients with acute ischaemic stroke [@ist_1997, @istdb_2011]. 
 
-```{r get_process_ist_data, eval = FALSE}
+```{r get-process-ist-data, eval = FALSE}
 # this chunk does not run always
 # I run it once to download and process the data, that will be saved in the data/ folder as "ist.csv"
 
@@ -293,13 +293,16 @@ write_csv(ist, "data/ist.csv")
 
 As illustration, I will evaluate the association between tretment with aspirin and/or heparin and survival after acute ischaemic stroke. I will start by reading the data, store in the `ist.csv` file. This file is a subset of the full IST dataset containing information on age, gender, treatment, and survival; further, individuals with missing values and individuals with a survival time of zero were dropped.
 
-```{r read_ist_data, echo = TRUE}
+```{r read-ist-data, echo = TRUE}
 # library(readr)
 ist = read_csv("data/ist.csv", 
   col_names = c("gender", "age", "rxasp", "rxhep", "d", "t"), 
   col_types = "ciccii", skip = 1)
 attr(ist, "spec") = NULL # removing "spec" attribute
-str(ist)
+
+# turn treatments into factors
+ist$rxasp = factor(ist$rxasp, levels = c("N", "Y"))
+ist$rxhep = factor(ist$rxhep, levels = c("N", "L", "H"))
 ```
 
 I fit first a parametric survival model assuming a Weibull distribution for \(h_0(t)\). The hazard function, including covariates and the imposing proportional hazards, has the form
@@ -324,8 +327,9 @@ ll = function(pars, X, t, d) {
   beta = pars[-(1:2)]
   log_hi = log(lambda) + log(p) + (p - 1) * log(t) + c(X %*% beta)
   log_Si = -lambda * t ^ p * exp(c(X %*% beta))
-  ll = sum(d * log_hi + log_Si) # + sum(log(t))
-  # + sum(log(t)) is the same adjustment that Stata does to remove the time units from log L
+  ll = sum(d * log_hi + log_Si + log(t))
+  # + sum(log(t)) is the same adjustment that Stata
+  # does to remove the time units from log L
   return(-ll)
 }
 ```
@@ -334,62 +338,135 @@ The function `ll()` returns the negative log-likelihood as most optimisers minim
 
 I define the model matrix \(X\) for a model with aspirin treatment, heparin treatment, and their interactions. The first column is removed to avoid collinearity:
 
-```{r model_matrix, echo = TRUE}
+```{r model-matrix, echo = TRUE}
 X = with(ist, model.matrix(t ~ rxasp * rxhep - 1))[,-1]
 ```
 
 Next, I define the starting values for the optmisation routine. I choose the value 1 for the parameters of the Weibull distribution and the value 0 for the regression coefficients:
 
-```{r starting_values, echo = TRUE}
+```{r starting-values, echo = TRUE}
 start = c(1, 1, rep(0, ncol(X)))
 names(start) = c("lambda", "p", colnames(X))
 ```
 
-The value of the log-likelihood function at the starting values is `r cute(ll(start, X, ist$t, ist$d))`. Finally, I use the `BFGS` optimiser (details in @fletcher_2000) to maximise the log-likelihood:
+The value of the log-likelihood function at the starting values is `r cute(-ll(start, X, ist$t, ist$d))`. Finally, I use the modification robust-variance modification of the Marquard algorithm, which is more efficient than the Gauss-Newton-like algorithm when starting from points very far from the optimum [@marquardt_1963, @commenges_2006]:
 
 ```{r optimisation, echo = TRUE}
-fit = optim(par = start, fn = ll, X = X, t = ist$t, d = ist$d, method = "BFGS", hessian = TRUE)
+# library(marqLevAlg)
+fit = marqLevAlg(b = start, 
+  fn = function(x) ll(x, X = X, t = ist$t, d = ist$d))
 ```
 
-The maximum likelihood estimates are:
+Assess convergency:
 
-```{r ml_estimates, echo = TRUE}
-fit$par
+```{r convergency, echo = TRUE}
+fit$istop
 ```
 
-The standard errors of the maximum likelihood estimates are obtained by inverting the resulting Hessian:
+The convergence status indicator is equal to 1, hence the convergence criteria were satisfied. The log-likelihood at the maximum likelihood estimates is `r cute(-ll(fit$b, X, ist$t, ist$d))`. The optimising routine returns the upper triangle matrix of variance-covariance estimates at the stopping point, which can be used to obtain standard errors of the estimated coefficients:
 
-```{r se_estimates, echo = TRUE}
-fit$vcov = solve(fit$hessian)
-fit$se = sqrt(diag(solve(fit$hessian)))
+```{r se, echo = TRUE}
+fit$vcov = matrix(0, 
+  nrow = length(fit$b), 
+  ncol = length(fit$b))
+fit$vcov[upper.tri(fit$vcov, diag = TRUE)] = fit$v
+fit$vcov[lower.tri(fit$vcov)] = t(fit$vcov)[lower.tri(fit$vcov)]
 ```
 
 Finally, I build a table of results:
 
 ```{r results, echo = TRUE}
 res = data.frame(
-  coef = fit$par,
-  hr = exp(fit$par),
-  se = fit$se)
+  coef = fit$b,
+  hr = exp(fit$b),
+  se = sqrt(diag(fit$vcov)))
 res$z = res$coef / res$se
-res$p = 1 - pnorm(abs(res$z), 1 - 0.05 / 2)
-kable(res, digits = 3)
+res$p = 2 * pmin(pnorm(-abs(res$z)), 1 - pnorm(abs(res$z)))
+kable(res, 
+  digits = 3, 
+  align = "rrrrr", 
+  booktabs = TRUE,
+  col.names = c("Beta", "Hazard ratio", "SE (Beta)", "Z", "P > |Z|"),
+  linesep = "",
+  caption = "Results from a parametric Weibull model.")
 ```
 
-Wald test for the interaction terms, using the \(\chi^2\) test statistic (as sample size is big, using the F statistic would be equivalent):
+I test the interaction term using the Wald test to assess whether combining aspirin and heparin alter their association with time to event. I use the Wald \(\chi^2\) test statistic as the sample
+size is big enough for it to be equivalent to its \(F\) counterpart:
 
-```{r wald_interaction, echo = TRUE}
+```{r wald-interaction, echo = TRUE}
 # identify the interaction terms
-idx = grepl(":", names(fit$par))
+idx = grepl(":", names(fit$b))
 
 # compute the W statistic
-W = t(fit$par[idx]) %*% solve(fit$vcov[idx, idx]) %*% fit$par[idx]
+W = t(fit$b[idx]) %*% solve(fit$vcov[idx, idx]) %*% fit$b[idx]
 
-# test it against the quantiles of a chi2 distribution with sum(idx) degrees of freedom
-c(W = W, p = 1 - pchisq(W, sum(idx)))
+# produce the test
+c(W = W, df = sum(idx), `p-value` = 1 - pchisq(W, sum(idx)))
 ```
 
+The interaction terms seem to be not statistically significant. We can conclude the association of aspirin and heparin treatments with survival are not dependent on one another. 
+
+I can then re-fit the model excluding the interaction terms:
+
+```{r re-optimisation, echo = TRUE}
+X = with(ist, model.matrix(t ~ rxasp + rxhep - 1))[,-1]
+start = c(1, 1, rep(0, ncol(X)))
+names(start) = c("lambda", "p", colnames(X))
+re_fit = marqLevAlg(b = start, 
+  fn = function(x) ll(x, X = X, t = ist$t, d = ist$d))
+re_fit$istop
+```
+
+The routine converged. I produce the variance-covariance matrix:
+
+```{r re-se, echo = TRUE}
+re_fit$vcov = matrix(0, 
+  nrow = length(re_fit$b), 
+  ncol = length(re_fit$b))
+re_fit$vcov[upper.tri(re_fit$vcov, diag = TRUE)] = re_fit$v
+re_fit$vcov[lower.tri(re_fit$vcov)] = t(re_fit$vcov)[lower.tri(re_fit$vcov)]
+```
+
+Finally, I build a new table of results:
+
+```{r re-results, echo = TRUE}
+re_res = data.frame(
+  coef = re_fit$b,
+  hr = exp(re_fit$b),
+  se = sqrt(diag(re_fit$vcov)))
+re_res$z = re_res$coef / re_res$se
+re_res$p = 2 * pmin(pnorm(-abs(re_res$z)), 1 - pnorm(abs(re_res$z)))
+kable(re_res, 
+  digits = 3, 
+  align = "rrrrr",
+  col.names = c("Beta", "Hazard ratio", "SE (Beta)", "Z", "P > |Z|"),
+  booktabs = TRUE,
+  linesep = "",
+  caption = "Results from a parametric Weibull model with no interactions.")
+```
+
+I now test the significance of the two coefficients related to heparin treatment jointly:
+
+```{r wald-rxhep, echo = TRUE}
+# identify the interaction terms
+idx = grepl("^rxhep", names(re_fit$b))
+
+# compute the W statistic
+W = t(re_fit$b[idx]) %*% solve(re_fit$vcov[idx, idx]) %*% re_fit$b[idx]
+
+# produce the test
+c(W = W, df = sum(idx), `p-value` = 1 - pchisq(W, sum(idx)))
+```
+
+Heparin treatment seems to be not statistically significantly associated with time to death in acute ischaemic stroke patients; the effect size is small, with a 4% and 7% increased risk for the `L` and `H` heparin treatment modalities versus no heparin treatment, respectively. 
+
+Finally, the treatment with aspirin is also not statistically significantly associated with the outcome; effect size is small as well, approximately a 5% risk reduction for aspirin treatment compared to no treatment with aspirin (Table \@ref(tab:re-results)).
+
+This is a simple application of parametric survival models; a fully developed analysis should take further aspects into account, such as considering different hazard distributions. It is possible to estimate various models and compare their fit to a specific distribution using information criteria such as the Akaike information criterion (AIC) and the Bayesian information criterion (BIC). 
 
 ## The Cox model {#sa-cox}
 
 ## Advanced survival analysis {#sa-advanced}
+
+
