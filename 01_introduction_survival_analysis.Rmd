@@ -202,7 +202,7 @@ with \(\beta\) a vector of regression coefficients and \(\epsilon\) a vector of 
 \[
 h(t; X) = h_0(t) g(X),
 \]
-for some \(h_0(t)\) and \(g(X)\), with \(g(\cdot)\)) a non-negative function of the covariates. A popular choice for the latter is \(g(X) = \exp(X \beta)\); conversely, is is possible to either left the former unspecified, or assume a parametric distribution. The focus of this Section is on specifying a parametric distribution for \(h_0(t)\), yielding the so-called _parametric survival regression models_; I will present commonly assumed parametric distributions in Section \@ref(sa-parsa-distributions), the estimation procedure in Section \@ref(sa-parsa-estimation), and an example using data from the International Stroke Trial (IST) [@ist_1997, @istdb_2011] in Section \@ref(sa-parsa-example). Leaving \(h_0(t)\) unspecified yields the semi-parametric Cox model, that I will present in Section \@ref(sa-cox). 
+for some \(h_0(t)\) and \(g(X)\), with \(g(\cdot)\)) a non-negative function of the covariates. A popular choice for the latter is \(g(X) = \exp(X \beta)\); conversely, is is possible to either left the former unspecified, or assume a parametric distribution. The focus of this Section is on specifying a parametric distribution for \(h_0(t)\), yielding the so-called _parametric survival regression models_; I will present commonly assumed parametric distributions in Section \@ref(sa-parsa-distributions), the estimation procedure in Section \@ref(sa-parsa-estimation), and an example using data from the International Stroke Trial (IST) [@ist_1997; @istdb_2011] in Section \@ref(sa-parsa-example). Leaving \(h_0(t)\) unspecified yields the semi-parametric Cox model, that I will present in Section \@ref(sa-cox). 
 
 From now on I will focus on the proportional hazards formulation of the survival model.
 
@@ -275,7 +275,7 @@ The log-likelihood function \(\log L\) has a closed-form; maximum likelihood est
 
 ### Data analysis example {#sa-parsa-example}
 
-The International Stroke Trial (IST) was a large, prospective, randomised controlled trial conducted between 1991 and 1996. The aim of the trial was to assess whether early administration of aspirin, heparin, both or neither influenced clinical outcomes in patients with acute ischaemic stroke [@ist_1997, @istdb_2011]. 
+The International Stroke Trial (IST) was a large, prospective, randomised controlled trial conducted between 1991 and 1996. The aim of the trial was to assess whether early administration of aspirin, heparin, both or neither influenced clinical outcomes in patients with acute ischaemic stroke [@ist_1997; @istdb_2011]. 
 
 ```{r get-process-ist-data, eval = FALSE}
 # this chunk does not run always
@@ -297,7 +297,7 @@ ist = ist[ist$TD > 0,]
 write_csv(ist, "data/ist.csv")
 ```
 
-As illustration, I will evaluate the association between tretment with aspirin and/or heparin and survival after acute ischaemic stroke. I will start by reading the data, store in the `ist.csv` file. This file is a subset of the full IST dataset containing information on age, gender, treatment, and survival; further, individuals with missing values and individuals with a survival time of zero were dropped.
+As illustration, I will evaluate the association between tretment with aspirin and/or heparin and survival after acute ischaemic stroke. I will start by reading the data, stored in the `ist.csv` file. This file is a subset of the full IST dataset containing information on age, gender, treatment, and survival; further, individuals with missing values and individuals with a survival time of zero were dropped.
 
 ```{r read-ist-data, echo = TRUE}
 # library(readr)
@@ -355,7 +355,7 @@ start = c(1, 1, rep(0, ncol(X)))
 names(start) = c("lambda", "p", colnames(X))
 ```
 
-The value of the log-likelihood function at the starting values is `r cute(-ll(start, X, ist$t, ist$d))`. Finally, I use the modification robust-variance modification of the Marquard algorithm, which is more efficient than the Gauss-Newton-like algorithm when starting from points very far from the optimum [@marquardt_1963, @commenges_2006]:
+The value of the log-likelihood function at the starting values is `r cute(-ll(start, X, ist$t, ist$d))`. Finally, I use the robust-variance modification of the Marquard algorithm, which is more efficient than Gauss-Newton-like algorithms when starting from points very far from the optimum [@marquardt_1963; @commenges_2006]:
 
 ```{r optimisation, echo = TRUE}
 # library(marqLevAlg)
@@ -563,10 +563,10 @@ c(W = W, df = sum(idx), `p-value` = 1 - pchisq(W, sum(idx)))
 
 Treatment with heparin is not statistically significantly associated with risk of death; besides that, the effect size of heparin treatment is small: approximately 4% and 6% risk increase for heparin treatment modalities `L` and `H` compared to no heparin treatment, respectively. 
 
-The treatment with aspirin is also not barely significantly different than zero, with a p-value of 0.0954; the effect size is comparable to the effect size estimated with the Weibull model, approximately 5% risk reduction for treatment with aspirin compared to no aspirin treatment.
+The treatment with aspirin is also barely significantly different than zero, assuming a significancy level \(\alpha = 0.10\), with a p-value of 0.0954. The effect size is comparable to the estimated effect size obtained with the Weibull model, approximately 5% risk reduction for treatment with aspirin compared to no aspirin treatment.
 
 ## Advances in survival analysis {#sa-advances}
 
 There are several extensions of the statistical methods presented in this Chapter: I will briefly introduce some of them in this Section, without going into great detail as that would be beyond the scope of this report.
 
-The proportional hazards models have been extended to include time-dependent covariates and time-dependent covariate effects; additionally, the Cox model has been extended to allow stratification by a given factor (details in @kalbfleisch_2011 and @kleinbaum_2012). Parametric survival models have been generalised to allow combinations of linear predictors, penalised smoothers for the effect of time and covariates, and parametric effects - both in the proportional hazards and proportional odds framework [@liu_2016]. More generally, models have been developed to account for competing events and multi-state diseases with intermediate states, and for modelling a wide range of multivariate survival data [@geskus_2015, @crowder_2016]. Finally, the main advances that I will discuss further are models with random effects and joint models for longitudinal and survival data, in Chapters \@ref(smre) and \@ref(jm) respectively.
+The proportional hazards models have been extended to include time-dependent covariates and time-dependent covariate effects; additionally, the Cox model has been extended to allow stratification by a given factor (details in @kalbfleisch_2011 and @kleinbaum_2012). Parametric survival models have been generalised to allow combinations of linear predictors and penalised smoothers for the effect of time and covariates, both in the proportional hazards and proportional odds framework [@liu_2016]. More generally, models have been developed to account for competing events and multi-state diseases, even with intermediate states, and for modelling a wide range of multivariate survival data [@geskus_2015; @crowder_2016]. Finally, the main advances that I will discuss further are models with random effects and joint models for longitudinal and survival data, in Chapters \@ref(smre) and \@ref(jm) respectively.
