@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="conferences.html">
-<link rel="next" href="ax-manuscript.html">
+<link rel="prev" href="smre-univariate-frailty.html">
+<link rel="next" href="smre-random-effects.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -164,17 +164,34 @@ code > span.in { color: #008000; } /* Information */
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="ax-slides" class="section level1">
-<h1><span class="header-section-number">A</span> Slides</h1>
-
+<div id="smre-shared-frailty" class="section level2">
+<h2><span class="header-section-number">2.2</span> Shared frailty models</h2>
+<p>Further generalising the model presented in Section <a href="smre-univariate-frailty.html#smre-univariate-frailty">2.1</a>, it is possible for the frailty effect <span class="math inline">\(\alpha\)</span> to be shared between clusters of study subjects. Specifically, for the <span class="math inline">\(j\)</span>-th observation in the <span class="math inline">\(i\)</span>-th cluster: <span class="math display">\[
+h_{ij}(t | \alpha_i) = \alpha_i h(t|X_{ij}).
+\]</span> The conditional survival function is: <span class="math display">\[
+S_{ij}(t | \alpha_i) = S_{ij}(t) ^ {\alpha_i}.
+\]</span></p>
+<p>In this setting, the cluster-specific contribution to the likelihood is obtained by calculating the cluster-specific likelihood conditional on the frailty, consequently integrating out the frailty itself: <span class="math display">\[
+L_i = \int_A L_i(\alpha_i) f(\alpha_i) \, d\alpha,
+\]</span> with <span class="math inline">\(f(\alpha)\)</span> the distribution of the frailty, <span class="math inline">\(A\)</span> its domain, and <span class="math inline">\(L_i(\alpha_i)\)</span> the cluster-specific contribution to the likelihood, conditional on the frailty. The cluster-specific contribution to the likelihood is <span class="math display">\[
+L_i(\alpha_i) = \alpha_i ^ {D_i} \prod_{j = 1} ^ {n_i} S_{ij}(t_{ij}) ^ {\alpha_i} h_{ij}(t_{ij}) ^ {d_{ij}},
+\]</span> with <span class="math inline">\(D_i = \sum_{j = 1} ^ {n_i} d_{ij}\)</span>. Analogously as before, analytical formulae can be obtained when <span class="math inline">\(\alpha_i\)</span> follows a Gamma distribution: <span class="math display">\[
+L_i = \left[ \prod_{j = 1} ^ {n_i} h_{ij}(t_{ij}) ^ {d_{ij}} \right] \frac{\Gamma (1 / \theta + D_i)}{\Gamma (1 / \theta)} \left[ 1 - \theta \sum_{j = 1} ^ {n_i} \log S_{ij}(t_{ij}) \right] ^ {-1 / \theta - D_i};
+\]</span> further details in <span class="citation">Gutierrez (<a href="#ref-gutierrez_2002">2002</a>)</span>. As in the univariate frailty model, assuming a log-normal distribution requires some numerical approximation to be performed, being the resulting model analytically intractable.</p>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-gutierrez_2002">
+<p>Gutierrez, Roberto G. 2002. “Parametric Frailty and Shared Frailty Survival Models.” <em>The Stata Journal</em> 2 (1): 22–44.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="conferences.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="ax-manuscript.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="smre-univariate-frailty.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="smre-random-effects.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

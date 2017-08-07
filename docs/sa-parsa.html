@@ -25,7 +25,7 @@
 <meta name="author" content="Alessandro Gasparini">
 
 
-<meta name="date" content="2017-08-04">
+<meta name="date" content="2017-08-07">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -111,7 +111,11 @@ code > span.in { color: #008000; } /* Information */
 </ul></li>
 <li class="chapter" data-level="1.7" data-path="sa-advances.html"><a href="sa-advances.html"><i class="fa fa-check"></i><b>1.7</b> Advances in survival analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="smre.html"><a href="smre.html"><i class="fa fa-check"></i><b>2</b> Survival models with random effects</a></li>
+<li class="chapter" data-level="2" data-path="smre.html"><a href="smre.html"><i class="fa fa-check"></i><b>2</b> Survival models with random effects</a><ul>
+<li class="chapter" data-level="2.1" data-path="smre-univariate-frailty.html"><a href="smre-univariate-frailty.html"><i class="fa fa-check"></i><b>2.1</b> Univariate frailty models</a></li>
+<li class="chapter" data-level="2.2" data-path="smre-shared-frailty.html"><a href="smre-shared-frailty.html"><i class="fa fa-check"></i><b>2.2</b> Shared frailty models</a></li>
+<li class="chapter" data-level="2.3" data-path="smre-random-effects.html"><a href="smre-random-effects.html"><i class="fa fa-check"></i><b>2.3</b> Alternative formulation</a></li>
+</ul></li>
 <li class="chapter" data-level="3" data-path="jm.html"><a href="jm.html"><i class="fa fa-check"></i><b>3</b> Joint models for longitudinal and survival data</a></li>
 <li class="chapter" data-level="4" data-path="compch.html"><a href="compch.html"><i class="fa fa-check"></i><b>4</b> Computational challenges in survival models with random effects</a></li>
 <li class="chapter" data-level="5" data-path="simst1.html"><a href="simst1.html"><i class="fa fa-check"></i><b>5</b> Simulation study: accuracy of Gaussian quadrature</a><ul>
@@ -141,6 +145,7 @@ code > span.in { color: #008000; } /* Information */
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="ax-slides.html"><a href="ax-slides.html"><i class="fa fa-check"></i><b>A</b> Slides</a></li>
 <li class="chapter" data-level="B" data-path="ax-manuscript.html"><a href="ax-manuscript.html"><i class="fa fa-check"></i><b>B</b> Manuscript</a></li>
+<li class="chapter" data-level="C" data-path="ax-r-session.html"><a href="ax-r-session.html"><i class="fa fa-check"></i><b>C</b> R Session</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
@@ -166,7 +171,7 @@ code > span.in { color: #008000; } /* Information */
 \log t = X \beta + \epsilon,
 \]</span> with <span class="math inline">\(\beta\)</span> a vector of regression coefficients and <span class="math inline">\(\epsilon\)</span> a vector of residual error terms. Assuming a parametric distribution for <span class="math inline">\(\epsilon\)</span> determines the regression model: log-normal, log-logistic, Weibull, etc. In the AFT model, a positive association of the covariates with survival time implies an increased expected time to event. In the PH model, the covariates have a multiplicative effect on the hazard function: <span class="math display">\[
 h(t; X) = h_0(t) g(X),
-\]</span> for some <span class="math inline">\(h_0(t)\)</span> and <span class="math inline">\(g(X)\)</span>, with <span class="math inline">\(g(\cdot)\)</span>) a non-negative function of the covariates. A popular choice for the latter is <span class="math inline">\(g(X) = \exp(X \beta)\)</span>; conversely, is is possible to either left the former unspecified, or assume a parametric distribution. The focus of this Section is on specifying a parametric distribution for <span class="math inline">\(h_0(t)\)</span>, yielding the so-called <em>parametric survival regression models</em>; I will present commonly assumed parametric distributions in Section <a href="sa-parsa.html#sa-parsa-distributions">1.5.1</a>, the estimation procedure in Section <a href="sa-parsa.html#sa-parsa-estimation">1.5.2</a>, and an example using data from the International Stroke Trial (IST) <span class="citation">(International Stroke Trial Collaborative Group <a href="#ref-ist_1997">1997</a>, <span class="citation">Sandercock, Niewada, and Czlonkowska (<a href="#ref-istdb_2011">2011</a>)</span>)</span> in Section <a href="sa-parsa.html#sa-parsa-example">1.5.3</a>. Leaving <span class="math inline">\(h_0(t)\)</span> unspecified yields the semi-parametric Cox model, that I will present in Section <a href="sa-cox.html#sa-cox">1.6</a>.</p>
+\]</span> for some <span class="math inline">\(h_0(t)\)</span> and <span class="math inline">\(g(X)\)</span>, with <span class="math inline">\(g(\cdot)\)</span>) a non-negative function of the covariates. A popular choice for the latter is <span class="math inline">\(g(X) = \exp(X \beta)\)</span>; conversely, is is possible to either left the former unspecified, or assume a parametric distribution. The focus of this Section is on specifying a parametric distribution for <span class="math inline">\(h_0(t)\)</span>, yielding the so-called <em>parametric survival regression models</em>; I will present commonly assumed parametric distributions in Section <a href="sa-parsa.html#sa-parsa-distributions">1.5.1</a>, the estimation procedure in Section <a href="sa-parsa.html#sa-parsa-estimation">1.5.2</a>, and an example using data from the International Stroke Trial (IST) <span class="citation">(International Stroke Trial Collaborative Group <a href="#ref-ist_1997">1997</a>; Sandercock, Niewada, and Czlonkowska <a href="#ref-istdb_2011">2011</a>)</span> in Section <a href="sa-parsa.html#sa-parsa-example">1.5.3</a>. Leaving <span class="math inline">\(h_0(t)\)</span> unspecified yields the semi-parametric Cox model, that I will present in Section <a href="sa-cox.html#sa-cox">1.6</a>.</p>
 <p>From now on I will focus on the proportional hazards formulation of the survival model.</p>
 <div id="sa-parsa-distributions" class="section level3">
 <h3><span class="header-section-number">1.5.1</span> Failure time distribution</h3>
@@ -243,8 +248,8 @@ L = \prod_{i = 1} ^ n L_i.
 </div>
 <div id="sa-parsa-example" class="section level3">
 <h3><span class="header-section-number">1.5.3</span> Data analysis example</h3>
-<p>The International Stroke Trial (IST) was a large, prospective, randomised controlled trial conducted between 1991 and 1996. The aim of the trial was to assess whether early administration of aspirin, heparin, both or neither influenced clinical outcomes in patients with acute ischaemic stroke <span class="citation">(International Stroke Trial Collaborative Group <a href="#ref-ist_1997">1997</a>, <span class="citation">Sandercock, Niewada, and Czlonkowska (<a href="#ref-istdb_2011">2011</a>)</span>)</span>.</p>
-<p>As illustration, I will evaluate the association between tretment with aspirin and/or heparin and survival after acute ischaemic stroke. I will start by reading the data, store in the <code>ist.csv</code> file. This file is a subset of the full IST dataset containing information on age, gender, treatment, and survival; further, individuals with missing values and individuals with a survival time of zero were dropped.</p>
+<p>The International Stroke Trial (IST) was a large, prospective, randomised controlled trial conducted between 1991 and 1996. The aim of the trial was to assess whether early administration of aspirin, heparin, both or neither influenced clinical outcomes in patients with acute ischaemic stroke <span class="citation">(International Stroke Trial Collaborative Group <a href="#ref-ist_1997">1997</a>; Sandercock, Niewada, and Czlonkowska <a href="#ref-istdb_2011">2011</a>)</span>.</p>
+<p>As illustration, I will evaluate the association between tretment with aspirin and/or heparin and survival after acute ischaemic stroke. I will start by reading the data, stored in the <code>ist.csv</code> file. This file is a subset of the full IST dataset containing information on age, gender, treatment, and survival; further, individuals with missing values and individuals with a survival time of zero were dropped.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># library(readr)</span>
 ist =<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/ist.csv&quot;</span>, 
   <span class="dt">col_names =</span> <span class="kw">c</span>(<span class="st">&quot;gender&quot;</span>, <span class="st">&quot;age&quot;</span>, <span class="st">&quot;rxasp&quot;</span>, <span class="st">&quot;rxhep&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;t&quot;</span>), 
@@ -279,13 +284,13 @@ S(t; X) = \exp(-\lambda t ^ p \exp(X \beta)).
 <p>Next, I define the starting values for the optmisation routine. I choose the value 1 for the parameters of the Weibull distribution and the value 0 for the regression coefficients:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">start =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="kw">rep</span>(<span class="dv">0</span>, <span class="kw">ncol</span>(X)))
 <span class="kw">names</span>(start) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;lambda&quot;</span>, <span class="st">&quot;p&quot;</span>, <span class="kw">colnames</span>(X))</code></pre></div>
-<p>The value of the log-likelihood function at the starting values is -92861140101.392. Finally, I use the modification robust-variance modification of the Marquard algorithm, which is more efficient than the Gauss-Newton-like algorithm when starting from points very far from the optimum <span class="citation">(Marquardt <a href="#ref-marquardt_1963">1963</a>, <span class="citation">Commenges et al. (<a href="#ref-commenges_2006">2006</a>)</span>)</span>:</p>
+<p>The value of the log-likelihood function at the starting values is -92861140101.392. Finally, I use the robust-variance modification of the Marquard algorithm, which is more efficient than Gauss-Newton-like algorithms when starting from points very far from the optimum <span class="citation">(Marquardt <a href="#ref-marquardt_1963">1963</a>; Commenges et al. <a href="#ref-commenges_2006">2006</a>)</span>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># library(marqLevAlg)</span>
 fit =<span class="st"> </span><span class="kw">marqLevAlg</span>(<span class="dt">b =</span> start, 
   <span class="dt">fn =</span> <span class="cf">function</span>(x) <span class="kw">ll</span>(x, <span class="dt">X =</span> X, <span class="dt">t =</span> ist<span class="op">$</span>t, <span class="dt">d =</span> ist<span class="op">$</span>d))</code></pre></div>
 <pre><code>## 
 ## Be patient. The program is computing ...
-## The program took 8.09 seconds</code></pre>
+## The program took 8.28 seconds</code></pre>
 <p>Assess convergency:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit<span class="op">$</span>istop</code></pre></div>
 <pre><code>## [1] 1</code></pre>
@@ -400,7 +405,7 @@ re_fit =<span class="st"> </span><span class="kw">marqLevAlg</span>(<span class=
   <span class="dt">fn =</span> <span class="cf">function</span>(x) <span class="kw">ll</span>(x, <span class="dt">X =</span> X, <span class="dt">t =</span> ist<span class="op">$</span>t, <span class="dt">d =</span> ist<span class="op">$</span>d))</code></pre></div>
 <pre><code>## 
 ## Be patient. The program is computing ...
-## The program took 4.74 seconds</code></pre>
+## The program took 4.43 seconds</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">re_fit<span class="op">$</span>istop</code></pre></div>
 <pre><code>## [1] 1</code></pre>
 <p>The routine converged. I produce the variance-covariance matrix:</p>

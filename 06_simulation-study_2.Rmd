@@ -1,4 +1,5 @@
 # Simulation study: impact of misspecification in survival models with shared frailty terms {#simst2}
+\chaptermark{Misspecification in survival models with frailty}
 
 ## Aim {#simst2-aim}
 

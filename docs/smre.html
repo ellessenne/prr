@@ -25,7 +25,7 @@
 <meta name="author" content="Alessandro Gasparini">
 
 
-<meta name="date" content="2017-08-04">
+<meta name="date" content="2017-08-07">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -33,7 +33,7 @@
   
   
 <link rel="prev" href="sa-advances.html">
-<link rel="next" href="jm.html">
+<link rel="next" href="smre-univariate-frailty.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -111,7 +111,11 @@ code > span.in { color: #008000; } /* Information */
 </ul></li>
 <li class="chapter" data-level="1.7" data-path="sa-advances.html"><a href="sa-advances.html"><i class="fa fa-check"></i><b>1.7</b> Advances in survival analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="smre.html"><a href="smre.html"><i class="fa fa-check"></i><b>2</b> Survival models with random effects</a></li>
+<li class="chapter" data-level="2" data-path="smre.html"><a href="smre.html"><i class="fa fa-check"></i><b>2</b> Survival models with random effects</a><ul>
+<li class="chapter" data-level="2.1" data-path="smre-univariate-frailty.html"><a href="smre-univariate-frailty.html"><i class="fa fa-check"></i><b>2.1</b> Univariate frailty models</a></li>
+<li class="chapter" data-level="2.2" data-path="smre-shared-frailty.html"><a href="smre-shared-frailty.html"><i class="fa fa-check"></i><b>2.2</b> Shared frailty models</a></li>
+<li class="chapter" data-level="2.3" data-path="smre-random-effects.html"><a href="smre-random-effects.html"><i class="fa fa-check"></i><b>2.3</b> Alternative formulation</a></li>
+</ul></li>
 <li class="chapter" data-level="3" data-path="jm.html"><a href="jm.html"><i class="fa fa-check"></i><b>3</b> Joint models for longitudinal and survival data</a></li>
 <li class="chapter" data-level="4" data-path="compch.html"><a href="compch.html"><i class="fa fa-check"></i><b>4</b> Computational challenges in survival models with random effects</a></li>
 <li class="chapter" data-level="5" data-path="simst1.html"><a href="simst1.html"><i class="fa fa-check"></i><b>5</b> Simulation study: accuracy of Gaussian quadrature</a><ul>
@@ -141,6 +145,7 @@ code > span.in { color: #008000; } /* Information */
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="ax-slides.html"><a href="ax-slides.html"><i class="fa fa-check"></i><b>A</b> Slides</a></li>
 <li class="chapter" data-level="B" data-path="ax-manuscript.html"><a href="ax-manuscript.html"><i class="fa fa-check"></i><b>B</b> Manuscript</a></li>
+<li class="chapter" data-level="C" data-path="ax-r-session.html"><a href="ax-r-session.html"><i class="fa fa-check"></i><b>C</b> R Session</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
@@ -161,7 +166,18 @@ code > span.in { color: #008000; } /* Information */
             <section class="normal" id="section-">
 <div id="smre" class="section level1">
 <h1><span class="header-section-number">2</span> Survival models with random effects</h1>
-
+<p>Random effects models are a kind of hierarchical model in which the data is assumed to have some sort of hierarchical structure: imagine having individual patients data clustered into families, cities, regions, and so on. It is also assumed that individuals are homogeneous within hierarchical unit, heterogeneous between different units. In comparison, fixed effects models do not take into account any hierarchy in the data. In biostatistics, also, the terms <em>fixed effects</em> and <em>random effects</em> have a special meaning, referring to the <em>population-average</em> and <em>subject-specific</em> effects, respectively, with the latter generally assumed to be unknown, unobserved variables.</p>
+<p>Random effects models are generally used to analyse hierarchical data with a continuous, normally distributed outcome (e.g. hemoglobin levels, inflammation markers, …); such models are referred to as <em>linear mixed-effects models</em>, as they can incorporate both fixed and random effects, and generalise the linear regression model. Additionally, when data consists in multiple observations for a given individual over time (and therefore the first level of clustering consists in the individual himself) the term <em>longitudinal data</em> is used. It is possible to encounter hierarchical data originating from a variety of ditribution from the exponential family such as the Poisson, Gamma, and Binomial distribution. Linear mixed-effects models can be generalised to include such data, and these models are generally referred to as <em>generalised linear mixed-effects models</em>. Practically speaking, the generalisation is analogous to generalising linear models to generalised linear models. It is also possible to relax the normality assumption for continuous, hierarchical data and model the median (or any quantile, really) rather than the mean. Such models are called <em>linear quantile mixed-effects models</em>, and generalise the linear mixed-effects models as quantile regression is generalising the linear model. Survival data can present a hierarchical structure too; for instance, data could be clustered in geographical areas, institutions, or patients themselves. Meta-analysis of individual-patient data are a common example of survival data (when the outcome is time to event, of course) with some hierarchical structure; another example is given by repeated-events data, such as infections or acute recurrent events, in which the first level of the hierarchical structure consists in the patient. Another example of survival data with biological cluster is given by twin data, in which siblings share some genetic factors. This heterogeneity structure often leads to violation of the implicit assumption that populations are homogeneous: sometimes it is impossible to include all relevant risk factors, or maybe such risk factors are not known at all. The result is unobserved heterogeneity. The simplest survival model with random effects is the <em>univariate frailty model</em>, in which a random effect - named frailty - is included in the model to account for the unobserved heterogeneity. The univariate frailty model can be generalised by allowing the frailty term to be shared between observations belonging to the same cluster of data. The resulting models are named <em>shared frailty model</em>. The frailty term generally acts multiplicatively on the baseline hazard, and it is modelled on the hazard scale; it is possible to alternatively formulate the model in terms of random effects rather than frailties, by including the frailty as an additive term on the log-hazard scale.</p>
+<p>I will introduce the univariate frailty model in Section <a href="smre-univariate-frailty.html#smre-univariate-frailty">2.1</a>, and generalise it to allow shared frailty terms in Section <a href="smre-shared-frailty.html#smre-shared-frailty">2.2</a>. Finally, I will present the alternative formulation in terms of random effects rather than frailties in Section <a href="smre-random-effects.html#smre-random-effects">2.3</a>. A comprehensive treatment of frailty models in survival analysis is given in <span class="citation">Hougaard (<a href="#ref-hougaard_2000">2000</a>)</span> and <span class="citation">Wienke (<a href="#ref-wienke_2010">2010</a>)</span>.</p> 
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-hougaard_2000">
+<p>Hougaard, Philip. 2000. <em>Analysis of Multivariate Survival Data</em>. Springer New York. doi:<a href="https://doi.org/10.1007/978-1-4612-1304-8">10.1007/978-1-4612-1304-8</a>.</p>
+</div>
+<div id="ref-wienke_2010">
+<p>Wienke, Andreas. 2010. <em>Frailty Models in Survival Analysis</em>. Chapman &amp; Hall / CRC. doi:<a href="https://doi.org/10.1201/9781420073911">10.1201/9781420073911</a>.</p>
+</div>
 </div>
             </section>
 
@@ -169,7 +185,7 @@ code > span.in { color: #008000; } /* Information */
         </div>
       </div>
 <a href="sa-advances.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="jm.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="smre-univariate-frailty.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -25,14 +25,14 @@
 <meta name="author" content="Alessandro Gasparini">
 
 
-<meta name="date" content="2017-08-04">
+<meta name="date" content="2017-08-07">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="ax-manuscript.html">
+<link rel="prev" href="ax-r-session.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -111,7 +111,11 @@ code > span.in { color: #008000; } /* Information */
 </ul></li>
 <li class="chapter" data-level="1.7" data-path="sa-advances.html"><a href="sa-advances.html"><i class="fa fa-check"></i><b>1.7</b> Advances in survival analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="smre.html"><a href="smre.html"><i class="fa fa-check"></i><b>2</b> Survival models with random effects</a></li>
+<li class="chapter" data-level="2" data-path="smre.html"><a href="smre.html"><i class="fa fa-check"></i><b>2</b> Survival models with random effects</a><ul>
+<li class="chapter" data-level="2.1" data-path="smre-univariate-frailty.html"><a href="smre-univariate-frailty.html"><i class="fa fa-check"></i><b>2.1</b> Univariate frailty models</a></li>
+<li class="chapter" data-level="2.2" data-path="smre-shared-frailty.html"><a href="smre-shared-frailty.html"><i class="fa fa-check"></i><b>2.2</b> Shared frailty models</a></li>
+<li class="chapter" data-level="2.3" data-path="smre-random-effects.html"><a href="smre-random-effects.html"><i class="fa fa-check"></i><b>2.3</b> Alternative formulation</a></li>
+</ul></li>
 <li class="chapter" data-level="3" data-path="jm.html"><a href="jm.html"><i class="fa fa-check"></i><b>3</b> Joint models for longitudinal and survival data</a></li>
 <li class="chapter" data-level="4" data-path="compch.html"><a href="compch.html"><i class="fa fa-check"></i><b>4</b> Computational challenges in survival models with random effects</a></li>
 <li class="chapter" data-level="5" data-path="simst1.html"><a href="simst1.html"><i class="fa fa-check"></i><b>5</b> Simulation study: accuracy of Gaussian quadrature</a><ul>
@@ -141,6 +145,7 @@ code > span.in { color: #008000; } /* Information */
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="ax-slides.html"><a href="ax-slides.html"><i class="fa fa-check"></i><b>A</b> Slides</a></li>
 <li class="chapter" data-level="B" data-path="ax-manuscript.html"><a href="ax-manuscript.html"><i class="fa fa-check"></i><b>B</b> Manuscript</a></li>
+<li class="chapter" data-level="C" data-path="ax-r-session.html"><a href="ax-r-session.html"><i class="fa fa-check"></i><b>C</b> R Session</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
@@ -170,6 +175,9 @@ code > span.in { color: #008000; } /* Information */
 <p>Breslow, N. 1974. “Covariance Analysis of Censored Survival Data.” <em>Biometrics</em> 30 (1): 89–99. doi:<a href="https://doi.org/10.2307/2529620">10.2307/2529620</a>.</p>
 </div>
 <div>
+<p>Clayton, David G. 1991. “A Monte Carlo Method for Bayesian Inference in Frailty Models.” <em>Biometrics</em> 47 (2): 467. doi:<a href="https://doi.org/10.2307/2532139">10.2307/2532139</a>.</p>
+</div>
+<div>
 <p>Commenges, Daniel, Hélène Jacqmin-Gadda, Cécile Proust, and Jérémie Guedj. 2006. “A Newton-Like Algorithm for Likelihood Maximization: The Robust-Variance Scoring Algorithm.” <em>ArXiv Mathematics E-Prints</em>, October. <a href="https://arxiv.org/abs/math/0610402v2" class="uri">https://arxiv.org/abs/math/0610402v2</a>.</p>
 </div>
 <div>
@@ -182,10 +190,19 @@ code > span.in { color: #008000; } /* Information */
 <p>Crowder, Martin. 2016. <em>Multivariate Survival Analysis and Competing Risks</em>. Text in Statistical Sciences. Chapman &amp; Hall / CRC.</p>
 </div>
 <div>
+<p>Crowther, Michael J, Maxime P Look, and Richard D Riley. 2014. “Multilevel Mixed Effects Parametric Survival Models Using Adaptive Gauss-Hermite Quadrature with Application to Recurrent Events and Individual Participant Data Meta-Analysis.” <em>Statistics in Medicine</em> 33 (22): 3844–58. doi:<a href="https://doi.org/10.1002/sim.6191">10.1002/sim.6191</a>.</p>
+</div>
+<div>
 <p>Efron, Bradley. 1977. “The Efficiency of Cox’s Likelihood Function for Censored Data.” <em>Journal of the American Statistical Association</em> 72 (359): 557–65. doi:<a href="https://doi.org/10.2307/2286217">10.2307/2286217</a>.</p>
 </div>
 <div>
 <p>Geskus, Ronald B. 2015. <em>Data Analysis with Competing Risks and Intermediate States</em>. The Biostatistics Series. Chapman &amp; Hall / CRC.</p>
+</div>
+<div>
+<p>Gutierrez, Roberto G. 2002. “Parametric Frailty and Shared Frailty Survival Models.” <em>The Stata Journal</em> 2 (1): 22–44.</p>
+</div>
+<div>
+<p>Hougaard, Philip. 2000. <em>Analysis of Multivariate Survival Data</em>. Springer New York. doi:<a href="https://doi.org/10.1007/978-1-4612-1304-8">10.1007/978-1-4612-1304-8</a>.</p>
 </div>
 <div>
 <p>International Stroke Trial Collaborative Group. 1997. “The International Stroke Trial (Ist): A Randomised Trial of Aspirin, Subcutaneous Heparin, Both, or Neither Among 19 435 Patients with Acute Ischaemic Stroke.” <em>The Lancet</em> 349 (9065): 1569–81. doi:<a href="https://doi.org/10.1016/S0140-6736(97)04011-7">10.1016/S0140-6736(97)04011-7</a>.</p>
@@ -212,7 +229,19 @@ code > span.in { color: #008000; } /* Information */
 <p>Peto, R. 1972. “Contribution to Discussion of Paper by D.R. Cox.” <em>Journal of the Royal Statistical Society: Series B (Statistical Methodology)</em> 34: 205–7.</p>
 </div>
 <div>
+<p>Ripatti, Samuli, and Juni Palmgren. 2000. “Estimation of Multivariate Frailty Models Using Penalized Partial Likelihood.” <em>Biometrics</em> 56 (4): 1016–22. doi:<a href="https://doi.org/10.1111/j.0006-341x.2000.01016.x">10.1111/j.0006-341x.2000.01016.x</a>.</p>
+</div>
+<div>
 <p>Sandercock, Peter, Maciej Niewada, and Anna Czlonkowska. 2011. “International Stroke Trial Database (Version 2).” University of Edinburgh, Department of Clinical Neuroscience. doi:<a href="https://doi.org/10.7488/ds/104.">10.7488/ds/104.</a></p>
+</div>
+<div>
+<p>Sinha, Debajyoti, Tapabrata Maiti, Joseph G Ibrahim, and Bichun Ouyang. 2008. “Current Methods for Recurrent Events Data with Dependent Termination.” <em>Journal of the American Statistical Association</em> 103 (482): 866–78. doi:<a href="https://doi.org/10.1198/016214508000000201">10.1198/016214508000000201</a>.</p>
+</div>
+<div>
+<p>Therneau, Terry M, Patricia M Grambsch, and V SHare Pankratz. 2003. “Penalized Survival Models and Frailty.” <em>Journal of Computational and Graphical Statistics</em> 12 (1): 156–75. doi:<a href="https://doi.org/10.1198/1061860031365">10.1198/1061860031365</a>.</p>
+</div>
+<div>
+<p>Wienke, Andreas. 2010. <em>Frailty Models in Survival Analysis</em>. Chapman &amp; Hall / CRC. doi:<a href="https://doi.org/10.1201/9781420073911">10.1201/9781420073911</a>.</p>
 </div>
 <div>
 <p>Xie, Yihui. 2016. <em>Bookdown: Authoring Books and Technical Documents with R Markdown</em>. The R Series. Chapman &amp; Hall / CRC. <a href="www.bookdown.org" class="uri">www.bookdown.org</a>.</p>
@@ -231,7 +260,7 @@ code > span.in { color: #008000; } /* Information */
           </div>
         </div>
       </div>
-<a href="ax-manuscript.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ax-r-session.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>

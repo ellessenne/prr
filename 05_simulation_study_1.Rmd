@@ -1,4 +1,5 @@
 # Simulation study: accuracy of Gaussian quadrature {#simst1}
+\chaptermark{Accuracy of Gaussian quadrature}
 
 ## Aim {#simst1-aim}
 

@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="conferences.html">
-<link rel="next" href="ax-manuscript.html">
+<link rel="prev" href="smre-shared-frailty.html">
+<link rel="next" href="jm.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -164,17 +164,42 @@ code > span.in { color: #008000; } /* Information */
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="ax-slides" class="section level1">
-<h1><span class="header-section-number">A</span> Slides</h1>
+<div id="smre-random-effects" class="section level2">
+<h2><span class="header-section-number">2.3</span> Alternative formulation</h2>
+<p>I mentioned briefly in Section <a href="smre-univariate-frailty.html#smre-univariate-frailty">2.1</a> that the log-normal distribution for the frailty term has strong ties to random-effects models. Recall the formulation for a log-normal shared frailty model: <span class="math display">\[
+h_{ij}(t | \alpha_i) = \alpha_i h(t | X_{ij}) = \alpha_i h_0(t) \exp(X_{ij} \beta),
+\]</span> with <span class="math inline">\(\alpha_i\)</span> following a log-normal distribution. It is possible to formulate the same model on the log-hazard scale as <span class="math display">\[
+h_{ij}(t | \alpha_i) = h_0(t) \exp(X_{ij} \beta + \eta_i),
+\]</span> with <span class="math inline">\(\eta_i = \log \alpha_i\)</span>. <span class="math inline">\(\eta_i\)</span> results being normally distributed with parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma ^ 2\)</span> related to those of the log-normal distribution by the relationship <span class="math display">\[
+E(\alpha_i) = \exp(\mu + \sigma ^ 2 / 2)
+\]</span> and <span class="math display">\[
+Var(\alpha_i) = \exp(2 \mu + \sigma ^ 2) (\exp(\sigma ^ 2) - 1)
+\]</span></p>
+<p>By formulating the model on the log-hazard scale, the frailty term has a direct interpretation as a random intercept in the model; that is, the heterogeneity is modelled by allowing the model intercept to vary between clusters. Consequently, it is possible to further extend this model by allowing random covariates effects, potentially ranging over multiple levels of clustering. Using the usual mixed-effects models notation: <span class="math display">\[
+h_{ij}(t | b_i) = h_0(t) \exp(X_{ij} \beta + Z_{i} b_i),
+\]</span> with <span class="math inline">\(X_{ij}\)</span> representing the design matrix for the fixed effects <span class="math inline">\(\beta\)</span> and <span class="math inline">\(Z_i\)</span> representing the design matrix for the random effects <span class="math inline">\(b_i\)</span>. Any distribution or functional form can be assumed for <span class="math inline">\(h_0(t)\)</span> <span class="citation">(Crowther, Look, and Riley <a href="#ref-crowther_2014">2014</a>)</span>, or it is possible to leave it unspecified altogether yielding a Cox model with random effects <span class="citation">(Ripatti and Palmgren <a href="#ref-ripatti_2000">2000</a>; Therneau, Grambsch, and Pankratz <a href="#ref-therneau_2003">2003</a>)</span>.</p>
 
+</div>
+<!-- </div> -->
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-crowther_2014">
+<p>Crowther, Michael J, Maxime P Look, and Richard D Riley. 2014. “Multilevel Mixed Effects Parametric Survival Models Using Adaptive Gauss-Hermite Quadrature with Application to Recurrent Events and Individual Participant Data Meta-Analysis.” <em>Statistics in Medicine</em> 33 (22): 3844–58. doi:<a href="https://doi.org/10.1002/sim.6191">10.1002/sim.6191</a>.</p>
+</div>
+<div id="ref-ripatti_2000">
+<p>Ripatti, Samuli, and Juni Palmgren. 2000. “Estimation of Multivariate Frailty Models Using Penalized Partial Likelihood.” <em>Biometrics</em> 56 (4): 1016–22. doi:<a href="https://doi.org/10.1111/j.0006-341x.2000.01016.x">10.1111/j.0006-341x.2000.01016.x</a>.</p>
+</div>
+<div id="ref-therneau_2003">
+<p>Therneau, Terry M, Patricia M Grambsch, and V SHare Pankratz. 2003. “Penalized Survival Models and Frailty.” <em>Journal of Computational and Graphical Statistics</em> 12 (1): 156–75. doi:<a href="https://doi.org/10.1198/1061860031365">10.1198/1061860031365</a>.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="conferences.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="ax-manuscript.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="smre-shared-frailty.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="jm.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

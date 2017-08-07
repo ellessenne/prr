@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="conferences.html">
-<link rel="next" href="ax-manuscript.html">
+<link rel="prev" href="smre.html">
+<link rel="next" href="smre-shared-frailty.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -164,17 +164,45 @@ code > span.in { color: #008000; } /* Information */
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="ax-slides" class="section level1">
-<h1><span class="header-section-number">A</span> Slides</h1>
-
+<div id="smre-univariate-frailty" class="section level2">
+<h2><span class="header-section-number">2.1</span> Univariate frailty models</h2>
+<p>In those settings where risk factors are not measured, their relevance is unknown, or it is not known whether such risk factor exist at all or not, it is useful to consider two sources of variability in survival analysis: variability accounted for by observable risk factors included in the model and heterogeneity caused by unknown covariates. The unobserved heterogeneity is described by the frailty term, which is assumed to follow some distribution. Formally: <span class="math display">\[
+h(t|\alpha) = \alpha h_0(t),
+\]</span> where <span class="math inline">\(\alpha\)</span> is a non-observed frailty effect and <span class="math inline">\(h_0(t)\)</span> is the baseline hazard function. The random variable <span class="math inline">\(\alpha\)</span>, the frailty term, is chosen to have a distribution <span class="math inline">\(f(\alpha)\)</span> with expectation <span class="math inline">\(E(\alpha) = 1\)</span> and variance <span class="math inline">\(V(\alpha) = \sigma ^ 2\)</span>. <span class="math inline">\(V(\alpha)\)</span> is interpretable as a measure of heterogeneity across the population in baseline risk: as <span class="math inline">\(\sigma ^ 2\)</span> increases the values of <span class="math inline">\(\alpha\)</span> are more dispersed, with greater heterogeneity in <span class="math inline">\(\alpha h_0(t)\)</span>. Underlying assumptions are: the frailty is time independent, and it acts multiplicatively on the underlying baseline hazard function.</p>
+<p>Introducing observed covariates into the model: <span class="math display">\[
+h(t|X,\alpha) = \alpha h_0(t) \exp(X \beta) = \alpha h(t | X),
+\]</span> with <span class="math inline">\(X\)</span> and <span class="math inline">\(\beta\)</span> covariates and regression coefficients, respectively. Given the relationship between hazard and survival function, it can be showed that the individual survival function conditional on the frailty is <span class="math inline">\(S(t | \alpha) = S(t) ^ \alpha\)</span>. The population (i.e. marginal, or unconditional) survival function is obtained by integrating out the frailty from the conditional survival function: <span class="math display">\[
+S(t) = \int_0^{+\infty} \left[ S(t) \right] ^ \alpha f(\alpha) \ d\alpha
+\]</span></p>
+<p>The individual contribution to the likelihood (assuming no delayed entry) is conditional on the unobserved frailty <span class="math inline">\(\alpha\)</span> <span class="math display">\[
+L_i = \prod_{i = 1} ^ {n} \left( \alpha h_0(t_i)\exp(X_i \beta) \right) ^ {d_i} \exp(-\alpha H_0(t_i) \exp(X_i \beta)),
+\]</span> with <span class="math inline">\(d_i\)</span> event indicator variable, <span class="math inline">\(H_0(t_i)\)</span> cumulative baseline hazard, and <span class="math inline">\(t_i\)</span> observed survival time - all relative to the <span class="math inline">\(i\)</span>-th individual.</p>
+<p>Different choices for the frailty distribution are possible. Assigning a probability distribution implies that the frailty can be integrated out of the likelihood function. After this integration, the likelihood can be maximized in the usual way if an explicit form of it exists. Otherwise, more sophisticated approaches like numerical integration or Markov Chain Monte Carlo methods need to be applied. The most often used frailty distributions are the gamma and the log-normal distribution; the positive stable and the inverse Gaussian distribution are also common.</p>
+<p>Assuming that the frailty <span class="math inline">\(\alpha\)</span> has a Gamma distribution is convenient: it has the appropriate range <span class="math inline">\((0, \infty)\)</span> and it is mathematically tractable. A Gamma distribution with parameters <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> has density <span class="math display">\[
+f(x) = \frac{x ^ {a - 1} \exp(- x / b)}{\Gamma(a)b ^ a};
+\]</span> by choosing <span class="math inline">\(a = 1 / \theta\)</span> and <span class="math inline">\(b = \theta\)</span> the resulting distribution has expectation <span class="math inline">\(1\)</span> and finite variance <span class="math inline">\(\theta\)</span>. In these settings, the model is analytically tractable: the population survival function has the form <span class="math display">\[
+S(t) = (1 - \theta \log(S(t))) ^ {-1/\theta};
+\]</span> the likelihood follows by substitution. Estimating such model becomes therefore straightforward, which likely contributed to the popularity of Gamma frailty models.</p>
+<p>Together with the Gamma distribution, the log-normal distribution is the most commonly used frailty distribution, given its strong ties to random effect models; more on that in Section <a href="smre-random-effects.html#smre-random-effects">2.3</a>. Hence, assuming a log-normal distribution with a single parameter <span class="math inline">\(\theta &gt; 0\)</span> (for comparison with the mathematically tractable Gamma frailty model), with density <span class="math display">\[
+f(x) = (2 \pi \theta) ^ {-\frac{1}{2}} x ^ {-1} \exp \left( -\frac{(\log x) ^ 2}{2 \theta} \right),
+\]</span> the resulting model has a frailty whose expectation is finite. Nevertheless, this frailty distribution cannot be integrated out of the survival function analytically to obtain the population survival function, and therefore requires more complex estimation procedures involving numerical integration (taking the maximum likelihood approach), mathematical approximations (such as the Laplace approximation), or Markov Chain Monte Carlo methods <span class="citation">(Clayton <a href="#ref-clayton_1991">1991</a>; Sinha et al. <a href="#ref-sinha_2008">2008</a>)</span>. Further details in Chapter <a href="compch.html#compch">4</a>.</p>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-clayton_1991">
+<p>Clayton, David G. 1991. “A Monte Carlo Method for Bayesian Inference in Frailty Models.” <em>Biometrics</em> 47 (2): 467. doi:<a href="https://doi.org/10.2307/2532139">10.2307/2532139</a>.</p>
+</div>
+<div id="ref-sinha_2008">
+<p>Sinha, Debajyoti, Tapabrata Maiti, Joseph G Ibrahim, and Bichun Ouyang. 2008. “Current Methods for Recurrent Events Data with Dependent Termination.” <em>Journal of the American Statistical Association</em> 103 (482): 866–78. doi:<a href="https://doi.org/10.1198/016214508000000201">10.1198/016214508000000201</a>.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="conferences.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="ax-manuscript.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="smre.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="smre-shared-frailty.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
