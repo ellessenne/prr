@@ -101,13 +101,16 @@ code > span.in { color: #008000; } /* Information */
 <li class="chapter" data-level="1.2" data-path="sa-censoring.html"><a href="sa-censoring.html"><i class="fa fa-check"></i><b>1.2</b> Censoring</a></li>
 <li class="chapter" data-level="1.3" data-path="sa-terminology-notation.html"><a href="sa-terminology-notation.html"><i class="fa fa-check"></i><b>1.3</b> Terminology and notation</a></li>
 <li class="chapter" data-level="1.4" data-path="sa-estsurv.html"><a href="sa-estsurv.html"><i class="fa fa-check"></i><b>1.4</b> Estimation of the survival function</a></li>
-<li class="chapter" data-level="1.5" data-path="sa-parsa.html"><a href="sa-parsa.html"><i class="fa fa-check"></i><b>1.5</b> Parametric survival analysis</a><ul>
-<li class="chapter" data-level="1.5.1" data-path="sa-parsa.html"><a href="sa-parsa.html#sa-parsa-distributions"><i class="fa fa-check"></i><b>1.5.1</b> Failure time distribution</a></li>
+<li class="chapter" data-level="1.5" data-path="sa-parsa.html"><a href="sa-parsa.html"><i class="fa fa-check"></i><b>1.5</b> Parametric survival models</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="sa-parsa.html"><a href="sa-parsa.html#sa-parsa-distributions"><i class="fa fa-check"></i><b>1.5.1</b> Failure time distributions</a></li>
 <li class="chapter" data-level="1.5.2" data-path="sa-parsa.html"><a href="sa-parsa.html#sa-parsa-estimation"><i class="fa fa-check"></i><b>1.5.2</b> Estimation procedure</a></li>
 <li class="chapter" data-level="1.5.3" data-path="sa-parsa.html"><a href="sa-parsa.html#sa-parsa-example"><i class="fa fa-check"></i><b>1.5.3</b> Data analysis example</a></li>
 </ul></li>
 <li class="chapter" data-level="1.6" data-path="sa-cox.html"><a href="sa-cox.html"><i class="fa fa-check"></i><b>1.6</b> The Cox proportional hazards model</a><ul>
-<li class="chapter" data-level="1.6.1" data-path="sa-cox.html"><a href="sa-cox.html#sa-cox-example"><i class="fa fa-check"></i><b>1.6.1</b> Data analysis example</a></li>
+<li class="chapter" data-level="1.6.1" data-path="sa-cox.html"><a href="sa-cox.html#sa-cox-estimation"><i class="fa fa-check"></i><b>1.6.1</b> Estimation procedure</a></li>
+<li class="chapter" data-level="1.6.2" data-path="sa-cox.html"><a href="sa-cox.html#sa-cox-estimating-survival"><i class="fa fa-check"></i><b>1.6.2</b> Estimating the survival function</a></li>
+<li class="chapter" data-level="1.6.3" data-path="sa-cox.html"><a href="sa-cox.html#sa-model-assumptions"><i class="fa fa-check"></i><b>1.6.3</b> Model assumptions</a></li>
+<li class="chapter" data-level="1.6.4" data-path="sa-cox.html"><a href="sa-cox.html#sa-cox-example"><i class="fa fa-check"></i><b>1.6.4</b> Data analysis example</a></li>
 </ul></li>
 <li class="chapter" data-level="1.7" data-path="sa-advances.html"><a href="sa-advances.html"><i class="fa fa-check"></i><b>1.7</b> Advances in survival analysis</a></li>
 </ul></li>
@@ -165,7 +168,7 @@ code > span.in { color: #008000; } /* Information */
 
             <section class="normal" id="section-">
 <div id="sa-parsa" class="section level2">
-<h2><span class="header-section-number">1.5</span> Parametric survival analysis</h2>
+<h2><span class="header-section-number">1.5</span> Parametric survival models</h2>
 <p>In applied settings it is often of interest to assess the association between observed covariates and the survival time of interest. For instance, it may be of interest to study whether a treatment is effective in slowing disease relapse (e.g. relapse of leukemia), whether there are difference between genders or age categories. A common way of assessing the effect of covariates on a time to event outcome, while adjusting for potentially confounding factors at the same time, consists in using a regression model.</p>
 <p>In the context of survival data, two models are commonly used: the <em>accelerated failure time</em> model (AFT), and the <em>proportional hazards</em> (PH) model. In the former, the natural logarithm of the observed survival time <span class="math inline">\(\log t\)</span> is expressed as a linear function of the covariates <span class="math inline">\(X\)</span>: <span class="math display">\[
 \log t = X \beta + \epsilon,
@@ -174,8 +177,8 @@ h(t; X) = h_0(t) g(X),
 \]</span> for some <span class="math inline">\(h_0(t)\)</span> and <span class="math inline">\(g(X)\)</span>, with <span class="math inline">\(g(\cdot)\)</span>) a non-negative function of the covariates. A popular choice for the latter is <span class="math inline">\(g(X) = \exp(X \beta)\)</span>; conversely, is is possible to either left the former unspecified, or assume a parametric distribution. The focus of this Section is on specifying a parametric distribution for <span class="math inline">\(h_0(t)\)</span>, yielding the so-called <em>parametric survival regression models</em>; I will present commonly assumed parametric distributions in Section <a href="sa-parsa.html#sa-parsa-distributions">1.5.1</a>, the estimation procedure in Section <a href="sa-parsa.html#sa-parsa-estimation">1.5.2</a>, and an example using data from the International Stroke Trial (IST) <span class="citation">(International Stroke Trial Collaborative Group <a href="#ref-ist_1997">1997</a>; Sandercock, Niewada, and Czlonkowska <a href="#ref-istdb_2011">2011</a>)</span> in Section <a href="sa-parsa.html#sa-parsa-example">1.5.3</a>. Leaving <span class="math inline">\(h_0(t)\)</span> unspecified yields the semi-parametric Cox model, that I will present in Section <a href="sa-cox.html#sa-cox">1.6</a>.</p>
 <p>From now on I will focus on the proportional hazards formulation of the survival model.</p>
 <div id="sa-parsa-distributions" class="section level3">
-<h3><span class="header-section-number">1.5.1</span> Failure time distribution</h3>
-<p>I mentioned in Section <a href="sa.html#sa">1</a> that the random variable representing the survival time is non-negative; hence, we can choose any non-negative distribution to assign to <span class="math inline">\(h_0(t)\)</span>. Commonly used distribution are the Exponential, Weibull, log-Normal, and Gompertz distributions; other possible distributions are the inverse Weibull, the log-skew-Normal <span class="citation">(Azzalini <a href="#ref-azzalini_1985">1985</a>)</span>, the log-logistic and complex mixture distributions (such as the two components mixture Weibull distribution, <span class="citation">McLachlan and McGiffin (<a href="#ref-mclachlan_1994">1994</a>)</span>). Each distribution yields a different Survival and hazard function:</p>
+<h3><span class="header-section-number">1.5.1</span> Failure time distributions</h3>
+<p>I mentioned in Section <a href="sa.html#sa">1</a> that the random variable representing the survival time is non-negative; hence, we can choose any non-negative distribution to assign to <span class="math inline">\(h_0(t)\)</span>. Commonly used distribution are the Exponential, Weibull, log-Normal, and Gompertz distributions; other possible distributions are the inverse Weibull, the inverse Gamma, the positive stable, the log-skew-Normal, the log-logistic, and complex mixture distributions (such as the two components mixture Weibull distribution, <span class="citation">McLachlan and McGiffin (<a href="#ref-mclachlan_1994">1994</a>)</span>). Each distribution yields a different shape for the Survival and hazard functions; in particular, focusing on the distribution I will be utilising in the rest of this report:</p>
 <ul>
 <li>Exponential distribution:
 <ul>
@@ -200,24 +203,6 @@ h(t; X) = h_0(t) g(X),
 <li><span class="math inline">\(h_0(t) = \lambda \exp(\gamma t)\)</span></li>
 <li><span class="math inline">\(S(t) = \exp \left[ -\frac{\lambda}{\gamma} (\exp(\gamma t) - 1) \right]\)</span></li>
 <li><span class="math inline">\(\lambda, \gamma &gt; 0\)</span></li>
-</ul></li>
-<li>inverse Weibull distribution:
-<ul>
-<li><span class="math inline">\(h_0(t) = \frac{\lambda p t ^ {-(p + 1)}}{\exp(\lambda t ^ {-p}) - 1}\)</span></li>
-<li><span class="math inline">\(S(t) = 1 - \exp(-\lambda t ^ {-p})\)</span></li>
-<li><span class="math inline">\(\lambda, p &gt; 0\)</span></li>
-</ul></li>
-<li>log-logistic distribution:
-<ul>
-<li><span class="math inline">\(h_0(t) = \frac{\exp(\alpha) \kappa t ^ {\kappa - 1}}{1 + \exp(\alpha) t ^ \kappa}\)</span></li>
-<li><span class="math inline">\(S(t) = \frac{1}{1 + \exp(\alpha) t ^ \kappa}\)</span></li>
-<li><span class="math inline">\(\alpha \in R; \kappa &gt; 0\)</span></li>
-</ul></li>
-<li>log-skew-Normal distribution<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>:
-<ul>
-<li><span class="math inline">\(h_0(t) = \frac{1 \phi \left( \frac{\log t - \xi}{\omega} \right) \Phi \left( \alpha \frac{\log t - \xi}{\omega}\right)}{t \omega \left[ 1 - SN \left( \log t; \xi, \omega, \alpha \right) \right]}\)</span></li>
-<li><span class="math inline">\(S(t) = 1 - SN\left( \log t; \xi, \omega, \alpha \right)\)</span></li>
-<li><span class="math inline">\(\xi, \alpha \in R; \omega &gt; 0 \)</span></li>
 </ul></li>
 <li>Two components mixture Weibull distribution:
 <ul>
@@ -290,7 +275,7 @@ fit =<span class="st"> </span><span class="kw">marqLevAlg</span>(<span class="dt
   <span class="dt">fn =</span> <span class="cf">function</span>(x) <span class="kw">ll</span>(x, <span class="dt">X =</span> X, <span class="dt">t =</span> ist<span class="op">$</span>t, <span class="dt">d =</span> ist<span class="op">$</span>d))</code></pre></div>
 <pre><code>## 
 ## Be patient. The program is computing ...
-## The program took 8.28 seconds</code></pre>
+## The program took 10.16 seconds</code></pre>
 <p>Assess convergency:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit<span class="op">$</span>istop</code></pre></div>
 <pre><code>## [1] 1</code></pre>
@@ -405,7 +390,7 @@ re_fit =<span class="st"> </span><span class="kw">marqLevAlg</span>(<span class=
   <span class="dt">fn =</span> <span class="cf">function</span>(x) <span class="kw">ll</span>(x, <span class="dt">X =</span> X, <span class="dt">t =</span> ist<span class="op">$</span>t, <span class="dt">d =</span> ist<span class="op">$</span>d))</code></pre></div>
 <pre><code>## 
 ## Be patient. The program is computing ...
-## The program took 4.43 seconds</code></pre>
+## The program took 5.11 seconds</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">re_fit<span class="op">$</span>istop</code></pre></div>
 <pre><code>## [1] 1</code></pre>
 <p>The routine converged. I produce the variance-covariance matrix:</p>
@@ -502,9 +487,6 @@ W =<span class="st"> </span><span class="kw">t</span>(re_fit<span class="op">$</
 <div id="ref-istdb_2011">
 <p>Sandercock, Peter, Maciej Niewada, and Anna Czlonkowska. 2011. “International Stroke Trial Database (Version 2).” University of Edinburgh, Department of Clinical Neuroscience. doi:<a href="https://doi.org/10.7488/ds/104.">10.7488/ds/104.</a></p>
 </div>
-<div id="ref-azzalini_1985">
-<p>Azzalini, A. 1985. “A Class of Distributions Which Include the Normal Ones.” <em>Scandinavian Journal of Statistics</em> 12 (2): 171–78. <a href="http://www.jstor.org/stable/4615982" class="uri">http://www.jstor.org/stable/4615982</a>.</p>
-</div>
 <div id="ref-mclachlan_1994">
 <p>McLachlan, GJ, and DC McGiffin. 1994. “On the Role of Finite Mixture Models in Survival Analysis.” <em>Statistical Methods in Medical Research</em> 3 (3): 221–26. doi:<a href="https://doi.org/10.1177/096228029400300302">10.1177/096228029400300302</a>.</p>
 </div>
@@ -514,12 +496,6 @@ W =<span class="st"> </span><span class="kw">t</span>(re_fit<span class="op">$</
 <div id="ref-commenges_2006">
 <p>Commenges, Daniel, Hélène Jacqmin-Gadda, Cécile Proust, and Jérémie Guedj. 2006. “A Newton-Like Algorithm for Likelihood Maximization: The Robust-Variance Scoring Algorithm.” <em>ArXiv Mathematics E-Prints</em>, October. <a href="https://arxiv.org/abs/math/0610402v2" class="uri">https://arxiv.org/abs/math/0610402v2</a>.</p>
 </div>
-</div>
-<div class="footnotes">
-<hr />
-<ol start="2">
-<li id="fn2"><p><span class="math inline">\(SN(\cdot)\)</span> is the cumulative distribution function of a skew-Normal random variable with parameters <span class="math inline">\(\xi\)</span>, <span class="math inline">\(\omega\)</span>, and <span class="math inline">\(\alpha\)</span> <span class="citation">(Azzalini <a href="#ref-azzalini_1985">1985</a>)</span><a href="sa-parsa.html#fnref2">↩</a></p></li>
-</ol>
 </div>
             </section>
 

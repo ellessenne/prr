@@ -190,7 +190,7 @@ An alternative way of estimating the survival function is to use the _Nelson-Aal
 \]
 and then use the relationship presented in Section \@ref(sa-terminology-notation) to obtain the survival function.
 
-## Parametric survival analysis {#sa-parsa}
+## Parametric survival models {#sa-parsa}
 
 In applied settings it is often of interest to assess the association between observed covariates and the survival time of interest. For instance, it may be of interest to study whether a treatment is effective in slowing disease relapse (e.g. relapse of leukemia), whether there are difference between genders or age categories. A common way of assessing the effect of covariates on a time to event outcome, while adjusting for potentially confounding factors at the same time, consists in using a regression model. 
 
@@ -206,38 +206,30 @@ for some \(h_0(t)\) and \(g(X)\), with \(g(\cdot)\)) a non-negative function of 
 
 From now on I will focus on the proportional hazards formulation of the survival model.
 
-### Failure time distribution {#sa-parsa-distributions}
+### Failure time distributions {#sa-parsa-distributions}
 
-I mentioned in Section \@ref(sa) that the random variable representing the survival time is non-negative; hence, we can choose any non-negative distribution to assign to \(h_0(t)\). Commonly used distribution are the Exponential, Weibull, log-Normal, and Gompertz distributions; other possible distributions are the inverse Weibull, the log-skew-Normal [@azzalini_1985], the log-logistic and complex mixture distributions (such as the two components mixture Weibull distribution, @mclachlan_1994). Each distribution yields a different Survival and hazard function:
+I mentioned in Section \@ref(sa) that the random variable representing the survival time is non-negative; hence, we can choose any non-negative distribution to assign to \(h_0(t)\). Commonly used distribution are the Exponential, Weibull, log-Normal, and Gompertz distributions; other possible distributions are the inverse Weibull, the inverse Gamma, the positive stable, the log-skew-Normal, the log-logistic, and complex mixture distributions (such as the two components mixture Weibull distribution, @mclachlan_1994). Each distribution yields a different shape for the Survival and hazard functions; in particular, focusing on the distribution I will be utilising in the rest of this report:
 
 - Exponential distribution:
     * \(h_0(t) = \lambda\)
     * \(S(t) = \exp(-\lambda t)\)
     * \(\lambda > 0\)
+    
 - Weibull distribution:
     * \(h_0(t) = \lambda p t ^ {p - 1}\)
     * \(S(t) = \exp(-\lambda t ^ p)\)
     * \(\lambda, p > 0\)
+
 - log-Normal distribution:
     * \(h_0(t) = \frac{\phi(\frac{\log t - \mu}{\sigma})}{\sigma t \left(1 - \Phi \left[ \frac{\log t - mu}{\sigma} \right] \right)}\)
     * \(S(t) = 1 - \Phi\left( \frac{\log t - \mu}{\sigma} \right)\)
     * \(\mu \in R; \sigma > 0\)
+
 - Gompertz distribution:
     * \(h_0(t) = \lambda \exp(\gamma t)\)
     * \(S(t) = \exp \left[ -\frac{\lambda}{\gamma} (\exp(\gamma t) - 1) \right]\)
     * \(\lambda, \gamma > 0\)
-- inverse Weibull distribution:
-    * \(h_0(t) = \frac{\lambda p t ^ {-(p + 1)}}{\exp(\lambda t ^ {-p}) - 1}\)
-    * \(S(t) = 1 - \exp(-\lambda t ^ {-p})\)
-    * \(\lambda, p > 0\)
-- log-logistic distribution:
-    * \(h_0(t) = \frac{\exp(\alpha) \kappa t ^ {\kappa - 1}}{1 + \exp(\alpha) t ^ \kappa}\)
-    * \(S(t) = \frac{1}{1 + \exp(\alpha) t ^ \kappa}\)
-    * \(\alpha \in R; \kappa > 0\)
-- log-skew-Normal distribution^[\(SN(\cdot)\) is the cumulative distribution function of a skew-Normal random variable with parameters \(\xi\), \(\omega\), and \(\alpha\) [@azzalini_1985]]:
-    * \(h_0(t) = \frac{1 \phi \left( \frac{\log t - \xi}{\omega} \right) \Phi \left( \alpha \frac{\log t - \xi}{\omega}\right)}{t \omega \left[ 1 - SN \left( \log t; \xi, \omega, \alpha \right) \right]}\)
-    * \(S(t) = 1 - SN\left( \log t; \xi, \omega, \alpha \right)\)
-    * \(\xi, \alpha \in R; \omega > 0 \)
+
 - Two components mixture Weibull distribution:
     * \(h_0(t) = \frac{\lambda_1 p_1 t ^ {p_1 - 1} \pi \exp(-\lambda_1 t ^ {p_1}) + \lambda_2 p_2 t ^ {p_2 - 1} (1 - \pi) \exp(-\lambda_2 t ^ {p_2})}{\pi \exp(-\lambda_1 t ^ {p_1}) + (1 - \pi) \exp(-\lambda_2 t ^ {p_2})}\)
     * \(S(t) = \pi \exp(-\lambda_1 t ^ {p_1}) + (1 - \pi) \exp(-\lambda_2 t ^ {p_2})\)
@@ -477,7 +469,9 @@ As I mentioned before, this model requires specifying the baseline hazard functi
 S(t; X) = \exp \left[ -\int_0^t h_0(u) \exp(X \beta) \ du \right]
 \]
 
-The main problems when fitting a Cox model are related to estimation of the regression coefficients \(\beta\) and of the survival function \(S(t)\). 
+The main problems when fitting a Cox model are related to estimation of the regression coefficients \(\beta\) and of the survival function \(S(t)\). The former is tackled in Section \@ref(sa-cox-estimation), the latter in Section \@ref(sa-cox-estimating-survival).
+
+### Estimation procedure {#sa-cox-estimation}
 
 The main method for estimating the regression coefficients is the method of partial likelihood, proposed and discussed in detail in @cox_1972 and @cox_1975. In brief, the observed data are assumed to have density function \(f(t; \theta, \beta)\) in which \(\beta\) is the vector of regression coefficients of interest and \(\theta\) can be considered a vector of nuisance parameters. In particular, \(\theta\) represents the unspecified function \(h_0(t)\). It can be showed that is is possible to factorise the density into two terms, one of which only depends on \(\beta\): this term is called _partial likelihood_. Ignoring the term that depends on \(\theta\), and even if the partial likelihood is not directly interpretable as a likelihood in the ordinary sense, it can be used like an ordinary likelihood for estimation purposes as the usual
 asymptotic properties formulas and properties associated with the likelihood function
@@ -493,7 +487,9 @@ L(\beta) = \prod_{i = 1}^n \frac{\exp(x_i \beta)}{\sum_{l \in R(t_i)} \exp(x_l \
 The values of \(\beta\) that maximise the partial likelihood \(\hat{\beta}\) can be obtained by using a Newton-Raphson-like algorithm; asymptotics are fully analogous to a parametric likelihood.
 A caveat of the partial likelihood method is that it assumes continuous failure times: in practice, that is unrealistic and there will be tied failure times (e.g. due to rounding). In that case, several methods have been proposed to adjust the partial likelihood in order to handle ties; see for instance @peto_1972, @breslow_1974, and @efron_1977
 
-Next, consider deriving an estimator for the survival function from a Cox model. The form of \(h_0(t)\) is unspecified, hence it is not possible to directly estimate the parameters of the distribution as in fully parametric survival models. Under a Cox model, the survival function has the form
+### Estimating the survival function {#sa-cox-estimating-survival}
+
+Consider deriving an estimator for the survival function from a Cox model: the form of \(h_0(t)\) is unspecified, hence it is not possible to directly estimate the parameters of the distribution as in fully parametric survival models. Under a Cox model, the survival function has the form
 \[
 S(t; X) = S_0(t) ^ {\exp(X \beta)}
 \]
@@ -511,7 +507,9 @@ and the survival function as
 \]
 An alternative estimator based on approximating the baseline survival function as a step function and consequently solving \(k\) simultaneous equations has been proposed by @kalbfleisch_2011, and is omitted here.
 
-Finally, the Cox model relies on two main assumptions. First, the assumption of non-informative censoring, e.g. the censoring process must be independent of any covariate, observed and not. Second, the proportional hazards assumption requires hazards to be proportional across time, e.g. the hazard must be constant. There are several ways of testing the proportional hazards assumption, both analytical and graphical; see Chapter 4 of @kleinbaum_2012 for further details.
+### Model assumptions {#sa-model-assumptions}
+
+The Cox model relies on two main assumptions. First, the assumption of non-informative censoring, e.g. the censoring process must be independent of any covariate, observed and not. Second, the proportional hazards assumption requires hazards to be proportional across time, e.g. the hazard ratios must be constant. There are several ways of testing the proportional hazards assumption, both analytical and graphical; see Chapter 4 of @kleinbaum_2012 for further details.
 
 ### Data analysis example {#sa-cox-example}
 
