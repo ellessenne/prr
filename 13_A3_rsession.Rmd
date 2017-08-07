@@ -1,0 +1,5 @@
+# R Session {#ax-r-session}
+
+```{r r-session, echo = TRUE}
+sessionInfo()
+```
