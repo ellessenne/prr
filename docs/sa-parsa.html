@@ -25,7 +25,7 @@
 <meta name="author" content="Alessandro Gasparini">
 
 
-<meta name="date" content="2017-08-07">
+<meta name="date" content="2017-08-08">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -119,7 +119,10 @@ code > span.in { color: #008000; } /* Information */
 <li class="chapter" data-level="2.2" data-path="smre-shared-frailty.html"><a href="smre-shared-frailty.html"><i class="fa fa-check"></i><b>2.2</b> Shared frailty models</a></li>
 <li class="chapter" data-level="2.3" data-path="smre-random-effects.html"><a href="smre-random-effects.html"><i class="fa fa-check"></i><b>2.3</b> Alternative formulation</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="jm.html"><a href="jm.html"><i class="fa fa-check"></i><b>3</b> Joint models for longitudinal and survival data</a></li>
+<li class="chapter" data-level="3" data-path="jm.html"><a href="jm.html"><i class="fa fa-check"></i><b>3</b> Joint models for longitudinal and survival data</a><ul>
+<li class="chapter" data-level="3.1" data-path="jm-formulation.html"><a href="jm-formulation.html"><i class="fa fa-check"></i><b>3.1</b> Model formulation</a></li>
+<li class="chapter" data-level="3.2" data-path="jm-estimation.html"><a href="jm-estimation.html"><i class="fa fa-check"></i><b>3.2</b> Estimation process</a></li>
+</ul></li>
 <li class="chapter" data-level="4" data-path="compch.html"><a href="compch.html"><i class="fa fa-check"></i><b>4</b> Computational challenges in survival models with random effects</a></li>
 <li class="chapter" data-level="5" data-path="simst1.html"><a href="simst1.html"><i class="fa fa-check"></i><b>5</b> Simulation study: accuracy of Gaussian quadrature</a><ul>
 <li class="chapter" data-level="5.1" data-path="simst1-aim.html"><a href="simst1-aim.html"><i class="fa fa-check"></i><b>5.1</b> Aim</a></li>
@@ -275,7 +278,7 @@ fit =<span class="st"> </span><span class="kw">marqLevAlg</span>(<span class="dt
   <span class="dt">fn =</span> <span class="cf">function</span>(x) <span class="kw">ll</span>(x, <span class="dt">X =</span> X, <span class="dt">t =</span> ist<span class="op">$</span>t, <span class="dt">d =</span> ist<span class="op">$</span>d))</code></pre></div>
 <pre><code>## 
 ## Be patient. The program is computing ...
-## The program took 10.16 seconds</code></pre>
+## The program took 6.69 seconds</code></pre>
 <p>Assess convergency:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit<span class="op">$</span>istop</code></pre></div>
 <pre><code>## [1] 1</code></pre>
@@ -390,7 +393,7 @@ re_fit =<span class="st"> </span><span class="kw">marqLevAlg</span>(<span class=
   <span class="dt">fn =</span> <span class="cf">function</span>(x) <span class="kw">ll</span>(x, <span class="dt">X =</span> X, <span class="dt">t =</span> ist<span class="op">$</span>t, <span class="dt">d =</span> ist<span class="op">$</span>d))</code></pre></div>
 <pre><code>## 
 ## Be patient. The program is computing ...
-## The program took 5.11 seconds</code></pre>
+## The program took 3.94 seconds</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">re_fit<span class="op">$</span>istop</code></pre></div>
 <pre><code>## [1] 1</code></pre>
 <p>The routine converged. I produce the variance-covariance matrix:</p>
@@ -491,7 +494,7 @@ W =<span class="st"> </span><span class="kw">t</span>(re_fit<span class="op">$</
 <p>McLachlan, GJ, and DC McGiffin. 1994. “On the Role of Finite Mixture Models in Survival Analysis.” <em>Statistical Methods in Medical Research</em> 3 (3): 221–26. doi:<a href="https://doi.org/10.1177/096228029400300302">10.1177/096228029400300302</a>.</p>
 </div>
 <div id="ref-marquardt_1963">
-<p>Marquardt, Donald W. 1963. “An Algorithm for Least-Squares Estimation of Nonlinear Parameters.” <em>Journal of the Society for Industrial and Applied Mathematics</em> 11 (2). Society for Industrial &amp; Applied Mathematics (SIAM): 431–41. doi:<a href="https://doi.org/10.1137/0111030">10.1137/0111030</a>.</p>
+<p>Marquardt, Donald W. 1963. “An Algorithm for Least-Squares Estimation of Nonlinear Parameters.” <em>Journal of the Society for Industrial and Applied Mathematics</em> 11 (2): 431–41. doi:<a href="https://doi.org/10.1137/0111030">10.1137/0111030</a>.</p>
 </div>
 <div id="ref-commenges_2006">
 <p>Commenges, Daniel, Hélène Jacqmin-Gadda, Cécile Proust, and Jérémie Guedj. 2006. “A Newton-Like Algorithm for Likelihood Maximization: The Robust-Variance Scoring Algorithm.” <em>ArXiv Mathematics E-Prints</em>, October. <a href="https://arxiv.org/abs/math/0610402v2" class="uri">https://arxiv.org/abs/math/0610402v2</a>.</p>

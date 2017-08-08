@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="simst1-methods.html">
-<link rel="next" href="simst1-pm.html">
+<link rel="prev" href="jm-formulation.html">
+<link rel="next" href="compch.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -170,16 +170,54 @@ code > span.in { color: #008000; } /* Information */
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="simst1-est" class="section level2">
-<h2><span class="header-section-number">5.4</span> Estimands</h2>
+<div id="jm-estimation" class="section level2">
+<h2><span class="header-section-number">3.2</span> Estimation process</h2>
+<p>Estimation of a joint model for longitudinal and survival data is a non-trivial task. The complexity of jointly modelling the longitudinal component and the survival component motivated using a two-stages procedure as mentioned in Section <a href="jm.html#jm">3</a>. With that approach, the longitudinal component is modelled and estimated separately; consequently, subject-specific predictions from the longitudinal model are produced and plugged into the survival model as time-varying covariates. Despite the simplicity of this approach, though, it has been showed that it produces substantial bias and poor coverage <span class="citation">(Tsiatis and Davidian <a href="#ref-tsiatis_2001">2001</a>; Sweeting and Thompson <a href="#ref-sweeting_2011">2011</a>)</span>. Therefore, an approach that models both processes jointly is required. in particular, two approaches are predominant: a full likelihood approach, and a Bayesian approach; both have appealing characteristics, but they share the feature of being computationally intensive.</p>
+<p>Focusing on the full likelihood approach, it is possible to formulate the joint likelihood <span class="citation">(Rizopoulos <a href="#ref-rizopoulos_2012">2012</a>)</span> for the overall parameter vector <span class="math inline">\(\theta = \{\theta_t, \theta_y, \theta_b\}\)</span>, formed by the parameters of the survival component, the parameters of the longitudinal component, and the elements of the variance-covariance matrix of the random effects, respectively. The joint distribution of the survival time <span class="math inline">\(T_i\)</span>, the event indicator <span class="math inline">\(d_i\)</span>, and the longitudinal response <span class="math inline">\(y_i\)</span>, conditional on the random effects <span class="math inline">\(b_i\)</span>, can be expressed as: <span class="math display">\[
+P(T_i, d_i, y_i | b_i, \theta) = P(T_i, d_i | b_i, \theta) P (y_i | b_i, \theta),
+\]</span> with <span class="math display">\[
+P(y_i | b_i, \theta) = \prod_{j = 1} ^ {n_i} P(y_i(t_{ij}) | b_i, \theta).
+\]</span> It follows that the contribution to the log-likelihood for the <span class="math inline">\(i\)</span><sup>th</sup> patient is <span class="math display">\[
+\begin{aligned}
+\log L(\theta) &amp;= \log \int_{-\infty} ^ {+\infty} P(T_i, d_i, y_i, b_i; \theta) \ db_i \\
+               &amp;= \log \int_{-\infty} ^ {+\infty} P(T_i, d_i | b_i, \theta_t) \left[ \prod_{j = 1} ^ {n_i} P(y_i(t_{ij}) | b_i, \theta_y) \right] P(b_i | \theta_b) \ db_i
+\end{aligned}
+\]</span> with <span class="math inline">\(P(T_i, d_i | b_i, \theta_t)\)</span> the likelihood relative to the survival component of the model: <span class="math display">\[
+\begin{aligned} 
+P(T_i, d_i | b_i, \theta_t) &amp;= h_i(T_i | M_i(T_i), \theta_t) ^ {d_i} S_i(T_i | M_i(T_i), \theta_t) \\
+&amp;= \left[ h_0(T_i) \exp(W \psi + \alpha m_i(T_i)) \right] ^ {d_i} \exp \left[ -\int_0^{T_i} h_0(u) \exp(W \psi + \alpha m_i(u)) \ du \right],
+\end{aligned}
+\]</span> <span class="math inline">\(P(y_i(t_{ij}) | b_i, \theta_y)\)</span> the likelihood of the longitudinal process at time <span class="math inline">\(t_{ij}\)</span>: <span class="math display">\[
+P(y_i(t_{ij}) | b_i, \theta_y) = (2 \pi \sigma ^ 2) ^ {-1/2} \exp \left[ -\frac{(y_i(t_{ij}) - m_i(t_{ij})) ^ 2}{2 \sigma ^ 2} \right],
+\]</span> and <span class="math inline">\(P(b_i | \theta_b)\)</span> the density of the random effects: <span class="math display">\[
+P(b_i | \theta_b) = (2 \pi) ^ {-q_b / 2} | \Sigma | ^ {-1 / 2} \exp \left[- \frac{b_i^T \Sigma ^ {-1} b_i}{2}\right]
+\]</span> <span class="math inline">\(q_b\)</span> being the dimension of the random effects.</p>
+<p>Historically the full joint likelihood has been maximised using the Expectation-Maximisation algorithm <span class="citation">(Dempster, Laird, and Rubin <a href="#ref-dempster_1977">1977</a>)</span>; alternatively, it is possible to use general purpose optimisers to maximise the full joint likelihood via algorithms such as the Newton-Raphson algorithm. Nevertheless, significant computational challenges persist; I will discuss them further in Chapter <a href="compch.html#compch">4</a>.</p>
+
+</div>
+<!-- </div> -->
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-tsiatis_2001">
+<p>Tsiatis, Anastasios A, and Marie Davidian. 2001. “A Semiparametric Estimator for the Proportional Hazards Model with Longitudinal Covariates Measured with Error.” <em>Biometrika</em> 88 (2): 447–58. <a href="http://www.jstor.org/stable/2673492" class="uri">http://www.jstor.org/stable/2673492</a>.</p>
+</div>
+<div id="ref-sweeting_2011">
+<p>Sweeting, Michael J, and Simon G Thompson. 2011. “Joint Modelling of Longitudinal and Time-to-Event Data with Application to Predicting Abdominal Aortic Aneurysm Growth and Rupture.” <em>Biometrical Journal</em> 53 (5): 750–63. doi:<a href="https://doi.org/10.1002/bimj.201100052">10.1002/bimj.201100052</a>.</p>
+</div>
+<div id="ref-rizopoulos_2012">
+<p>Rizopoulos, Dimitris. 2012. <em>Joint Models for Longitudinal and Time-to-Event Data: With Applications in R</em>. Biostatistics. Chapman &amp; Hall / CRC.</p>
+</div>
+<div id="ref-dempster_1977">
+<p>Dempster, Arthur P, Nan M Laird, and Donald B Rubin. 1977. “Maximum Likelihood from Incomplete Data via the EM Algorithm.” <em>Journal of the Royal Statistical Society: Series B (Statistical Methodology)</em> 39 (1): 1–38. <a href="http://www.jstor.org/stable/2984875" class="uri">http://www.jstor.org/stable/2984875</a>.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="simst1-methods.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="simst1-pm.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="jm-formulation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="compch.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

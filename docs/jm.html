@@ -25,7 +25,7 @@
 <meta name="author" content="Alessandro Gasparini">
 
 
-<meta name="date" content="2017-08-07">
+<meta name="date" content="2017-08-08">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -33,7 +33,7 @@
   
   
 <link rel="prev" href="smre-random-effects.html">
-<link rel="next" href="compch.html">
+<link rel="next" href="jm-formulation.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -119,7 +119,10 @@ code > span.in { color: #008000; } /* Information */
 <li class="chapter" data-level="2.2" data-path="smre-shared-frailty.html"><a href="smre-shared-frailty.html"><i class="fa fa-check"></i><b>2.2</b> Shared frailty models</a></li>
 <li class="chapter" data-level="2.3" data-path="smre-random-effects.html"><a href="smre-random-effects.html"><i class="fa fa-check"></i><b>2.3</b> Alternative formulation</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="jm.html"><a href="jm.html"><i class="fa fa-check"></i><b>3</b> Joint models for longitudinal and survival data</a></li>
+<li class="chapter" data-level="3" data-path="jm.html"><a href="jm.html"><i class="fa fa-check"></i><b>3</b> Joint models for longitudinal and survival data</a><ul>
+<li class="chapter" data-level="3.1" data-path="jm-formulation.html"><a href="jm-formulation.html"><i class="fa fa-check"></i><b>3.1</b> Model formulation</a></li>
+<li class="chapter" data-level="3.2" data-path="jm-estimation.html"><a href="jm-estimation.html"><i class="fa fa-check"></i><b>3.2</b> Estimation process</a></li>
+</ul></li>
 <li class="chapter" data-level="4" data-path="compch.html"><a href="compch.html"><i class="fa fa-check"></i><b>4</b> Computational challenges in survival models with random effects</a></li>
 <li class="chapter" data-level="5" data-path="simst1.html"><a href="simst1.html"><i class="fa fa-check"></i><b>5</b> Simulation study: accuracy of Gaussian quadrature</a><ul>
 <li class="chapter" data-level="5.1" data-path="simst1-aim.html"><a href="simst1-aim.html"><i class="fa fa-check"></i><b>5.1</b> Aim</a></li>
@@ -169,7 +172,48 @@ code > span.in { color: #008000; } /* Information */
             <section class="normal" id="section-">
 <div id="jm" class="section level1">
 <h1><span class="header-section-number">3</span> Joint models for longitudinal and survival data</h1>
-
+<p>It is increasingly common for observational studies and trials to follow participants over time, recording abundant data on clinical features throughout the duration of the study. Moreover, routinely collected healthcare consumption data and population registries are being used more and more for research purpose, after being linked with other data sources (and each other). As a consequence, applied researchers often encounter longitudinally recorded covariates to account for when studying the clinical outcome of interest (e.g. time to event, that is what I will focus on). Researchers then face two options: (1) select only one of the multiple values per individual and analyse as such, ignoring part of the available data, or (2) take into account the potential dependency and association between the repeatedly measured covariates and the outcome interest. The latter is usually the sensible choice, as the longitudinal data can be important predictors or surrogates of the time to event outcome. A powerful tool to jointly model longitudinal and time-to-event data is joint models for longitudinal and time to event data, in which the longitudinal and survival processes are modelled jointly into a single model allowing to infer their association. The development of such models was motivated by HIV/AIDS clinical trials, in which immune response (in terms of CD4 lymphocite cells count) was recorded over the duration of the trial and the association with survival was of interest. Seminal works on the topic are the papers by <span class="citation">Wulfsohn and Tsiatis (<a href="#ref-wulfsohn_1997">1997</a>)</span>, <span class="citation">Tsiatis and Davidian (<a href="#ref-tsiatis_2004">2004</a>)</span>, <span class="citation">Henderson, Diggle, and Dobson (<a href="#ref-henderson_2000">2000</a>)</span>, <span class="citation">Pawitan and Self (<a href="#ref-pawitan_1993">1993</a>)</span>; a more recent tractation of the topic is in <span class="citation">Ibrahim, Chu, and Chen (<a href="#ref-ibrahim_2010">2010</a>)</span>, <span class="citation">Rizopoulos (<a href="#ref-rizopoulos_2012">2012</a>)</span>, <span class="citation">Gould et al. (<a href="#ref-gould_2015">2015</a>)</span>.</p>
+<p>Previous attempts to tackle this problem consisted in (1) fitting a time-dependent Cox model <span class="citation">(Cox <a href="#ref-cox_1972">1972</a>)</span> by splitting individual rows every time a new observation from the longitudinal covariate becomes available, and (2) by using two-stages methods in which the longitudinal and survival data were modelled separately <span class="citation">(Tsiatis, Degruttola, and Wulfsohn <a href="#ref-tsiatis_1995">1995</a>)</span>. Nevertheless, it has been showed that joint modeling increases efficiency and reduces bias <span class="citation">(Hogan and Laird <a href="#ref-hogan_1998">1998</a>)</span>, while improving predictions at the same time <span class="citation">(Rizopoulos et al. <a href="#ref-rizopoulos_2014">2014</a>)</span>.</p>
+<p>In this Chapter I will focus on the basic joint model for longitudinal and survival data, with a single longitudinal process. I will present its formulation in Section <a href="jm-formulation.html#jm-formulation">3.1</a>, and the estimation process in Section <a href="jm-estimation.html#jm-estimation">3.2</a>. However, several extensions of the basic joint model presented in this Chapter have been proposed during the years, as the topic has received considerable attention. A review on the state of the art in joint models with a single longitudinal process is given by <span class="citation">Gould et al. (<a href="#ref-gould_2015">2015</a>)</span>. Of course, the joint model has been extended to allow incorporating multiple longitudinal processes at one, measured intermittently and not necessarily at the same time or with the same structure of the association with the survival outcome: a review on recent developments, software, and persisting issues is given by <span class="citation">Hickey et al. (<a href="#ref-hickey_2016">2016</a>)</span>.</p> 
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-wulfsohn_1997">
+<p>Wulfsohn, Michael S, and Anastasios A Tsiatis. 1997. “A Joint Model for Survival and Longitudinal Data Measured with Error.” <em>Biometrics</em> 53 (1): 330–39. doi:<a href="https://doi.org/10.2307/2533118">10.2307/2533118</a>.</p>
+</div>
+<div id="ref-tsiatis_2004">
+<p>Tsiatis, Anastasios A, and Marie Davidian. 2004. “Joint Modeling of Longitudinal and Time-to-Event Data: An Overview.” <em>Statistica Sinica</em> 14: 809–34. <a href="http://www.jstor.org/stable/24307417" class="uri">http://www.jstor.org/stable/24307417</a>.</p>
+</div>
+<div id="ref-henderson_2000">
+<p>Henderson, Robin, Peter Diggle, and Angela Dobson. 2000. “Joint Modelling of Longitudinal Measurements and Event Time Data.” <em>Biostatistics</em> 1 (4): 465–80. doi:<a href="https://doi.org/10.1093/biostatistics/1.4.465">10.1093/biostatistics/1.4.465</a>.</p>
+</div>
+<div id="ref-pawitan_1993">
+<p>Pawitan, Yudi, and Steve Self. 1993. “Modeling Disease Marker Processes in Aids.” <em>Journal of the American Statistical Association</em> 88 (423): 719–26. doi:<a href="https://doi.org/10.2307/2290756">10.2307/2290756</a>.</p>
+</div>
+<div id="ref-ibrahim_2010">
+<p>Ibrahim, Joseph G, Haitao Chu, and Liddy M Chen. 2010. “Basic Concepts and Methods for Joint Models of Longitudinal and Survival Data.” <em>Journal of Clinical Oncology</em> 28 (16): 2796–2801. doi:<a href="https://doi.org/10.1200/jco.2009.25.0654">10.1200/jco.2009.25.0654</a>.</p>
+</div>
+<div id="ref-rizopoulos_2012">
+<p>Rizopoulos, Dimitris. 2012. <em>Joint Models for Longitudinal and Time-to-Event Data: With Applications in R</em>. Biostatistics. Chapman &amp; Hall / CRC.</p>
+</div>
+<div id="ref-gould_2015">
+<p>Gould, A Lawrence, Mark E Boye, Michael J Crowther, Joseph G Ibrahim, George Quartey, Sandrine Micallef, and Frederic Y Bois. 2015. “Joint Modeling of Survival and Longitudinal Non-Survival Data: Current Methods and Issues. Report of the DIA Bayesian Joint Modeling Working Group.” <em>Statistics in Medicine</em> 34 (14): 2181–95. doi:<a href="https://doi.org/10.1002/sim.6141">10.1002/sim.6141</a>.</p>
+</div>
+<div id="ref-cox_1972">
+<p>Cox, David R. 1972. “Regression Models and Life-Tables.” <em>Journal of the Royal Statistical Society: Series B (Statistical Methodology)</em> 34 (2): 187–220. <a href="http://www.jstor.org/stable/2985181" class="uri">http://www.jstor.org/stable/2985181</a>.</p>
+</div>
+<div id="ref-tsiatis_1995">
+<p>Tsiatis, Anastasios A, Victor Degruttola, and Michael S Wulfsohn. 1995. “Modeling the Relationship of Survival to Longitudinal Data Measured with Error. Applications to Survival and Cd4 Counts in Patients with AIDS.” <em>Journal of the American Statistical Association</em> 90 (429): 27–37. doi:<a href="https://doi.org/10.1080/01621459.1995.10476485">10.1080/01621459.1995.10476485</a>.</p>
+</div>
+<div id="ref-hogan_1998">
+<p>Hogan, Joseph W, and Nan M Laird. 1998. “Increasing Efficiency from Censored Survival Data by Using Random Effects to Model Longitudinal Covariates.” <em>Statistical Methods in Medical Research</em> 7 (1): 28–48. doi:<a href="https://doi.org/10.1177/096228029800700104">10.1177/096228029800700104</a>.</p>
+</div>
+<div id="ref-rizopoulos_2014">
+<p>Rizopoulos, Dimitris, Laura A Hatfield, Bradley P Carlin, and Johanna JM Takkenberg. 2014. “Combining Dynamic Predictions from Joint Models for Longitudinal and Time-to-Event Data Using Bayesian Model Averaging.” <em>Journal of the American Statistical Association</em> 109 (508): 1385–97. doi:<a href="https://doi.org/10.1080/01621459.2014.931236">10.1080/01621459.2014.931236</a>.</p>
+</div>
+<div id="ref-hickey_2016">
+<p>Hickey, Graeme L, Pete Philipson, Andrea Jorgensen, and Ruwanthi Kolamunnage-Dona. 2016. “Joint Modelling of Time-to-Event and Multivariate Longitudinal Outcomes: Recent Developments and Issues.” <em>BMC Medical Research Methodology</em> 16 (1). doi:<a href="https://doi.org/10.1186/s12874-016-0212-5">10.1186/s12874-016-0212-5</a>.</p>
+</div>
 </div>
             </section>
 
@@ -177,7 +221,7 @@ code > span.in { color: #008000; } /* Information */
         </div>
       </div>
 <a href="smre-random-effects.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="compch.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="jm-formulation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

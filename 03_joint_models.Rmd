@@ -1,2 +1,74 @@
 # Joint models for longitudinal and survival data {#jm}
 
+It is increasingly common for observational studies and trials to follow participants over time, recording abundant data on clinical features throughout the duration of the study. Moreover, routinely collected healthcare consumption data and population registries are being used more and more for research purpose, after being linked with other data sources (and each other).  As a consequence, applied researchers often encounter longitudinally recorded covariates to account for when studying the clinical outcome of interest (e.g. time to event, that is what I will focus on). Researchers then face two options: (1) select only one of the multiple values per individual and analyse as such, ignoring part of the available data, or (2) take into account the potential dependency and association between the repeatedly measured covariates and the outcome interest. The latter is usually the sensible choice, as the longitudinal data can be important predictors or surrogates of the time to event outcome. A powerful tool to jointly model longitudinal and time-to-event data is joint models for longitudinal and time to event data, in which the longitudinal and survival processes are modelled jointly into a single model allowing to infer their association. The development of such models was motivated by HIV/AIDS clinical trials, in which immune response (in terms of CD4 lymphocite cells count) was recorded over the duration of the trial and the association with survival was of interest. Seminal works on the topic are the papers by @wulfsohn_1997, @tsiatis_2004, @henderson_2000, @pawitan_1993; a more recent tractation of the topic is in @ibrahim_2010, @rizopoulos_2012, @gould_2015.
+
+Previous attempts to tackle this problem consisted in (1) fitting a time-dependent Cox model [@cox_1972] by splitting individual rows every time a new observation from the longitudinal covariate becomes available, and (2) by using two-stages methods in which the longitudinal and survival data were modelled separately [@tsiatis_1995]. Nevertheless, it has been showed that joint modeling increases efficiency and reduces bias [@hogan_1998], while improving predictions at the same time [@rizopoulos_2014]. 
+
+In this Chapter I will focus on the basic joint model for longitudinal and survival data, with a single longitudinal process. I will present its formulation in Section \@ref(jm-formulation), and the estimation process in Section \@ref(jm-estimation). However, several extensions of the basic joint model presented in this Chapter have been proposed during the years, as the topic has received considerable attention. A review on the state of the art in joint models with a single longitudinal process is given by @gould_2015. Of course, the joint model has been extended to allow incorporating multiple longitudinal processes at one, measured intermittently and not necessarily at the same time or with the same structure of the association with the survival outcome: a review on recent developments, software, and persisting issues is given by @hickey_2016.
+
+## Model formulation {#jm-formulation}
+
+A joint model for longitudinal and survival data consists of two components: a model for the longitudinal part (I will be assuming a single longitudinal trajectory from now on for simplicity) and a model for the survival part. These two components will then share a set of parameters that will describe the association between the two processes. In literature, the dominant approach seems to be allowing the two components to share random effects; I will follow this approach.
+
+Building on the notation from Section \@ref(sa-terminology-notation), let \(y_{ij} = \{ y_{ij}(t_{ij}) \ \forall \ j = 1, \dots, n_i \}\) be the observed longitudinal response for the \(i\)^th^ subject, with \(y_{ij}(t_{ij})\) the observed response at time \(t_{ij}\) and \(n_i\) the number of longitudinal observations.
+
+The longitudinal component of the joint model is modelled within the mixed-effects framework [@diggle_2013], as longitudinal data is likely measured intermittently and with error. Therefore:
+\[
+y_i(t) = m_i(t) + \epsilon_i(t), \ \epsilon_i(t) \sim N(0, \sigma^2)
+\]
+and 
+\[
+m_i(t) = X_i(t) \beta + Z_i(t) b, \ b \sim N(0, \Sigma)
+\]
+with \(X_i(t)\) and \(Z_i(t)\) the time-dependent design matrices for the fixed and random effects, respectively. \(y_i(t)\) represents the observed longitudinal trajectory at time \(t\), which could be decomposed into the true longitudinal trajectory \(m_i(t)\) plus the measurement error \(\epsilon_i(t)\).
+
+The survival component of the joint model is modelled using a proportional hazards time to event model, given the true unobserved longitudinal trajectory up to time \(t\), i.e. \(M_i(t) = \{m_i(s) \ \forall \ 0 \le s \le t\}\):
+\[
+h(t | M_i(t)) = h_0(t) \exp(W \psi + \alpha m_i(t)),
+\]
+where \(h_0(t)\) is the baseline hazard function and \(W\) is a vector of time-fixed covariates with their regression parameters \(\psi\). \(\alpha\) is the association parameter that links the longitudinal component and the survival component of the joint model; it can be intepreted as the change in log-hazard ratio for a unit increase in the true longitudinal trajectory \(m_i(t)\), at time \(t\). This specific form of the association parameter is also known as the _current value_ parametrisation; additional association structures are available, allowing for instance interactions, association with the slope of the trajectory or its cumulative effect, and so on. Further details in @rizopoulos_2012.
+
+The survival function follows as
+\[
+S(t | M_i(t)) = \exp \left( -\int_0 ^ t h_0(u) \exp(W \psi + \alpha m_i(u)) \ du \right)
+\]
+
+Finally, regarding \(h_0(t)\): the choice of the baseline hazard function follows the usual rationale. It can be left unspecified, therefore resulting in a Cox model for the survival component of the joint model, or it can be specified using a parametric distribution (e.g. a distribution from Section \@ref(sa-parsa-distributions)) or some flexible alternative [@crowther_2012]. Nevertheless, @hsieh_2006 showed that choosing the Cox model for the survival component yields standard errors that are underestimated; consequently, bootstrap is required to obtain correct standard errors in that situation.
+
+## Estimation process {#jm-estimation}
+
+Estimation of a joint model for longitudinal and survival data is a non-trivial task. The complexity of jointly modelling the longitudinal component and the survival component motivated using a two-stages procedure as mentioned in Section \@ref(jm). With that approach, the longitudinal component is modelled and estimated separately; consequently, subject-specific predictions from the longitudinal model are produced and plugged into the survival model as time-varying covariates. Despite the simplicity of this approach, though, it has been showed that it produces substantial bias and poor coverage [@tsiatis_2001; @sweeting_2011]. Therefore, an approach that models both processes jointly is required. in particular, two approaches are predominant: a full likelihood approach, and a Bayesian approach; both have appealing characteristics, but they share the feature of being computationally intensive. 
+
+Focusing on the full likelihood approach, it is possible to formulate the joint likelihood [@rizopoulos_2012] for the overall parameter vector \(\theta = \{\theta_t, \theta_y, \theta_b\}\), formed by the parameters of the survival component, the parameters of the longitudinal component, and the elements of the variance-covariance matrix of the random effects, respectively. The joint distribution of the survival time \(T_i\), the event indicator \(d_i\), and the longitudinal response \(y_i\), conditional on the random effects \(b_i\), can be expressed as:
+\[
+P(T_i, d_i, y_i | b_i, \theta) = P(T_i, d_i | b_i, \theta) P (y_i | b_i, \theta),
+\]
+with
+\[
+P(y_i | b_i, \theta) = \prod_{j = 1} ^ {n_i} P(y_i(t_{ij}) | b_i, \theta).
+\]
+It follows that the contribution to the log-likelihood for the \(i\)^th^ patient is
+\[
+\begin{aligned}
+\log L(\theta) &= \log \int_{-\infty} ^ {+\infty} P(T_i, d_i, y_i, b_i; \theta) \ db_i \\
+               &= \log \int_{-\infty} ^ {+\infty} P(T_i, d_i | b_i, \theta_t) \left[ \prod_{j = 1} ^ {n_i} P(y_i(t_{ij}) | b_i, \theta_y) \right] P(b_i | \theta_b) \ db_i
+\end{aligned}
+\]
+with \(P(T_i, d_i | b_i, \theta_t)\) the likelihood relative to the survival component of the model:
+\[
+\begin{aligned} 
+P(T_i, d_i | b_i, \theta_t) &= h_i(T_i | M_i(T_i), \theta_t) ^ {d_i} S_i(T_i | M_i(T_i), \theta_t) \\
+&= \left[ h_0(T_i) \exp(W \psi + \alpha m_i(T_i)) \right] ^ {d_i} \exp \left[ -\int_0^{T_i} h_0(u) \exp(W \psi + \alpha m_i(u)) \ du \right],
+\end{aligned}
+\]
+\(P(y_i(t_{ij}) | b_i, \theta_y)\) the likelihood of the longitudinal process at time \(t_{ij}\):
+\[
+P(y_i(t_{ij}) | b_i, \theta_y) = (2 \pi \sigma ^ 2) ^ {-1/2} \exp \left[ -\frac{(y_i(t_{ij}) - m_i(t_{ij})) ^ 2}{2 \sigma ^ 2} \right],
+\]
+and \(P(b_i | \theta_b)\) the density of the random effects:
+\[
+P(b_i | \theta_b) = (2 \pi) ^ {-q_b / 2} | \Sigma | ^ {-1 / 2} \exp \left[- \frac{b_i^T \Sigma ^ {-1} b_i}{2}\right]
+\]
+\(q_b\) being the dimension of the random effects.
+
+Historically the full joint likelihood has been maximised using the Expectation-Maximisation algorithm [@dempster_1977]; alternatively, it is possible to use general purpose optimisers to maximise the full joint likelihood via algorithms such as the Newton-Raphson algorithm. Nevertheless, significant computational challenges persist; I will discuss them further in Chapter \@ref(compch).

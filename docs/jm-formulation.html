@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="simst1-methods.html">
-<link rel="next" href="simst1-pm.html">
+<link rel="prev" href="jm.html">
+<link rel="next" href="jm-estimation.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -170,16 +170,45 @@ code > span.in { color: #008000; } /* Information */
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="simst1-est" class="section level2">
-<h2><span class="header-section-number">5.4</span> Estimands</h2>
+<div id="jm-formulation" class="section level2">
+<h2><span class="header-section-number">3.1</span> Model formulation</h2>
+<p>A joint model for longitudinal and survival data consists of two components: a model for the longitudinal part (I will be assuming a single longitudinal trajectory from now on for simplicity) and a model for the survival part. These two components will then share a set of parameters that will describe the association between the two processes. In literature, the dominant approach seems to be allowing the two components to share random effects; I will follow this approach.</p>
+<p>Building on the notation from Section <a href="sa-terminology-notation.html#sa-terminology-notation">1.3</a>, let <span class="math inline">\(y_{ij} = \{ y_{ij}(t_{ij}) \ \forall \ j = 1, \dots, n_i \}\)</span> be the observed longitudinal response for the <span class="math inline">\(i\)</span><sup>th</sup> subject, with <span class="math inline">\(y_{ij}(t_{ij})\)</span> the observed response at time <span class="math inline">\(t_{ij}\)</span> and <span class="math inline">\(n_i\)</span> the number of longitudinal observations.</p>
+<p>The longitudinal component of the joint model is modelled within the mixed-effects framework <span class="citation">(P. J. Diggle et al. <a href="#ref-diggle_2013">2013</a>)</span>, as longitudinal data is likely measured intermittently and with error. Therefore: <span class="math display">\[
+y_i(t) = m_i(t) + \epsilon_i(t), \ \epsilon_i(t) \sim N(0, \sigma^2)
+\]</span> and <span class="math display">\[
+m_i(t) = X_i(t) \beta + Z_i(t) b, \ b \sim N(0, \Sigma)
+\]</span> with <span class="math inline">\(X_i(t)\)</span> and <span class="math inline">\(Z_i(t)\)</span> the time-dependent design matrices for the fixed and random effects, respectively. <span class="math inline">\(y_i(t)\)</span> represents the observed longitudinal trajectory at time <span class="math inline">\(t\)</span>, which could be decomposed into the true longitudinal trajectory <span class="math inline">\(m_i(t)\)</span> plus the measurement error <span class="math inline">\(\epsilon_i(t)\)</span>.</p>
+<p>The survival component of the joint model is modelled using a proportional hazards time to event model, given the true unobserved longitudinal trajectory up to time <span class="math inline">\(t\)</span>, i.e. <span class="math inline">\(M_i(t) = \{m_i(s) \ \forall \ 0 \le s \le t\}\)</span>: <span class="math display">\[
+h(t | M_i(t)) = h_0(t) \exp(W \psi + \alpha m_i(t)),
+\]</span> where <span class="math inline">\(h_0(t)\)</span> is the baseline hazard function and <span class="math inline">\(W\)</span> is a vector of time-fixed covariates with their regression parameters <span class="math inline">\(\psi\)</span>. <span class="math inline">\(\alpha\)</span> is the association parameter that links the longitudinal component and the survival component of the joint model; it can be intepreted as the change in log-hazard ratio for a unit increase in the true longitudinal trajectory <span class="math inline">\(m_i(t)\)</span>, at time <span class="math inline">\(t\)</span>. This specific form of the association parameter is also known as the <em>current value</em> parametrisation; additional association structures are available, allowing for instance interactions, association with the slope of the trajectory or its cumulative effect, and so on. Further details in <span class="citation">Rizopoulos (<a href="#ref-rizopoulos_2012">2012</a>)</span>.</p>
+<p>The survival function follows as <span class="math display">\[
+S(t | M_i(t)) = \exp \left( -\int_0 ^ t h_0(u) \exp(W \psi + \alpha m_i(u)) \ du \right)
+\]</span></p>
+<p>Finally, regarding <span class="math inline">\(h_0(t)\)</span>: the choice of the baseline hazard function follows the usual rationale. It can be left unspecified, therefore resulting in a Cox model for the survival component of the joint model, or it can be specified using a parametric distribution (e.g. a distribution from Section <a href="sa-parsa.html#sa-parsa-distributions">1.5.1</a>) or some flexible alternative <span class="citation">(Crowther, Abrams, and Lambert <a href="#ref-crowther_2012">2012</a>)</span>. Nevertheless, <span class="citation">Hsieh, Tseng, and Wang (<a href="#ref-hsieh_2006">2006</a>)</span> showed that choosing the Cox model for the survival component yields standard errors that are underestimated; consequently, bootstrap is required to obtain correct standard errors in that situation.</p>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-diggle_2013">
+<p>Diggle, Peter J, Patrick Heagerty, Kung-Yee Liang, and Scott L Zeger. 2013. <em>Analysis of Longitudinal Data</em>. 2nd ed. Oxford Statistical Science Series. OUP Oxford.</p>
+</div>
+<div id="ref-rizopoulos_2012">
+<p>Rizopoulos, Dimitris. 2012. <em>Joint Models for Longitudinal and Time-to-Event Data: With Applications in R</em>. Biostatistics. Chapman &amp; Hall / CRC.</p>
+</div>
+<div id="ref-crowther_2012">
+<p>Crowther, Michael J, Keith R Abrams, and Paul C Lambert. 2012. “Flexible Parametric Joint Modelling of Longitudinal and Survival Data.” <em>Statistics in Medicine</em> 31 (30): 4456–71. doi:<a href="https://doi.org/10.1002/sim.5644">10.1002/sim.5644</a>.</p>
+</div>
+<div id="ref-hsieh_2006">
+<p>Hsieh, Fushing, Yi-Kuan Tseng, and Jane-Ling Wang. 2006. “Joint Modeling of Survival and Longitudinal Data: Likelihood Approach Revisited.” <em>Biometrics</em> 62: 1037–43. doi:<a href="https://doi.org/10.1111/j.1541-0420.2006.00570.x">10.1111/j.1541-0420.2006.00570.x</a>.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="simst1-methods.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="simst1-pm.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="jm.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="jm-estimation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
