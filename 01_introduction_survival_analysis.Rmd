@@ -274,7 +274,7 @@ The International Stroke Trial (IST) was a large, prospective, randomised contro
 # I run it once to download and process the data, that will be saved in the data/ folder as "ist.csv"
 
 # read data
-ist = read_csv("http://datashare.is.ed.ac.uk/bitstream/handle/10283/128/IST_corrected.csv?sequence=5&isAllowed=y", col_types = paste(c("___ci", rep("_", 20), "cc", rep("_", 60), "ii", rep("_", 23)), collapse = ""))
+ist = read_csv("http://datashare.is.ed.ac.uk/bitstream/handle/10283/128/IST_corrected.csv?sequence=5&isAllowed=y", col_types = paste(c("___ci", rep("_", 20), "cc", rep("_", 54), "c", rep("_", 5), "ii", rep("_", 23)), collapse = ""))
 
 # recode heparin treatment
 ist$RXHEP = ifelse(ist$RXHEP %in% c("H", "M"), "H", ist$RXHEP)
@@ -289,13 +289,13 @@ ist = ist[ist$TD > 0,]
 write_csv(ist, "data/ist.csv")
 ```
 
-As illustration, I will evaluate the association between tretment with aspirin and/or heparin and survival after acute ischaemic stroke. I will start by reading the data, stored in the `ist.csv` file. This file is a subset of the full IST dataset containing information on age, gender, treatment, and survival; further, individuals with missing values and individuals with a survival time of zero were dropped.
+As illustration, I will evaluate the association between tretment with aspirin and/or heparin and survival after acute ischaemic stroke. I will start by reading the data, stored in the `ist.csv` file. This file is a subset of the full IST dataset containing information on age, gender, Country, treatment, and survival; further, individuals with missing values and individuals with a survival time of zero were dropped.
 
 ```{r read-ist-data, echo = TRUE}
 # library(readr)
 ist = read_csv("data/ist.csv", 
-  col_names = c("gender", "age", "rxasp", "rxhep", "d", "t"), 
-  col_types = "ciccii", skip = 1)
+  col_names = c("gender", "age", "rxasp", "rxhep", "country", "d", "t"), 
+  col_types = "cicccii", skip = 1)
 attr(ist, "spec") = NULL # removing "spec" attribute
 
 # turn treatments into factors
@@ -518,8 +518,8 @@ In this section I re-analyse the IST data of Section \@ref(sa-parsa-example) usi
 ```{r cox-read-ist-data, echo = TRUE}
 # library(readr)
 ist = read_csv("data/ist.csv", 
-  col_names = c("gender", "age", "rxasp", "rxhep", "d", "t"), 
-  col_types = "ciccii", skip = 1)
+  col_names = c("gender", "age", "rxasp", "rxhep", "country", "d", "t"), 
+  col_types = "cicccii", skip = 1)
 attr(ist, "spec") = NULL # removing "spec" attribute
 
 # turn treatments into factors
