@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="training-and-courses.html">
-<link rel="next" href="ax-slides.html">
+<link rel="prev" href="compch.html">
+<link rel="next" href="simst1.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -171,28 +171,85 @@ code > span.in { color: #008000; } /* Information */
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="conferences" class="section level2">
-<h2><span class="header-section-number">11.3</span> Conferences</h2>
-<p>I have attended a number of conferences during this year, in which I delivered the following oral presentations:</p>
-<ul>
-<li><p>Survival Analysis for Junior Researchers conference, held in Leicester, UK, on April 5<sup>th</sup> and 6<sup>th</sup> 2017. I delivered a talk titled <em>Direct likelihood maximisation using numerical quadrature to approximate intractable terms</em>;</p></li>
-<li><p>Statistical Analysis of Multi-Outcome Data (SAM) conference, held in Liverpool, UK, on July 3<sup>rd</sup> and 4<sup>th</sup> 2017. I delivered a talk titled <em>Impact of model misspecification in survival models with frailties</em>;</p></li>
-<li><p>Annual Conference of the International Society for Clinical Biostatistics conference, held in Vigo, Spain, on July 9<sup>th</sup> to July 13<sup>th</sup> 2017. I delivered two talks: a titled <em>Impact of model misspecification in survival models with frailties</em> during the main conference, and a talk titled <em>Exploring results from simulation studies interactively</em> during the Students’ Day organised on July 13<sup>th</sup>.</p></li>
-</ul>
-<p>Additionally, I delivered an oral presentation on previous work external to my PhD project during the 54<sup>th</sup> ERA-EDTA Congress held in Madrid, Spain, between June 3<sup>rd</sup> and June 6<sup>th</sup>. The ERA-EDTA Congress is the main conference in the field of Nephrology in Europe, with approximately 10,000 participants in 2017. I delivered my presentation, titled <em>Inappropriate prescription of nephrotoxic drugs to individuals with chronic kidney disease</em>, to an audience of clinicians, epidemiologists, clinical researchers, and other stakeholders.</p>
+<div id="simsurv" class="section level1">
+<h1><span class="header-section-number">5</span> Simulating survival data</h1>
+<p>In this Chapter I will present a flexible and efficient method to simulate survival data from a variety of parametric distributions, first introduced by <span class="citation">Bender, Augustin, and Blettner (<a href="#ref-bender_2005">2005</a>)</span>. Then, I will present an extension that allows simulating from a variety of complex distributions proposed by <span class="citation">Crowther and Lambert (<a href="#ref-crowther_2013b">2013</a>)</span>.</p>
+<p>Let <span class="math inline">\(h(t) = h_0(t) \exp(X \beta)\)</span> be the hazard function of a proportional hazards model, with <span class="math inline">\(h_0(t)\)</span> baseline hazard function and <span class="math inline">\(X\)</span> a matrix of covariates with regression coefficients <span class="math inline">\(\beta\)</span>. Let <span class="math inline">\(H_0(t) = H_0(t) \exp(X \beta)\)</span> be the corresponding cumulative hazard function, with <span class="math inline">\(H_0(t) = \int_0^t h_0(u) \ du\)</span>. The survival function <span class="math inline">\(S(t)\)</span> and cumulative distribution function <span class="math inline">\(F(t)\)</span> follow naturally: <span class="math inline">\(S(t) = \exp(-H(t))\)</span> and <span class="math inline">\(F(t) = 1 - S(t) = 1 - \exp(X \beta)\)</span>.</p>
+<p><span class="citation">Bender, Augustin, and Blettner (<a href="#ref-bender_2005">2005</a>)</span> showed that by letting <span class="math display">\[
+F(\tau) = u, \ u \sim U(0, 1)
+\]</span> and denoting the simulated survival time with <span class="math inline">\(\tau\)</span>, it is possible to derive <span class="math inline">\(\tau\)</span> analytically by inverting <span class="math inline">\(H_0(t)\)</span> if <span class="math inline">\(h_0(\tau) &gt; 0\)</span>: <span class="math display">\[
+\tau = H_0^{-1}(-\log(u) \exp(X \beta))
+\]</span> The only requirement is for <span class="math inline">\(H_0(t)\)</span> to be directly invertible, which happens to be the case when simulating from an exponential, Weibull, or Gompertz distribution for the baseline hazard <span class="math inline">\(h_0(t)\)</span>. The algorithm for simulating <span class="math inline">\(m\)</span> survival times is as follows:</p>
+<ol style="list-style-type: decimal">
+<li><p>draw a vector <span class="math inline">\(u\)</span> of <span class="math inline">\(m\)</span> observations from a <span class="math inline">\(U(0, 1)\)</span> distribution;</p></li>
+<li><p>simulate <span class="math inline">\(X\)</span> (e.g. a binary treatment from a Bernoulli distribution) and fix <span class="math inline">\(\beta\)</span>;</p></li>
+<li><p>the survival times can be obtained directly by applying the formula <span class="math inline">\(H_0^{-1}(-\log(u) \exp(X \beta))\)</span>.</p></li>
+</ol>
+<p><span class="citation">Bender, Augustin, and Blettner (<a href="#ref-bender_2005">2005</a>)</span> derived the closed-form version of <span class="math inline">\(H_0^{-1}(t)\)</span> for the exponential, Weibull, and Gompertz distributions, presented in Table <a href="simsurv.html#tab:closed-form-formulas-simsurv">5.1</a>.</p>
+<table>
+<caption><span id="tab:closed-form-formulas-simsurv">Table 5.1: </span> Closed-form formulas for simulating survival data from an exponential, Weibull, or Gompertz distribution.</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="left">Exponential</th>
+<th align="left">Weibull</th>
+<th align="left">Gompertz</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Hazard function <span class="math inline">\(h_0(t)\)</span></td>
+<td align="left"><span class="math inline">\(\lambda\)</span></td>
+<td align="left"><span class="math inline">\(\lambda p t ^ {p - 1}\)</span></td>
+<td align="left"><span class="math inline">\(\exp(\gamma t)\)</span></td>
+</tr>
+<tr class="even">
+<td>Cumulative hazard function <span class="math inline">\(H_0(t)\)</span></td>
+<td align="left"><span class="math inline">\(\lambda t\)</span></td>
+<td align="left"><span class="math inline">\(\lambda t ^ p\)</span></td>
+<td align="left"><span class="math inline">\((\lambda / \gamma) (\exp(\gamma t) - 1)\)</span></td>
+</tr>
+<tr class="odd">
+<td>Inverse cumulative hazard function <span class="math inline">\(H_0^{-1}(t)\)</span></td>
+<td align="left"><span class="math inline">\(\lambda ^ {-1} t\)</span></td>
+<td align="left"><span class="math inline">\((\lambda ^ {-1} t) ^ {1 / p}\)</span></td>
+<td align="left"><span class="math inline">\((1 / \gamma) \log((\gamma / \lambda) t + 1)\)</span></td>
+</tr>
+<tr class="even">
+<td>Survival time <span class="math inline">\(\tau\)</span></td>
+<td align="left"><span class="math inline">\(-\frac{\log(u)}{\lambda \exp(X \beta)}\)</span></td>
+<td align="left"><span class="math inline">\(\left[-\frac{\log(u)}{\lambda \exp(X \beta)}\right]^{1/p}\)</span></td>
+<td align="left"><span class="math inline">\((1 / \gamma) \log\left[1 - \frac{\gamma \log(u)}{\lambda\exp(X \beta)}\right]\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>The requirement requirement for <span class="math inline">\(H_0(t)\)</span> to be directly invertible impedes the use of distributions other than the exponential, Weibull, or Gompertz - which could be appropriate in some setting but too restricting in others. <span class="citation">Crowther and Lambert (<a href="#ref-crowther_2013b">2013</a>)</span> generalised this method in order to accommodate more complex distributions, even with turning points, under a proportional hazards model. In brief, when the cumulative baseline hazard function is not invertible it is not possible to solve the equation <span class="math inline">\(F(\tau) = u\)</span> for <span class="math inline">\(\tau\)</span>; assuming it is possible to write <span class="math inline">\(H_0(t)\)</span> analytically - a broader assumption compared to assuming <span class="math inline">\(H_0(t)\)</span> is invertible - it is possible to use root-finding methods to solve for <span class="math inline">\(\tau\)</span> numerically (Section <a href="#compch-numroot"><strong>??</strong></a>). Formally, the survival time <span class="math inline">\(\tau\)</span> can be simulated as the root of the equation <span class="math inline">\(S(\tau) - u = 0\)</span>.</p>
+<p><span class="citation">Crowther and Lambert (<a href="#ref-crowther_2013b">2013</a>)</span> present an example of their method by simulating from a two-components mixture distribution <span class="citation">(McLachlan and McGiffin <a href="#ref-mclachlan_1994">1994</a>)</span>, defined by additive components on the survival scale: <span class="math display">\[
+S_0(t) = \pi S_1(t) + (1 - \pi) S_2(t),
+\]</span> with <span class="math inline">\(\pi \in [0, 1]\)</span> mixing parameter. <span class="math inline">\(S_i(t)\)</span> can be any standard parametric distribution. Choosing two Weibull components for the mixture distribution, it can be showed that a proportional hazards model has the form <span class="math display">\[
+h(t) = \frac{\lambda_1 p_1 t ^ {p_1-1} \pi \exp(-\lambda_1 t ^ {p_1}) + \lambda_2 p_2 t ^ {p_2-1} (1 - \pi) \exp(-\lambda_2 t ^ {p_2})} {\pi \exp(-\lambda_1 t ^ {p_1}) + (1 - \pi) \exp(-\lambda_2 t ^ {p_2})} \exp(X \beta);
+\]</span> the survival function can be obtained directly from <span class="math inline">\(h(t)\)</span> in closed-form, plugged into the equation <span class="math inline">\(S(\tau) - u = 0\)</span>, and numerically solved for <span class="math inline">\(\tau\)</span>.</p>
 
 </div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-bender_2005">
+<p>Bender, Ralf, Thomas Augustin, and Maria Blettner. 2005. “Generating Survival Times to Simulate Cox Proportional Hazards Models.” <em>Statistics in Medicine</em> 24: 1713–23. doi:<a href="https://doi.org/10.1002/sim.2059">10.1002/sim.2059</a>.</p>
 </div>
-
-
-<!--  -->
+<div id="ref-crowther_2013b">
+<p>Crowther, Michael J, and Paul C Lambert. 2013. “Simulating Biologically Plausible Complex Survival Data.” <em>Statistics in Medicine</em> 32 (23): 4118–34. doi:<a href="https://doi.org/10.1002/sim.5823">10.1002/sim.5823</a>.</p>
+</div>
+<div id="ref-mclachlan_1994">
+<p>McLachlan, GJ, and DC McGiffin. 1994. “On the Role of Finite Mixture Models in Survival Analysis.” <em>Statistical Methods in Medical Research</em> 3 (3): 221–26. doi:<a href="https://doi.org/10.1177/096228029400300302">10.1177/096228029400300302</a>.</p>
+</div>
+</div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="training-and-courses.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="ax-slides.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="compch.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="simst1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
