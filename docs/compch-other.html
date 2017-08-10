@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="supervisory-meetings.html">
-<link rel="next" href="conferences.html">
+<link rel="prev" href="compch-numintgr.html">
+<link rel="next" href="simsurv.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -181,38 +181,83 @@ code > span.in { color: #008000; } /* Information */
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="training-and-courses" class="section level2">
-<h2><span class="header-section-number">11.2</span> Training and courses</h2>
-<p>I have attended a wide variety of courses during my first year, both externally and internally to the University of Leicester. The external courses I attended are:</p>
-<ul>
-<li><p><em>Efficient R Programming</em>, on November 8<sup>th</sup> 2016, organised by the Royal Statistical Society in London. The instructor was Dr. Colin Gillespie, from the University of Newcastle, United Kingdom, and Jumping Rivers. The course covered how to program efficiently with R; in particular, it covered common pitfalls when writing R code, code profiling, RCpp, and parallel programming. General hints and tips were provided.</p></li>
-<li><p><em>Introduction to causal inference</em>, on April 25<sup>th</sup> and 26<sup>th</sup> 2017, organised by the Biostatistics Research Group at the University of Leicester and delivered by Dr. Arvid Sjölander from Karolinska Institutet, Stockholm, Sweden. The course provided foundational concepts of causal inference such as the difference between association and causation, the counterfactual framework, exchangeability, directed acyclic graphs, methods for estimating a causal effect, etc. Additionally, it provided an introduction to more advanced methods such as intrumental variables and Mendelian randomisation.</p></li>
-<li><p><em>Using simulation studies to evaluate statistical methods</em>, on May 22<sup>nd</sup> 2017, organised by University College London. The course was delivered by Dr. Tim Morris, Prof. Ian White and Dr. Michael Crowther, and it covered the rationale for using simulation studies, important concepts to keep in mind when planning a simulation study, computational tools, estimates of uncertainty, and tools for improving reporting and dissemination.</p></li>
-<li><p>Workshop on <em>Joint modelling of longitudinal and time-to-event data with R</em>, on July 5<sup>th</sup>, 2017, organised by the Department of Biostatistics of the University of Liverpool. The course was delivered by Dr. Graeme Hickey, and provided an introduction to joint models of longitudinal and survival data, including extensions to incorporate competing risks and multiple longitudinal processes and a practical session using R.</p></li>
-</ul>
-<p>I have attended a few courses within the University and not offered on PROSE; specifically, I attended a course on <em>Time series analysis with R</em> (November 10<sup>th</sup>, 2016), a course on <em>Data visualisation</em> (November 15<sup>th</sup>, 2016), and a course on <em>High performance computing at Leicester</em> (February 8<sup>th</sup>, 2017). The latter was particularly important, as it allowed me to make better use of the high-performance computing facilities offered by the University. I also attended the <em>Preparing to teach in higher education</em> workshop, strand A (July 24<sup>th</sup> and 27<sup>th</sup> 2017).</p>
-<p>Additionally, I have attended the following PROSE training sessions to develop personal and communication skills in research settings. These are listed below:</p>
-<ul>
-<li><p><em>Planning your literature search</em>, October 21<sup>st</sup> 2016;</p></li>
-<li><p><em>Conducting your literature search</em>, October 25<sup>th</sup> 2016 ;</p></li>
-<li><p><em>Assertiveness</em>, November 14<sup>th</sup> 2016;</p></li>
-<li><p><em>Introduction to critical thinking</em>, December 15<sup>th</sup> 2016;</p></li>
-<li><p><em>Presentations A: Fundamentals of an effective presentation</em>, January 30<sup>th</sup> 2017;</p></li>
-<li><p><em>Communication in research and other work settings</em>, January 31<sup>st</sup> 2017;</p></li>
-<li><p><em>Enhancing your digital profile</em>, February 2<sup>nd</sup> 2017;</p></li>
-<li><p><em>Saying it with your abstract</em>, February 10<sup>th</sup> 2017;</p></li>
-<li><p><em>Designing a poster</em>, February 27<sup>th</sup> 2017;</p></li>
-<li><p><em>Leadership in research and other work environments</em>, February 28<sup>th</sup> 2017;</p></li>
-<li><p><em>Preparing for the probation review (Physical natural and medical sciences)</em>, May 30<sup>th</sup> 2017.</p></li>
-</ul>
+<div id="compch-other" class="section level2">
+<h2><span class="header-section-number">4.2</span> Other considerations</h2>
+<div id="compch-other-precision" class="section level3">
+<h3><span class="header-section-number">4.2.1</span> Cancellation error, precision, and arithmetic over- and under-flow</h3>
+<p>One of the problems when doing calculations on a computer is <em>cancellation error</em> (or <em>round-off error</em>). That occurs as a side effect of performing finite-precision arithmetic, as computers can store numbers in memory using a finite number of digits. Cancellation error causes the number of significant digits in the result to be reduced unacceptably; when a sequence of calculations is performed, cancellation errors add up significantly, altering the final result. Cancellation error can be easily reproduced:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="fl">1e16</span>
+b &lt;-<span class="st"> </span><span class="fl">1e16</span> <span class="op">+</span><span class="st"> </span>pi
+b <span class="op">-</span><span class="st"> </span>a</code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pi</code></pre></div>
+<pre><code>## [1] 3.141593</code></pre>
+<p><code>b - a</code> should be <span class="math inline">\(\pi\)</span>, instead it is 4. Analogously, <em>arithmetic over- and under-flow</em> is a condition that happens when the result of a calculation is, respectively, bigger or smaller than the minimum or maximum value that a given machine can store in memory. On the laptop used to produce this report, the smallest (and largest) floating-point number that the machine can represent are:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">.Machine<span class="op">$</span>double.xmin</code></pre></div>
+<pre><code>## [1] 2.225074e-308</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">.Machine<span class="op">$</span>double.xmax</code></pre></div>
+<pre><code>## [1] 1.797693e+308</code></pre>
+<p>Next, precision. Machines can only distinguish numbers that they can represent as different. For instance:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a =<span class="st"> </span><span class="dv">1</span>
+b =<span class="st"> </span>(.Machine<span class="op">$</span>double.eps <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)
+c =<span class="st"> </span>(.Machine<span class="op">$</span>double.neg.eps <span class="op">^</span><span class="st"> </span><span class="dv">2</span>)
+d =<span class="st"> </span>a <span class="op">+</span><span class="st"> </span>b
+e =<span class="st"> </span>a <span class="op">-</span><span class="st"> </span>c
+
+<span class="co"># The following equalities should be FALSE</span>
+a <span class="op">==</span><span class="st"> </span>d</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">==</span><span class="st"> </span>e</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Check that b, c are not 0</span>
+b <span class="op">==</span><span class="st"> </span><span class="dv">0</span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">c <span class="op">==</span><span class="st"> </span><span class="dv">0</span></code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<p>In this case, <code>.Machine$double.eps</code> and <code>.Machine$double.neg.eps</code> are the smallest positive floating-point numbers <span class="math inline">\(x\)</span> such that <span class="math inline">\(1 + x \ne 1\)</span> and <span class="math inline">\(1 - x \ne 1\)</span>, respectively.</p>
+<p>It is necessary to keep this potential problems in mind when doing numerical calculation using finite-precision arithmetic; for instance, a common situation where we may incur in arithmetic over- or under-flow is when maximising a likelihood. That is, the product of the individual contributions to the likelihood may be a number so large (or so small) that the computer cannot distinguish it from <span class="math inline">\(\pm \infty\)</span>, or rounding error may seriously affect the results. This specific example is easy to fix by using the log-likelihood instead, as the sum of the logarithm of the individual contributions behaves much better; nevertheless, this problem may not be always evident nor as easy to solve.</p>
+</div>
+<div id="compch-other-numdiff" class="section level3">
+<h3><span class="header-section-number">4.2.2</span> Numerical differentiation</h3>
+<p>Numerical differentiation is a series of algorithms to numerically estimate the derivative of a function. They tend to be computationally less demanding than numerical integration methods, but they are more sensitive to cancellation error.</p>
+<p>The easiest method for approximating the derivative of a function is to use finite difference approximation. Say I want to estimate the first derivative of a function <span class="math inline">\(f(\cdot)\)</span> at <span class="math inline">\(x\)</span>; the finite difference approximation of the derivative <span class="math inline">\(f&#39;(x)\)</span> is calculated as <span class="math display">\[
+f&#39;(x) \approx \frac{f(x + h) - f(x)}{h},
+\]</span> for a small <span class="math inline">\(h\)</span>. This formula is affected by both truncation error (as it derives from a truncated Taylor series expansion of <span class="math inline">\(f(x)\)</span>) and cancellation error (as a machine works with finite-precision arithmetic). It is necessary to choose a value <span class="math inline">\(h\)</span> that gives a good balance between the two errors: it can be showed that a good choice in most cases is <span class="math inline">\(h = \sqrt{\epsilon}\)</span>, with <span class="math inline">\(\epsilon\)</span> being the machine precision.</p>
+<p>The formula I presented for finite difference approximation is also known as <em>forward differencing</em>; alternatively, it is possible to use methods such as <em>central differencing</em> (<span class="math inline">\([f(x + h) - f(x - h)] / 2h\)</span>, more accurate but more computationally expensive) and <em>backward differencing</em> (<span class="math inline">\([f(x) - f(x - h)] / h\)</span>). Other methods are the <em>complex method</em>, which requires the function to be able to handle complex values and it is extremely powerful but with limited applicability, and the <em>Richardson’s extrapolation method</em>, which is more accurate but slower than finite differencing. All these methods are implemented in R in the <code>numDeriv</code> package, which sets the standard for numerical differentiation.</p>
+</div>
+<div id="compch-numroot" class="section level3">
+<h3><span class="header-section-number">4.2.3</span> Numerical root finding</h3>
+<p>Root-finding algorithms are algorithms for finding the values <span class="math inline">\(x\)</span> such that <span class="math inline">\(f(x) = 0\)</span>, for a given continuous function <span class="math inline">\(f(\cdot)\)</span>. Such values <span class="math inline">\(x\)</span> are named roots (or zeros) of a function. Most root-finding algorithms are based on the intermediate value theorem, which states that if a continuous function has values of opposite sign at the end points of an interval then the function has at least one root in the interval.</p>
+<p>For instance, the easiest root-finding method is the <em>bisection method</em>: let <span class="math inline">\(f(x)\)</span> be a continuous function, for which one knows an interval <span class="math inline">\([a, b]\)</span> such that <span class="math inline">\(f(a)\)</span> and <span class="math inline">\(f(b)\)</span> have opposite sign. Let <span class="math inline">\(c = (a + b) / 2\)</span> be the midpoint the bisect the interval: now, either <span class="math inline">\(f(a)\)</span> and <span class="math inline">\(f(c)\)</span> or <span class="math inline">\(f(c)\)</span> and <span class="math inline">\(f(b)\)</span> have opposite sign, and one has in fact divided by two the size of the interval. One can iterate this method until the difference between the extremities of the interval is small enough (e.g. <span class="math inline">\(&lt;1 \times 10^{-8}\)</span>).</p>
+<p>Another well established method is the <em>secant method</em>: it uses a succession of roots of secant lines to approximate the root of a function <span class="math inline">\(f(x)\)</span>. Starting with values <span class="math inline">\(x_0\)</span> and <span class="math inline">\(x_1\)</span>, a line is constructed between <span class="math inline">\((x_0, f(x_0))\)</span> and <span class="math inline">\((x_1, f(x_1))\)</span>: <span class="math display">\[
+y = \frac{f(x_1) - f(x_0)}{x_1 - x_0}(x - x_1) + f(x_1)
+\]</span> The root of this line is <span class="math display">\[
+x = x_1 - f(x_1) \frac{x_1 - x_0}{f(x_1) - f(x_0)}
+\]</span> Now, we set <span class="math inline">\(x_2 = x\)</span> and we iterate this method until the difference between the extremities of the interval is small enough (e.g. <span class="math inline">\(&lt;1 \times 10^{-8}\)</span>).</p>
+<p>The secant method is also known as a <em>linear interpolation</em> method; it is also possible to use higher order interpolation, specifically <em>quadratic interpolation</em>, to find the root of a function using the same rationale presented for the secant method. Specifically, starting with three starting values <span class="math inline">\(x_0\)</span>, <span class="math inline">\(x_1\)</span>, <span class="math inline">\(x_2\)</span> and their function values <span class="math inline">\(f(x_0)\)</span>, <span class="math inline">\(f(x_1)\)</span>, <span class="math inline">\(f(x_2)\)</span>, applying the Lagrange interpolation formula to interpolate the inverse of <span class="math inline">\(f(x)\)</span> yields the equation <span class="math display">\[
+\begin{aligned}
+f^{-1}(y) &amp;= \frac{(y - f(x_1))(y - f(x_2))}{(f(x_0) - f(x_1))(f(x_0) - f(x_2))}x_{0} + \frac{(y - f(x_0))(y - f(x_2))}{(f(x_1) - f(x_0))(f(x_1) - f(x_2))}x_{1} + \\
+          &amp;\frac{(y - f(x_0))(y - f(x_1))}{(f(x_2) - f(x_0))(f(x_2) - f(x_1))}x_{2} 
+\end{aligned}
+\]</span> Substituting <span class="math inline">\(y = 0\)</span> in the above equation yields the recursion formula, to be iterated until a desired precision is reached.</p>
+<p>Finally, a well-established and robust method is the <em>Brent-Dekker</em> method, implemented in R with the <code>uniroot()</code> function. In combined the three methods presented before, trying to use the secant or quadratic interpolation method first - as they tend to converge faster to a solution - but falling back to the bisection method if necessary, for its robustness properties. More details on the Brent-Dekker method in <span class="citation">Brent (<a href="#ref-brent_1973">1973</a>)</span>.</p>
+
+</div>
+</div>
+<!-- </div> -->
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-brent_1973">
+<p>Brent, Richard P. 1973. <em>Algorithms for Minimization Without Derivatives</em>. Prentice-Hall.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="supervisory-meetings.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="conferences.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="compch-numintgr.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="simsurv.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -25,14 +25,14 @@
 <meta name="author" content="Alessandro Gasparini">
 
 
-<meta name="date" content="2017-08-09">
+<meta name="date" content="2017-08-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="compch.html">
+<link rel="prev" href="compch-other.html">
 <link rel="next" href="simst1.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -123,7 +123,17 @@ code > span.in { color: #008000; } /* Information */
 <li class="chapter" data-level="3.1" data-path="jm-formulation.html"><a href="jm-formulation.html"><i class="fa fa-check"></i><b>3.1</b> Model formulation</a></li>
 <li class="chapter" data-level="3.2" data-path="jm-estimation.html"><a href="jm-estimation.html"><i class="fa fa-check"></i><b>3.2</b> Estimation process</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="compch.html"><a href="compch.html"><i class="fa fa-check"></i><b>4</b> Computational challenges in survival models with random effects</a></li>
+<li class="chapter" data-level="4" data-path="compch.html"><a href="compch.html"><i class="fa fa-check"></i><b>4</b> Computational challenges in survival models with random effects</a><ul>
+<li class="chapter" data-level="4.1" data-path="compch-numintgr.html"><a href="compch-numintgr.html"><i class="fa fa-check"></i><b>4.1</b> Numerical integration</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="compch-numintgr.html"><a href="compch-numintgr.html#compch-numintgr-uni"><i class="fa fa-check"></i><b>4.1.1</b> Unidimensional functions</a></li>
+<li class="chapter" data-level="4.1.2" data-path="compch-numintgr.html"><a href="compch-numintgr.html#compch-numintgr-multi"><i class="fa fa-check"></i><b>4.1.2</b> Multidimensional functions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="compch-other.html"><a href="compch-other.html"><i class="fa fa-check"></i><b>4.2</b> Other considerations</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="compch-other.html"><a href="compch-other.html#compch-other-precision"><i class="fa fa-check"></i><b>4.2.1</b> Cancellation error, precision, and arithmetic over- and under-flow</a></li>
+<li class="chapter" data-level="4.2.2" data-path="compch-other.html"><a href="compch-other.html#compch-other-numdiff"><i class="fa fa-check"></i><b>4.2.2</b> Numerical differentiation</a></li>
+<li class="chapter" data-level="4.2.3" data-path="compch-other.html"><a href="compch-other.html#compch-numroot"><i class="fa fa-check"></i><b>4.2.3</b> Numerical root finding</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="5" data-path="simsurv.html"><a href="simsurv.html"><i class="fa fa-check"></i><b>5</b> Simulating survival data</a></li>
 <li class="chapter" data-level="6" data-path="simst1.html"><a href="simst1.html"><i class="fa fa-check"></i><b>6</b> Simulation study: accuracy of Gaussian quadrature</a><ul>
 <li class="chapter" data-level="6.1" data-path="simst1-aim.html"><a href="simst1-aim.html"><i class="fa fa-check"></i><b>6.1</b> Aim</a></li>
@@ -223,7 +233,7 @@ F(\tau) = u, \ u \sim U(0, 1)
 </tr>
 </tbody>
 </table>
-<p>The requirement requirement for <span class="math inline">\(H_0(t)\)</span> to be directly invertible impedes the use of distributions other than the exponential, Weibull, or Gompertz - which could be appropriate in some setting but too restricting in others. <span class="citation">Crowther and Lambert (<a href="#ref-crowther_2013b">2013</a>)</span> generalised this method in order to accommodate more complex distributions, even with turning points, under a proportional hazards model. In brief, when the cumulative baseline hazard function is not invertible it is not possible to solve the equation <span class="math inline">\(F(\tau) = u\)</span> for <span class="math inline">\(\tau\)</span>; assuming it is possible to write <span class="math inline">\(H_0(t)\)</span> analytically - a broader assumption compared to assuming <span class="math inline">\(H_0(t)\)</span> is invertible - it is possible to use root-finding methods to solve for <span class="math inline">\(\tau\)</span> numerically (Section <a href="#compch-numroot"><strong>??</strong></a>). Formally, the survival time <span class="math inline">\(\tau\)</span> can be simulated as the root of the equation <span class="math inline">\(S(\tau) - u = 0\)</span>.</p>
+<p>The requirement requirement for <span class="math inline">\(H_0(t)\)</span> to be directly invertible impedes the use of distributions other than the exponential, Weibull, or Gompertz - which could be appropriate in some setting but too restricting in others. <span class="citation">Crowther and Lambert (<a href="#ref-crowther_2013b">2013</a>)</span> generalised this method in order to accommodate more complex distributions, even with turning points, under a proportional hazards model. In brief, when the cumulative baseline hazard function is not invertible it is not possible to solve the equation <span class="math inline">\(F(\tau) = u\)</span> for <span class="math inline">\(\tau\)</span>; assuming it is possible to write <span class="math inline">\(H_0(t)\)</span> analytically - a broader assumption compared to assuming <span class="math inline">\(H_0(t)\)</span> is invertible - it is possible to use root-finding methods to solve for <span class="math inline">\(\tau\)</span> numerically (Section <a href="compch-other.html#compch-numroot">4.2.3</a>). Formally, the survival time <span class="math inline">\(\tau\)</span> can be simulated as the root of the equation <span class="math inline">\(S(\tau) - u = 0\)</span>.</p>
 <p><span class="citation">Crowther and Lambert (<a href="#ref-crowther_2013b">2013</a>)</span> present an example of their method by simulating from a two-components mixture distribution <span class="citation">(McLachlan and McGiffin <a href="#ref-mclachlan_1994">1994</a>)</span>, defined by additive components on the survival scale: <span class="math display">\[
 S_0(t) = \pi S_1(t) + (1 - \pi) S_2(t),
 \]</span> with <span class="math inline">\(\pi \in [0, 1]\)</span> mixing parameter. <span class="math inline">\(S_i(t)\)</span> can be any standard parametric distribution. Choosing two Weibull components for the mixture distribution, it can be showed that a proportional hazards model has the form <span class="math display">\[
@@ -248,7 +258,7 @@ h(t) = \frac{\lambda_1 p_1 t ^ {p_1-1} \pi \exp(-\lambda_1 t ^ {p_1}) + \lambda_
           </div>
         </div>
       </div>
-<a href="compch.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="compch-other.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="simst1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

@@ -25,7 +25,7 @@
 <meta name="author" content="Alessandro Gasparini">
 
 
-<meta name="date" content="2017-08-09">
+<meta name="date" content="2017-08-10">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -33,7 +33,7 @@
   
   
 <link rel="prev" href="jm-estimation.html">
-<link rel="next" href="simsurv.html">
+<link rel="next" href="compch-numintgr.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -123,7 +123,17 @@ code > span.in { color: #008000; } /* Information */
 <li class="chapter" data-level="3.1" data-path="jm-formulation.html"><a href="jm-formulation.html"><i class="fa fa-check"></i><b>3.1</b> Model formulation</a></li>
 <li class="chapter" data-level="3.2" data-path="jm-estimation.html"><a href="jm-estimation.html"><i class="fa fa-check"></i><b>3.2</b> Estimation process</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="compch.html"><a href="compch.html"><i class="fa fa-check"></i><b>4</b> Computational challenges in survival models with random effects</a></li>
+<li class="chapter" data-level="4" data-path="compch.html"><a href="compch.html"><i class="fa fa-check"></i><b>4</b> Computational challenges in survival models with random effects</a><ul>
+<li class="chapter" data-level="4.1" data-path="compch-numintgr.html"><a href="compch-numintgr.html"><i class="fa fa-check"></i><b>4.1</b> Numerical integration</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="compch-numintgr.html"><a href="compch-numintgr.html#compch-numintgr-uni"><i class="fa fa-check"></i><b>4.1.1</b> Unidimensional functions</a></li>
+<li class="chapter" data-level="4.1.2" data-path="compch-numintgr.html"><a href="compch-numintgr.html#compch-numintgr-multi"><i class="fa fa-check"></i><b>4.1.2</b> Multidimensional functions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="compch-other.html"><a href="compch-other.html"><i class="fa fa-check"></i><b>4.2</b> Other considerations</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="compch-other.html"><a href="compch-other.html#compch-other-precision"><i class="fa fa-check"></i><b>4.2.1</b> Cancellation error, precision, and arithmetic over- and under-flow</a></li>
+<li class="chapter" data-level="4.2.2" data-path="compch-other.html"><a href="compch-other.html#compch-other-numdiff"><i class="fa fa-check"></i><b>4.2.2</b> Numerical differentiation</a></li>
+<li class="chapter" data-level="4.2.3" data-path="compch-other.html"><a href="compch-other.html#compch-numroot"><i class="fa fa-check"></i><b>4.2.3</b> Numerical root finding</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="5" data-path="simsurv.html"><a href="simsurv.html"><i class="fa fa-check"></i><b>5</b> Simulating survival data</a></li>
 <li class="chapter" data-level="6" data-path="simst1.html"><a href="simst1.html"><i class="fa fa-check"></i><b>6</b> Simulation study: accuracy of Gaussian quadrature</a><ul>
 <li class="chapter" data-level="6.1" data-path="simst1-aim.html"><a href="simst1-aim.html"><i class="fa fa-check"></i><b>6.1</b> Aim</a></li>
@@ -174,7 +184,15 @@ code > span.in { color: #008000; } /* Information */
 <div id="compch" class="section level1">
 <h1><span class="header-section-number">4</span> Computational challenges in survival models with random effects</h1>
 
-
+<p>The models I presented in Chapter <a href="smre.html#smre">2</a> and <a href="jm.html#jm">3</a> present significant computational challenges during the estimation process. I showed how frailty models with a Gamma frailty are analytically tractable, as it is possible to obtain closed-form expressions for the marginal survival function and therefore the likelihood; conversely, including a log-normal frailty (or, correspondingly, random effects) in a survival model yields a survival function - and likelihood - that does not have a closed form. Recall the <span class="math inline">\(i\)</span><sup>th</sup>-custer-specific contribution to the likelihood for a shared frailty model: <span class="math display">\[
+L_i(\alpha_i) = \alpha_i ^ {D_i} \prod_{j = 1} ^ {n_i} S_{ij}(t_{ij}) ^ {\alpha_i} h_{ij}(t_{ij}) ^ {d_{ij}}
+\]</span> The marginal survival function has the form <span class="math display">\[
+S_{ij}(t_{ij}) = \int_0^{+\infty} \left[ S_{ij}(t_{ij}) \right] ^ \alpha_i f(\alpha_i) \ d\alpha_i
+\]</span> with <span class="math inline">\(f(\alpha_i)\)</span> a log-normal density function. This integral has no closed form, hence it is necessary to approximate it in order to obtain (1) marginal survival and (2) the likelihood.</p>
+<p>Analogously, recall the joint likelihood in joint models for longitudinal and survival data: <span class="math display">\[
+\log L(\theta) = \log \int_{-\infty} ^ {+\infty} P(T_i, d_i, y_i, b_i; \theta) \ db_i.
+\]</span> Evaluating this likelihood requires evaluating an analytically intractable integral over a possibly multi-dimentional integral over the infinite domain; it is therefore necessary to use some method to approximate it numerically.</p>
+<p>Methods for approximating intractable integrals form the majority of this Chapter, with more details in Section <a href="compch-numintgr.html#compch-numintgr">4.1</a>. I will conclude with additional considerations on numerical methods in Section <a href="compch-other.html#compch-other">4.2</a>.</p> 
 </div>
             </section>
 
@@ -182,7 +200,7 @@ code > span.in { color: #008000; } /* Information */
         </div>
       </div>
 <a href="jm-estimation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="simsurv.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="compch-numintgr.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
