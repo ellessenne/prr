@@ -217,7 +217,7 @@ S(t; X) = S_0(t) ^ {\exp(X \beta)}
 <h3><span class="header-section-number">1.6.4</span> Data analysis example</h3>
 <p>In this section I re-analyse the IST data of Section <a href="sa-parsa.html#sa-parsa-example">1.5.3</a> using a semi-parametric Cox model. I first read the dataset:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># library(readr)</span>
-ist =<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/ist.csv&quot;</span>, 
+ist =<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/ist.csv.gz&quot;</span>, 
   <span class="dt">col_names =</span> <span class="kw">c</span>(<span class="st">&quot;gender&quot;</span>, <span class="st">&quot;age&quot;</span>, <span class="st">&quot;rxasp&quot;</span>, <span class="st">&quot;rxhep&quot;</span>, <span class="st">&quot;country&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;t&quot;</span>), 
   <span class="dt">col_types =</span> <span class="st">&quot;cicccii&quot;</span>, <span class="dt">skip =</span> <span class="dv">1</span>)
 <span class="kw">attr</span>(ist, <span class="st">&quot;spec&quot;</span>) =<span class="st"> </span><span class="ot">NULL</span> <span class="co"># removing &quot;spec&quot; attribute</span>

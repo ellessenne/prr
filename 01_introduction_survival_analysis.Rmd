@@ -286,14 +286,14 @@ ist = na.omit(ist)
 ist = ist[ist$TD > 0,]
 
 # export
-write_csv(ist, "data/ist.csv")
+write_csv(x = ist, path = gzfile("data/ist.csv.gz"))
 ```
 
 As illustration, I will evaluate the association between tretment with aspirin and/or heparin and survival after acute ischaemic stroke. I will start by reading the data, stored in the `ist.csv` file. This file is a subset of the full IST dataset containing information on age, gender, Country, treatment, and survival; further, individuals with missing values and individuals with a survival time of zero were dropped.
 
 ```{r read-ist-data, echo = TRUE}
 # library(readr)
-ist = read_csv("data/ist.csv", 
+ist = read_csv("data/ist.csv.gz", 
   col_names = c("gender", "age", "rxasp", "rxhep", "country", "d", "t"), 
   col_types = "cicccii", skip = 1)
 attr(ist, "spec") = NULL # removing "spec" attribute
@@ -517,7 +517,7 @@ In this section I re-analyse the IST data of Section \@ref(sa-parsa-example) usi
 
 ```{r cox-read-ist-data, echo = TRUE}
 # library(readr)
-ist = read_csv("data/ist.csv", 
+ist = read_csv("data/ist.csv.gz", 
   col_names = c("gender", "age", "rxasp", "rxhep", "country", "d", "t"), 
   col_types = "cicccii", skip = 1)
 attr(ist, "spec") = NULL # removing "spec" attribute
