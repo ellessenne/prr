@@ -12,6 +12,3 @@ bookdown::clean_book(T)
 # Compile all the formats
 bookdown::render_book("index.Rmd", "bookdown::gitbook")
 bookdown::render_book("index.Rmd", "bookdown::pdf_book")
-bookdown::render_book("index.Rmd", "bookdown::epub_book")
-bookdown::kindlegen(epub = "docs/Probation_review_report_AG.epub") # This requires KindleGen (https://www.amazon.com/gp/feature.html?docId=1000765211), and its location has to be on the system PATH
-

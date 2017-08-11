@@ -2,13 +2,6 @@ language: r
 cache: packages
 pandoc_version: 1.19.2.1
 
-before_script:
-  - wget http://kindlegen.s3.amazonaws.com/kindlegen_linux_2.6_i386_v2_9.tar.gz
-  - tar -xvzf kindlegen_linux_2.6_i386_v2_9.tar.gz
-  - export PATH=./:$PATH
-
 script:
   - Rscript -e 'bookdown::render_book("index.rmd", "bookdown::gitbook")'
   - Rscript -e 'bookdown::render_book("index.rmd", "bookdown::pdf_book")'
-  - Rscript -e 'bookdown::render_book("index.rmd", "bookdown::epub_book")'
-  - Rscript -e 'bookdown::kindlegen()'
