@@ -1,4 +1,4 @@
-# This script compiles a bookdown book into a Gitbook, a .pdf, an .epub, and a .mobi file.
+# This script compiles a bookdown book into a Gitbook and a .pdf
 
 # Clean-up session
 rm(list = ls()); gc()
@@ -12,3 +12,6 @@ bookdown::clean_book(T)
 # Compile all the formats
 bookdown::render_book("index.Rmd", "bookdown::gitbook")
 bookdown::render_book("index.Rmd", "bookdown::pdf_book")
+
+# Clean-up some leftover plots that are not needed
+unlink("figs", recursive = TRUE)
