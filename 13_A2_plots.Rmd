@@ -1,0 +1,349 @@
+# Plots {#ax-plots}
+
+## Simulation study 1 {#ax-plots-simst1}
+
+```{r sim1-an-vs-gq-scenario1-bias, fig.height = 12, fig.width = 8, fig.cap = "Bias, comparison with analytical formulae, scenario with a small frailty variance and a negative regression coefficient. "}
+summary_an_vs_gq %>% 
+  filter(fv == 0.25 & treatment_effect == -0.50) %>% 
+  mutate(n_individuals = paste0("N. ind.: ", n_individuals),
+         n_clusters = paste0("N. cl.: ", n_clusters)) %>% 
+  ggplot(aes(x = bias, y = method)) + 
+  geom_vline(xintercept = 0, color = "red", lty = "dashed") +
+  geom_point() + 
+  geom_errorbarh(aes(xmin = bias - 1.96 * bias_mcse, xmax = bias + 1.96 * bias_mcse, y = method, height = 1/3)) +
+  facet_grid(n_individuals + n_clusters ~ par) +
+  theme_bw() +
+  labs(x = "Bias", y = "", subtitle = "Comparison with analytical formulae. Scenario: frailty variance = 0.25, beta = -0.50")
+```
+
+```{r sim1-an-vs-gq-scenario1-cov, fig.height = 12, fig.width = 8, fig.cap = "Coverage, comparison with analytical formulae, scenario with a small frailty variance and a negative regression coefficient. "}
+summary_an_vs_gq %>% 
+  filter(fv == 0.25 & treatment_effect == -0.50) %>% 
+  mutate(n_individuals = paste0("N. ind.: ", n_individuals),
+         n_clusters = paste0("N. cl.: ", n_clusters)) %>% 
+  ggplot(aes(x = cov, y = method)) + 
+  geom_vline(xintercept = 95, color = "red", lty = "dashed") +
+  geom_point() + 
+  geom_errorbarh(aes(xmin = cov - 1.96 * cov_mcse, xmax = cov + 1.96 * cov_mcse, y = method, height = 1/3)) +
+  facet_grid(n_individuals + n_clusters ~ par) +
+  theme_bw() +
+  labs(x = "Coverage (%)", y = "", subtitle = "Comparison with analytical formulae. Scenario: frailty variance = 0.25, beta = -0.50")
+```
+
+```{r sim1-an-vs-gq-scenario1-mse, fig.height = 12, fig.width = 8, fig.cap = "Mean squared error, comparison with analytical formulae, scenario with a small frailty variance and a negative regression coefficient. "}
+summary_an_vs_gq %>% 
+  filter(fv == 0.25 & treatment_effect == -0.50) %>% 
+  mutate(n_individuals = paste0("N. ind.: ", n_individuals),
+         n_clusters = paste0("N. cl.: ", n_clusters)) %>% 
+  ggplot(aes(x = mse, y = method)) + 
+  geom_vline(xintercept = 0, color = "red", lty = "dashed") +
+  geom_point() + 
+  facet_grid(n_individuals + n_clusters ~ par) +
+  theme_bw() +
+  labs(x = "Mean squared error", y = "", subtitle = "Comparison with analytical formulae. Scenario: frailty variance = 0.25, beta = -0.50")
+```
+
+```{r sim1-an-vs-gq-scenario1-convergence, fig.height = 4, fig.width = 6, fig.cap = "Convergence rates, comparison with analytical formulae, scenario with a small frailty variance and a negative regression coefficient. "}
+summary_an_vs_gq %>% 
+  filter(fv == 0.25 & treatment_effect == -0.50) %>% 
+  distinct(fv, treatment_effect, n_individuals, n_clusters, method, .keep_all = TRUE) %>% 
+  mutate(n_individuals = paste0("N. ind.: ", n_individuals),
+         n_clusters = paste0("N. cl.: ", n_clusters)) %>% 
+  ggplot(aes(x = convergence_p, y = method)) + 
+  geom_vline(xintercept = 1, color = "red", lty = "dashed") +
+  geom_point() + 
+  facet_wrap(~ n_individuals + n_clusters) +
+  scale_x_continuous(labels = scales::percent) +
+  theme_bw() +
+  labs(x = "Convergence rate (%)", y = "", subtitle = "Comparison with analytical formulae. Scenario: frailty variance = 0.25, beta = -0.50")
+```
+
+```{r sim1-an-vs-gq-scenario2-bias, fig.height = 12, fig.width = 8, fig.cap = "Bias, comparison with analytical formulae, scenario with a large frailty variance and a null regression coefficient. "}
+summary_an_vs_gq %>% 
+  filter(fv == 1.25 & treatment_effect == 0.00) %>% 
+  mutate(n_individuals = paste0("N. ind.: ", n_individuals),
+         n_clusters = paste0("N. cl.: ", n_clusters)) %>% 
+  ggplot(aes(x = bias, y = method)) + 
+  geom_vline(xintercept = 0, color = "red", lty = "dashed") +
+  geom_point() + 
+  geom_errorbarh(aes(xmin = bias - 1.96 * bias_mcse, xmax = bias + 1.96 * bias_mcse, y = method, height = 1/3)) +
+  facet_grid(n_individuals + n_clusters ~ par) +
+  theme_bw() +
+  labs(x = "Bias", y = "", subtitle = "Comparison with analytical formulae. Scenario: frailty variance = 1.25, beta = 0.00")
+```
+
+```{r sim1-an-vs-gq-scenario2-cov, fig.height = 12, fig.width = 8, fig.cap = "Coverage, comparison with analytical formulae, scenario with a large frailty variance and a null regression coefficient. "}
+summary_an_vs_gq %>% 
+  filter(fv == 1.25 & treatment_effect == 0.00) %>% 
+  mutate(n_individuals = paste0("N. ind.: ", n_individuals),
+         n_clusters = paste0("N. cl.: ", n_clusters)) %>% 
+  ggplot(aes(x = cov, y = method)) + 
+  geom_vline(xintercept = 95, color = "red", lty = "dashed") +
+  geom_point() + 
+  geom_errorbarh(aes(xmin = cov - 1.96 * cov_mcse, xmax = cov + 1.96 * cov_mcse, y = method, height = 1/3)) +
+  facet_grid(n_individuals + n_clusters ~ par) +
+  theme_bw() +
+  labs(x = "Coverage (%)", y = "", subtitle = "Comparison with analytical formulae. Scenario: frailty variance = 1.25, beta = 0.00")
+```
+
+```{r sim1-an-vs-gq-scenario2-mse, fig.height = 12, fig.width = 8, fig.cap = "Mean squared error, comparison with analytical formulae, scenario with a large frailty variance and a null regression coefficient. "}
+summary_an_vs_gq %>% 
+  filter(fv == 1.25 & treatment_effect == 0.00) %>% 
+  mutate(n_individuals = paste0("N. ind.: ", n_individuals),
+         n_clusters = paste0("N. cl.: ", n_clusters)) %>% 
+  ggplot(aes(x = mse, y = method)) + 
+  geom_vline(xintercept = 0, color = "red", lty = "dashed") +
+  geom_point() + 
+  facet_grid(n_individuals + n_clusters ~ par) +
+  theme_bw() +
+  labs(x = "Mean squared error", y = "", subtitle = "Comparison with analytical formulae. Scenario: frailty variance = 1.25, beta = 0.00")
+```
+
+```{r sim1-an-vs-gq-scenario2-convergence, fig.height = 4, fig.width = 6, fig.cap = "Convergence rates, comparison with analytical formulae, scenario with a large frailty variance and a null regression coefficient. "}
+summary_an_vs_gq %>% 
+  filter(fv == 1.25 & treatment_effect == 0.00) %>% 
+  distinct(fv, treatment_effect, n_individuals, n_clusters, method, .keep_all = TRUE) %>% 
+  mutate(n_individuals = paste0("N. ind.: ", n_individuals),
+         n_clusters = paste0("N. cl.: ", n_clusters)) %>% 
+  ggplot(aes(x = convergence_p, y = method)) + 
+  geom_vline(xintercept = 1, color = "red", lty = "dashed") +
+  geom_point() + 
+  facet_wrap(~ n_individuals + n_clusters) +
+  scale_x_continuous(labels = scales::percent) +
+  theme_bw() +
+  labs(x = "Convergence rate (%)", y = "", subtitle = "Comparison with analytical formulae. Scenario: frailty variance = 1.25, beta = 0.00")
+```
+
+```{r sim1-an-vs-gq-scenario3-bias, fig.height = 6, fig.width = 8, fig.cap = "Bias, comparison with analytical formulae, scenario with 1000 clusters of 2 individuals each with a positive regression coefficient. "}
+summary_an_vs_gq %>% 
+  filter(n_individuals == 2 & n_clusters == 1000 & treatment_effect == -0.50) %>% 
+  ggplot(aes(x = bias, y = method)) + 
+  geom_vline(xintercept = 0, color = "red", lty = "dashed") +
+  geom_point() + 
+  geom_errorbarh(aes(xmin = bias - 1.96 * bias_mcse, xmax = bias + 1.96 * bias_mcse, y = method, height = 1/3)) +
+  facet_grid(fv ~ par) +
+  theme_bw() +
+  labs(x = "Bias", y = "", subtitle = "Comparison with analytical formulae. Scenario: 1000 clusters of 2 individuals each, beta = -0.50")
+```
+
+```{r sim1-an-vs-gq-scenario3-cov, fig.height = 6, fig.width = 8, fig.cap = "Coverage, comparison with analytical formulae, scenario with 1000 clusters of 2 individuals each with a positive regression coefficient. "}
+summary_an_vs_gq %>% 
+  filter(n_individuals == 2 & n_clusters == 1000 & treatment_effect == -0.50) %>% 
+  ggplot(aes(x = cov, y = method)) + 
+  geom_vline(xintercept = 95, color = "red", lty = "dashed") +
+  geom_point() + 
+  geom_errorbarh(aes(xmin = cov - 1.96 * cov_mcse, xmax = cov + 1.96 * cov_mcse, y = method, height = 1/3)) +
+  facet_grid(fv ~ par) +
+  theme_bw() +
+  labs(x = "Coverage (%)", y = "", subtitle = "Comparison with analytical formulae. Scenario: 1000 clusters of 2 individuals each, beta = -0.50")
+```
+
+```{r sim1-an-vs-gq-scenario3-pbias, fig.height = 6, fig.width = 8, fig.cap = "Percentage bias, comparison with analytical formulae, scenario with 1000 clusters of 2 individuals each with a positive regression coefficient. "}
+summary_an_vs_gq %>% 
+  filter(n_individuals == 2 & n_clusters == 1000 & treatment_effect == -0.50) %>% 
+  ggplot(aes(x = pbias, y = method)) + 
+  geom_vline(xintercept = 0, color = "red", lty = "dashed") +
+  geom_point() + 
+  facet_grid(fv ~ par) +
+  theme_bw() +
+  labs(x = "Percentage bias (%)", y = "", subtitle = "Comparison with analytical formulae. Scenario: 1000 clusters of 2 individuals each, beta = -0.50")
+```
+
+```{r sim1-an-vs-gq-scenario3-mse, fig.height = 6, fig.width = 8, fig.cap = "Mean squared error, comparison with analytical formulae, scenario with 1000 clusters of 2 individuals each with a positive regression coefficient. "}
+summary_an_vs_gq %>% 
+  filter(n_individuals == 2 & n_clusters == 1000 & treatment_effect == -0.50) %>% 
+  ggplot(aes(x = mse, y = method)) + 
+  geom_vline(xintercept = 0, color = "red", lty = "dashed") +
+  geom_point() + 
+  facet_grid(fv ~ par) +
+  theme_bw() +
+  labs(x = "Mean squared error", y = "", subtitle = "Comparison with analytical formulae. Scenario: 1000 clusters of 2 individuals each, beta = -0.50")
+```
+
+```{r sim1-an-vs-gq-scenario3-convergence, fig.height = 2, fig.width = 6, fig.cap = "Convergence rates, comparison with analytical formulae, scenario with 1000 clusters of 2 individuals each with a positive regression coefficient. "}
+summary_an_vs_gq %>% 
+  filter(n_individuals == 2 & n_clusters == 1000 & treatment_effect == -0.50) %>% 
+  distinct(fv, treatment_effect, n_individuals, n_clusters, method, .keep_all = TRUE) %>% 
+  ggplot(aes(x = convergence_p, y = method)) + 
+  geom_vline(xintercept = 1, color = "red", lty = "dashed") +
+  geom_point() + 
+  facet_wrap(~ fv) +
+  scale_x_continuous(labels = scales::percent) +
+  theme_bw() +
+  labs(x = "Convergence rate (%)", y = "", subtitle = "Comparison with analytical formulae. Scenario: 1000 clusters of 2 individuals each, beta = -0.50")
+```
+
+```{r sim1-normal-gq-scenario1-bias, fig.height = 12, fig.width = 8, fig.cap = "Bias, comparison without analytical formulae, scenario with a small frailty variance and a negative regression coefficient. "}
+summary_normal_gq %>% 
+  filter(fv == 0.25 & treatment_effect == -0.50) %>% 
+  mutate(n_individuals = paste0("N. ind.: ", n_individuals),
+         n_clusters = paste0("N. cl.: ", n_clusters)) %>% 
+  ggplot(aes(x = bias, y = method)) + 
+  geom_vline(xintercept = 0, color = "red", lty = "dashed") +
+  geom_point() + 
+  geom_errorbarh(aes(xmin = bias - 1.96 * bias_mcse, xmax = bias + 1.96 * bias_mcse, y = method, height = 1/3)) +
+  facet_grid(n_individuals + n_clusters ~ par) +
+  theme_bw() +
+  labs(x = "Bias", y = "", subtitle = "Comparison without analytical formulae. Scenario: frailty variance = 0.25, beta = -0.50")
+```
+
+```{r sim1-normal-gq-scenario1-cov, fig.height = 12, fig.width = 8, fig.cap = "Coverage, comparison without analytical formulae, scenario with a small frailty variance and a negative regression coefficient. "}
+summary_normal_gq %>% 
+  filter(fv == 0.25 & treatment_effect == -0.50) %>% 
+  mutate(n_individuals = paste0("N. ind.: ", n_individuals),
+         n_clusters = paste0("N. cl.: ", n_clusters)) %>% 
+  ggplot(aes(x = cov, y = method)) + 
+  geom_vline(xintercept = 95, color = "red", lty = "dashed") +
+  geom_point() + 
+  geom_errorbarh(aes(xmin = cov - 1.96 * cov_mcse, xmax = cov + 1.96 * cov_mcse, y = method, height = 1/3)) +
+  facet_grid(n_individuals + n_clusters ~ par) +
+  theme_bw() +
+  labs(x = "Coverage (%)", y = "", subtitle = "Comparison without analytical formulae. Scenario: frailty variance = 0.25, beta = -0.50")
+```
+
+```{r sim1-normal-gq-scenario1-mse, fig.height = 12, fig.width = 8, fig.cap = "Mean squared error, comparison without analytical formulae, scenario with a small frailty variance and a negative regression coefficient. "}
+summary_normal_gq %>% 
+  filter(fv == 0.25 & treatment_effect == -0.50) %>% 
+  mutate(n_individuals = paste0("N. ind.: ", n_individuals),
+         n_clusters = paste0("N. cl.: ", n_clusters)) %>% 
+  ggplot(aes(x = mse, y = method)) + 
+  geom_vline(xintercept = 0, color = "red", lty = "dashed") +
+  geom_point() + 
+  facet_grid(n_individuals + n_clusters ~ par) +
+  theme_bw() +
+  labs(x = "Mean squared error", y = "", subtitle = "Comparison without analytical formulae. Scenario: frailty variance = 0.25, beta = -0.50")
+```
+
+```{r sim1-normal-gq-scenario1-convergence, fig.height = 4, fig.width = 6, fig.cap = "Convergence rates, comparison without analytical formulae, scenario with a small frailty variance and a negative regression coefficient. "}
+summary_normal_gq %>% 
+  filter(fv == 0.25 & treatment_effect == -0.50) %>% 
+  distinct(fv, treatment_effect, n_individuals, n_clusters, method, .keep_all = TRUE) %>% 
+  mutate(n_individuals = paste0("N. ind.: ", n_individuals),
+         n_clusters = paste0("N. cl.: ", n_clusters)) %>% 
+  ggplot(aes(x = convergence_p, y = method)) + 
+  geom_vline(xintercept = 1, color = "red", lty = "dashed") +
+  geom_point() + 
+  facet_wrap(~ n_individuals + n_clusters) +
+  scale_x_continuous(labels = scales::percent) +
+  theme_bw() +
+  labs(x = "Convergence rate (%)", y = "", subtitle = "Comparison without analytical formulae. Scenario: frailty variance = 0.25, beta = -0.50")
+```
+
+```{r sim1-normal-gq-scenario2-bias, fig.height = 12, fig.width = 8, fig.cap = "Bias, comparison without analytical formulae, scenario with a large frailty variance and a null regression coefficient. "}
+summary_normal_gq %>% 
+  filter(fv == 1.25 & treatment_effect == 0.00) %>% 
+  mutate(n_individuals = paste0("N. ind.: ", n_individuals),
+         n_clusters = paste0("N. cl.: ", n_clusters)) %>% 
+  ggplot(aes(x = bias, y = method)) + 
+  geom_vline(xintercept = 0, color = "red", lty = "dashed") +
+  geom_point() + 
+  geom_errorbarh(aes(xmin = bias - 1.96 * bias_mcse, xmax = bias + 1.96 * bias_mcse, y = method, height = 1/3)) +
+  facet_grid(n_individuals + n_clusters ~ par) +
+  theme_bw() +
+  labs(x = "Bias", y = "", subtitle = "Comparison without analytical formulae. Scenario: frailty variance = 1.25, beta = 0.00")
+```
+
+```{r sim1-normal-gq-scenario2-cov, fig.height = 12, fig.width = 8, fig.cap = "Coverage, comparison without analytical formulae, scenario with a large frailty variance and a null regression coefficient. "}
+summary_normal_gq %>% 
+  filter(fv == 1.25 & treatment_effect == 0.00) %>% 
+  mutate(n_individuals = paste0("N. ind.: ", n_individuals),
+         n_clusters = paste0("N. cl.: ", n_clusters)) %>% 
+  ggplot(aes(x = cov, y = method)) + 
+  geom_vline(xintercept = 95, color = "red", lty = "dashed") +
+  geom_point() + 
+  geom_errorbarh(aes(xmin = cov - 1.96 * cov_mcse, xmax = cov + 1.96 * cov_mcse, y = method, height = 1/3)) +
+  facet_grid(n_individuals + n_clusters ~ par) +
+  theme_bw() +
+  labs(x = "Coverage (%)", y = "", subtitle = "Comparison without analytical formulae. Scenario: frailty variance = 1.25, beta = 0.00")
+```
+
+```{r sim1-normal-gq-scenario2-mse, fig.height = 12, fig.width = 8, fig.cap = "Mean squared error, comparison without analytical formulae, scenario with a large frailty variance and a null regression coefficient. "}
+summary_normal_gq %>% 
+  filter(fv == 1.25 & treatment_effect == 0.00) %>% 
+  mutate(n_individuals = paste0("N. ind.: ", n_individuals),
+         n_clusters = paste0("N. cl.: ", n_clusters)) %>% 
+  ggplot(aes(x = mse, y = method)) + 
+  geom_vline(xintercept = 0, color = "red", lty = "dashed") +
+  geom_point() + 
+  facet_grid(n_individuals + n_clusters ~ par) +
+  theme_bw() +
+  labs(x = "Mean squared error", y = "", subtitle = "Comparison without analytical formulae. Scenario: frailty variance = 1.25, beta = 0.00")
+```
+
+```{r sim1-normal-gq-scenario2-convergence, fig.height = 4, fig.width = 6, fig.cap = "Convergence rates, comparison without analytical formulae, scenario with a large frailty variance and a null regression coefficient. "}
+summary_normal_gq %>% 
+  filter(fv == 1.25 & treatment_effect == 0.00) %>% 
+  distinct(fv, treatment_effect, n_individuals, n_clusters, method, .keep_all = TRUE) %>% 
+  mutate(n_individuals = paste0("N. ind.: ", n_individuals),
+         n_clusters = paste0("N. cl.: ", n_clusters)) %>% 
+  ggplot(aes(x = convergence_p, y = method)) + 
+  geom_vline(xintercept = 1, color = "red", lty = "dashed") +
+  geom_point() + 
+  facet_wrap(~ n_individuals + n_clusters) +
+  scale_x_continuous(labels = scales::percent) +
+  theme_bw() +
+  labs(x = "Convergence rate (%)", y = "", subtitle = "Comparison without analytical formulae. Scenario: frailty variance = 1.25, beta = 0.00")
+```
+
+```{r sim1-normal-gq-scenario3-bias, fig.height = 6, fig.width = 8, fig.cap = "Bias, comparison without analytical formulae, scenario with 1000 clusters of 2 individuals each with a positive regression coefficient. "}
+summary_normal_gq %>% 
+  filter(n_individuals == 2 & n_clusters == 1000 & treatment_effect == 0.50) %>% 
+  ggplot(aes(x = bias, y = method)) + 
+  geom_vline(xintercept = 0, color = "red", lty = "dashed") +
+  geom_point() + 
+  geom_errorbarh(aes(xmin = bias - 1.96 * bias_mcse, xmax = bias + 1.96 * bias_mcse, y = method, height = 1/3)) +
+  facet_grid(fv ~ par) +
+  theme_bw() +
+  labs(x = "Bias", y = "", subtitle = "Comparison without analytical formulae. Scenario: 1000 clusters of 2 individuals each, beta = -0.50")
+```
+
+```{r sim1-normal-gq-scenario3-cov, fig.height = 6, fig.width = 8, fig.cap = "Coverage, comparison without analytical formulae, scenario with 1000 clusters of 2 individuals each with a positive regression coefficient. "}
+summary_normal_gq %>% 
+  filter(n_individuals == 2 & n_clusters == 1000 & treatment_effect == 0.50) %>% 
+  ggplot(aes(x = cov, y = method)) + 
+  geom_vline(xintercept = 95, color = "red", lty = "dashed") +
+  geom_point() + 
+  geom_errorbarh(aes(xmin = cov - 1.96 * cov_mcse, xmax = cov + 1.96 * cov_mcse, y = method, height = 1/3)) +
+  facet_grid(fv ~ par) +
+  theme_bw() +
+  labs(x = "Coverage (%)", y = "", subtitle = "Comparison without analytical formulae. Scenario: 1000 clusters of 2 individuals each, beta = -0.50")
+```
+
+```{r sim1-normal-gq-scenario3-pbias, fig.height = 6, fig.width = 8, fig.cap = "Percentage bias, comparison without analytical formulae, scenario with 1000 clusters of 2 individuals each with a positive regression coefficient. "}
+summary_normal_gq %>% 
+  filter(n_individuals == 2 & n_clusters == 1000 & treatment_effect == 0.50) %>% 
+  ggplot(aes(x = pbias, y = method)) + 
+  geom_vline(xintercept = 0, color = "red", lty = "dashed") +
+  geom_point() + 
+  facet_grid(fv ~ par) +
+  theme_bw() +
+  labs(x = "Percentage bias (%)", y = "", subtitle = "Comparison without analytical formulae. Scenario: 1000 clusters of 2 individuals each, beta = -0.50")
+```
+
+```{r sim1-normal-gq-scenario3-mse, fig.height = 6, fig.width = 8, fig.cap = "Mean squared error, comparison without analytical formulae, scenario with 1000 clusters of 2 individuals each with a positive regression coefficient. "}
+summary_normal_gq %>% 
+  filter(n_individuals == 2 & n_clusters == 1000 & treatment_effect == 0.50) %>% 
+  ggplot(aes(x = mse, y = method)) + 
+  geom_vline(xintercept = 0, color = "red", lty = "dashed") +
+  geom_point() + 
+  facet_grid(fv ~ par) +
+  theme_bw() +
+  labs(x = "Mean squared error", y = "", subtitle = "Comparison without analytical formulae. Scenario: 1000 clusters of 2 individuals each, beta = -0.50")
+```
+
+```{r sim1-normal-gq-scenario3-convergence, fig.height = 2, fig.width = 6, fig.cap = "Convergence rates, comparison without analytical formulae, scenario with 1000 clusters of 2 individuals each with a positive regression coefficient. "}
+summary_normal_gq %>% 
+  filter(n_individuals == 2 & n_clusters == 1000 & treatment_effect == 0.50) %>% 
+  distinct(fv, treatment_effect, n_individuals, n_clusters, method, .keep_all = TRUE) %>% 
+  ggplot(aes(x = convergence_p, y = method)) + 
+  geom_vline(xintercept = 1, color = "red", lty = "dashed") +
+  geom_point() + 
+  facet_wrap(~ fv) +
+  scale_x_continuous(labels = scales::percent) +
+  theme_bw() +
+  labs(x = "Convergence rate (%)", y = "", subtitle = "Comparison without analytical formulae. Scenario: 1000 clusters of 2 individuals each, beta = -0.50")
+```
+
+`r if (knitr:::is_latex_output()) '\\clearpage'`
+
+## Simulation study 2 {#ax-plots-simst2}

@@ -1,0 +1,428 @@
+# (APPENDIX) Appendix {-} 
+
+# Tables {#ax-tables}
+
+## Simulation study 1 {#ax-tables-simst1}
+
+
+```{r sim1-an-vs-gq-scenario1-bias-t}
+summary_an_vs_gq %>% 
+  filter(fv == 0.25 & treatment_effect == -0.50) %>% 
+  mutate(bias = paste(sprintf("%.4f", bias)),
+         bias_mcse = paste(sprintf("%.4f", bias_mcse)),
+         value = paste0(bias, " (", bias_mcse, ")"),
+         `Sample size` = paste0(n_clusters, "c. of ", n_individuals, "i.")) %>%
+  select(`Sample size`, par, value, method) %>%
+  spread(key = par, value = value) %>% 
+  arrange(`Sample size`, method) %>%
+  rename(Method = method) %>% 
+  kable(booktabs = TRUE, 
+        caption = "Bias, comparison with analytical formulae, scenario with a small frailty variance and a negative regression coefficient.",
+        align = "r",
+        linesep = c("", "", "", "", "", "\\addlinespace")) %>% 
+  kable_styling(latex_options = c("scale_down"))
+```
+
+```{r sim1-an-vs-gq-scenario1-cov-t}
+summary_an_vs_gq %>% 
+  filter(fv == 0.25 & treatment_effect == -0.50) %>% 
+  mutate(cov = paste(sprintf("%.4f", cov)),
+         cov_mcse = paste(sprintf("%.4f", cov_mcse)),
+         value = paste0(cov, " (", cov_mcse, ")"),
+         `Sample size` = paste0(n_clusters, "c. of ", n_individuals, "i.")) %>%
+  select(`Sample size`, par, value, method) %>%
+  spread(key = par, value = value) %>% 
+  arrange(`Sample size`, method) %>%
+  rename(Method = method) %>% 
+  kable(booktabs = TRUE, 
+        caption = "Coverage, comparison with analytical formulae, scenario with a small frailty variance and a negative regression coefficient.",
+        align = "r",
+        linesep = c("", "", "", "", "", "\\addlinespace")) %>% 
+  kable_styling(latex_options = c("scale_down"))
+```
+
+```{r sim1-an-vs-gq-scenario1-mse-t}
+summary_an_vs_gq %>% 
+  filter(fv == 0.25 & treatment_effect == -0.50) %>% 
+  mutate(value = paste(sprintf("%.4f", mse)),
+         `Sample size` = paste0(n_clusters, "c. of ", n_individuals, "i.")) %>%
+  select(`Sample size`, par, value, method) %>%
+  spread(key = par, value = value) %>% 
+  arrange(`Sample size`, method) %>%
+  rename(Method = method) %>% 
+  kable(booktabs = TRUE, 
+        caption = "Mean squared error, comparison with analytical formulae, scenario with a small frailty variance and a negative regression coefficient.",
+        align = "r",
+        linesep = c("", "", "", "", "", "\\addlinespace"))
+```
+
+```{r sim1-an-vs-gq-scenario1-convergence-t}
+summary_an_vs_gq %>% 
+  filter(fv == 0.25 & treatment_effect == -0.50) %>% 
+  distinct(fv, treatment_effect, n_clusters, n_individuals, method, .keep_all = TRUE) %>% 
+  mutate(value = paste(scales::percent(convergence_p)),
+         `Sample size` = paste0(n_clusters, "c. of ", n_individuals, "i.")) %>%
+  select(`Sample size`, value, method) %>%
+  spread(key = method, value = value) %>% 
+  arrange(`Sample size`) %>%
+  kable(booktabs = TRUE, 
+        caption = "Convergence rates, comparison with analytical formulae, scenario with a small frailty variance and a negative regression coefficient.",
+        align = "r",
+        linesep = "")
+```
+
+```{r sim1-an-vs-gq-scenario2-bias-t}
+summary_an_vs_gq %>% 
+  filter(fv == 1.25 & treatment_effect == 0.00) %>% 
+  mutate(bias = paste(sprintf("%.4f", bias)),
+         bias_mcse = paste(sprintf("%.4f", bias_mcse)),
+         value = paste0(bias, " (", bias_mcse, ")"),
+         `Sample size` = paste0(n_clusters, "c. of ", n_individuals, "i.")) %>%
+  select(`Sample size`, par, value, method) %>%
+  spread(key = par, value = value) %>% 
+  arrange(`Sample size`, method) %>%
+  rename(Method = method) %>% 
+  kable(booktabs = TRUE, 
+        caption = "Bias, comparison with analytical formulae, scenario with a large frailty variance and a null regression coefficient.",
+        align = "r",
+        linesep = c("", "", "", "", "", "\\addlinespace")) %>% 
+  kable_styling(latex_options = c("scale_down"))
+```
+
+```{r sim1-an-vs-gq-scenario2-cov-t}
+summary_an_vs_gq %>% 
+  filter(fv == 1.25 & treatment_effect == 0.00) %>% 
+  mutate(cov = paste(sprintf("%.4f", cov)),
+         cov_mcse = paste(sprintf("%.4f", cov_mcse)),
+         value = paste0(cov, " (", cov_mcse, ")"),
+         `Sample size` = paste0(n_clusters, "c. of ", n_individuals, "i.")) %>%
+  select(`Sample size`, par, value, method) %>%
+  spread(key = par, value = value) %>% 
+  arrange(`Sample size`, method) %>%
+  rename(Method = method) %>% 
+  kable(booktabs = TRUE, 
+        caption = "Coverage, comparison with analytical formulae, scenario with a large frailty variance and a null regression coefficient.",
+        align = "r",
+        linesep = c("", "", "", "", "", "\\addlinespace")) %>% 
+  kable_styling(latex_options = c("scale_down"))
+```
+
+```{r sim1-an-vs-gq-scenario2-mse-t}
+summary_an_vs_gq %>% 
+  filter(fv == 1.25 & treatment_effect == 0.00) %>% 
+  mutate(value = paste(sprintf("%.4f", mse)),
+         `Sample size` = paste0(n_clusters, "c. of ", n_individuals, "i.")) %>%
+  select(`Sample size`, par, value, method) %>%
+  spread(key = par, value = value) %>% 
+  arrange(`Sample size`, method) %>%
+  rename(Method = method) %>% 
+  kable(booktabs = TRUE, 
+        caption = "Mean squared error, comparison with analytical formulae, scenario with a large frailty variance and a null regression coefficient.",
+        align = "r",
+        linesep = c("", "", "", "", "", "\\addlinespace"))
+```
+
+```{r sim1-an-vs-gq-scenario2-convergence-t}
+summary_an_vs_gq %>% 
+  filter(fv == 1.25 & treatment_effect == 0.00) %>% 
+  distinct(fv, treatment_effect, n_clusters, n_individuals, method, .keep_all = TRUE) %>% 
+  mutate(value = paste(scales::percent(convergence_p)),
+         `Sample size` = paste0(n_clusters, "c. of ", n_individuals, "i.")) %>%
+  select(`Sample size`, value, method) %>%
+  spread(key = method, value = value) %>% 
+  arrange(`Sample size`) %>%
+  kable(booktabs = TRUE, 
+        caption = "Convergence rates, comparison with analytical formulae, scenario with a large frailty variance and a null regression coefficient.",
+        align = "r",
+        linesep = "")
+```
+
+```{r sim1-an-vs-gq-scenario3-bias-t}
+summary_an_vs_gq %>% 
+  filter(n_individuals == 2 & n_clusters == 1000 & treatment_effect == 0.50) %>% 
+  mutate(bias = paste(sprintf("%.4f", bias)),
+         bias_mcse = paste(sprintf("%.4f", bias_mcse)),
+         value = paste0(bias, " (", bias_mcse, ")")) %>%
+  select(fv, par, value, method) %>%
+  spread(key = par, value = value) %>% 
+  arrange(fv, method) %>%
+  rename(Method = method) %>% 
+  kable(booktabs = TRUE, 
+        caption = "Bias, comparison without analytical formulae, scenario with 1000 clusters of 2 individuals and a positive regression coefficient.",
+        align = "r",
+        linesep = c("", "", "", "\\addlinespace")) %>% 
+  kable_styling(latex_options = c("scale_down"))
+```
+
+```{r sim1-an-vs-gq-scenario3-cov-t}
+summary_an_vs_gq %>% 
+  filter(n_individuals == 2 & n_clusters == 1000 & treatment_effect == 0.50) %>% 
+  mutate(cov = paste(sprintf("%.4f", cov)),
+         cov_mcse = paste(sprintf("%.4f", cov_mcse)),
+         value = paste0(cov, " (", cov_mcse, ")")) %>%
+  select(fv, par, value, method) %>%
+  spread(key = par, value = value) %>% 
+  arrange(fv, method) %>%
+  rename(Method = method, `Frailty variance` = fv) %>% 
+  kable(booktabs = TRUE, 
+        caption = "Coverage, comparison with analytical formulae, scenario with 1000 clusters of 2 individuals and a positive regression coefficient.",
+        align = "r",
+        linesep = c("", "", "", "", "", "\\addlinespace")) %>% 
+  kable_styling(latex_options = c("scale_down"))
+```
+
+```{r sim1-an-vs-gq-scenario3-pbias-t}
+summary_an_vs_gq %>% 
+  filter(n_individuals == 2 & n_clusters == 1000 & treatment_effect == 0.50) %>% 
+  mutate(value = paste(sprintf("%.4f", pbias))) %>%
+  select(fv, par, value, method) %>%
+  spread(key = par, value = value) %>% 
+  arrange(fv, method) %>%
+  rename(Method = method, `Frailty variance` = fv) %>% 
+  kable(booktabs = TRUE, 
+        caption = "Percentage bias (\\%), comparison with analytical formulae, scenario with 1000 clusters of 2 individuals and a positive regression coefficient.",
+        align = "r",
+        linesep = c("", "", "", "", "", "\\addlinespace"))
+```
+
+```{r sim1-an-vs-gq-scenario3-mse-t}
+summary_an_vs_gq %>% 
+  filter(n_individuals == 2 & n_clusters == 1000 & treatment_effect == 0.50) %>% 
+  mutate(value = paste(sprintf("%.4f", mse))) %>%
+  select(fv, par, value, method) %>%
+  spread(key = par, value = value) %>% 
+  arrange(fv, method) %>%
+  rename(Method = method, `Frailty variance` = fv) %>% 
+  kable(booktabs = TRUE, 
+        caption = "Mean squared error, comparison with analytical formulae, scenario with 1000 clusters of 2 individuals and a positive regression coefficient.",
+        align = "r",
+        linesep = c("", "", "", "", "", "\\addlinespace"))
+```
+
+```{r sim1-an-vs-gq-scenario3-convergence-t}
+summary_an_vs_gq %>% 
+  filter(n_individuals == 2 & n_clusters == 1000 & treatment_effect == 0.50) %>% 
+  distinct(fv, treatment_effect, n_clusters, n_individuals, method, .keep_all = TRUE) %>% 
+  mutate(value = paste(scales::percent(convergence_p))) %>%
+  select(fv, value, method) %>%
+  spread(key = method, value = value) %>% 
+  arrange(fv) %>%
+  rename(`Frailty variance` = fv) %>% 
+  kable(booktabs = TRUE, 
+        caption = "Convergence rates, comparison with analytical formulae, scenario with 1000 clusters of 2 individuals and a positive regression coefficient.",
+        align = "r",
+        linesep = "")
+```
+
+```{r sim1-normal-gq-scenario1-bias-t}
+summary_normal_gq %>% 
+  filter(fv == 0.25 & treatment_effect == -0.50) %>% 
+  mutate(bias = paste(sprintf("%.4f", bias)),
+         bias_mcse = paste(sprintf("%.4f", bias_mcse)),
+         value = paste0(bias, " (", bias_mcse, ")"),
+         `Sample size` = paste0(n_clusters, "c. of ", n_individuals, "i.")) %>%
+  select(`Sample size`, par, value, method) %>%
+  spread(key = par, value = value) %>% 
+  arrange(`Sample size`, method) %>%
+  rename(Method = method) %>% 
+  kable(booktabs = TRUE, 
+        caption = "Bias, comparison without analytical formulae, scenario with a small frailty variance and a negative regression coefficient.",
+        align = "r",
+        linesep = c("", "", "", "\\addlinespace")) %>% 
+  kable_styling(latex_options = c("scale_down"))
+```
+
+```{r sim1-normal-gq-scenario1-cov-t}
+summary_normal_gq %>% 
+  filter(fv == 0.25 & treatment_effect == -0.50) %>% 
+  mutate(cov = paste(sprintf("%.4f", cov)),
+         cov_mcse = paste(sprintf("%.4f", cov_mcse)),
+         value = paste0(cov, " (", cov_mcse, ")"),
+         `Sample size` = paste0(n_clusters, "c. of ", n_individuals, "i.")) %>%
+  select(`Sample size`, par, value, method) %>%
+  spread(key = par, value = value) %>% 
+  arrange(`Sample size`, method) %>%
+  rename(Method = method) %>% 
+  kable(booktabs = TRUE, 
+        caption = "Coverage, comparison without analytical formulae, scenario with a small frailty variance and a negative regression coefficient.",
+        align = "r",
+        linesep = c("", "", "", "\\addlinespace")) %>% 
+  kable_styling(latex_options = c("scale_down"))
+```
+
+```{r sim1-normal-gq-scenario1-mse-t}
+summary_normal_gq %>% 
+  filter(fv == 0.25 & treatment_effect == -0.50) %>% 
+  mutate(value = paste(sprintf("%.4f", mse)),
+         `Sample size` = paste0(n_clusters, "c. of ", n_individuals, "i.")) %>%
+  select(`Sample size`, par, value, method) %>%
+  spread(key = par, value = value) %>% 
+  arrange(`Sample size`, method) %>%
+  rename(Method = method) %>% 
+  kable(booktabs = TRUE, 
+        caption = "Mean squared error, comparison without analytical formulae, scenario with a small frailty variance and a negative regression coefficient.",
+        align = "r",
+        linesep = c("", "", "", "\\addlinespace"))
+```
+
+```{r sim1-normal-gq-scenario1-convergence-t}
+summary_normal_gq %>% 
+  filter(fv == 0.25 & treatment_effect == -0.50) %>% 
+  distinct(fv, treatment_effect, n_clusters, n_individuals, method, .keep_all = TRUE) %>% 
+  mutate(value = paste(scales::percent(convergence_p)),
+         `Sample size` = paste0(n_clusters, "c. of ", n_individuals, "i.")) %>%
+  select(`Sample size`, value, method) %>%
+  spread(key = method, value = value) %>% 
+  arrange(`Sample size`) %>%
+  kable(booktabs = TRUE, 
+        caption = "Convergence rates, comparison without analytical formulae, scenario with a small frailty variance and a negative regression coefficient.",
+        align = "r",
+        linesep = "")
+```
+
+```{r sim1-normal-gq-scenario2-bias-t}
+summary_normal_gq %>% 
+  filter(fv == 1.25 & treatment_effect == 0.00) %>% 
+  mutate(bias = paste(sprintf("%.4f", bias)),
+         bias_mcse = paste(sprintf("%.4f", bias_mcse)),
+         value = paste0(bias, " (", bias_mcse, ")"),
+         `Sample size` = paste0(n_clusters, "c. of ", n_individuals, "i.")) %>%
+  select(`Sample size`, par, value, method) %>%
+  spread(key = par, value = value) %>% 
+  arrange(`Sample size`, method) %>%
+  rename(Method = method) %>% 
+  kable(booktabs = TRUE, 
+        caption = "Bias, comparison without analytical formulae, scenario with a large frailty variance and a null regression coefficient.",
+        align = "r",
+        linesep = c("", "", "", "\\addlinespace")) %>% 
+  kable_styling(latex_options = c("scale_down"))
+```
+
+```{r sim1-normal-gq-scenario2-cov-t}
+summary_normal_gq %>% 
+  filter(fv == 1.25 & treatment_effect == 0.00) %>% 
+  mutate(cov = paste(sprintf("%.4f", cov)),
+         cov_mcse = paste(sprintf("%.4f", cov_mcse)),
+         value = paste0(cov, " (", cov_mcse, ")"),
+         `Sample size` = paste0(n_clusters, "c. of ", n_individuals, "i.")) %>%
+  select(`Sample size`, par, value, method) %>%
+  spread(key = par, value = value) %>% 
+  arrange(`Sample size`, method) %>%
+  rename(Method = method) %>% 
+  kable(booktabs = TRUE, 
+        caption = "Coverage, comparison without analytical formulae, scenario with a large frailty variance and a null regression coefficient.",
+        align = "r",
+        linesep = c("", "", "", "\\addlinespace")) %>% 
+  kable_styling(latex_options = c("scale_down"))
+```
+
+```{r sim1-normal-gq-scenario2-mse-t}
+summary_normal_gq %>% 
+  filter(fv == 1.25 & treatment_effect == 0.00) %>% 
+  mutate(value = paste(sprintf("%.4f", mse)),
+         `Sample size` = paste0(n_clusters, "c. of ", n_individuals, "i.")) %>%
+  select(`Sample size`, par, value, method) %>%
+  spread(key = par, value = value) %>% 
+  arrange(`Sample size`, method) %>%
+  rename(Method = method) %>% 
+  kable(booktabs = TRUE, 
+        caption = "Mean squared error, comparison without analytical formulae, scenario with a large frailty variance and a null regression coefficient.",
+        align = "r",
+        linesep = c("", "", "", "\\addlinespace"))
+```
+
+```{r sim1-normal-gq-scenario2-convergence-t}
+summary_normal_gq %>% 
+  filter(fv == 1.25 & treatment_effect == 0.00) %>% 
+  distinct(fv, treatment_effect, n_clusters, n_individuals, method, .keep_all = TRUE) %>% 
+  mutate(value = paste(scales::percent(convergence_p)),
+         `Sample size` = paste0(n_clusters, "c. of ", n_individuals, "i.")) %>%
+  select(`Sample size`, value, method) %>%
+  spread(key = method, value = value) %>% 
+  arrange(`Sample size`) %>%
+  kable(booktabs = TRUE, 
+        caption = "Convergence rates, comparison without analytical formulae, scenario with a large frailty variance and a null regression coefficient.",
+        align = "r",
+        linesep = "")
+```
+
+```{r sim1-normal-gq-scenario3-bias-t}
+summary_normal_gq %>% 
+  filter(n_individuals == 2 & n_clusters == 1000 & treatment_effect == 0.50) %>% 
+  mutate(bias = paste(sprintf("%.4f", bias)),
+         bias_mcse = paste(sprintf("%.4f", bias_mcse)),
+         value = paste0(bias, " (", bias_mcse, ")")) %>%
+  select(fv, par, value, method) %>%
+  spread(key = par, value = value) %>% 
+  arrange(fv, method) %>%
+  rename(Method = method) %>% 
+  kable(booktabs = TRUE, 
+        caption = "Bias, comparison without analytical formulae, scenario with 1000 clusters of 2 individuals and a positive regression coefficient.",
+        align = "r",
+        linesep = c("", "", "", "\\addlinespace")) %>% 
+  kable_styling(latex_options = c("scale_down"))
+```
+
+```{r sim1-normal-gq-scenario3-cov-t}
+summary_normal_gq %>% 
+  filter(n_individuals == 2 & n_clusters == 1000 & treatment_effect == 0.50) %>% 
+  mutate(cov = paste(sprintf("%.4f", cov)),
+         cov_mcse = paste(sprintf("%.4f", cov_mcse)),
+         value = paste0(cov, " (", cov_mcse, ")")) %>%
+  select(fv, par, value, method) %>%
+  spread(key = par, value = value) %>% 
+  arrange(fv, method) %>%
+  rename(Method = method, `Frailty variance` = fv) %>% 
+  kable(booktabs = TRUE, 
+        caption = "Coverage, comparison without analytical formulae, scenario with 1000 clusters of 2 individuals and a positive regression coefficient.",
+        align = "r",
+        linesep = c("", "", "", "\\addlinespace")) %>% 
+  kable_styling(latex_options = c("scale_down"))
+```
+
+```{r sim1-normal-gq-scenario3-pbias-t}
+summary_normal_gq %>% 
+  filter(n_individuals == 2 & n_clusters == 1000 & treatment_effect == 0.50) %>% 
+  mutate(value = paste(sprintf("%.4f", pbias))) %>%
+  select(fv, par, value, method) %>%
+  spread(key = par, value = value) %>% 
+  arrange(fv, method) %>%
+  rename(Method = method, `Frailty variance` = fv) %>% 
+  kable(booktabs = TRUE, 
+        caption = "Percentage bias (\\%), comparison without analytical formulae, scenario with 1000 clusters of 2 individuals and a positive regression coefficient.",
+        align = "r",
+        linesep = c("", "", "", "\\addlinespace"))
+```
+
+```{r sim1-normal-gq-scenario3-mse-t}
+summary_normal_gq %>% 
+  filter(n_individuals == 2 & n_clusters == 1000 & treatment_effect == 0.50) %>% 
+  mutate(value = paste(sprintf("%.4f", mse))) %>%
+  select(fv, par, value, method) %>%
+  spread(key = par, value = value) %>% 
+  arrange(fv, method) %>%
+  rename(Method = method, `Frailty variance` = fv) %>% 
+  kable(booktabs = TRUE, 
+        caption = "Mean squared error, comparison without analytical formulae, scenario with 1000 clusters of 2 individuals and a positive regression coefficient.",
+        align = "r",
+        linesep = c("", "", "", "\\addlinespace"))
+```
+
+```{r sim1-normal-gq-scenario3-convergence-t}
+summary_normal_gq %>% 
+  filter(n_individuals == 2 & n_clusters == 1000 & treatment_effect == 0.50) %>% 
+  distinct(fv, treatment_effect, n_clusters, n_individuals, method, .keep_all = TRUE) %>% 
+  mutate(value = paste(scales::percent(convergence_p))) %>%
+  select(fv, value, method) %>%
+  spread(key = method, value = value) %>% 
+  arrange(fv) %>%
+  rename(`Frailty variance` = fv) %>% 
+  kable(booktabs = TRUE, 
+        caption = "Convergence rates, comparison without analytical formulae, scenario with 1000 clusters of 2 individuals and a positive regression coefficient.",
+        align = "r",
+        linesep = "")
+```
+
+`r if (knitr:::is_latex_output()) '\\clearpage'`
+
+## Simulation study 2 {#ax-tables-simst2}

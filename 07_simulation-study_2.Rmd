@@ -12,3 +12,5 @@
 ## Performance measures {#simst2-pm}
 
 ## Results {#simst2-res}
+
+## Conclusions {#simst2-conclusions}

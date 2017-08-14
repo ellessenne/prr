@@ -47,5 +47,8 @@ pacman::p_load(
   "dplyr",
   "ggfortify",
   "readr",
-  "marqLevAlg")
+  "marqLevAlg",
+  "scales",
+  "tidyr",
+  "kableExtra")
 ```
