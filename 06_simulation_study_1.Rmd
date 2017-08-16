@@ -1,7 +1,7 @@
 # Simulation study: accuracy of Gaussian quadrature {#simst1}
 \chaptermark{Accuracy of Gaussian quadrature}
 
-In this Chapter I will present the first simulation study I run during my first year, on accuracy on Gaussian quadrature methods. The Chapter is partitioned into seven Sections, and in each Section I will present an aspect of the simulation study: the aim of the study (Section \@ref(simst1-aim)), the data-generating mechanisms (Section \@ref(simst1-dgms)), the methods that I will compare (Section \@ref(simst1-methods)) and the estimands of interest (Section \@ref(simst1-est)), the performance measures I will use to compare the methods (Section \@ref(simst1-pm)), the results of the study (Section \@ref(simst1-res)), and finally a brief discussion in Section \@ref(simst1-conclusions).
+In this Chapter I will present the first simulation study I run during my first year, on accuracy on Gaussian quadrature methods. I presented part of this work as an oral presentation at the 2017 Survival Analysis for Junior Researchers conference (more details in Chapter \@ref(pdevelop) and slides available in Appendix \@ref(ax-slides-safjr)). The Chapter is partitioned into seven Sections, and in each Section I will present an aspect of the simulation study: the aim of the study (Section \@ref(simst1-aim)), the data-generating mechanisms (Section \@ref(simst1-dgms)), the methods that I will compare (Section \@ref(simst1-methods)) and the estimands of interest (Section \@ref(simst1-est)), the performance measures I will use to compare the methods (Section \@ref(simst1-pm)), the results of the study (Section \@ref(simst1-res)), and finally a brief discussion in Section \@ref(simst1-conclusions).
 
 ## Aim {#simst1-aim}
 
@@ -60,7 +60,7 @@ Next, I am interested in coverage, i.e. the proportion of times the \(100 \times
 
 Finally, I am interested in overall accuracy and therefore I will compute the mean squared error, defined as the sum of bias and variability: \((\bar{\hat{\beta}} - \beta) ^ 2 + (SE(\hat{\beta})) ^ 2\).
 
-Summary measures for \(\lambda\), \(p\), and \(\theta\) are computed on the log-scale. For bias and coverage I will further include Monte Carlo standard errors to quantify the uncertainty in estimating the performance measures (see @white_2010 for further details).
+Summary measures for \(\lambda\), \(p\), and \(\theta\) are computed on the log-scale. For bias and coverage I will further include Monte Carlo standard errors to quantify the uncertainty in estimating the performance measures (see @white_2010 for further details). I will also discuss convergence rates of the different methods included in the comparison.
 
 ## Results {#simst1-res}
 
