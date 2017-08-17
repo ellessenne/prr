@@ -48,15 +48,3 @@ automatically;
 5. Exporting summary statistics, tables, and plots for later use is supported.
 
 A current demo of the tool is available at [https://ag475.shinyapps.io/sirex-demo/](https://ag475.shinyapps.io/sirex-demo/), using an example dataset from a simulation study on multiple imputation.
-
-## Conclusions
-
-SiReX is still under active development and not fully polished. For instance, further developments will involve:
-
-* polishing the underlying engine used to computed summary statistics;
-
-* including more plots;
-
-* allowing custom faceted plots and tables comparing multiple factors at once.
-
-I believe interactive tools such as SiReX can be a valuable tool for researchers running simulation studies, greatly aiding dissemination of results.
