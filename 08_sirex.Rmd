@@ -32,7 +32,7 @@ As a consequence, several design and reporting guidelines emerged, often tailor-
 
 ## SiReX {#sirex-sirex}
 
-To bridge the gap between the number of scenarios a researcher can simulate from and dissemination of results, I developed a tool for exploring results interactively. The tool is developed using R and shiny, a web application framework for R that allows creating interactive web applications in a straighforward way.
+To bridge the gap between the number of scenarios a researcher can simulate from and dissemination of results, I developed a tool for exploring results interactively. The tool is developed using R and shiny, a web application framework for R that allows creating interactive web applications in a straighforward way ([https://shiny.rstudio.com/](https://shiny.rstudio.com/)).
 
 I named the interactive tool _SiReX_, acronym for _Simulation Results eXplorer_. It requires the researcher to upload a dataset in a standardised, tidy format (observations are in rows, variables are in columns) containing results from a simulation study. Then, it computes performance measures such as bias, coverage probability, Monte Carlo errors, and empirical standard errors automatically. Finally, it presents results and performance summaries both in tabular and graphical fashion (via bar plots and lolly plots) and allows the reader to vary simulation parameters and choose estimands of interest for further investigations.
 
