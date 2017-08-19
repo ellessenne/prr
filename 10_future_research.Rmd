@@ -32,6 +32,6 @@ Finally, an ongoing task will be the continuous development and expansion of the
 
 * allowing custom faceted plots and tables comparing multiple factors at once.
 
-```{r gantt-chart, fig.cap = "Gantt chart for current and future projects during my PhD.", out.width = ifelse(knitr:::is_latex_output(), ".75\\textheight", "100%"), out.extra = if (knitr:::is_latex_output()) {"angle = 90"}}
+```{r gantt-chart, fig.cap = "Gantt chart for current and future projects during my PhD.", out.width = ifelse(knitr:::is_latex_output(), ".9\\textheight", "100%"), out.extra = if (knitr:::is_latex_output()) {"angle = 90"}}
 include_graphics("gantt_chart.png")
 ```
