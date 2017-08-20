@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Probation review report</title>
+  <meta name="description" content="Probation review report">
+  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Probation review report" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="ellessenne/prr" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Probation review report" />
+  
+  
+  
+
+<meta name="author" content="Alessandro Gasparini">
+
+
+<meta name="date" content="2017-08-20">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="ax-slides-sam-iscb.html">
+<link rel="next" href="ax-manuscript.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #0000ff; } /* Keyword */
+code > span.ch { color: #008080; } /* Char */
+code > span.st { color: #008080; } /* String */
+code > span.co { color: #008000; } /* Comment */
+code > span.ot { color: #ff4000; } /* Other */
+code > span.al { color: #ff0000; } /* Alert */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #008000; font-weight: bold; } /* Warning */
+code > span.cn { } /* Constant */
+code > span.sc { color: #008080; } /* SpecialChar */
+code > span.vs { color: #008080; } /* VerbatimString */
+code > span.ss { color: #008080; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { } /* Variable */
+code > span.cf { color: #0000ff; } /* ControlFlow */
+code > span.op { } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #ff4000; } /* Preprocessor */
+code > span.do { color: #008000; } /* Documentation */
+code > span.an { color: #008000; } /* Annotation */
+code > span.cv { color: #008000; } /* CommentVar */
+code > span.at { } /* Attribute */
+code > span.in { color: #008000; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="1" data-path="sa.html"><a href="sa.html"><i class="fa fa-check"></i><b>1</b> Introduction to survival analysis</a><ul>
+<li class="chapter" data-level="1.1" data-path="sa-survdata.html"><a href="sa-survdata.html"><i class="fa fa-check"></i><b>1.1</b> Survival data</a></li>
+<li class="chapter" data-level="1.2" data-path="sa-censoring.html"><a href="sa-censoring.html"><i class="fa fa-check"></i><b>1.2</b> Censoring</a></li>
+<li class="chapter" data-level="1.3" data-path="sa-terminology-notation.html"><a href="sa-terminology-notation.html"><i class="fa fa-check"></i><b>1.3</b> Terminology and notation</a></li>
+<li class="chapter" data-level="1.4" data-path="sa-estsurv.html"><a href="sa-estsurv.html"><i class="fa fa-check"></i><b>1.4</b> Estimation of the survival function</a></li>
+<li class="chapter" data-level="1.5" data-path="sa-parsa.html"><a href="sa-parsa.html"><i class="fa fa-check"></i><b>1.5</b> Parametric survival models</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="sa-parsa.html"><a href="sa-parsa.html#sa-parsa-distributions"><i class="fa fa-check"></i><b>1.5.1</b> Failure time distributions</a></li>
+<li class="chapter" data-level="1.5.2" data-path="sa-parsa.html"><a href="sa-parsa.html#sa-parsa-estimation"><i class="fa fa-check"></i><b>1.5.2</b> Estimation procedure</a></li>
+<li class="chapter" data-level="1.5.3" data-path="sa-parsa.html"><a href="sa-parsa.html#sa-parsa-example"><i class="fa fa-check"></i><b>1.5.3</b> Data analysis example</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="sa-cox.html"><a href="sa-cox.html"><i class="fa fa-check"></i><b>1.6</b> The Cox proportional hazards model</a><ul>
+<li class="chapter" data-level="1.6.1" data-path="sa-cox.html"><a href="sa-cox.html#sa-cox-estimation"><i class="fa fa-check"></i><b>1.6.1</b> Estimation procedure</a></li>
+<li class="chapter" data-level="1.6.2" data-path="sa-cox.html"><a href="sa-cox.html#sa-cox-estimating-survival"><i class="fa fa-check"></i><b>1.6.2</b> Estimating the survival function</a></li>
+<li class="chapter" data-level="1.6.3" data-path="sa-cox.html"><a href="sa-cox.html#sa-model-assumptions"><i class="fa fa-check"></i><b>1.6.3</b> Model assumptions</a></li>
+<li class="chapter" data-level="1.6.4" data-path="sa-cox.html"><a href="sa-cox.html#sa-cox-example"><i class="fa fa-check"></i><b>1.6.4</b> Data analysis example</a></li>
+</ul></li>
+<li class="chapter" data-level="1.7" data-path="sa-advances.html"><a href="sa-advances.html"><i class="fa fa-check"></i><b>1.7</b> Advances in survival analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="smre.html"><a href="smre.html"><i class="fa fa-check"></i><b>2</b> Survival models with random effects</a><ul>
+<li class="chapter" data-level="2.1" data-path="smre-univariate-frailty.html"><a href="smre-univariate-frailty.html"><i class="fa fa-check"></i><b>2.1</b> Univariate frailty models</a></li>
+<li class="chapter" data-level="2.2" data-path="smre-shared-frailty.html"><a href="smre-shared-frailty.html"><i class="fa fa-check"></i><b>2.2</b> Shared frailty models</a></li>
+<li class="chapter" data-level="2.3" data-path="smre-random-effects.html"><a href="smre-random-effects.html"><i class="fa fa-check"></i><b>2.3</b> Alternative formulation</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="jm.html"><a href="jm.html"><i class="fa fa-check"></i><b>3</b> Joint models for longitudinal and survival data</a><ul>
+<li class="chapter" data-level="3.1" data-path="jm-formulation.html"><a href="jm-formulation.html"><i class="fa fa-check"></i><b>3.1</b> Model formulation</a></li>
+<li class="chapter" data-level="3.2" data-path="jm-estimation.html"><a href="jm-estimation.html"><i class="fa fa-check"></i><b>3.2</b> Estimation process</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="compch.html"><a href="compch.html"><i class="fa fa-check"></i><b>4</b> Computational challenges in survival models with random effects</a><ul>
+<li class="chapter" data-level="4.1" data-path="compch-numintgr.html"><a href="compch-numintgr.html"><i class="fa fa-check"></i><b>4.1</b> Numerical integration</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="compch-numintgr.html"><a href="compch-numintgr.html#compch-numintgr-uni"><i class="fa fa-check"></i><b>4.1.1</b> Unidimensional functions</a></li>
+<li class="chapter" data-level="4.1.2" data-path="compch-numintgr.html"><a href="compch-numintgr.html#compch-numintgr-multi"><i class="fa fa-check"></i><b>4.1.2</b> Multidimensional functions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="compch-other.html"><a href="compch-other.html"><i class="fa fa-check"></i><b>4.2</b> Other considerations</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="compch-other.html"><a href="compch-other.html#compch-other-precision"><i class="fa fa-check"></i><b>4.2.1</b> Cancellation error, precision, and arithmetic over- and under-flow</a></li>
+<li class="chapter" data-level="4.2.2" data-path="compch-other.html"><a href="compch-other.html#compch-other-numdiff"><i class="fa fa-check"></i><b>4.2.2</b> Numerical differentiation</a></li>
+<li class="chapter" data-level="4.2.3" data-path="compch-other.html"><a href="compch-other.html#compch-numroot"><i class="fa fa-check"></i><b>4.2.3</b> Numerical root finding</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="simsurv.html"><a href="simsurv.html"><i class="fa fa-check"></i><b>5</b> Simulating survival data</a></li>
+<li class="chapter" data-level="6" data-path="simst1.html"><a href="simst1.html"><i class="fa fa-check"></i><b>6</b> Simulation study: accuracy of Gaussian quadrature</a><ul>
+<li class="chapter" data-level="6.1" data-path="simst1-aim.html"><a href="simst1-aim.html"><i class="fa fa-check"></i><b>6.1</b> Aim</a></li>
+<li class="chapter" data-level="6.2" data-path="simst1-dgms.html"><a href="simst1-dgms.html"><i class="fa fa-check"></i><b>6.2</b> Data-generating mechanisms</a></li>
+<li class="chapter" data-level="6.3" data-path="simst1-methods.html"><a href="simst1-methods.html"><i class="fa fa-check"></i><b>6.3</b> Methods</a></li>
+<li class="chapter" data-level="6.4" data-path="simst1-est.html"><a href="simst1-est.html"><i class="fa fa-check"></i><b>6.4</b> Estimands</a></li>
+<li class="chapter" data-level="6.5" data-path="simst1-pm.html"><a href="simst1-pm.html"><i class="fa fa-check"></i><b>6.5</b> Performance measures</a></li>
+<li class="chapter" data-level="6.6" data-path="simst1-res.html"><a href="simst1-res.html"><i class="fa fa-check"></i><b>6.6</b> Results</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="simst1-res.html"><a href="simst1-res.html#aim-1-comparison-of-gaussian-quadrature-with-analytical-formulae"><i class="fa fa-check"></i><b>6.6.1</b> Aim 1: comparison of Gaussian quadrature with analytical formulae</a></li>
+<li class="chapter" data-level="6.6.2" data-path="simst1-res.html"><a href="simst1-res.html#aim-2-accuracy-when-analytical-formulae-are-not-available"><i class="fa fa-check"></i><b>6.6.2</b> Aim 2: accuracy when analytical formulae are not available</a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="simst1-conclusions.html"><a href="simst1-conclusions.html"><i class="fa fa-check"></i><b>6.7</b> Conclusions</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="simst2.html"><a href="simst2.html"><i class="fa fa-check"></i><b>7</b> Simulation study: impact of misspecification in survival models with shared frailty terms</a><ul>
+<li class="chapter" data-level="7.1" data-path="simst2-aim.html"><a href="simst2-aim.html"><i class="fa fa-check"></i><b>7.1</b> Aim</a></li>
+<li class="chapter" data-level="7.2" data-path="simst2-dgms.html"><a href="simst2-dgms.html"><i class="fa fa-check"></i><b>7.2</b> Data-generating mechanisms</a></li>
+<li class="chapter" data-level="7.3" data-path="simst2-methods.html"><a href="simst2-methods.html"><i class="fa fa-check"></i><b>7.3</b> Methods</a></li>
+<li class="chapter" data-level="7.4" data-path="simst2-est.html"><a href="simst2-est.html"><i class="fa fa-check"></i><b>7.4</b> Estimands</a></li>
+<li class="chapter" data-level="7.5" data-path="simst2-pm.html"><a href="simst2-pm.html"><i class="fa fa-check"></i><b>7.5</b> Performance measures</a></li>
+<li class="chapter" data-level="7.6" data-path="simst2-res.html"><a href="simst2-res.html"><i class="fa fa-check"></i><b>7.6</b> Results</a></li>
+<li class="chapter" data-level="7.7" data-path="simst2-conclusions.html"><a href="simst2-conclusions.html"><i class="fa fa-check"></i><b>7.7</b> Conclusions</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="sirex.html"><a href="sirex.html"><i class="fa fa-check"></i><b>8</b> Exploring results from simulation studies interactively</a><ul>
+<li class="chapter" data-level="8.1" data-path="sirex-rationale.html"><a href="sirex-rationale.html"><i class="fa fa-check"></i><b>8.1</b> Rationale</a></li>
+<li class="chapter" data-level="8.2" data-path="sirex-sirex.html"><a href="sirex-sirex.html"><i class="fa fa-check"></i><b>8.2</b> SiReX</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="infvp.html"><a href="infvp.html"><i class="fa fa-check"></i><b>9</b> Informative visiting process</a></li>
+<li class="chapter" data-level="10" data-path="future.html"><a href="future.html"><i class="fa fa-check"></i><b>10</b> Future research developments</a></li>
+<li class="chapter" data-level="11" data-path="pdevelop.html"><a href="pdevelop.html"><i class="fa fa-check"></i><b>11</b> Personal development</a><ul>
+<li class="chapter" data-level="11.1" data-path="supervisory-meetings.html"><a href="supervisory-meetings.html"><i class="fa fa-check"></i><b>11.1</b> Supervisory meetings</a></li>
+<li class="chapter" data-level="11.2" data-path="training-and-courses.html"><a href="training-and-courses.html"><i class="fa fa-check"></i><b>11.2</b> Training and courses</a></li>
+<li class="chapter" data-level="11.3" data-path="conferences.html"><a href="conferences.html"><i class="fa fa-check"></i><b>11.3</b> Conferences</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="ax-tables.html"><a href="ax-tables.html"><i class="fa fa-check"></i><b>A</b> Tables</a><ul>
+<li class="chapter" data-level="A.1" data-path="ax-tables-simst1.html"><a href="ax-tables-simst1.html"><i class="fa fa-check"></i><b>A.1</b> Simulation study 1</a></li>
+<li class="chapter" data-level="A.2" data-path="ax-tables-simst2.html"><a href="ax-tables-simst2.html"><i class="fa fa-check"></i><b>A.2</b> Simulation study 2</a></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="ax-plots.html"><a href="ax-plots.html"><i class="fa fa-check"></i><b>B</b> Plots</a><ul>
+<li class="chapter" data-level="B.1" data-path="ax-plots-simst1.html"><a href="ax-plots-simst1.html"><i class="fa fa-check"></i><b>B.1</b> Simulation study 1</a></li>
+<li class="chapter" data-level="B.2" data-path="ax-plots-simst2.html"><a href="ax-plots-simst2.html"><i class="fa fa-check"></i><b>B.2</b> Simulation study 2</a></li>
+</ul></li>
+<li class="chapter" data-level="C" data-path="ax-slides.html"><a href="ax-slides.html"><i class="fa fa-check"></i><b>C</b> Slides</a><ul>
+<li class="chapter" data-level="C.1" data-path="ax-slides-safjr.html"><a href="ax-slides-safjr.html"><i class="fa fa-check"></i><b>C.1</b> 2017 SAfJR Conference</a></li>
+<li class="chapter" data-level="C.2" data-path="ax-slides-sam-iscb.html"><a href="ax-slides-sam-iscb.html"><i class="fa fa-check"></i><b>C.2</b> 2017 SAM Conference and ISCB Conference</a></li>
+<li class="chapter" data-level="C.3" data-path="ax-slides-students-day.html"><a href="ax-slides-students-day.html"><i class="fa fa-check"></i><b>C.3</b> Students’ Day at the ISCB Conference</a></li>
+</ul></li>
+<li class="chapter" data-level="D" data-path="ax-manuscript.html"><a href="ax-manuscript.html"><i class="fa fa-check"></i><b>D</b> Manuscript</a></li>
+<li class="chapter" data-level="E" data-path="ax-r-session.html"><a href="ax-r-session.html"><i class="fa fa-check"></i><b>E</b> R Session</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Probation review report</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ax-slides-students-day" class="section level2">
+<h2><span class="header-section-number">C.3</span> Students’ Day at the ISCB Conference</h2>
+<p><img src="slides/iscb_students_day/Gasparini_Session1_Speaker2-00.png" width="100%" style="display: block; margin: auto;" /><img src="slides/iscb_students_day/Gasparini_Session1_Speaker2-01.png" width="100%" style="display: block; margin: auto;" /><img src="slides/iscb_students_day/Gasparini_Session1_Speaker2-02.png" width="100%" style="display: block; margin: auto;" /><img src="slides/iscb_students_day/Gasparini_Session1_Speaker2-03.png" width="100%" style="display: block; margin: auto;" /><img src="slides/iscb_students_day/Gasparini_Session1_Speaker2-04.png" width="100%" style="display: block; margin: auto;" /><img src="slides/iscb_students_day/Gasparini_Session1_Speaker2-05.png" width="100%" style="display: block; margin: auto;" /><img src="slides/iscb_students_day/Gasparini_Session1_Speaker2-06.png" width="100%" style="display: block; margin: auto;" /><img src="slides/iscb_students_day/Gasparini_Session1_Speaker2-07.png" width="100%" style="display: block; margin: auto;" /><img src="slides/iscb_students_day/Gasparini_Session1_Speaker2-08.png" width="100%" style="display: block; margin: auto;" /><img src="slides/iscb_students_day/Gasparini_Session1_Speaker2-09.png" width="100%" style="display: block; margin: auto;" /><img src="slides/iscb_students_day/Gasparini_Session1_Speaker2-10.png" width="100%" style="display: block; margin: auto;" /><img src="slides/iscb_students_day/Gasparini_Session1_Speaker2-11.png" width="100%" style="display: block; margin: auto;" /><img src="slides/iscb_students_day/Gasparini_Session1_Speaker2-12.png" width="100%" style="display: block; margin: auto;" /><img src="slides/iscb_students_day/Gasparini_Session1_Speaker2-13.png" width="100%" style="display: block; margin: auto;" /><img src="slides/iscb_students_day/Gasparini_Session1_Speaker2-14.png" width="100%" style="display: block; margin: auto;" /><img src="slides/iscb_students_day/Gasparini_Session1_Speaker2-15.png" width="100%" style="display: block; margin: auto;" /><img src="slides/iscb_students_day/Gasparini_Session1_Speaker2-16.png" width="100%" style="display: block; margin: auto;" /><img src="slides/iscb_students_day/Gasparini_Session1_Speaker2-17.png" width="100%" style="display: block; margin: auto;" /><img src="slides/iscb_students_day/Gasparini_Session1_Speaker2-18.png" width="100%" style="display: block; margin: auto;" /><img src="slides/iscb_students_day/Gasparini_Session1_Speaker2-19.png" width="100%" style="display: block; margin: auto;" /><img src="slides/iscb_students_day/Gasparini_Session1_Speaker2-20.png" width="100%" style="display: block; margin: auto;" /><img src="slides/iscb_students_day/Gasparini_Session1_Speaker2-21.png" width="100%" style="display: block; margin: auto;" /></p>
+
+</div>
+<!-- </div> -->
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="ax-slides-sam-iscb.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ax-manuscript.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["Probation_review_report_AG.pdf"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

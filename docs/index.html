@@ -25,7 +25,7 @@
 <meta name="author" content="Alessandro Gasparini">
 
 
-<meta name="date" content="2017-08-14">
+<meta name="date" content="2017-08-20">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -156,7 +156,10 @@ code > span.in { color: #008000; } /* Information */
 <li class="chapter" data-level="7.6" data-path="simst2-res.html"><a href="simst2-res.html"><i class="fa fa-check"></i><b>7.6</b> Results</a></li>
 <li class="chapter" data-level="7.7" data-path="simst2-conclusions.html"><a href="simst2-conclusions.html"><i class="fa fa-check"></i><b>7.7</b> Conclusions</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="sirex.html"><a href="sirex.html"><i class="fa fa-check"></i><b>8</b> Exploring results from simulation studies interactively</a></li>
+<li class="chapter" data-level="8" data-path="sirex.html"><a href="sirex.html"><i class="fa fa-check"></i><b>8</b> Exploring results from simulation studies interactively</a><ul>
+<li class="chapter" data-level="8.1" data-path="sirex-rationale.html"><a href="sirex-rationale.html"><i class="fa fa-check"></i><b>8.1</b> Rationale</a></li>
+<li class="chapter" data-level="8.2" data-path="sirex-sirex.html"><a href="sirex-sirex.html"><i class="fa fa-check"></i><b>8.2</b> SiReX</a></li>
+</ul></li>
 <li class="chapter" data-level="9" data-path="infvp.html"><a href="infvp.html"><i class="fa fa-check"></i><b>9</b> Informative visiting process</a></li>
 <li class="chapter" data-level="10" data-path="future.html"><a href="future.html"><i class="fa fa-check"></i><b>10</b> Future research developments</a></li>
 <li class="chapter" data-level="11" data-path="pdevelop.html"><a href="pdevelop.html"><i class="fa fa-check"></i><b>11</b> Personal development</a><ul>
@@ -173,7 +176,11 @@ code > span.in { color: #008000; } /* Information */
 <li class="chapter" data-level="B.1" data-path="ax-plots-simst1.html"><a href="ax-plots-simst1.html"><i class="fa fa-check"></i><b>B.1</b> Simulation study 1</a></li>
 <li class="chapter" data-level="B.2" data-path="ax-plots-simst2.html"><a href="ax-plots-simst2.html"><i class="fa fa-check"></i><b>B.2</b> Simulation study 2</a></li>
 </ul></li>
-<li class="chapter" data-level="C" data-path="ax-slides.html"><a href="ax-slides.html"><i class="fa fa-check"></i><b>C</b> Slides</a></li>
+<li class="chapter" data-level="C" data-path="ax-slides.html"><a href="ax-slides.html"><i class="fa fa-check"></i><b>C</b> Slides</a><ul>
+<li class="chapter" data-level="C.1" data-path="ax-slides-safjr.html"><a href="ax-slides-safjr.html"><i class="fa fa-check"></i><b>C.1</b> 2017 SAfJR Conference</a></li>
+<li class="chapter" data-level="C.2" data-path="ax-slides-sam-iscb.html"><a href="ax-slides-sam-iscb.html"><i class="fa fa-check"></i><b>C.2</b> 2017 SAM Conference and ISCB Conference</a></li>
+<li class="chapter" data-level="C.3" data-path="ax-slides-students-day.html"><a href="ax-slides-students-day.html"><i class="fa fa-check"></i><b>C.3</b> Students’ Day at the ISCB Conference</a></li>
+</ul></li>
 <li class="chapter" data-level="D" data-path="ax-manuscript.html"><a href="ax-manuscript.html"><i class="fa fa-check"></i><b>D</b> Manuscript</a></li>
 <li class="chapter" data-level="E" data-path="ax-r-session.html"><a href="ax-r-session.html"><i class="fa fa-check"></i><b>E</b> R Session</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -197,12 +204,12 @@ code > span.in { color: #008000; } /* Information */
 <div id="header">
 <h1 class="title">Probation review report</h1>
 <h4 class="author"><em>Alessandro Gasparini</em></h4>
-<h4 class="date"><em>2017-08-14</em></h4>
+<h4 class="date"><em>2017-08-20</em></h4>
 </div>
 <div id="introduction" class="section level1 unnumbered">
 <h1>Introduction</h1>
 <p>This report presents the work I have done during my first year as a PhD student at the Department of Health Sciences, University of Leicester, under the supervision of Dr. Michael Crowther and Prof. Keith Abrams.</p>
-<p>I will begin by briefly introducing the topic of survival analysis in Chapter <a href="sa.html#sa">1</a>. Second, I will introduce survival models with random effects (e.g. frailties, in the simplest form) and joint models for longitudinal and time-to-event data in Chapters <a href="smre.html#smre">2</a> and <a href="jm.html#jm">3</a>, respectively. Computational challenges that survival models with random effects and joint models pose are presented in Chapter <a href="compch.html#compch">4</a>. In Chapter <a href="simsurv.html#simsurv">5</a>, I will present a method for simulating survival data. I will then present the results of two simulation studies in Chapters <a href="simst1.html#simst1">6</a> and <a href="simst2.html#simst2">7</a>; the first simulation study investigates the accuracy of quadrature methods when approximating analytically intractable terms, while the second simulation study investigates the impact of model misspecification in survival models with shared frailty terms. I will introduce an interactive tool I have been developing to aid the dissemination of results from simulation studies and motivated by the simulation studies of Chapter <a href="simst1.html#simst1">6</a> and <a href="simst2.html#simst2">7</a> in Chapter <a href="sirex.html#sirex">8</a>. Next, I will introduce the problem of informative visiting process in clinical research using healthcare consumption data in Chapter <a href="infvp.html#infvp">9</a>, and how I aim to evaluate and compare the different approaches that have been proposed and utilised in literature to tackle such problem in Chapter <a href="future.html#future">10</a>. Finally, I will briefly summarise the training and personal development activities I have participated to during the first year of my PhD in Chapter <a href="pdevelop.html#pdevelop">11</a>.</p>
+<p>I will begin by briefly introducing the topic of survival analysis in Chapter <a href="sa.html#sa">1</a>. Second, I will introduce survival models with random effects (e.g. frailties, in the simplest form) and joint models for longitudinal and time-to-event data in Chapters <a href="smre.html#smre">2</a> and <a href="jm.html#jm">3</a>, respectively. Computational challenges that survival models with random effects and joint models pose are presented in Chapter <a href="compch.html#compch">4</a>. In Chapter <a href="simsurv.html#simsurv">5</a>, I will present a method for simulating survival data. I will then present the results of two simulation studies in Chapters <a href="simst1.html#simst1">6</a> and <a href="simst2.html#simst2">7</a>; the first simulation study investigates the accuracy of quadrature methods when approximating analytically intractable terms, while the second simulation study investigates the impact of model misspecification in survival models with shared frailty terms. I will introduce an interactive tool I have been developing to aid the dissemination of results from simulation studies and motivated by the simulation studies of Chapter <a href="simst1.html#simst1">6</a> and <a href="simst2.html#simst2">7</a> in Chapter <a href="sirex.html#sirex">8</a>. Next, I will introduce the problem of informative visiting process in clinical research using healthcare consumption data in Chapter <a href="infvp.html#infvp">9</a>, and how I aim to evaluate and compare the different approaches that have been proposed and utilised in literature to tackle such problem in Chapter <a href="future.html#future">10</a>. Chapter <a href="future.html#future">10</a> will also include the research goals for the second year of my PhD. Finally, I will briefly summarise the training and personal development activities I have participated to during the first year of my PhD in Chapter <a href="pdevelop.html#pdevelop">11</a>.</p>
 <p>The text of this report is licensed under the <a href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>, while the underlying code is licensed under the <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GPLv3</a>. The report is written using <a href="https://www.bookdown.org">bookdown</a> <span class="citation">(Xie <a href="#ref-xie_2016">2016</a>)</span>, and can be accessed online at <a href="https://ellessenne.github.io/prr/" class="uri">https://ellessenne.github.io/prr/</a>.</p>
 
 </div>

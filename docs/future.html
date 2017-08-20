@@ -25,7 +25,7 @@
 <meta name="author" content="Alessandro Gasparini">
 
 
-<meta name="date" content="2017-08-14">
+<meta name="date" content="2017-08-20">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -156,7 +156,10 @@ code > span.in { color: #008000; } /* Information */
 <li class="chapter" data-level="7.6" data-path="simst2-res.html"><a href="simst2-res.html"><i class="fa fa-check"></i><b>7.6</b> Results</a></li>
 <li class="chapter" data-level="7.7" data-path="simst2-conclusions.html"><a href="simst2-conclusions.html"><i class="fa fa-check"></i><b>7.7</b> Conclusions</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="sirex.html"><a href="sirex.html"><i class="fa fa-check"></i><b>8</b> Exploring results from simulation studies interactively</a></li>
+<li class="chapter" data-level="8" data-path="sirex.html"><a href="sirex.html"><i class="fa fa-check"></i><b>8</b> Exploring results from simulation studies interactively</a><ul>
+<li class="chapter" data-level="8.1" data-path="sirex-rationale.html"><a href="sirex-rationale.html"><i class="fa fa-check"></i><b>8.1</b> Rationale</a></li>
+<li class="chapter" data-level="8.2" data-path="sirex-sirex.html"><a href="sirex-sirex.html"><i class="fa fa-check"></i><b>8.2</b> SiReX</a></li>
+</ul></li>
 <li class="chapter" data-level="9" data-path="infvp.html"><a href="infvp.html"><i class="fa fa-check"></i><b>9</b> Informative visiting process</a></li>
 <li class="chapter" data-level="10" data-path="future.html"><a href="future.html"><i class="fa fa-check"></i><b>10</b> Future research developments</a></li>
 <li class="chapter" data-level="11" data-path="pdevelop.html"><a href="pdevelop.html"><i class="fa fa-check"></i><b>11</b> Personal development</a><ul>
@@ -173,7 +176,11 @@ code > span.in { color: #008000; } /* Information */
 <li class="chapter" data-level="B.1" data-path="ax-plots-simst1.html"><a href="ax-plots-simst1.html"><i class="fa fa-check"></i><b>B.1</b> Simulation study 1</a></li>
 <li class="chapter" data-level="B.2" data-path="ax-plots-simst2.html"><a href="ax-plots-simst2.html"><i class="fa fa-check"></i><b>B.2</b> Simulation study 2</a></li>
 </ul></li>
-<li class="chapter" data-level="C" data-path="ax-slides.html"><a href="ax-slides.html"><i class="fa fa-check"></i><b>C</b> Slides</a></li>
+<li class="chapter" data-level="C" data-path="ax-slides.html"><a href="ax-slides.html"><i class="fa fa-check"></i><b>C</b> Slides</a><ul>
+<li class="chapter" data-level="C.1" data-path="ax-slides-safjr.html"><a href="ax-slides-safjr.html"><i class="fa fa-check"></i><b>C.1</b> 2017 SAfJR Conference</a></li>
+<li class="chapter" data-level="C.2" data-path="ax-slides-sam-iscb.html"><a href="ax-slides-sam-iscb.html"><i class="fa fa-check"></i><b>C.2</b> 2017 SAM Conference and ISCB Conference</a></li>
+<li class="chapter" data-level="C.3" data-path="ax-slides-students-day.html"><a href="ax-slides-students-day.html"><i class="fa fa-check"></i><b>C.3</b> Students’ Day at the ISCB Conference</a></li>
+</ul></li>
 <li class="chapter" data-level="D" data-path="ax-manuscript.html"><a href="ax-manuscript.html"><i class="fa fa-check"></i><b>D</b> Manuscript</a></li>
 <li class="chapter" data-level="E" data-path="ax-r-session.html"><a href="ax-r-session.html"><i class="fa fa-check"></i><b>E</b> R Session</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -196,7 +203,39 @@ code > span.in { color: #008000; } /* Information */
             <section class="normal" id="section-">
 <div id="future" class="section level1">
 <h1><span class="header-section-number">10</span> Future research developments</h1>
+<p>In this Chapter I will present my plans for research during the second year of my PhD. I also included a Gantt chart in Figure <a href="future.html#fig:gantt-chart">10.1</a>.</p>
+<p>First of all, I plan to conclude the simulation study on the impact of model misspecification in survival models with frailty terms. Simulations for some scenarios are currently still running on the University high-performance computing facilities at the time of writing, and should finish soon. Consequently, I will summarise the results in a meaningful way using tables and plots and I will finish writing up the project into a paper that will be submitted to a journal for publication by the end of the year. Current potential target journals are the Biometrical Journal and Statistics in Medicine.</p>
+<p>At the same time, I will be planning the next project on modelling the visiting process and investigating the impact of an informative visiting process on inference using longitudinal data originating from healthcare records. This project aims to shed light on how an informative visiting process affects the analysis of longitudinal data that are intermittently and irregularly measured and recorded, in order to provide practical advice to applied researchers. In practice, I will be simulating complex survival data along with one or more longitudinal biomarkers under a variety of biologically plausible data-generating mechanisms; I will vary:</p>
+<ol style="list-style-type: decimal">
+<li><p>the underlying risk of event, in terms of magnitude and shape of the baseline hazard;</p></li>
+<li><p>the number and frequency of longitudinal measurements;</p></li>
+<li><p>features of the longitudinal process such as functional form over time;</p></li>
+<li><p>the strength of the informative observation process, i.e. the magnitude of the association between the underlying disease process and the observation process;</p></li>
+<li><p>the shape of the association between the observation process and the disease process, i.e. the parametrisation that links the two processes (e.g. the current value parametrisation, intercept and slope, cumulative effect, and so on);</p></li>
+<li><p>eventually, sample size in terms of study subjects.</p></li>
+</ol>
+<p>Then, I will compare different analytical approaches proposed in literature to tackle the problem, starting with simple approaches such as including the number of preceding measurements in the model as a proxy of disease severity moving onto more complex methods such as those introduced in Section <a href="infvp.html#infvp">9</a>. Some methods will be directly applicable using existing software, while others will require developing ad-hoc software if an existing implementation is not available in standard statistical packages such as R and Stata. Throughout this project we will be collaborating with Dr. Jessica Barrett from the MRC Biostatistic Unit in Cambridge, and we will have extensive meetings to discuss factors that may affect the results of this study and what methods to include and compare. Once the planning phase is completed, I will code the simulation study and and run it using the high-performance computing facilities of the University. Finally, I plan to write up the project and produce a manuscript approximately at the end of my second year.</p>
+<p>During my second year I will also work on an applied project in the area of cardiovascular epidemiology using joint models for multiple longitudinal biomarkers and survival data using CALIBER data <span class="citation">(Denaxas et al. <a href="#ref-denaxas_2012">2012</a>)</span>. CALIBER includes a wide variety of biomarkers such as systolic and diastolic blood pressure, body-mass index, high- and low-density cholesterol, and so on. These biomarkers are likely to be correlated as they change over time, and they may improve cardiovascular risk prediction and clear up the complex relationship between changes in the biomarkers and the risk of adverse events. Specifically, I will select a cohort of individuals with stable angina and type 2 diabetes (for whom regular monitoring of blood pressure is recommended) and evaluate the association between multiple, longitudinally measured biomarkers and the risk of adverse coronary events, fatal and non-fatal.</p>
+<p>The applied project using CALIBER data will inform further projects, such as studying and developing discrimination and calibration tools to use with multiple longitudinal biomarkers. The importance of discrimination and classification tools is great, as it is fundamental to be able to classify whether additional biomarkers can improve predictions or not; this project will have wide reaching consequences by providing guidance in the use of joint models when developing risk predictions using multiple biomarkers. I aim to work on this during the final year of my PhD.</p>
+<p>Finally, an ongoing task will be the continuous development and expansion of the interactive tool for exploring results from simulation studies. For instance, potential developments will include:</p>
+<ul>
+<li><p>polishing the underlying engine used to computed summary statistics;</p></li>
+<li><p>including more plots;</p></li>
+<li><p>allowing custom faceted plots and tables comparing multiple factors at once.</p></li>
+</ul>
+<div class="figure" style="text-align: center"><span id="fig:gantt-chart"></span>
+<img src="gantt_chart.png" alt="Gantt chart for current and future projects during my PhD." width="100%" />
+<p class="caption">
+Figure 10.1: Gantt chart for current and future projects during my PhD.
+</p>
+</div>
 
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-denaxas_2012">
+<p>Denaxas, Spiros C, Julie George, Emily Herrett, Anoop D Shah, Dipak Kalra, Aroon D Hingorani, Mika Kivimaki, Adam D Timmis, Liam Smeeth, and Harry Hemingway. 2012. “Data Resource Profile: Cardiovascular Disease Research Using Linked Bespoke Studies and Electronic Health Records (CALIBER).” <em>International Journal of Epidemiology</em> 41: 1625–38. doi:<a href="https://doi.org/10.1093/ije/dys188">10.1093/ije/dys188</a>.</p>
+</div>
 </div>
             </section>
 

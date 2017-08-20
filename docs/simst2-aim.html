@@ -25,7 +25,7 @@
 <meta name="author" content="Alessandro Gasparini">
 
 
-<meta name="date" content="2017-08-14">
+<meta name="date" content="2017-08-20">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -156,7 +156,10 @@ code > span.in { color: #008000; } /* Information */
 <li class="chapter" data-level="7.6" data-path="simst2-res.html"><a href="simst2-res.html"><i class="fa fa-check"></i><b>7.6</b> Results</a></li>
 <li class="chapter" data-level="7.7" data-path="simst2-conclusions.html"><a href="simst2-conclusions.html"><i class="fa fa-check"></i><b>7.7</b> Conclusions</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="sirex.html"><a href="sirex.html"><i class="fa fa-check"></i><b>8</b> Exploring results from simulation studies interactively</a></li>
+<li class="chapter" data-level="8" data-path="sirex.html"><a href="sirex.html"><i class="fa fa-check"></i><b>8</b> Exploring results from simulation studies interactively</a><ul>
+<li class="chapter" data-level="8.1" data-path="sirex-rationale.html"><a href="sirex-rationale.html"><i class="fa fa-check"></i><b>8.1</b> Rationale</a></li>
+<li class="chapter" data-level="8.2" data-path="sirex-sirex.html"><a href="sirex-sirex.html"><i class="fa fa-check"></i><b>8.2</b> SiReX</a></li>
+</ul></li>
 <li class="chapter" data-level="9" data-path="infvp.html"><a href="infvp.html"><i class="fa fa-check"></i><b>9</b> Informative visiting process</a></li>
 <li class="chapter" data-level="10" data-path="future.html"><a href="future.html"><i class="fa fa-check"></i><b>10</b> Future research developments</a></li>
 <li class="chapter" data-level="11" data-path="pdevelop.html"><a href="pdevelop.html"><i class="fa fa-check"></i><b>11</b> Personal development</a><ul>
@@ -173,7 +176,11 @@ code > span.in { color: #008000; } /* Information */
 <li class="chapter" data-level="B.1" data-path="ax-plots-simst1.html"><a href="ax-plots-simst1.html"><i class="fa fa-check"></i><b>B.1</b> Simulation study 1</a></li>
 <li class="chapter" data-level="B.2" data-path="ax-plots-simst2.html"><a href="ax-plots-simst2.html"><i class="fa fa-check"></i><b>B.2</b> Simulation study 2</a></li>
 </ul></li>
-<li class="chapter" data-level="C" data-path="ax-slides.html"><a href="ax-slides.html"><i class="fa fa-check"></i><b>C</b> Slides</a></li>
+<li class="chapter" data-level="C" data-path="ax-slides.html"><a href="ax-slides.html"><i class="fa fa-check"></i><b>C</b> Slides</a><ul>
+<li class="chapter" data-level="C.1" data-path="ax-slides-safjr.html"><a href="ax-slides-safjr.html"><i class="fa fa-check"></i><b>C.1</b> 2017 SAfJR Conference</a></li>
+<li class="chapter" data-level="C.2" data-path="ax-slides-sam-iscb.html"><a href="ax-slides-sam-iscb.html"><i class="fa fa-check"></i><b>C.2</b> 2017 SAM Conference and ISCB Conference</a></li>
+<li class="chapter" data-level="C.3" data-path="ax-slides-students-day.html"><a href="ax-slides-students-day.html"><i class="fa fa-check"></i><b>C.3</b> Students’ Day at the ISCB Conference</a></li>
+</ul></li>
 <li class="chapter" data-level="D" data-path="ax-manuscript.html"><a href="ax-manuscript.html"><i class="fa fa-check"></i><b>D</b> Manuscript</a></li>
 <li class="chapter" data-level="E" data-path="ax-r-session.html"><a href="ax-r-session.html"><i class="fa fa-check"></i><b>E</b> R Session</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -196,6 +203,20 @@ code > span.in { color: #008000; } /* Information */
             <section class="normal" id="section-">
 <div id="simst2-aim" class="section level2">
 <h2><span class="header-section-number">7.1</span> Aim</h2>
+<p>I introduced in Section <a href="sa-cox.html#sa-cox">1.6</a> the de-facto standard method used in medical research when dealing with time to event data: the Cox proportional hazards model. It is best suited when relative risk estimates are the quantities of interest; however, often it is of interest to obtain absolute measures of risk: in that context, modelling the baseline hazard is necessary, and it can be achieved by using standard parametric survival models with a simple parametric distribution (such as the exponential, Weibull, or Gompertz distribution) or by using the flexible parametric modelling approach <span class="citation">(Royston and Parmar <a href="#ref-royston_2002">2002</a>)</span> to better capture the shape of complex hazard functions. The latter approach requires choosing the number of degrees of freedom for the spline term used to approximate the baseline hazard: in practice, sensitivity analyses and information criteria (AIC, BIC) have been used to select the best model. Recently, <span class="citation">Rutherford, Crowther, and Lambert (<a href="#ref-rutherford_2015">2015</a>)</span> showed via simulation studies that, assuming a sufficient number of degrees of freedom is used, the approximated hazard function given by restricted cubic splines fit well for a number of complex hazard shapes and the hazard ratios estimation is insensitive to the correct specification of the baseline hazard. Moreover, it is common to encounter clustered survival data where the overall study population can be divided into heterogeneous clusters of homogeneous observations. Examples of such data consist of multi-centre clinical trial data, individual-patient data meta-analysis, observational data with geographical clusters, . As a consequence, survival times of individuals within a cluster are likely to be correlated and need to be analysed as such. Analogously, correlated data may emerge as a consequence of recurrent events, i.e. events that may occur repeatedly within the same study subject. Unfortunately, covariates that contribute to explaining the heterogeneity between clusters are often not measured, e.g. for economic reasons. Hence, the frailty approach aims to account for the unobserved heterogeneity by including a random effect that acts multiplicatively on the baseline hazard and can be shared within a given cluster.</p>
+<p>As I mentioned before, flexible parametric survival models are a robust alternative to standard parametric survival models when the shape of the hazard function is complex; using a sufficient number of degrees of freedom, e.g. 2 or more, the spline-based approach is able to capture the underlying shape of the hazard function with minimal bias. AIC and BIC can guide the choice of the best fitting model, but they tend to agree to within 1 or 2 degrees of freedom in practice <span class="citation">(Rutherford, Crowther, and Lambert <a href="#ref-rutherford_2015">2015</a>)</span>. Analogously, the impact of the choice of a particular parametric frailty distribution on the regression coefficients is minimal <span class="citation">(Pickles and Crouchley <a href="#ref-pickles_1995">1995</a>)</span>. Conversely, little is know about the impact of misspecifying the baseline hazard in survival models with frailty terms. I aim therefore with this work to assess the impact of misspecifying the baseline hazard or the distribution of the frailty on the estimated regression coefficients, frailty variance, and absolute, marginal risk measures such as the integrated difference of survival curves and the survival difference at given time points. I will simulate data under a variety of data-generating mechanisms, and then compare a set of models that include the Cox model with frailties, fully parametric survival models with frailty, models with flexible baseline hazard, and models with flexible baseline hazard and a penalty for the complexity of the spline.</p>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-royston_2002">
+<p>Royston, Patrick, and Mahesh KB Parmar. 2002. “Flexible Parametric Proportional-Hazards and Proportional-Odds Models for Censored Survival Data, with Application to Prognostic Modelling and Estimation of Treatment Effects.” <em>Statistics in Medicine</em> 21 (15): 2175–97. doi:<a href="https://doi.org/10.1002/sim.1203">10.1002/sim.1203</a>.</p>
+</div>
+<div id="ref-rutherford_2015">
+<p>Rutherford, Mark J, Michael J Crowther, and Paul C Lambert. 2015. “The Use of Restricted Cubic Splines to Approximate Complex Hazard Functions in the Analysis of Time-to-Event Data: A Simulation Study.” <em>Journal of Statistical Computation and Simulation</em> 85 (4): 777–93. doi:<a href="https://doi.org/10.1080/00949655.2013.845890">10.1080/00949655.2013.845890</a>.</p>
+</div>
+<div id="ref-pickles_1995">
+<p>Pickles, Andrew, and Robert Crouchley. 1995. “A Comparison of Frailty Models for Multivariate Survival Data.” <em>Statistics in Medicine</em> 14 (13): 1447–61. doi:<a href="https://doi.org/10.1002/sim.4780141305">10.1002/sim.4780141305</a>.</p>
+</div>
 </div>
             </section>
 
