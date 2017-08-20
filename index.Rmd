@@ -43,9 +43,9 @@ if (!require("pacman")) install.packages("pacman")
 pacman::p_load(
   "ggplot2",
   "survival",
-  "cowplot",
+  "ggpubr",
   "dplyr",
-  "ggfortify",
+  "cowplot",
   "readr",
   "marqLevAlg",
   "scales",

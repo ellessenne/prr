@@ -1,16 +1,193 @@
 # Simulation study: impact of misspecification in survival models with shared frailty terms {#simst2}
 \chaptermark{Misspecification in survival models with frailty}
 
+In this Chapter, I will present the second simulation study I set up and run during my first year. It investigates the impact of model misspecification in survival models with shared frailty terms, and part of this work was presented in oral form at the 2017 Statistical Analysis of Multi-Outcome Data (SAM) Conference and at the 38^th^ Annual Conference of the International Society for Clinical Biostatistics (more details in Chapter \@ref(pdevelop) and slides available in Appendix \@ref(ax-slides-sam-iscb)). I am also currently writing up this project into a manuscript for submission to a journal; a current draft is attached as well in Appendix \@ref(ax-manuscript).
+
+This Chapter is arranged as follows. First, I introduce the aim of the simulation study in greater detail in Section \@ref(simst2-aim). Then, in Section \@ref(simst2-dgms) I will introduce the data-generating mechanisms, in Section \@ref(simst2-methods) I will describe the different models I included in the comparison, in Section \@ref(simst2-est) I will define the estimands of interest, in Section \@ref(simst2-pm) I will present the performance measures used to compare the different models, in Section \@ref(simst2-res) I will present some results, and finally I will conclude the Chapter in Section \@ref(simst2-conclusions).
+
 ## Aim {#simst2-aim}
+
+I introduced in Section \@ref(sa-cox) the de-facto standard method used in medical research when dealing with time to event data: the Cox proportional hazards model. It is best suited when relative risk estimates are the quantities of interest; however, often it is of interest to obtain absolute measures of risk: in that context, modelling the baseline hazard is necessary, and it can be achieved by using standard parametric survival models with a simple parametric distribution (such as the exponential, Weibull, or Gompertz distribution) or by using the flexible parametric modelling approach [@royston_2002] to better capture the shape of complex hazard functions. The latter approach requires choosing the number of degrees of freedom for the spline term used to approximate the baseline hazard: in practice, sensitivity analyses and information criteria (AIC, BIC) have been used to select the best model. Recently, @rutherford_2015 showed via simulation studies that, assuming a sufficient number of degrees of freedom is used, the approximated hazard function given by restricted cubic splines fit well for a number of complex hazard shapes and the hazard ratios estimation is insensitive to the correct specification of the baseline hazard. Moreover, it is common to encounter clustered survival data where the overall study population can be divided into heterogeneous clusters of homogeneous observations. Examples of such data consist of multi-centre clinical trial data, individual-patient data meta-analysis, observational data with geographical clusters, \dots. As a consequence, survival times of individuals within a cluster are likely to be correlated and need to be analysed as such. Analogously, correlated data may emerge as a consequence of recurrent events, i.e. events that may occur repeatedly within the same study subject. Unfortunately, covariates that contribute to explaining the heterogeneity between clusters are often not measured, e.g. for economic reasons. Hence, the frailty approach aims to account for the unobserved heterogeneity by including a random effect that acts multiplicatively on the baseline hazard and can be shared  within a given cluster.
+
+As I mentioned before, flexible parametric survival models are a robust alternative to standard parametric survival models when the shape of the hazard function is complex; using a sufficient number of degrees of freedom, e.g. 2 or more, the spline-based approach is able to capture the underlying shape of the hazard function with minimal bias. AIC and BIC can guide the choice of the best fitting model, but they tend to agree to within 1 or 2 degrees of freedom in practice [@rutherford_2015]. Analogously, the impact of the choice of a particular parametric frailty distribution on the regression coefficients is minimal [@pickles_1995]. Conversely, little is know about the impact of misspecifying the baseline hazard in survival models with frailty terms. I aim therefore with this work to assess the impact of misspecifying the baseline hazard or the distribution of the frailty on the estimated regression coefficients, frailty variance, and absolute, marginal risk measures such as the integrated difference of survival curves and the survival difference at given time points. I will simulate data under a variety of data-generating mechanisms, and then compare a set of models that include the Cox model with frailties, fully parametric survival models with frailty, models with flexible baseline hazard, and models with flexible baseline hazard and a penalty for the complexity of the spline.
 
 ## Data-generating mechanisms {#simst2-dgms}
 
+I simulate data under five different baseline hazard functions using the approaches presented in Chapter \@ref(simsurv): Exponential, Weibull, Gompertz, and a two different two-components mixture Weibull-Weibull with turning points. In practice, I choose the following hazard functions: exponential with scale \(\lambda\) = 0.3, Weibull with scale \(\lambda\) = 0.5 and shape \(p\) = 0.6, Gompertz with scale \(\lambda\) = 0.1 and shape \(\gamma\) = 0.5, , two-components mixture Weibull with scale parameters \(\lambda_1\) = 0.5, \(\lambda_2\) = 0.3, shape parameters \(p_1\) = 2.5 and \(p_2\) = 1.3, and mixing parameter \(\pi\) = 0.8, and two-components mixture Weibull-Weibull with scale parameters \(\lambda_1\) = \(\lambda_2\) = 1.0, shape parameters \(p_1\) = 1.5 and \(p_2\) = 0.5, and mixing parameter \(\pi\) = 0.5 (Figure \@ref(fig:simst2-baseline-hazards)). Then, for all possible baseline hazard function, I generated clustered data assuming 15 clusters of (30, 100) individuals each, 50 clusters of (30, 100) individuals each, or 1000 clusters of 2 individuals each. I included a binary treatment variable \(X ~ Bin(1, 0.5)\) with associated log-hazard ratio of \(-0.5\) and cluster-specific frailty terms \(\alpha_i\) following either a Gamma or a log-normal distribution with variance \(\theta\) (\(\theta\) = {0.25, 0.75, 1.25}, Figure \@ref(fig:simst2-frailty-distributions)). Finally, I generated an event indicator variable \(d\) by applying administrative censoring at 5 years. The true marginal survival functions corresponding to these simulated settings are depicted in Figure \@ref(fig:simst2-marginal-survival).
+
+I applied a fully factorial design: this resulted in 150 simulation scenarios, 5 sample sizes \(\times\) 5 baseline hazards \(\times\) 2 frailty distributions \(\times\) 3 true frailty variances.
+
+```{r simst2-baseline-hazards, fig.cap = "Baseline hazard functions chosen for this simulation study."}
+h0_exp = function(t, lambda) {
+  lambda
+}
+h0_wei = function(t, lambda, p) {
+  lambda * p * t ^ (p - 1)
+}
+h0_gom = function(t, lambda, gamma) {
+  lambda * exp(gamma * t)
+}
+h0_wwm = function(t, lambda1, lambda2, p1, p2, pi) {
+ (lambda1 * p1 * t ^ (p1 - 1) * pi * exp(-lambda1 * t ^ p1) + lambda2 * p2 * t ^ (p2 - 1) * (1 - pi) * exp(-lambda2 * t ^ p2)) / (pi * exp(-lambda1 * t ^ p1) + (1 - pi) * exp(-lambda2 * t ^ p2))
+}
+
+# Five hand-picked colours from a colorblind-safe palette
+cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#CC79A7", "#0072B2", "#D55E00")
+
+t = seq(0, 5, length.out = 1000)
+out = bind_rows(
+  data_frame(t = t, dist = "Exponential") %>% mutate(h0 = h0_exp(t = t, lambda = 0.3)),
+  data_frame(t = t, dist = "Weibull") %>% mutate(h0 = h0_wei(t = t, lambda = 0.5, p = 0.6)),
+  data_frame(t = t, dist = "Gompertz") %>% mutate(h0 = h0_gom(t = t, lambda = 0.1, gamma = 0.5)),
+  data_frame(t = t, dist = "Weibull-Weibull (1)") %>% mutate(h0 = h0_wwm(t = t, lambda1 = 0.5, lambda2 = 0.3, p1 = 2.5, p2 = 1.3, pi = 0.8)),
+  data_frame(t = t, dist = "Weibull-Weibull (2)") %>% mutate(h0 = h0_wwm(t = t, lambda1 = 1.0, lambda2 = 1.0, p1 = 1.5, p2 = 0.5, pi = 0.5)))
+ggplot(out, aes(x = t, y = h0, color = dist)) +
+  geom_line() +
+  scale_color_manual(values = cbPalette) +
+  scale_y_continuous(labels = comma) +
+  theme_bw() +
+  scale_linetype_discrete() +
+  theme(legend.position = c(1, 1), legend.justification = c(1, 1), legend.background = element_blank(), legend.key = element_blank(), legend.direction = "vertical") +
+  labs(x = "Follow-up time t", y = expression(h[0](t)), color = "Baseline hazard")
+```
+
+```{r simst2-frailty-distributions, fig.cap = "Frailty distributions chosen for this simulation study."}
+theta = c(0.25, 0.75, 1.25)
+thetalabels = formattable::comma(theta, digits = 2) %>% factor()
+
+ggplot(data.frame(x = c(0, 3)), aes(x)) +
+  stat_function(aes(color = thetalabels[1], lty = "Gamma"), fun = dgamma, args = list(shape = 1 / theta[1], scale = theta[1])) +
+  stat_function(aes(color = thetalabels[2], lty = "Gamma"), fun = dgamma, args = list(shape = 1 / theta[2], scale = theta[2])) +
+  stat_function(aes(color = thetalabels[3], lty = "Gamma"), fun = dgamma, args = list(shape = 1 / theta[3], scale = theta[3])) +
+  stat_function(aes(color = thetalabels[1], lty = "Log-Normal"), fun = dlnorm, args = list(meanlog = -log(theta[1] + 1) / 2, sdlog = sqrt(log(theta[1] + 1)))) +
+  stat_function(aes(color = thetalabels[2], lty = "Log-Normal"), fun = dlnorm, args = list(meanlog = -log(theta[2] + 1) / 2, sdlog = sqrt(log(theta[2] + 1)))) +
+  stat_function(aes(color = thetalabels[3], lty = "Log-Normal"), fun = dlnorm, args = list(meanlog = -log(theta[3] + 1) / 2, sdlog = sqrt(log(theta[3] + 1)))) +
+  scale_color_manual(values = cbPalette) +
+  theme_bw() +
+  theme(legend.position = c(1, 1), legend.justification = c(1, 1), legend.background = element_blank(), legend.key = element_blank(), legend.direction = "vertical") +
+  labs(x = "x", y = "Density f(x)", color = "Frailty variance", linetype = "Frailty distribution")
+```
+
+```{r simst2-marginal-survival, fig.cap = "Marginal survival depending on baseline hazard and frailty distribution chosen for this simulation study.", fig.width = 8, fig.height = 6}
+true_ms = Vectorize(function(t, baseline, fv_dist, fv, trt = c(0, 1)) {
+  if (fv_dist == "Gamma") {
+    if (baseline == "Exponential") {
+      (1 - fv * log(exp(-0.3 * exp(-0.5 * trt) * t))) ^ (-1 / fv)
+    } else if (baseline == "Weibull") {
+      (1 - fv * log(exp(-0.5 * exp(-0.5 * trt) * t ^ 0.6))) ^ (-1 / fv)
+    } else if (baseline == "Gompertz") {
+      (1 - fv * log(exp(-(0.1 * exp(-0.5 * trt)) / 0.5 * (exp(0.5 * t) - 1)))) ^ (-1 / fv)
+    } else if (baseline == "Weibull-Weibull (1)") {
+      (1 - fv * log((0.8 * exp(-0.5 * t ^ 2.5) + (1 - 0.8) * exp(-0.3 * t ^ 1.3)) ^ exp(-0.50 * trt))) ^ (-1 / fv)
+    } else {
+      (1 - fv * log((0.5 * exp(-1 * t ^ 1.5) + (1 - 0.5) * exp(-1 * t ^ 0.5)) ^ exp(-0.50 * trt))) ^ (-1 / fv)
+    }
+  } else {
+    if (baseline == "Exponential") {
+      fn = Vectorize(function(a) {
+        exp(-0.3 * exp(-0.5 * trt) * t) ^ a * dlnorm(a, meanlog = -log(fv + 1) / 2, sdlog = sqrt(log(fv + 1)))
+      })
+      integrate(fn, 0, Inf)$value
+    } else if (baseline == "Weibull") {
+      fn = Vectorize(function(a) {
+        exp(-0.5 * exp(-0.5 * trt) * t ^ 0.6) ^ a * dlnorm(a, meanlog = -log(fv + 1) / 2, sdlog = sqrt(log(fv + 1)))
+      })
+      integrate(fn, 0, Inf)$value
+    } else if (baseline == "Gompertz") {
+      fn = Vectorize(function(a) {
+        exp(-(0.1 * exp(-0.5 * trt)) / 0.5 * (exp(0.5 * t) - 1)) ^ a * dlnorm(a, meanlog = -log(fv + 1) / 2, sdlog = sqrt(log(fv + 1)))
+      })
+      integrate(fn, 0, Inf)$value
+    } else if (baseline == "Weibull-Weibull (1)") {
+      fn = Vectorize(function(a) {
+        ((0.8 * exp(-0.5 * t ^ 2.5) + (1 - 0.8) * exp(-0.3 * t ^ 1.3)) ^ exp(-0.50 * trt)) ^ a * dlnorm(a, meanlog = -log(fv + 1) / 2, sdlog = sqrt(log(fv + 1)))
+      })
+      integrate(fn, 0, Inf)$value
+    } else {
+      fn = Vectorize(function(a) {
+        ((0.5 * exp(-1 * t ^ 1.5) + (1 - 0.5) * exp(-1 * t ^ 0.5)) ^ exp(-0.50 * trt)) ^ a * dlnorm(a, meanlog = -log(fv + 1) / 2, sdlog = sqrt(log(fv + 1)))
+      })
+      integrate(fn, 0, Inf)$value
+    }
+  }
+})
+
+isdiff <- crossing(fv = c(0.25, 0.75, 1.25),
+                   fv_dist = c("Gamma", "Log-Normal"),
+                   baseline = c("Exponential", "Weibull", "Gompertz", "Weibull-Weibull (1)", "Weibull-Weibull (2)"))
+
+msdf = lapply(1:nrow(isdiff), function(i) {
+  t = seq(0, 5, length.out = 1000)
+  ms = with(isdiff, true_ms(t, baseline[i], fv_dist[i], fv[i], trt = 0))
+  data.frame(t, ms, baseline = isdiff$baseline[i], fv_dist = isdiff$fv_dist[i], fv = isdiff$fv[i])
+}) %>%
+  bind_rows() %>%
+  mutate(fv = paste("Frailty variance:", fv))
+
+ggplot(msdf, aes(x = t, y = ms, lty = fv_dist, color = baseline)) +
+  geom_line() +
+  facet_wrap(~ fv) +
+  scale_color_manual(values = cbPalette) +
+  theme_bw() +
+  theme(legend.position = "bottom", legend.direction = "vertical") +
+  labs(x = "Follow-up time t", y = expression(S(t)), lty = "Frailty distribution", color = "Baseline hazard")
+```
+
+```{r}
+rm(t, out, h0_exp, h0_wei, h0_gom, h0_wwm, theta, thetalabels, true_ms, isdiff, msdf)
+```
+
 ## Methods {#simst2-methods}
+
+In this Section I will introduce the models I fitted in this simulation study. First, I fit a Cox model with a shared frailty term:
+\[
+h_{ij}(t | \alpha_i) = \alpha_i h_0(t_{ij}) \exp(X_{ij} \beta),
+\]
+with \(h_0(\cdot)\) left unspecified. The Cox model with a shared Gamma frailty is implemented in the R package `frailtyEM`, while the Cox model with a shared log-normal frailty is implemented in the R package `coxme`. Since the `coxme` package does not return a standard error for the estimated frailty variance, I computed a bootstrapped standard error using 1000 bootstrap replications; I resampled clusters of individuals rather than individuals to preserve the correlation between and within clusters. Then, I fitted fully parametric survival models with a shared frailty term, using the same model formulation of the Cox model but specifying the baseline hazard function. I fitted six models, for each combination of baseline hazard (Exponential, Weibull, or Gompertz) and frailty distribution (Gamma, log-normal). These models are implemented in the R package `parfm`. Finally, I fit flexible Royston-Parmar models with a shared frailty term, either Gamma or log-normal:
+\[
+\log H(t_{ij}|\alpha_i) = s(z; \gamma) + X \beta + \log(\alpha_i),
+\]
+with \(s(\cdot)\) a restricted cubic spline function of log-time that smooths the logarithm of the baseline cumulative hazard \(H_0(\cdot)\). This model requires choosing the number of degrees of freedom of the spline term, hence I varied between 3, 5, 7, and 9 degrees of freedom. I also fitted the same model using penalised likelihood [@liu_2016], applying a penalty to the likelihood to avoid overfitting and sparing myself from having to choose the number of degrees of freedom for the spline term. These flexible parametric models are implemented in the R package `rstpm2`.
 
 ## Estimands {#simst2-est}
 
+The first estimand of interest in the regression coefficient \(\beta\) associated with the simulated binary treatment. This coefficient can be interpreted as log-treatment effect, and it would be interesting to see if and how misspecification of the baseline hazard or frailty distribution affects relative risk estimates. Second, I am interested in comparing estimates of the frailty variance obtained from each model - a quantity often used to quantify dependence between clustered observations. Finally, I am going to compare two measures of absolute risk: marginal survival difference at time \(t\), defined as \(S(t)_{\text{diff}} = S(t | x = 1) - S(t | x = 0)\), and integrated marginal survival difference, defined as \(iS_{\text{diff}} = iS(x = 1) - iS(x = 0)\). The former is obtained by fixing the time \(t\) (I am using 1, 2, 3, and 4 years), and then integrating out the frailty term from the conditional survival function as presented in Chapter \@ref(smre). Conversely, the latter requires integrating the marginal survival function for both treatment groups and then computing their difference; I compute it as follows:
+
+1. I estimate marginal survival for a treatment group at 1000 equally spaced values of follow-up time \(t\);
+
+2. I fit an interpolating natural spline over the 1000 estimates from step (1) using the `splinefun` R function;
+
+3. I integrate the resulting function using Gauss-Kronrod quadrature as implemented in the `integrate` function;
+
+4. I compute the difference of the integrated marginal survival for the two treatment groups.
+
+The integral of a survival function can be interpreted as life expectancy; hence, the quantity I am computing can be interpreted as the difference in 5-years life expectancy between treated and untreated individuals.
+
 ## Performance measures {#simst2-pm}
+
+Analogously with the previous simulation study of Chapter \@ref(simst1), the main performance measures of interest are bias, coverage, and mean squared error. A more in detail presentation of the characteristics of each summary measure is given in Section \@ref(simst1-pm). I will be presenting percentage bias when relevant (i.e. when comparing estimates with different magnitude), and I will include Monte Carlo standard errors for bias and coverage to quantify uncertainty in estimating such performance measures.
 
 ## Results {#simst2-res}
 
+```{r load-sim2-results}
+summary_miss_subset = read_csv("data/summary_miss_subset.csv.gz") %>%
+  mutate(model_frailty = factor(model_frailty, levels = c("Gamma", "Log-Normal")),
+         model_baseline = factor(model_baseline, levels = c("Cox", "Exp", "Wei", "Gom", "RP(3)", "RP(5)", "RP(7)", "RP(9)", "RP(P)")),
+         baseline = factor(baseline, levels = c("Exponential", "Weibull", "Gompertz", "Weibull-Weibull (1)", "Weibull-Weibull (2)"))) %>%
+  filter(!(model_baseline %in% c("RP(3)", "RP(7)"))) %>%
+  mutate(model_baseline = droplevels(model_baseline))
+```
+
+I mentioned in Section \@ref(simst2-dgms) that I simulated data under 150 different data-generating mechanisms. In this Section I will present results for a single scenario, for conciseness: 15 clusters of 100 individuals each, with a frailty variance of 0.25. I will also exclude Royston-Parmar models with 3 or 7 degrees of freedom from this comparison, again for conciseveness. Nevertheless, the full results of this simulation study can be explored interactively by clicking [here](https://ag475.shinyapps.io/PRR-SiReX/).
+
+Convergence rates for the models include in this comparison are presented in Table \@ref(tab:sim2-miss-scenario1-convergence-t) and plot \@ref(fig:sim2-miss-scenario1-convergence). Convergence rates varied considerably between different baseline hazards and frailty distributions, were generally greater when the true baseline hazard was simple (exponential, Weibull, or Gompertz) with some exception, specifically the Cox model with a Gamma frailty and the Gompertz model with either frailty when the baseline hazard was misspecified. With the first Weibull-Weibull baseline hazard convergence was optimal for all models except the Cox model with a Gamma frailty; finally, with the second Weibull-Weibull baseline hazard convergence rates dropped for all models except the Cox model with a log-normal frailty and parametric models with an exponential or Weibull baseline hazard and either frailty distributions.
+
+Bias, coverage, and mean squared error of the estimated regression coefficient are presented in Tables \@ref(tab:sim2-miss-scenario1-trt-bias-t), \@ref(tab:sim2-miss-scenario1-trt-cov-t), \@ref(tab:sim2-miss-scenario1-trt-mse-t) and Figures \@ref(fig:sim2-miss-scenario1-trt-bias), \@ref(fig:sim2-miss-scenario1-trt-cov), \@ref(fig:sim2-miss-scenario1-trt-mse). With a true exponential baseline hazard, all models produced unbiased estimates under all scenarios; with a true Weibull baseline hazard, all models performed well except the parametric models with an exponential or Gompertz baseline hazard, which yielded underestimated regression coefficients (approximately -0.09 on the log-hazard rate scale). Analogously, with a true Gompertz baseline hazard the parametric Gompertz model, the flexible parametric models, and the Cox models performed well with unbiased estimates; the parametric exponential and Weibull models yielded overestimated results (approximately 0.13). With the first Weibull-Weibull baseline hazard, the flexible parametric models and the Cox model performed well; conversely, the parametric models yielded overstimated results (exponential and Gompertz, approximately -0.07) or underestimated results (Weibull, approximately 0.10). Similarly, with the second Weibull-Weibull the flexible parametric models and the Cox model returned unbiased estimates; the Weibull model returned unbiased results too. The exponential and Gompertz parametric models, on the other side, return underestimated results (approximately -0.11). Coverage followed a similar pattern; when the model yielded unbiased results, coverage was optimal at approximately 95\%. Conversely, when the estimates were biased and the parametric distribution was misspecified or failed to capture a complex hazard shape, coverage dropped up to 35\% (with the exponential model performing worst). Mean squared error of the estimated coefficients was the smallest when the model was well specified, or when using the Cox model or Royston-Parmar models.
+
+Bias, coverage, and mean squared error of the estimated frailty variance are presented in Tables \@ref(tab:sim2-miss-scenario1-fv-bias-t), \@ref(tab:sim2-miss-scenario1-fv-cov-t), \@ref(tab:sim2-miss-scenario1-fv-mse-t) and Figures \@ref(fig:sim2-miss-scenario1-fv-bias), \@ref(fig:sim2-miss-scenario1-fv-cov), \@ref(fig:sim2-miss-scenario1-fv-mse). With a true exponential baseline hazard, all models yielded slightly biased results irrespectively of the frailty distribution: models with a well specified frailty distribution yielded slightly negatively biased results (-0.03 to -0.01; the Cox model with a Gamma frailty performed worse with a negative bias of -0.09). When assuming a Gamma frailty in place of a log-normal frailty, negative bias was a somewhat greater (around -0.05, with the Cox model once again performing worse with a negative bias of -0.11); when assuming a log-normal frailty in place of a Gamma frailty, results where slightly positively biased (approximately 0.01). With more complex true baseline hazard functions, the flexible parametric models performed the best with performance similar to the exponential setting; conversely, fully parametric models performed worse when the baseline hazard was misspecified (with both negative and positive bias depending on the setting, up to -0.15 and 0.10). With a complex baseline hazard, negative and positive bias for the fully parametric models further increased up to -0.15 and 0.15, approximately. The Cox model with a Gamma frailty performed the worst, severely underestimating the frailty variance (up to -0.18, approximatley). Coverage was generally suboptimal, in the range 70-90\%, with a few exceptions; the fully parametric models sometimes showed good coverage, symptom of overestimated standard errors (given that they returned biased estimates). Mean squared errors reflected the pattern observed for bias, with the flexible parametric models performing better than the other models across the range of frailty ditributions and baseline hazards examined; the parametric models performed similarly when well specified, slightly worse otherwise. The Cox model with a log-normal frailty performed similarly to the Royston-Parmar models, while the Cox model with a Gamma frailty performed worse, especially with a complex baseline hazard (where it performed even worse than fully parametric models).
+
+Finally, bias and mean squared error of the estimated difference in 5-years life expectancy are presented in Tables \@ref(tab:sim2-miss-scenario1-isdiff-bias-t), \@ref(tab:sim2-miss-scenario1-isdiff-mse-t) and Figures \@ref(fig:sim2-miss-scenario1-isdiff-bias), \@ref(fig:sim2-miss-scenario1-isdiff-mse). With a true Gamma frailty, the flexible parametric models perform well with estimates of the difference in 5-years life expectancy that are practically unbiased; the parametric models performed well when well specified, returned slightly biased results otherwise (both negative and positive bias, up to -0.04 and 0.08 respectively - an absolute difference of 0.5 to 1.0 months in terms of time). With a true log-normal frailty distribution, the Royston-Parmar models produced slightly overestimated results (0.01 to 0.05), while the remaining models performed similarly to the setting with a true Gamma distribution. Bias slightly increased with a complex baseline hazard when using parametric models, up to 0.12 (i.e. approximately 1.5 months). Mean squared errors showed a similar pattern, with all models performing comparably with a true exponential or Gompertz baseline hazard, and the flexible parametric models performing best otherwise (compared to misspecified models). The Cox model generally performed similarly to slightly worse than the flexible parametric models.
+
 ## Conclusions {#simst2-conclusions}
+
+I showed that estimates of regression coefficients, frailty variance, and difference in expectation of life are relatively unsensitive to misspecification of the frailty distribution of the model. Conversely, misspecifying the baseline hazard has serious consequences as it impacts both relative and absolute measures of risk, and measures of heterogeneity such as the variance of the frailty. This seems to be particularly important with respect to the regression coeffcients, as bias on the log-hazard ratio scale of up to 0.13 corresponds to a difference of approximately 15\% on the relative risk scale - which is clinically meaningful. All models seemed to produced biased estimates of the frailty variance, which may be due to the small number of cluster examined here; exploring additional scenarios will provide a greater insight on the topic. The bias in the difference of 5-years expectation of life seems to be less clinically relevant (with bias up to 1.5 months over 5 years), but it is important to bear that in mind nonetheless. The fully parametric models perform well (as expected) when well specified, but relatively simple hazard forms may be too restrictive and unrealistic in practice; conversely, flexible parametric models showed robustness to all different shapes of the baseline hazards and generally performed best, even compared to the Cox model. Further to that, this robustness seemed to be independent on the number of knots for modelling the baseline hazard and on the estimation method (full or penalised likelihood).
