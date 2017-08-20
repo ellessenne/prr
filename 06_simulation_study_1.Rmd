@@ -81,7 +81,7 @@ I selected three scenarios for each aim of this simulation study (out of 54) to 
 
 3. 1000 clusters of 2 individuals each and positive regression coefficient (0.50).
 
-The full results can be explored online interactively at [LINK TO ADD](https://www.google.com).
+The full results can be explored online interactively by clicking [here](https://ag475.shinyapps.io/PRR-SiReX/).
 
 ### Aim 1: comparison of Gaussian quadrature with analytical formulae
 
