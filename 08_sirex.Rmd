@@ -1,10 +1,8 @@
 # Exploring results from simulation studies interactively {#sirex}
 
-The simulation studies I presented in Chapters \@ref(simst1) and \@ref(simst2) presented multiple challenges, one of them being how to present the results effectively given the amount of simulated scenarios (108 and 150 scenarios for simulation 1 and 2, respectively). Each scenario would require producing a variety of tables and plot for bias, coverage, and any other summary statistics I may be interested in: the amount of tables and plots would grow dramatically to an unsustainable number. A straightforward (and often used in practice) option could be selecting a handful of scenarios to present, limiting the number of tables and plots to what is believed to be most interesting. However, a reader may find other scenarios more interesting, or would like to compare different factors or even deep down more into the results; presenting only a subset of results may result limiting to some extent then. Therefore, facing this problem myself, I set out to develop an interactive tool to aid exploration and dissemination of results from simulation studies. I will present further details on the rationale behind developing such tool in Section \@ref(sirex-rationale), and introduce the interactive tool in Section \@ref(sirex-sirex). I presented part of this work at the Students' Day of the 38^th^ Conference of the International Society for Clinical Biostatistics; slides are attached in Appendix \@ref(ax-slides-students-day).
+The simulation studies I presented in Chapters \@ref(simst1) and \@ref(simst2) presented multiple challenges, one of them being how to present the results effectively given the amount of simulated scenarios (108 and 150 scenarios for simulation 1 and 2, respectively). Each scenario would require producing a variety of tables and plot for bias, coverage, and any other summary statistics I may be interested in: the amount of tables and plots would grow dramatically to an unsustainable number. A straightforward (and often used in practice) option could be selecting a handful of scenarios to present, limiting the number of tables and plots to what is believed to be most interesting. However, a reader may find other scenarios more interesting, or would like to compare different factors or even deep down more into the results; presenting only a subset of results may result limiting to some extent then. Therefore, facing this problem myself, I set out to develop an interactive tool to aid exploration and dissemination of results from simulation studies. Part of this work was presented in oral form at the Students' Day of the 38^th^ Conference of the International Society for Clinical Biostatistics; slides are attached in Appendix \@ref(ax-slides-students-day).
 
-## Rationale {#sirex-rationale}
-
-Simulation studies represent a powerful tool with a multiplicity of aims: among others, evaluating new or existing statistical methods, comparing them, assessing the impact of modelling assumption violations, and helping with the understanding of statistical concepts. The increased availability of powerful computational tools (both personal and high-performance cluster computers) to the average researcher surely contributed to the rise of simulation studies in current literature. Searching on PubMed and Scopus with the query "simulation study" it is indeed possible to appreciate the greater use of this tool (Figure \@ref(fig:simst-count)). Additionally, increased computational capabilities allow researchers to simulate an ever-growing number of scenarios, exploring multiple data-generating mechanisms, factors, and methods at once - making reporting results a non-trivial task as aforementioned.
+Simulation studies represent a powerful tool with a multiplicity of aims: among others, evaluating new or existing statistical methods, comparing them, assessing the impact of modelling assumption violations, and helping with the understanding of statistical concepts. The increased availability of powerful computational tools (both personal and high-performance cluster computers) to the average researcher surely contributed to the rise of simulation studies in current literature. Searching on PubMed and Scopus with the query "simulation study" it is indeed possible to appreciate the greater use of this tool (Figure \@ref(fig:simst-count)). Additionally, increased computational capabilities allow researchers to simulate an ever-growing number of scenarios, exploring multiple data-generating mechanisms, factors, and methods at once - making reporting results a non-trivial task.
 
 ```{r simst-count, fig.width = 8, fig.cap = "Numer of results querying 'simulation study' on Pubmed and Scopus."}
 dbquery <- read_csv("data/dbquery.csv.gz") %>%
@@ -30,13 +28,11 @@ It is necessary to bear in mind that dissemination of results plays a focal role
 
 As a consequence, several design and reporting guidelines emerged, often tailor-made to a specific research area (e.g. health technology assessment, medical statistics, social sciences). Despite that, challenges still persist and further research is needed into methods to help reporting of results.
 
-## SiReX {#sirex-sirex}
-
-To bridge the gap between the number of scenarios a researcher can simulate from and dissemination of results, I developed a tool for exploring results interactively. The tool is developed using R and shiny, a web application framework for R that allows creating interactive web applications in a straighforward way ([https://shiny.rstudio.com/](https://shiny.rstudio.com/)).
+To bridge the gap between the number of scenarios a researcher can simulate from and dissemination of results, I developed a tool for exploring results interactively. The tool is developed using R and shiny ([https://shiny.rstudio.com/](https://shiny.rstudio.com/)), a web application framework for R that allows creating interactive web applications in a straighforward way.
 
 I named the interactive tool _SiReX_, acronym for _Simulation Results eXplorer_. It requires the researcher to upload a dataset in a standardised, tidy format (observations are in rows, variables are in columns) containing results from a simulation study. Then, it computes performance measures such as bias, coverage probability, Monte Carlo errors, and empirical standard errors automatically. Finally, it presents results and performance summaries both in tabular and graphical fashion (via bar plots and lolly plots) and allows the reader to vary simulation parameters and choose estimands of interest for further investigations.
 
-A typical workflow when using SiReX would consist in the following steps:
+A typical workflow with SiReX would consist in the following steps:
 
 1. Upload a dataset with results from a simulation study in a tidy format compatible with the tool;
 
@@ -44,8 +40,7 @@ A typical workflow when using SiReX would consist in the following steps:
 
 3. Factors identifying different data-generating mechanisms are identified automatically and drop-down menus are populated appropriately;
 
-4. Now, it is possible to select and change data-generating mechanisms: summary tables and plots are updated
-automatically;
+4. Now, it is possible to select and change data-generating mechanisms: summary tables and plots are updated automatically;
 
 5. Exporting summary statistics, tables, and plots for later use is supported.
 
