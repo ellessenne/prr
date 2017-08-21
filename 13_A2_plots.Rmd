@@ -1,7 +1,5 @@
 # Plots {#ax-plots}
 
-## Simulation study 1 {#ax-plots-simst1}
-
 ```{r sim1-an-vs-gq-scenario1-convergence, fig.height = 4, fig.width = 6, fig.cap = "Convergence rates, comparison with analytical formulae, scenario with a small frailty variance and a negative regression coefficient. "}
 summary_an_vs_gq %>%
   filter(fv == 0.25 & treatment_effect == -0.50) %>%
@@ -113,10 +111,6 @@ summary_normal_gq %>%
   theme_bw() +
   labs(x = "Mean squared error", y = "", subtitle = "Comparison without analytical formulae. Scenario: frailty variance = 0.25, beta = -0.50")
 ```
-
-`r if (knitr:::is_latex_output()) '\\clearpage'`
-
-## Simulation study 2 {#ax-plots-simst2}
 
 ```{r sim2-miss-scenario1-convergence, fig.height = 8, fig.width = 10, fig.cap = "Convergence rates, simulation study on model misspecification in survival models with shared frailty terms, scenario with 15 clusters of 100 individuals each and a small frailty variance.", out.width = ifelse(knitr:::is_latex_output(), ".8\\textheight", "100%"), out.extra = if (knitr:::is_latex_output()) {"angle = 90"}}
 summary_miss_subset %>%

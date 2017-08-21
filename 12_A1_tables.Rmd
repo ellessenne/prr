@@ -2,8 +2,6 @@
 
 # Tables {#ax-tables}
 
-## Simulation study 1 {#ax-tables-simst1}
-
 ```{r sim1-an-vs-gq-scenario1-bias-t}
 summary_an_vs_gq %>%
   filter(fv == 0.25 & treatment_effect == -0.50) %>%
@@ -135,10 +133,6 @@ summary_normal_gq %>%
         align = "r",
         linesep = "")
 ```
-
-`r if (knitr:::is_latex_output()) '\\clearpage'`
-
-## Simulation study 2 {#ax-tables-simst2}
 
 ```{r sim2-miss-scenario1-convergence-t}
 summary_miss_subset %>%

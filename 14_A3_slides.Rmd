@@ -53,7 +53,7 @@ include_graphics("slides/iscb_sam/iscb17_sam17-18.png")
 include_graphics("slides/iscb_sam/iscb17_sam17-19.png")
 ```
 
-## Students' Day at the ISCB Conference {#ax-slides-students-day}
+## Students' Day at the 2017 ISCB Conference {#ax-slides-students-day}
 
 ```{r slides-iscb-students-day, out.width = ifelse(knitr:::is_latex_output(), "0.666\\textwidth", "100%")}
 include_graphics("slides/iscb_students_day/Gasparini_Session1_Speaker2-00.png")
