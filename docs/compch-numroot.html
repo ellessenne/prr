@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Probation review report</title>
+  <meta name="description" content="Probation review report">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Probation review report" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="ellessenne/prr" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Probation review report" />
+  
+  
+  
+
+<meta name="author" content="Alessandro Gasparini">
+
+
+<meta name="date" content="2017-08-21">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="compch-numdiff.html">
+<link rel="next" href="simsurv.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="1" data-path="terminology-notation.html"><a href="terminology-notation.html"><i class="fa fa-check"></i><b>1</b> Terminology and notation</a></li>
+<li class="chapter" data-level="2" data-path="smre.html"><a href="smre.html"><i class="fa fa-check"></i><b>2</b> Survival models with random effects</a><ul>
+<li class="chapter" data-level="2.1" data-path="smre-univariate-frailty.html"><a href="smre-univariate-frailty.html"><i class="fa fa-check"></i><b>2.1</b> Univariate frailty models</a></li>
+<li class="chapter" data-level="2.2" data-path="smre-shared-frailty.html"><a href="smre-shared-frailty.html"><i class="fa fa-check"></i><b>2.2</b> Shared frailty models</a></li>
+<li class="chapter" data-level="2.3" data-path="smre-random-effects.html"><a href="smre-random-effects.html"><i class="fa fa-check"></i><b>2.3</b> Alternative formulation</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="jm.html"><a href="jm.html"><i class="fa fa-check"></i><b>3</b> Joint models for longitudinal and survival data</a><ul>
+<li class="chapter" data-level="3.1" data-path="jm-formulation.html"><a href="jm-formulation.html"><i class="fa fa-check"></i><b>3.1</b> Model formulation</a></li>
+<li class="chapter" data-level="3.2" data-path="jm-estimation.html"><a href="jm-estimation.html"><i class="fa fa-check"></i><b>3.2</b> Estimation process</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="compch.html"><a href="compch.html"><i class="fa fa-check"></i><b>4</b> Computational challenges in survival models with random effects</a><ul>
+<li class="chapter" data-level="4.1" data-path="compch-numintgr.html"><a href="compch-numintgr.html"><i class="fa fa-check"></i><b>4.1</b> Numerical integration</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="compch-numintgr.html"><a href="compch-numintgr.html#compch-numintgr-uni"><i class="fa fa-check"></i><b>4.1.1</b> Unidimensional functions</a></li>
+<li class="chapter" data-level="4.1.2" data-path="compch-numintgr.html"><a href="compch-numintgr.html#compch-numintgr-multi"><i class="fa fa-check"></i><b>4.1.2</b> Multidimensional functions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="compch-numdiff.html"><a href="compch-numdiff.html"><i class="fa fa-check"></i><b>4.2</b> Numerical differentiation</a></li>
+<li class="chapter" data-level="4.3" data-path="compch-numroot.html"><a href="compch-numroot.html"><i class="fa fa-check"></i><b>4.3</b> Numerical root finding</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="simsurv.html"><a href="simsurv.html"><i class="fa fa-check"></i><b>5</b> Simulating survival data</a></li>
+<li class="chapter" data-level="6" data-path="simst1.html"><a href="simst1.html"><i class="fa fa-check"></i><b>6</b> Simulation study: accuracy of Gaussian quadrature</a><ul>
+<li class="chapter" data-level="6.1" data-path="simst1-aim.html"><a href="simst1-aim.html"><i class="fa fa-check"></i><b>6.1</b> Aim</a></li>
+<li class="chapter" data-level="6.2" data-path="simst1-dgms.html"><a href="simst1-dgms.html"><i class="fa fa-check"></i><b>6.2</b> Data-generating mechanisms</a></li>
+<li class="chapter" data-level="6.3" data-path="simst1-methods.html"><a href="simst1-methods.html"><i class="fa fa-check"></i><b>6.3</b> Methods</a></li>
+<li class="chapter" data-level="6.4" data-path="simst1-est.html"><a href="simst1-est.html"><i class="fa fa-check"></i><b>6.4</b> Estimands</a></li>
+<li class="chapter" data-level="6.5" data-path="simst1-pm.html"><a href="simst1-pm.html"><i class="fa fa-check"></i><b>6.5</b> Performance measures</a></li>
+<li class="chapter" data-level="6.6" data-path="simst1-res.html"><a href="simst1-res.html"><i class="fa fa-check"></i><b>6.6</b> Results</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="simst1-res.html"><a href="simst1-res.html#aim-1-comparison-of-gaussian-quadrature-with-analytical-formulae"><i class="fa fa-check"></i><b>6.6.1</b> Aim 1: comparison of Gaussian quadrature with analytical formulae</a></li>
+<li class="chapter" data-level="6.6.2" data-path="simst1-res.html"><a href="simst1-res.html#aim-2-accuracy-when-analytical-formulae-are-not-available"><i class="fa fa-check"></i><b>6.6.2</b> Aim 2: accuracy when analytical formulae are not available</a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="simst1-conclusions.html"><a href="simst1-conclusions.html"><i class="fa fa-check"></i><b>6.7</b> Conclusions</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="simst2.html"><a href="simst2.html"><i class="fa fa-check"></i><b>7</b> Simulation study: impact of misspecification in survival models with shared frailty terms</a><ul>
+<li class="chapter" data-level="7.1" data-path="simst2-aim.html"><a href="simst2-aim.html"><i class="fa fa-check"></i><b>7.1</b> Aim</a></li>
+<li class="chapter" data-level="7.2" data-path="simst2-dgms.html"><a href="simst2-dgms.html"><i class="fa fa-check"></i><b>7.2</b> Data-generating mechanisms</a></li>
+<li class="chapter" data-level="7.3" data-path="simst2-methods.html"><a href="simst2-methods.html"><i class="fa fa-check"></i><b>7.3</b> Methods</a></li>
+<li class="chapter" data-level="7.4" data-path="simst2-est.html"><a href="simst2-est.html"><i class="fa fa-check"></i><b>7.4</b> Estimands</a></li>
+<li class="chapter" data-level="7.5" data-path="simst2-pm.html"><a href="simst2-pm.html"><i class="fa fa-check"></i><b>7.5</b> Performance measures</a></li>
+<li class="chapter" data-level="7.6" data-path="simst2-res.html"><a href="simst2-res.html"><i class="fa fa-check"></i><b>7.6</b> Results</a></li>
+<li class="chapter" data-level="7.7" data-path="simst2-conclusions.html"><a href="simst2-conclusions.html"><i class="fa fa-check"></i><b>7.7</b> Conclusions</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="sirex.html"><a href="sirex.html"><i class="fa fa-check"></i><b>8</b> Exploring results from simulation studies interactively</a></li>
+<li class="chapter" data-level="9" data-path="infvp.html"><a href="infvp.html"><i class="fa fa-check"></i><b>9</b> Informative visiting process</a></li>
+<li class="chapter" data-level="10" data-path="future.html"><a href="future.html"><i class="fa fa-check"></i><b>10</b> Future research developments</a></li>
+<li class="chapter" data-level="11" data-path="pdevelop.html"><a href="pdevelop.html"><i class="fa fa-check"></i><b>11</b> Personal development</a><ul>
+<li class="chapter" data-level="11.1" data-path="supervisory-meetings.html"><a href="supervisory-meetings.html"><i class="fa fa-check"></i><b>11.1</b> Supervisory meetings</a></li>
+<li class="chapter" data-level="11.2" data-path="training-and-courses.html"><a href="training-and-courses.html"><i class="fa fa-check"></i><b>11.2</b> Training and courses</a></li>
+<li class="chapter" data-level="11.3" data-path="conferences.html"><a href="conferences.html"><i class="fa fa-check"></i><b>11.3</b> Conferences</a></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="ax-tables.html"><a href="ax-tables.html"><i class="fa fa-check"></i><b>A</b> Tables</a></li>
+<li class="chapter" data-level="B" data-path="ax-plots.html"><a href="ax-plots.html"><i class="fa fa-check"></i><b>B</b> Plots</a></li>
+<li class="chapter" data-level="C" data-path="ax-slides.html"><a href="ax-slides.html"><i class="fa fa-check"></i><b>C</b> Slides</a><ul>
+<li class="chapter" data-level="C.1" data-path="ax-slides-safjr.html"><a href="ax-slides-safjr.html"><i class="fa fa-check"></i><b>C.1</b> 2017 SAfJR Conference</a></li>
+<li class="chapter" data-level="C.2" data-path="ax-slides-sam-iscb.html"><a href="ax-slides-sam-iscb.html"><i class="fa fa-check"></i><b>C.2</b> 2017 SAM Conference and ISCB Conference</a></li>
+<li class="chapter" data-level="C.3" data-path="ax-slides-students-day.html"><a href="ax-slides-students-day.html"><i class="fa fa-check"></i><b>C.3</b> Students’ Day at the 2017 ISCB Conference</a></li>
+</ul></li>
+<li class="chapter" data-level="D" data-path="ax-manuscript.html"><a href="ax-manuscript.html"><i class="fa fa-check"></i><b>D</b> Manuscript draft</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Probation review report</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="compch-numroot" class="section level2">
+<h2><span class="header-section-number">4.3</span> Numerical root finding</h2>
+<p>Root-finding algorithms are algorithms for finding the values <span class="math inline">\(x\)</span> such that <span class="math inline">\(f(x) = 0\)</span>, for a given continuous function <span class="math inline">\(f(\cdot)\)</span>. Such values <span class="math inline">\(x\)</span> are named roots (or zeros) of a function. Most root-finding algorithms are based on the intermediate value theorem, which states that if a continuous function has values of opposite sign at the end points of an interval then the function has at least one root in the interval.</p>
+<p>For instance, the easiest root-finding method is the <em>bisection method</em>: let <span class="math inline">\(f(x)\)</span> be a continuous function, for which one knows an interval <span class="math inline">\([a, b]\)</span> such that <span class="math inline">\(f(a)\)</span> and <span class="math inline">\(f(b)\)</span> have opposite sign. Let <span class="math inline">\(c = (a + b) / 2\)</span> be the midpoint the bisect the interval: now, either <span class="math inline">\(f(a)\)</span> and <span class="math inline">\(f(c)\)</span> or <span class="math inline">\(f(c)\)</span> and <span class="math inline">\(f(b)\)</span> have opposite sign, and one has in fact divided by two the size of the interval. One can iterate this method until the difference between the extremities of the interval is small enough (e.g. <span class="math inline">\(&lt;1 \times 10^{-8}\)</span>).</p>
+<p>Another well established method is the <em>secant method</em>: it uses a succession of roots of secant lines to approximate the root of a function <span class="math inline">\(f(x)\)</span>. Starting with values <span class="math inline">\(x_0\)</span> and <span class="math inline">\(x_1\)</span>, a line is constructed between <span class="math inline">\((x_0, f(x_0))\)</span> and <span class="math inline">\((x_1, f(x_1))\)</span>: <span class="math display">\[
+y = \frac{f(x_1) - f(x_0)}{x_1 - x_0}(x - x_1) + f(x_1)
+\]</span> The root of this line is <span class="math display">\[
+x = x_1 - f(x_1) \frac{x_1 - x_0}{f(x_1) - f(x_0)}
+\]</span> Now, we set <span class="math inline">\(x_2 = x\)</span> and we iterate this method until the difference between the extremities of the interval is small enough (e.g. <span class="math inline">\(&lt;1 \times 10^{-8}\)</span>).</p>
+<p>The secant method is also known as a <em>linear interpolation</em> method; it is also possible to use higher order interpolation, specifically <em>quadratic interpolation</em>, to find the root of a function using the same rationale presented for the secant method. Specifically, starting with three starting values <span class="math inline">\(x_0\)</span>, <span class="math inline">\(x_1\)</span>, <span class="math inline">\(x_2\)</span> and their function values <span class="math inline">\(f(x_0)\)</span>, <span class="math inline">\(f(x_1)\)</span>, <span class="math inline">\(f(x_2)\)</span>, applying the Lagrange interpolation formula to interpolate the inverse of <span class="math inline">\(f(x)\)</span> yields the equation <span class="math display">\[
+\begin{aligned}
+f^{-1}(y) &amp;= \frac{(y - f(x_1))(y - f(x_2))}{(f(x_0) - f(x_1))(f(x_0) - f(x_2))}x_{0} + \frac{(y - f(x_0))(y - f(x_2))}{(f(x_1) - f(x_0))(f(x_1) - f(x_2))}x_{1} + \\
+          &amp;\frac{(y - f(x_0))(y - f(x_1))}{(f(x_2) - f(x_0))(f(x_2) - f(x_1))}x_{2}
+\end{aligned}
+\]</span> Substituting <span class="math inline">\(y = 0\)</span> in the above equation yields the recursion formula, to be iterated until a desired precision is reached.</p>
+<p>Finally, a well-established and robust method is the <em>Brent-Dekker</em> method, implemented in R with the <code>uniroot()</code> function. It combines the three methods presented before, trying to use the secant or quadratic interpolation method first - as they tend to converge faster to a solution - but falling back to the bisection method if necessary, for its robustness properties. More details on the Brent-Dekker method in <span class="citation">Brent (<a href="#ref-brent_1973">1973</a>)</span>.</p>
+
+</div>
+<!-- </div> -->
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-brent_1973">
+<p>Brent, Richard P. 1973. <em>Algorithms for Minimization Without Derivatives</em>. Prentice-Hall.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="compch-numdiff.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="simsurv.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"google": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["Probation_review_report_AG.pdf"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(script.src))
+      script.src  = script.src.replace(/^https?:/, '');
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

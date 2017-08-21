@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Probation review report</title>
   <meta name="description" content="Probation review report">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Probation review report" />
   <meta property="og:type" content="book" />
@@ -25,7 +25,7 @@
 <meta name="author" content="Alessandro Gasparini">
 
 
-<meta name="date" content="2017-08-20">
+<meta name="date" content="2017-08-21">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -33,7 +33,7 @@
   
   
 <link rel="prev" href="conferences.html">
-<link rel="next" href="ax-tables-simst1.html">
+<link rel="next" href="ax-plots.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,38 +49,6 @@
 
 
 
-<style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #0000ff; } /* Keyword */
-code > span.ch { color: #008080; } /* Char */
-code > span.st { color: #008080; } /* String */
-code > span.co { color: #008000; } /* Comment */
-code > span.ot { color: #ff4000; } /* Other */
-code > span.al { color: #ff0000; } /* Alert */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #008000; font-weight: bold; } /* Warning */
-code > span.cn { } /* Constant */
-code > span.sc { color: #008080; } /* SpecialChar */
-code > span.vs { color: #008080; } /* VerbatimString */
-code > span.ss { color: #008080; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { } /* Variable */
-code > span.cf { color: #0000ff; } /* ControlFlow */
-code > span.op { } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #ff4000; } /* Preprocessor */
-code > span.do { color: #008000; } /* Documentation */
-code > span.an { color: #008000; } /* Annotation */
-code > span.cv { color: #008000; } /* CommentVar */
-code > span.at { } /* Attribute */
-code > span.in { color: #008000; } /* Information */
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -96,24 +64,7 @@ code > span.in { color: #008000; } /* Information */
 
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
-<li class="chapter" data-level="1" data-path="sa.html"><a href="sa.html"><i class="fa fa-check"></i><b>1</b> Introduction to survival analysis</a><ul>
-<li class="chapter" data-level="1.1" data-path="sa-survdata.html"><a href="sa-survdata.html"><i class="fa fa-check"></i><b>1.1</b> Survival data</a></li>
-<li class="chapter" data-level="1.2" data-path="sa-censoring.html"><a href="sa-censoring.html"><i class="fa fa-check"></i><b>1.2</b> Censoring</a></li>
-<li class="chapter" data-level="1.3" data-path="sa-terminology-notation.html"><a href="sa-terminology-notation.html"><i class="fa fa-check"></i><b>1.3</b> Terminology and notation</a></li>
-<li class="chapter" data-level="1.4" data-path="sa-estsurv.html"><a href="sa-estsurv.html"><i class="fa fa-check"></i><b>1.4</b> Estimation of the survival function</a></li>
-<li class="chapter" data-level="1.5" data-path="sa-parsa.html"><a href="sa-parsa.html"><i class="fa fa-check"></i><b>1.5</b> Parametric survival models</a><ul>
-<li class="chapter" data-level="1.5.1" data-path="sa-parsa.html"><a href="sa-parsa.html#sa-parsa-distributions"><i class="fa fa-check"></i><b>1.5.1</b> Failure time distributions</a></li>
-<li class="chapter" data-level="1.5.2" data-path="sa-parsa.html"><a href="sa-parsa.html#sa-parsa-estimation"><i class="fa fa-check"></i><b>1.5.2</b> Estimation procedure</a></li>
-<li class="chapter" data-level="1.5.3" data-path="sa-parsa.html"><a href="sa-parsa.html#sa-parsa-example"><i class="fa fa-check"></i><b>1.5.3</b> Data analysis example</a></li>
-</ul></li>
-<li class="chapter" data-level="1.6" data-path="sa-cox.html"><a href="sa-cox.html"><i class="fa fa-check"></i><b>1.6</b> The Cox proportional hazards model</a><ul>
-<li class="chapter" data-level="1.6.1" data-path="sa-cox.html"><a href="sa-cox.html#sa-cox-estimation"><i class="fa fa-check"></i><b>1.6.1</b> Estimation procedure</a></li>
-<li class="chapter" data-level="1.6.2" data-path="sa-cox.html"><a href="sa-cox.html#sa-cox-estimating-survival"><i class="fa fa-check"></i><b>1.6.2</b> Estimating the survival function</a></li>
-<li class="chapter" data-level="1.6.3" data-path="sa-cox.html"><a href="sa-cox.html#sa-model-assumptions"><i class="fa fa-check"></i><b>1.6.3</b> Model assumptions</a></li>
-<li class="chapter" data-level="1.6.4" data-path="sa-cox.html"><a href="sa-cox.html#sa-cox-example"><i class="fa fa-check"></i><b>1.6.4</b> Data analysis example</a></li>
-</ul></li>
-<li class="chapter" data-level="1.7" data-path="sa-advances.html"><a href="sa-advances.html"><i class="fa fa-check"></i><b>1.7</b> Advances in survival analysis</a></li>
-</ul></li>
+<li class="chapter" data-level="1" data-path="terminology-notation.html"><a href="terminology-notation.html"><i class="fa fa-check"></i><b>1</b> Terminology and notation</a></li>
 <li class="chapter" data-level="2" data-path="smre.html"><a href="smre.html"><i class="fa fa-check"></i><b>2</b> Survival models with random effects</a><ul>
 <li class="chapter" data-level="2.1" data-path="smre-univariate-frailty.html"><a href="smre-univariate-frailty.html"><i class="fa fa-check"></i><b>2.1</b> Univariate frailty models</a></li>
 <li class="chapter" data-level="2.2" data-path="smre-shared-frailty.html"><a href="smre-shared-frailty.html"><i class="fa fa-check"></i><b>2.2</b> Shared frailty models</a></li>
@@ -128,11 +79,8 @@ code > span.in { color: #008000; } /* Information */
 <li class="chapter" data-level="4.1.1" data-path="compch-numintgr.html"><a href="compch-numintgr.html#compch-numintgr-uni"><i class="fa fa-check"></i><b>4.1.1</b> Unidimensional functions</a></li>
 <li class="chapter" data-level="4.1.2" data-path="compch-numintgr.html"><a href="compch-numintgr.html#compch-numintgr-multi"><i class="fa fa-check"></i><b>4.1.2</b> Multidimensional functions</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="compch-other.html"><a href="compch-other.html"><i class="fa fa-check"></i><b>4.2</b> Other considerations</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="compch-other.html"><a href="compch-other.html#compch-other-precision"><i class="fa fa-check"></i><b>4.2.1</b> Cancellation error, precision, and arithmetic over- and under-flow</a></li>
-<li class="chapter" data-level="4.2.2" data-path="compch-other.html"><a href="compch-other.html#compch-other-numdiff"><i class="fa fa-check"></i><b>4.2.2</b> Numerical differentiation</a></li>
-<li class="chapter" data-level="4.2.3" data-path="compch-other.html"><a href="compch-other.html#compch-numroot"><i class="fa fa-check"></i><b>4.2.3</b> Numerical root finding</a></li>
-</ul></li>
+<li class="chapter" data-level="4.2" data-path="compch-numdiff.html"><a href="compch-numdiff.html"><i class="fa fa-check"></i><b>4.2</b> Numerical differentiation</a></li>
+<li class="chapter" data-level="4.3" data-path="compch-numroot.html"><a href="compch-numroot.html"><i class="fa fa-check"></i><b>4.3</b> Numerical root finding</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="simsurv.html"><a href="simsurv.html"><i class="fa fa-check"></i><b>5</b> Simulating survival data</a></li>
 <li class="chapter" data-level="6" data-path="simst1.html"><a href="simst1.html"><i class="fa fa-check"></i><b>6</b> Simulation study: accuracy of Gaussian quadrature</a><ul>
@@ -156,10 +104,7 @@ code > span.in { color: #008000; } /* Information */
 <li class="chapter" data-level="7.6" data-path="simst2-res.html"><a href="simst2-res.html"><i class="fa fa-check"></i><b>7.6</b> Results</a></li>
 <li class="chapter" data-level="7.7" data-path="simst2-conclusions.html"><a href="simst2-conclusions.html"><i class="fa fa-check"></i><b>7.7</b> Conclusions</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="sirex.html"><a href="sirex.html"><i class="fa fa-check"></i><b>8</b> Exploring results from simulation studies interactively</a><ul>
-<li class="chapter" data-level="8.1" data-path="sirex-rationale.html"><a href="sirex-rationale.html"><i class="fa fa-check"></i><b>8.1</b> Rationale</a></li>
-<li class="chapter" data-level="8.2" data-path="sirex-sirex.html"><a href="sirex-sirex.html"><i class="fa fa-check"></i><b>8.2</b> SiReX</a></li>
-</ul></li>
+<li class="chapter" data-level="8" data-path="sirex.html"><a href="sirex.html"><i class="fa fa-check"></i><b>8</b> Exploring results from simulation studies interactively</a></li>
 <li class="chapter" data-level="9" data-path="infvp.html"><a href="infvp.html"><i class="fa fa-check"></i><b>9</b> Informative visiting process</a></li>
 <li class="chapter" data-level="10" data-path="future.html"><a href="future.html"><i class="fa fa-check"></i><b>10</b> Future research developments</a></li>
 <li class="chapter" data-level="11" data-path="pdevelop.html"><a href="pdevelop.html"><i class="fa fa-check"></i><b>11</b> Personal development</a><ul>
@@ -168,21 +113,14 @@ code > span.in { color: #008000; } /* Information */
 <li class="chapter" data-level="11.3" data-path="conferences.html"><a href="conferences.html"><i class="fa fa-check"></i><b>11.3</b> Conferences</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
-<li class="chapter" data-level="A" data-path="ax-tables.html"><a href="ax-tables.html"><i class="fa fa-check"></i><b>A</b> Tables</a><ul>
-<li class="chapter" data-level="A.1" data-path="ax-tables-simst1.html"><a href="ax-tables-simst1.html"><i class="fa fa-check"></i><b>A.1</b> Simulation study 1</a></li>
-<li class="chapter" data-level="A.2" data-path="ax-tables-simst2.html"><a href="ax-tables-simst2.html"><i class="fa fa-check"></i><b>A.2</b> Simulation study 2</a></li>
-</ul></li>
-<li class="chapter" data-level="B" data-path="ax-plots.html"><a href="ax-plots.html"><i class="fa fa-check"></i><b>B</b> Plots</a><ul>
-<li class="chapter" data-level="B.1" data-path="ax-plots-simst1.html"><a href="ax-plots-simst1.html"><i class="fa fa-check"></i><b>B.1</b> Simulation study 1</a></li>
-<li class="chapter" data-level="B.2" data-path="ax-plots-simst2.html"><a href="ax-plots-simst2.html"><i class="fa fa-check"></i><b>B.2</b> Simulation study 2</a></li>
-</ul></li>
+<li class="chapter" data-level="A" data-path="ax-tables.html"><a href="ax-tables.html"><i class="fa fa-check"></i><b>A</b> Tables</a></li>
+<li class="chapter" data-level="B" data-path="ax-plots.html"><a href="ax-plots.html"><i class="fa fa-check"></i><b>B</b> Plots</a></li>
 <li class="chapter" data-level="C" data-path="ax-slides.html"><a href="ax-slides.html"><i class="fa fa-check"></i><b>C</b> Slides</a><ul>
 <li class="chapter" data-level="C.1" data-path="ax-slides-safjr.html"><a href="ax-slides-safjr.html"><i class="fa fa-check"></i><b>C.1</b> 2017 SAfJR Conference</a></li>
 <li class="chapter" data-level="C.2" data-path="ax-slides-sam-iscb.html"><a href="ax-slides-sam-iscb.html"><i class="fa fa-check"></i><b>C.2</b> 2017 SAM Conference and ISCB Conference</a></li>
-<li class="chapter" data-level="C.3" data-path="ax-slides-students-day.html"><a href="ax-slides-students-day.html"><i class="fa fa-check"></i><b>C.3</b> Students’ Day at the ISCB Conference</a></li>
+<li class="chapter" data-level="C.3" data-path="ax-slides-students-day.html"><a href="ax-slides-students-day.html"><i class="fa fa-check"></i><b>C.3</b> Students’ Day at the 2017 ISCB Conference</a></li>
 </ul></li>
-<li class="chapter" data-level="D" data-path="ax-manuscript.html"><a href="ax-manuscript.html"><i class="fa fa-check"></i><b>D</b> Manuscript</a></li>
-<li class="chapter" data-level="E" data-path="ax-r-session.html"><a href="ax-r-session.html"><i class="fa fa-check"></i><b>E</b> R Session</a></li>
+<li class="chapter" data-level="D" data-path="ax-manuscript.html"><a href="ax-manuscript.html"><i class="fa fa-check"></i><b>D</b> Manuscript draft</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
@@ -202,7 +140,4337 @@ code > span.in { color: #008000; } /* Information */
 
             <section class="normal" id="section-">
 <div id="ax-tables" class="section level1">
-<h1><span class="header-section-number">A</span> Tables</h1> 
+<h1><span class="header-section-number">A</span> Tables</h1>
+<table>
+<caption><span id="tab:sim1-an-vs-gq-scenario1-bias-t">Table A.1: </span>Bias, comparison with analytical formulae, scenario with a small frailty variance and a negative regression coefficient.</caption>
+<thead>
+<tr class="header">
+<th align="right">Sample size</th>
+<th align="right">Method</th>
+<th align="right">Lambda</th>
+<th align="right">P</th>
+<th align="right">Beta</th>
+<th align="right">Theta</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1000c. of 2i.</td>
+<td align="right">AF</td>
+<td align="right">0.002 (0.002)</td>
+<td align="right">0.001 (0.001)</td>
+<td align="right">-0.003 (0.002)</td>
+<td align="right">-0.017 (0.008)</td>
+</tr>
+<tr class="even">
+<td align="right">1000c. of 2i.</td>
+<td align="right">IN</td>
+<td align="right">0.000 (0.002)</td>
+<td align="right">0.000 (0.001)</td>
+<td align="right">-0.003 (0.002)</td>
+<td align="right">-0.032 (0.008)</td>
+</tr>
+<tr class="odd">
+<td align="right">1000c. of 2i.</td>
+<td align="right">GQ15</td>
+<td align="right">0.011 (0.002)</td>
+<td align="right">0.005 (0.001)</td>
+<td align="right">-0.007 (0.002)</td>
+<td align="right">0.086 (0.003)</td>
+</tr>
+<tr class="even">
+<td align="right">1000c. of 2i.</td>
+<td align="right">GQ35</td>
+<td align="right">0.002 (0.002)</td>
+<td align="right">0.001 (0.001)</td>
+<td align="right">-0.003 (0.002)</td>
+<td align="right">-0.011 (0.008)</td>
+</tr>
+<tr class="odd">
+<td align="right">1000c. of 2i.</td>
+<td align="right">GQ75</td>
+<td align="right">0.002 (0.002)</td>
+<td align="right">0.001 (0.001)</td>
+<td align="right">-0.003 (0.002)</td>
+<td align="right">-0.017 (0.008)</td>
+</tr>
+<tr class="even">
+<td align="right">1000c. of 2i.</td>
+<td align="right">GQ105</td>
+<td align="right">0.002 (0.002)</td>
+<td align="right">0.001 (0.001)</td>
+<td align="right">-0.003 (0.002)</td>
+<td align="right">-0.017 (0.008)</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 100i.</td>
+<td align="right">AF</td>
+<td align="right">-0.008 (0.004)</td>
+<td align="right">0.002 (0.001)</td>
+<td align="right">-0.001 (0.002)</td>
+<td align="right">-0.146 (0.013)</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 100i.</td>
+<td align="right">IN</td>
+<td align="right">-0.007 (0.004)</td>
+<td align="right">0.002 (0.001)</td>
+<td align="right">-0.001 (0.002)</td>
+<td align="right">-0.146 (0.013)</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 100i.</td>
+<td align="right">GQ15</td>
+<td align="right">-0.165 (0.008)</td>
+<td align="right">0.003 (0.001)</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">0.223 (0.013)</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 100i.</td>
+<td align="right">GQ35</td>
+<td align="right">-0.086 (0.006)</td>
+<td align="right">0.002 (0.001)</td>
+<td align="right">-0.001 (0.002)</td>
+<td align="right">-0.028 (0.013)</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 100i.</td>
+<td align="right">GQ75</td>
+<td align="right">-0.040 (0.005)</td>
+<td align="right">0.001 (0.001)</td>
+<td align="right">-0.001 (0.002)</td>
+<td align="right">-0.114 (0.013)</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 100i.</td>
+<td align="right">GQ105</td>
+<td align="right">-0.008 (0.005)</td>
+<td align="right">0.002 (0.001)</td>
+<td align="right">-0.001 (0.002)</td>
+<td align="right">-0.130 (0.013)</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 30i.</td>
+<td align="right">AF</td>
+<td align="right">-0.010 (0.005)</td>
+<td align="right">0.002 (0.002)</td>
+<td align="right">-0.007 (0.004)</td>
+<td align="right">-0.215 (0.017)</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 30i.</td>
+<td align="right">IN</td>
+<td align="right">-0.008 (0.005)</td>
+<td align="right">0.002 (0.002)</td>
+<td align="right">-0.008 (0.004)</td>
+<td align="right">-0.215 (0.017)</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 30i.</td>
+<td align="right">GQ15</td>
+<td align="right">-0.053 (0.007)</td>
+<td align="right">0.003 (0.002)</td>
+<td align="right">-0.007 (0.004)</td>
+<td align="right">-0.025 (0.014)</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 30i.</td>
+<td align="right">GQ35</td>
+<td align="right">-0.003 (0.005)</td>
+<td align="right">0.002 (0.002)</td>
+<td align="right">-0.008 (0.004)</td>
+<td align="right">-0.194 (0.021)</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 30i.</td>
+<td align="right">GQ75</td>
+<td align="right">-0.010 (0.005)</td>
+<td align="right">0.002 (0.002)</td>
+<td align="right">-0.007 (0.004)</td>
+<td align="right">-0.216 (0.017)</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 30i.</td>
+<td align="right">GQ105</td>
+<td align="right">-0.010 (0.005)</td>
+<td align="right">0.002 (0.002)</td>
+<td align="right">-0.007 (0.004)</td>
+<td align="right">-0.216 (0.017)</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 500i.</td>
+<td align="right">AF</td>
+<td align="right">-0.011 (0.004)</td>
+<td align="right">0.000 (0.000)</td>
+<td align="right">0.001 (0.001)</td>
+<td align="right">-0.142 (0.012)</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 500i.</td>
+<td align="right">IN</td>
+<td align="right">-0.049 (0.005)</td>
+<td align="right">0.000 (0.000)</td>
+<td align="right">0.001 (0.001)</td>
+<td align="right">-0.067 (0.013)</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 500i.</td>
+<td align="right">GQ15</td>
+<td align="right">-0.225 (0.009)</td>
+<td align="right">0.001 (0.000)</td>
+<td align="right">0.001 (0.001)</td>
+<td align="right">0.317 (0.015)</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 500i.</td>
+<td align="right">GQ35</td>
+<td align="right">-0.145 (0.006)</td>
+<td align="right">0.001 (0.000)</td>
+<td align="right">0.001 (0.001)</td>
+<td align="right">0.073 (0.013)</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 500i.</td>
+<td align="right">GQ75</td>
+<td align="right">-0.109 (0.005)</td>
+<td align="right">0.000 (0.000)</td>
+<td align="right">0.001 (0.001)</td>
+<td align="right">-0.033 (0.012)</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 500i.</td>
+<td align="right">GQ105</td>
+<td align="right">-0.101 (0.005)</td>
+<td align="right">0.000 (0.000)</td>
+<td align="right">0.001 (0.001)</td>
+<td align="right">-0.057 (0.012)</td>
+</tr>
+<tr class="odd">
+<td align="right">50c. of 100i.</td>
+<td align="right">AF</td>
+<td align="right">0.000 (0.002)</td>
+<td align="right">0.000 (0.001)</td>
+<td align="right">-0.002 (0.001)</td>
+<td align="right">-0.044 (0.007)</td>
+</tr>
+<tr class="even">
+<td align="right">50c. of 100i.</td>
+<td align="right">IN</td>
+<td align="right">0.001 (0.002)</td>
+<td align="right">0.000 (0.001)</td>
+<td align="right">-0.002 (0.001)</td>
+<td align="right">-0.045 (0.007)</td>
+</tr>
+<tr class="odd">
+<td align="right">50c. of 100i.</td>
+<td align="right">GQ15</td>
+<td align="right">-0.207 (0.006)</td>
+<td align="right">0.001 (0.001)</td>
+<td align="right">-0.003 (0.001)</td>
+<td align="right">0.316 (0.009)</td>
+</tr>
+<tr class="even">
+<td align="right">50c. of 100i.</td>
+<td align="right">GQ35</td>
+<td align="right">-0.088 (0.004)</td>
+<td align="right">0.000 (0.001)</td>
+<td align="right">-0.002 (0.001)</td>
+<td align="right">0.062 (0.007)</td>
+</tr>
+<tr class="odd">
+<td align="right">50c. of 100i.</td>
+<td align="right">GQ75</td>
+<td align="right">-0.020 (0.003)</td>
+<td align="right">0.000 (0.001)</td>
+<td align="right">-0.002 (0.001)</td>
+<td align="right">-0.025 (0.007)</td>
+</tr>
+<tr class="even">
+<td align="right">50c. of 100i.</td>
+<td align="right">GQ105</td>
+<td align="right">-0.002 (0.003)</td>
+<td align="right">0.000 (0.001)</td>
+<td align="right">-0.002 (0.001)</td>
+<td align="right">-0.036 (0.007)</td>
+</tr>
+<tr class="odd">
+<td align="right">50c. of 30i.</td>
+<td align="right">AF</td>
+<td align="right">-0.002 (0.003)</td>
+<td align="right">0.000 (0.001)</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">-0.046 (0.008)</td>
+</tr>
+<tr class="even">
+<td align="right">50c. of 30i.</td>
+<td align="right">IN</td>
+<td align="right">-0.002 (0.003)</td>
+<td align="right">0.000 (0.001)</td>
+<td align="right">-0.004 (0.002)</td>
+<td align="right">-0.043 (0.008)</td>
+</tr>
+<tr class="odd">
+<td align="right">50c. of 30i.</td>
+<td align="right">GQ15</td>
+<td align="right">-0.045 (0.004)</td>
+<td align="right">0.001 (0.001)</td>
+<td align="right">-0.003 (0.002)</td>
+<td align="right">0.082 (0.007)</td>
+</tr>
+<tr class="even">
+<td align="right">50c. of 30i.</td>
+<td align="right">GQ35</td>
+<td align="right">-0.002 (0.003)</td>
+<td align="right">0.000 (0.001)</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">-0.038 (0.008)</td>
+</tr>
+<tr class="odd">
+<td align="right">50c. of 30i.</td>
+<td align="right">GQ75</td>
+<td align="right">-0.002 (0.003)</td>
+<td align="right">0.000 (0.001)</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">-0.046 (0.008)</td>
+</tr>
+<tr class="even">
+<td align="right">50c. of 30i.</td>
+<td align="right">GQ105</td>
+<td align="right">-0.002 (0.003)</td>
+<td align="right">0.000 (0.001)</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">-0.046 (0.008)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption><span id="tab:sim1-an-vs-gq-scenario1-cov-t">Table A.2: </span>Coverage, comparison with analytical formulae, scenario with a small frailty variance and a negative regression coefficient.</caption>
+<thead>
+<tr class="header">
+<th align="right">Sample size</th>
+<th align="right">Method</th>
+<th align="right">Lambda</th>
+<th align="right">P</th>
+<th align="right">Beta</th>
+<th align="right">Theta</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1000c. of 2i.</td>
+<td align="right">AF</td>
+<td align="right">94.20 (0.74)</td>
+<td align="right">95.50 (0.66)</td>
+<td align="right">95.00 (0.69)</td>
+<td align="right">96.50 (0.58)</td>
+</tr>
+<tr class="even">
+<td align="right">1000c. of 2i.</td>
+<td align="right">IN</td>
+<td align="right">93.42 (0.78)</td>
+<td align="right">95.70 (0.64)</td>
+<td align="right">93.02 (0.81)</td>
+<td align="right">77.45 (1.32)</td>
+</tr>
+<tr class="odd">
+<td align="right">1000c. of 2i.</td>
+<td align="right">GQ15</td>
+<td align="right">93.60 (0.77)</td>
+<td align="right">95.40 (0.66)</td>
+<td align="right">95.10 (0.68)</td>
+<td align="right">98.70 (0.36)</td>
+</tr>
+<tr class="even">
+<td align="right">1000c. of 2i.</td>
+<td align="right">GQ35</td>
+<td align="right">94.29 (0.73)</td>
+<td align="right">95.10 (0.68)</td>
+<td align="right">95.30 (0.67)</td>
+<td align="right">95.90 (0.63)</td>
+</tr>
+<tr class="odd">
+<td align="right">1000c. of 2i.</td>
+<td align="right">GQ75</td>
+<td align="right">94.20 (0.74)</td>
+<td align="right">95.50 (0.66)</td>
+<td align="right">95.00 (0.69)</td>
+<td align="right">96.50 (0.58)</td>
+</tr>
+<tr class="even">
+<td align="right">1000c. of 2i.</td>
+<td align="right">GQ105</td>
+<td align="right">94.20 (0.74)</td>
+<td align="right">95.50 (0.66)</td>
+<td align="right">95.00 (0.69)</td>
+<td align="right">96.50 (0.58)</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 100i.</td>
+<td align="right">AF</td>
+<td align="right">92.40 (0.84)</td>
+<td align="right">95.50 (0.66)</td>
+<td align="right">94.70 (0.71)</td>
+<td align="right">92.60 (0.83)</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 100i.</td>
+<td align="right">IN</td>
+<td align="right">90.65 (0.92)</td>
+<td align="right">95.48 (0.66)</td>
+<td align="right">94.45 (0.72)</td>
+<td align="right">92.39 (0.84)</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 100i.</td>
+<td align="right">GQ15</td>
+<td align="right">27.80 (1.42)</td>
+<td align="right">94.60 (0.71)</td>
+<td align="right">94.90 (0.70)</td>
+<td align="right">86.70 (1.07)</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 100i.</td>
+<td align="right">GQ35</td>
+<td align="right">44.04 (1.57)</td>
+<td align="right">94.79 (0.70)</td>
+<td align="right">94.89 (0.70)</td>
+<td align="right">93.99 (0.75)</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 100i.</td>
+<td align="right">GQ75</td>
+<td align="right">66.00 (1.50)</td>
+<td align="right">95.10 (0.68)</td>
+<td align="right">95.10 (0.68)</td>
+<td align="right">93.00 (0.81)</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 100i.</td>
+<td align="right">GQ105</td>
+<td align="right">76.20 (1.35)</td>
+<td align="right">95.50 (0.66)</td>
+<td align="right">94.80 (0.70)</td>
+<td align="right">92.50 (0.83)</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 30i.</td>
+<td align="right">AF</td>
+<td align="right">92.70 (0.82)</td>
+<td align="right">95.00 (0.69)</td>
+<td align="right">94.70 (0.71)</td>
+<td align="right">94.50 (0.72)</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 30i.</td>
+<td align="right">IN</td>
+<td align="right">92.21 (0.85)</td>
+<td align="right">94.91 (0.69)</td>
+<td align="right">94.08 (0.75)</td>
+<td align="right">93.15 (0.80)</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 30i.</td>
+<td align="right">GQ15</td>
+<td align="right">68.10 (1.47)</td>
+<td align="right">94.70 (0.71)</td>
+<td align="right">94.70 (0.71)</td>
+<td align="right">93.10 (0.80)</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 30i.</td>
+<td align="right">GQ35</td>
+<td align="right">88.91 (0.99)</td>
+<td align="right">94.61 (0.71)</td>
+<td align="right">94.20 (0.74)</td>
+<td align="right">95.23 (0.67)</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 30i.</td>
+<td align="right">GQ75</td>
+<td align="right">92.50 (0.83)</td>
+<td align="right">95.00 (0.69)</td>
+<td align="right">94.70 (0.71)</td>
+<td align="right">94.10 (0.75)</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 30i.</td>
+<td align="right">GQ105</td>
+<td align="right">92.70 (0.82)</td>
+<td align="right">95.00 (0.69)</td>
+<td align="right">94.60 (0.71)</td>
+<td align="right">94.60 (0.71)</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 500i.</td>
+<td align="right">AF</td>
+<td align="right">92.50 (0.83)</td>
+<td align="right">95.40 (0.66)</td>
+<td align="right">95.70 (0.64)</td>
+<td align="right">91.60 (0.88)</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 500i.</td>
+<td align="right">IN</td>
+<td align="right">31.74 (1.47)</td>
+<td align="right">95.02 (0.69)</td>
+<td align="right">95.63 (0.65)</td>
+<td align="right">91.25 (0.89)</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 500i.</td>
+<td align="right">GQ15</td>
+<td align="right">11.00 (0.99)</td>
+<td align="right">92.50 (0.83)</td>
+<td align="right">94.90 (0.70)</td>
+<td align="right">80.40 (1.26)</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 500i.</td>
+<td align="right">GQ35</td>
+<td align="right">14.20 (1.10)</td>
+<td align="right">93.80 (0.76)</td>
+<td align="right">95.70 (0.64)</td>
+<td align="right">91.50 (0.88)</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 500i.</td>
+<td align="right">GQ75</td>
+<td align="right">18.40 (1.23)</td>
+<td align="right">94.80 (0.70)</td>
+<td align="right">95.90 (0.63)</td>
+<td align="right">93.40 (0.79)</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 500i.</td>
+<td align="right">GQ105</td>
+<td align="right">22.00 (1.31)</td>
+<td align="right">95.20 (0.68)</td>
+<td align="right">95.40 (0.66)</td>
+<td align="right">93.20 (0.80)</td>
+</tr>
+<tr class="odd">
+<td align="right">50c. of 100i.</td>
+<td align="right">AF</td>
+<td align="right">95.40 (0.66)</td>
+<td align="right">94.90 (0.70)</td>
+<td align="right">94.30 (0.73)</td>
+<td align="right">93.30 (0.79)</td>
+</tr>
+<tr class="even">
+<td align="right">50c. of 100i.</td>
+<td align="right">IN</td>
+<td align="right">93.07 (0.80)</td>
+<td align="right">94.56 (0.72)</td>
+<td align="right">93.82 (0.76)</td>
+<td align="right">91.68 (0.87)</td>
+</tr>
+<tr class="odd">
+<td align="right">50c. of 100i.</td>
+<td align="right">GQ15</td>
+<td align="right">17.20 (1.19)</td>
+<td align="right">94.30 (0.73)</td>
+<td align="right">94.70 (0.71)</td>
+<td align="right">60.60 (1.55)</td>
+</tr>
+<tr class="even">
+<td align="right">50c. of 100i.</td>
+<td align="right">GQ35</td>
+<td align="right">37.80 (1.53)</td>
+<td align="right">94.60 (0.71)</td>
+<td align="right">94.30 (0.73)</td>
+<td align="right">91.50 (0.88)</td>
+</tr>
+<tr class="odd">
+<td align="right">50c. of 100i.</td>
+<td align="right">GQ75</td>
+<td align="right">69.80 (1.45)</td>
+<td align="right">94.80 (0.70)</td>
+<td align="right">94.50 (0.72)</td>
+<td align="right">93.70 (0.77)</td>
+</tr>
+<tr class="even">
+<td align="right">50c. of 100i.</td>
+<td align="right">GQ105</td>
+<td align="right">82.90 (1.19)</td>
+<td align="right">94.90 (0.70)</td>
+<td align="right">94.20 (0.74)</td>
+<td align="right">93.60 (0.77)</td>
+</tr>
+<tr class="odd">
+<td align="right">50c. of 30i.</td>
+<td align="right">AF</td>
+<td align="right">93.80 (0.76)</td>
+<td align="right">95.30 (0.67)</td>
+<td align="right">95.30 (0.67)</td>
+<td align="right">95.40 (0.66)</td>
+</tr>
+<tr class="even">
+<td align="right">50c. of 30i.</td>
+<td align="right">IN</td>
+<td align="right">92.65 (0.83)</td>
+<td align="right">95.28 (0.67)</td>
+<td align="right">94.73 (0.71)</td>
+<td align="right">93.30 (0.79)</td>
+</tr>
+<tr class="odd">
+<td align="right">50c. of 30i.</td>
+<td align="right">GQ15</td>
+<td align="right">71.90 (1.42)</td>
+<td align="right">95.00 (0.69)</td>
+<td align="right">95.10 (0.68)</td>
+<td align="right">92.60 (0.83)</td>
+</tr>
+<tr class="even">
+<td align="right">50c. of 30i.</td>
+<td align="right">GQ35</td>
+<td align="right">92.00 (0.86)</td>
+<td align="right">95.10 (0.68)</td>
+<td align="right">95.10 (0.68)</td>
+<td align="right">93.90 (0.76)</td>
+</tr>
+<tr class="odd">
+<td align="right">50c. of 30i.</td>
+<td align="right">GQ75</td>
+<td align="right">93.80 (0.76)</td>
+<td align="right">95.40 (0.66)</td>
+<td align="right">95.20 (0.68)</td>
+<td align="right">95.40 (0.66)</td>
+</tr>
+<tr class="even">
+<td align="right">50c. of 30i.</td>
+<td align="right">GQ105</td>
+<td align="right">93.70 (0.77)</td>
+<td align="right">95.30 (0.67)</td>
+<td align="right">95.30 (0.67)</td>
+<td align="right">95.40 (0.66)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption><span id="tab:sim1-an-vs-gq-scenario1-mse-t">Table A.3: </span>Mean squared error, comparison with analytical formulae, scenario with a small frailty variance and a negative regression coefficient.</caption>
+<thead>
+<tr class="header">
+<th align="right">Sample size</th>
+<th align="right">Method</th>
+<th align="right">Lambda</th>
+<th align="right">P</th>
+<th align="right">Beta</th>
+<th align="right">Theta</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1000c. of 2i.</td>
+<td align="right">AF</td>
+<td align="right">0.0026</td>
+<td align="right">0.0008</td>
+<td align="right">0.0042</td>
+<td align="right">0.0670</td>
+</tr>
+<tr class="even">
+<td align="right">1000c. of 2i.</td>
+<td align="right">IN</td>
+<td align="right">0.0024</td>
+<td align="right">0.0008</td>
+<td align="right">0.0041</td>
+<td align="right">0.0635</td>
+</tr>
+<tr class="odd">
+<td align="right">1000c. of 2i.</td>
+<td align="right">GQ15</td>
+<td align="right">0.0024</td>
+<td align="right">0.0007</td>
+<td align="right">0.0042</td>
+<td align="right">0.0159</td>
+</tr>
+<tr class="even">
+<td align="right">1000c. of 2i.</td>
+<td align="right">GQ35</td>
+<td align="right">0.0025</td>
+<td align="right">0.0008</td>
+<td align="right">0.0042</td>
+<td align="right">0.0571</td>
+</tr>
+<tr class="odd">
+<td align="right">1000c. of 2i.</td>
+<td align="right">GQ75</td>
+<td align="right">0.0026</td>
+<td align="right">0.0008</td>
+<td align="right">0.0042</td>
+<td align="right">0.0668</td>
+</tr>
+<tr class="even">
+<td align="right">1000c. of 2i.</td>
+<td align="right">GQ105</td>
+<td align="right">0.0026</td>
+<td align="right">0.0008</td>
+<td align="right">0.0042</td>
+<td align="right">0.0669</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 100i.</td>
+<td align="right">AF</td>
+<td align="right">0.0190</td>
+<td align="right">0.0009</td>
+<td align="right">0.0045</td>
+<td align="right">0.1886</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 100i.</td>
+<td align="right">IN</td>
+<td align="right">0.0193</td>
+<td align="right">0.0009</td>
+<td align="right">0.0046</td>
+<td align="right">0.1880</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 100i.</td>
+<td align="right">GQ15</td>
+<td align="right">0.0867</td>
+<td align="right">0.0009</td>
+<td align="right">0.0046</td>
+<td align="right">0.2116</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 100i.</td>
+<td align="right">GQ35</td>
+<td align="right">0.0432</td>
+<td align="right">0.0009</td>
+<td align="right">0.0046</td>
+<td align="right">0.1621</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 100i.</td>
+<td align="right">GQ75</td>
+<td align="right">0.0274</td>
+<td align="right">0.0009</td>
+<td align="right">0.0045</td>
+<td align="right">0.1816</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 100i.</td>
+<td align="right">GQ105</td>
+<td align="right">0.0242</td>
+<td align="right">0.0009</td>
+<td align="right">0.0045</td>
+<td align="right">0.1877</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 30i.</td>
+<td align="right">AF</td>
+<td align="right">0.0262</td>
+<td align="right">0.0029</td>
+<td align="right">0.0157</td>
+<td align="right">0.3341</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 30i.</td>
+<td align="right">IN</td>
+<td align="right">0.0259</td>
+<td align="right">0.0029</td>
+<td align="right">0.0158</td>
+<td align="right">0.3353</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 30i.</td>
+<td align="right">GQ15</td>
+<td align="right">0.0517</td>
+<td align="right">0.0029</td>
+<td align="right">0.0161</td>
+<td align="right">0.2038</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 30i.</td>
+<td align="right">GQ35</td>
+<td align="right">0.0283</td>
+<td align="right">0.0029</td>
+<td align="right">0.0159</td>
+<td align="right">0.4801</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 30i.</td>
+<td align="right">GQ75</td>
+<td align="right">0.0263</td>
+<td align="right">0.0029</td>
+<td align="right">0.0157</td>
+<td align="right">0.3365</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 30i.</td>
+<td align="right">GQ105</td>
+<td align="right">0.0262</td>
+<td align="right">0.0029</td>
+<td align="right">0.0157</td>
+<td align="right">0.3414</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 500i.</td>
+<td align="right">AF</td>
+<td align="right">0.0169</td>
+<td align="right">0.0002</td>
+<td align="right">0.0009</td>
+<td align="right">0.1691</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 500i.</td>
+<td align="right">IN</td>
+<td align="right">0.0284</td>
+<td align="right">0.0002</td>
+<td align="right">0.0009</td>
+<td align="right">0.1835</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 500i.</td>
+<td align="right">GQ15</td>
+<td align="right">0.1315</td>
+<td align="right">0.0002</td>
+<td align="right">0.0009</td>
+<td align="right">0.3364</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 500i.</td>
+<td align="right">GQ35</td>
+<td align="right">0.0599</td>
+<td align="right">0.0002</td>
+<td align="right">0.0009</td>
+<td align="right">0.1638</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 500i.</td>
+<td align="right">GQ75</td>
+<td align="right">0.0394</td>
+<td align="right">0.0002</td>
+<td align="right">0.0009</td>
+<td align="right">0.1486</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 500i.</td>
+<td align="right">GQ105</td>
+<td align="right">0.0345</td>
+<td align="right">0.0002</td>
+<td align="right">0.0009</td>
+<td align="right">0.1477</td>
+</tr>
+<tr class="odd">
+<td align="right">50c. of 100i.</td>
+<td align="right">AF</td>
+<td align="right">0.0053</td>
+<td align="right">0.0003</td>
+<td align="right">0.0014</td>
+<td align="right">0.0487</td>
+</tr>
+<tr class="even">
+<td align="right">50c. of 100i.</td>
+<td align="right">IN</td>
+<td align="right">0.0054</td>
+<td align="right">0.0003</td>
+<td align="right">0.0014</td>
+<td align="right">0.0488</td>
+</tr>
+<tr class="odd">
+<td align="right">50c. of 100i.</td>
+<td align="right">GQ15</td>
+<td align="right">0.0816</td>
+<td align="right">0.0003</td>
+<td align="right">0.0014</td>
+<td align="right">0.1827</td>
+</tr>
+<tr class="even">
+<td align="right">50c. of 100i.</td>
+<td align="right">GQ35</td>
+<td align="right">0.0242</td>
+<td align="right">0.0003</td>
+<td align="right">0.0014</td>
+<td align="right">0.0555</td>
+</tr>
+<tr class="odd">
+<td align="right">50c. of 100i.</td>
+<td align="right">GQ75</td>
+<td align="right">0.0095</td>
+<td align="right">0.0003</td>
+<td align="right">0.0014</td>
+<td align="right">0.0480</td>
+</tr>
+<tr class="even">
+<td align="right">50c. of 100i.</td>
+<td align="right">GQ105</td>
+<td align="right">0.0076</td>
+<td align="right">0.0003</td>
+<td align="right">0.0014</td>
+<td align="right">0.0491</td>
+</tr>
+<tr class="odd">
+<td align="right">50c. of 30i.</td>
+<td align="right">AF</td>
+<td align="right">0.0073</td>
+<td align="right">0.0009</td>
+<td align="right">0.0047</td>
+<td align="right">0.0628</td>
+</tr>
+<tr class="even">
+<td align="right">50c. of 30i.</td>
+<td align="right">IN</td>
+<td align="right">0.0074</td>
+<td align="right">0.0009</td>
+<td align="right">0.0047</td>
+<td align="right">0.0629</td>
+</tr>
+<tr class="odd">
+<td align="right">50c. of 30i.</td>
+<td align="right">GQ15</td>
+<td align="right">0.0180</td>
+<td align="right">0.0009</td>
+<td align="right">0.0048</td>
+<td align="right">0.0560</td>
+</tr>
+<tr class="even">
+<td align="right">50c. of 30i.</td>
+<td align="right">GQ35</td>
+<td align="right">0.0082</td>
+<td align="right">0.0009</td>
+<td align="right">0.0047</td>
+<td align="right">0.0647</td>
+</tr>
+<tr class="odd">
+<td align="right">50c. of 30i.</td>
+<td align="right">GQ75</td>
+<td align="right">0.0073</td>
+<td align="right">0.0009</td>
+<td align="right">0.0047</td>
+<td align="right">0.0627</td>
+</tr>
+<tr class="even">
+<td align="right">50c. of 30i.</td>
+<td align="right">GQ105</td>
+<td align="right">0.0073</td>
+<td align="right">0.0009</td>
+<td align="right">0.0047</td>
+<td align="right">0.0628</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption><span id="tab:sim1-an-vs-gq-scenario1-convergence-t">Table A.4: </span>Convergence rates, comparison with analytical formulae, scenario with a small frailty variance and a negative regression coefficient.</caption>
+<thead>
+<tr class="header">
+<th align="right">Sample size</th>
+<th align="right">AF</th>
+<th align="right">IN</th>
+<th align="right">GQ15</th>
+<th align="right">GQ35</th>
+<th align="right">GQ75</th>
+<th align="right">GQ105</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1000c. of 2i.</td>
+<td align="right">100.0%</td>
+<td align="right">74.5%</td>
+<td align="right">100.0%</td>
+<td align="right">99.9%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 100i.</td>
+<td align="right">100.0%</td>
+<td align="right">97.3%</td>
+<td align="right">100.0%</td>
+<td align="right">99.9%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 30i.</td>
+<td align="right">100.0%</td>
+<td align="right">96.3%</td>
+<td align="right">100.0%</td>
+<td align="right">96.5%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 500i.</td>
+<td align="right">100.0%</td>
+<td align="right">98.3%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+</tr>
+<tr class="odd">
+<td align="right">50c. of 100i.</td>
+<td align="right">100.0%</td>
+<td align="right">93.8%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+</tr>
+<tr class="even">
+<td align="right">50c. of 30i.</td>
+<td align="right">100.0%</td>
+<td align="right">91.1%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption><span id="tab:sim1-normal-gq-scenario1-bias-t">Table A.5: </span>Bias, comparison without analytical formulae, scenario with a small frailty variance and a negative regression coefficient.</caption>
+<thead>
+<tr class="header">
+<th align="right">Sample size</th>
+<th align="right">Method</th>
+<th align="right">Lambda</th>
+<th align="right">P</th>
+<th align="right">Beta</th>
+<th align="right">Sigma</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1000c. of 2i.</td>
+<td align="right">GQ15</td>
+<td align="right">0.0187 (0.0012)</td>
+<td align="right">-0.0415 (0.0008)</td>
+<td align="right">0.0149 (0.0019)</td>
+<td align="right">-0.3010 (0.0250)</td>
+</tr>
+<tr class="even">
+<td align="right">1000c. of 2i.</td>
+<td align="right">GQ35</td>
+<td align="right">0.0188 (0.0012)</td>
+<td align="right">-0.0415 (0.0008)</td>
+<td align="right">0.0144 (0.0019)</td>
+<td align="right">-0.2842 (0.0232)</td>
+</tr>
+<tr class="odd">
+<td align="right">1000c. of 2i.</td>
+<td align="right">GQ75</td>
+<td align="right">0.0188 (0.0012)</td>
+<td align="right">-0.0415 (0.0008)</td>
+<td align="right">0.0146 (0.0019)</td>
+<td align="right">-0.3057 (0.0254)</td>
+</tr>
+<tr class="even">
+<td align="right">1000c. of 2i.</td>
+<td align="right">GQ105</td>
+<td align="right">0.0187 (0.0012)</td>
+<td align="right">-0.0415 (0.0008)</td>
+<td align="right">0.0147 (0.0019)</td>
+<td align="right">-0.2946 (0.0243)</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 100i.</td>
+<td align="right">GQ15</td>
+<td align="right">0.0102 (0.0040)</td>
+<td align="right">-0.0332 (0.0010)</td>
+<td align="right">0.0552 (0.0040)</td>
+<td align="right">0.0282 (0.0113)</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 100i.</td>
+<td align="right">GQ35</td>
+<td align="right">0.0102 (0.0040)</td>
+<td align="right">-0.0333 (0.0010)</td>
+<td align="right">0.0173 (0.0024)</td>
+<td align="right">-0.0854 (0.0085)</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 100i.</td>
+<td align="right">GQ75</td>
+<td align="right">0.0102 (0.0040)</td>
+<td align="right">-0.0333 (0.0010)</td>
+<td align="right">0.0088 (0.0022)</td>
+<td align="right">-0.1015 (0.0075)</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 100i.</td>
+<td align="right">GQ105</td>
+<td align="right">0.0102 (0.0040)</td>
+<td align="right">-0.0333 (0.0010)</td>
+<td align="right">0.0088 (0.0022)</td>
+<td align="right">-0.1015 (0.0075)</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 30i.</td>
+<td align="right">GQ15</td>
+<td align="right">0.0193 (0.0045)</td>
+<td align="right">-0.0348 (0.0017)</td>
+<td align="right">0.0047 (0.0039)</td>
+<td align="right">-0.2510 (0.0272)</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 30i.</td>
+<td align="right">GQ35</td>
+<td align="right">0.0192 (0.0045)</td>
+<td align="right">-0.0348 (0.0017)</td>
+<td align="right">0.0041 (0.0039)</td>
+<td align="right">-0.2455 (0.0256)</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 30i.</td>
+<td align="right">GQ75</td>
+<td align="right">0.0191 (0.0045)</td>
+<td align="right">-0.0348 (0.0017)</td>
+<td align="right">0.0041 (0.0039)</td>
+<td align="right">-0.2593 (0.0275)</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 30i.</td>
+<td align="right">GQ105</td>
+<td align="right">0.0195 (0.0045)</td>
+<td align="right">-0.0347 (0.0017)</td>
+<td align="right">0.0040 (0.0039)</td>
+<td align="right">-0.2522 (0.0265)</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 500i.</td>
+<td align="right">GQ15</td>
+<td align="right">0.0113 (0.0037)</td>
+<td align="right">-0.0411 (0.0006)</td>
+<td align="right">0.0867 (0.0050)</td>
+<td align="right">0.2427 (0.0104)</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 500i.</td>
+<td align="right">GQ35</td>
+<td align="right">0.0157 (0.0038)</td>
+<td align="right">-0.0423 (0.0006)</td>
+<td align="right">0.0860 (0.0040)</td>
+<td align="right">0.4011 (0.0091)</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 500i.</td>
+<td align="right">GQ75</td>
+<td align="right">0.0078 (0.0036)</td>
+<td align="right">-0.0405 (0.0005)</td>
+<td align="right">0.0707 (0.0033)</td>
+<td align="right">0.4020 (0.0112)</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 500i.</td>
+<td align="right">GQ105</td>
+<td align="right">0.0059 (0.0036)</td>
+<td align="right">-0.0410 (0.0006)</td>
+<td align="right">0.0600 (0.0028)</td>
+<td align="right">0.3119 (0.0125)</td>
+</tr>
+<tr class="odd">
+<td align="right">50c. of 100i.</td>
+<td align="right">GQ15</td>
+<td align="right">0.0135 (0.0022)</td>
+<td align="right">-0.0365 (0.0005)</td>
+<td align="right">0.0244 (0.0020)</td>
+<td align="right">-0.0095 (0.0049)</td>
+</tr>
+<tr class="even">
+<td align="right">50c. of 100i.</td>
+<td align="right">GQ35</td>
+<td align="right">0.0135 (0.0022)</td>
+<td align="right">-0.0365 (0.0005)</td>
+<td align="right">0.0102 (0.0012)</td>
+<td align="right">-0.0350 (0.0038)</td>
+</tr>
+<tr class="odd">
+<td align="right">50c. of 100i.</td>
+<td align="right">GQ75</td>
+<td align="right">0.0135 (0.0022)</td>
+<td align="right">-0.0365 (0.0005)</td>
+<td align="right">0.0105 (0.0012)</td>
+<td align="right">-0.0350 (0.0037)</td>
+</tr>
+<tr class="even">
+<td align="right">50c. of 100i.</td>
+<td align="right">GQ105</td>
+<td align="right">0.0135 (0.0022)</td>
+<td align="right">-0.0365 (0.0005)</td>
+<td align="right">0.0105 (0.0012)</td>
+<td align="right">-0.0350 (0.0037)</td>
+</tr>
+<tr class="odd">
+<td align="right">50c. of 30i.</td>
+<td align="right">GQ15</td>
+<td align="right">0.0154 (0.0025)</td>
+<td align="right">-0.0367 (0.0009)</td>
+<td align="right">0.0079 (0.0021)</td>
+<td align="right">-0.0535 (0.0052)</td>
+</tr>
+<tr class="even">
+<td align="right">50c. of 30i.</td>
+<td align="right">GQ35</td>
+<td align="right">0.0154 (0.0025)</td>
+<td align="right">-0.0367 (0.0009)</td>
+<td align="right">0.0079 (0.0021)</td>
+<td align="right">-0.0536 (0.0052)</td>
+</tr>
+<tr class="odd">
+<td align="right">50c. of 30i.</td>
+<td align="right">GQ75</td>
+<td align="right">0.0154 (0.0025)</td>
+<td align="right">-0.0367 (0.0009)</td>
+<td align="right">0.0079 (0.0021)</td>
+<td align="right">-0.0536 (0.0052)</td>
+</tr>
+<tr class="even">
+<td align="right">50c. of 30i.</td>
+<td align="right">GQ105</td>
+<td align="right">0.0154 (0.0025)</td>
+<td align="right">-0.0367 (0.0009)</td>
+<td align="right">0.0079 (0.0021)</td>
+<td align="right">-0.0536 (0.0052)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption><span id="tab:sim1-normal-gq-scenario1-cov-t">Table A.6: </span>Coverage, comparison without analytical formulae, scenario with a small frailty variance and a negative regression coefficient.</caption>
+<thead>
+<tr class="header">
+<th align="right">Sample size</th>
+<th align="right">Method</th>
+<th align="right">Lambda</th>
+<th align="right">P</th>
+<th align="right">Beta</th>
+<th align="right">Sigma</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1000c. of 2i.</td>
+<td align="right">GQ15</td>
+<td align="right">92.5662 (0.8295)</td>
+<td align="right">64.8676 (1.5096)</td>
+<td align="right">94.5010 (0.7209)</td>
+<td align="right">99.0835 (0.3013)</td>
+</tr>
+<tr class="even">
+<td align="right">1000c. of 2i.</td>
+<td align="right">GQ35</td>
+<td align="right">92.4413 (0.8359)</td>
+<td align="right">64.7600 (1.5107)</td>
+<td align="right">94.6885 (0.7092)</td>
+<td align="right">99.0807 (0.3018)</td>
+</tr>
+<tr class="odd">
+<td align="right">1000c. of 2i.</td>
+<td align="right">GQ75</td>
+<td align="right">92.4720 (0.8343)</td>
+<td align="right">64.6999 (1.5113)</td>
+<td align="right">94.6083 (0.7142)</td>
+<td align="right">99.0844 (0.3012)</td>
+</tr>
+<tr class="even">
+<td align="right">1000c. of 2i.</td>
+<td align="right">GQ105</td>
+<td align="right">92.5586 (0.8299)</td>
+<td align="right">64.8318 (1.5100)</td>
+<td align="right">94.5973 (0.7149)</td>
+<td align="right">99.0826 (0.3015)</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 100i.</td>
+<td align="right">GQ15</td>
+<td align="right">52.1000 (1.5797)</td>
+<td align="right">76.4000 (1.3428)</td>
+<td align="right">86.0000 (1.0973)</td>
+<td align="right">70.2000 (1.4464)</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 100i.</td>
+<td align="right">GQ35</td>
+<td align="right">52.1000 (1.5797)</td>
+<td align="right">76.5000 (1.3408)</td>
+<td align="right">98.8000 (0.3443)</td>
+<td align="right">88.9000 (0.9934)</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 100i.</td>
+<td align="right">GQ75</td>
+<td align="right">52.1000 (1.5797)</td>
+<td align="right">76.4000 (1.3428)</td>
+<td align="right">99.9000 (0.0999)</td>
+<td align="right">94.0000 (0.7510)</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 100i.</td>
+<td align="right">GQ105</td>
+<td align="right">52.1000 (1.5797)</td>
+<td align="right">76.4000 (1.3428)</td>
+<td align="right">99.9000 (0.0999)</td>
+<td align="right">94.1000 (0.7451)</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 30i.</td>
+<td align="right">GQ15</td>
+<td align="right">75.4016 (1.3619)</td>
+<td align="right">90.0602 (0.9461)</td>
+<td align="right">99.0964 (0.2992)</td>
+<td align="right">98.3936 (0.3976)</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 30i.</td>
+<td align="right">GQ35</td>
+<td align="right">75.3769 (1.3624)</td>
+<td align="right">90.2513 (0.9380)</td>
+<td align="right">99.0955 (0.2994)</td>
+<td align="right">99.1960 (0.2824)</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 30i.</td>
+<td align="right">GQ75</td>
+<td align="right">75.4263 (1.3614)</td>
+<td align="right">90.0702 (0.9457)</td>
+<td align="right">99.0973 (0.2991)</td>
+<td align="right">99.2979 (0.2640)</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 30i.</td>
+<td align="right">GQ105</td>
+<td align="right">75.5020 (1.3600)</td>
+<td align="right">90.0602 (0.9461)</td>
+<td align="right">99.0964 (0.2992)</td>
+<td align="right">99.2972 (0.2642)</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 500i.</td>
+<td align="right">GQ15</td>
+<td align="right">30.0813 (1.4503)</td>
+<td align="right">21.3415 (1.2956)</td>
+<td align="right">27.6423 (1.4143)</td>
+<td align="right">23.1707 (1.3342)</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 500i.</td>
+<td align="right">GQ35</td>
+<td align="right">27.8826 (1.4180)</td>
+<td align="right">17.8197 (1.2101)</td>
+<td align="right">37.1069 (1.5277)</td>
+<td align="right">15.7233 (1.1511)</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 500i.</td>
+<td align="right">GQ75</td>
+<td align="right">30.1053 (1.4506)</td>
+<td align="right">18.9474 (1.2392)</td>
+<td align="right">55.5789 (1.5713)</td>
+<td align="right">16.6316 (1.1775)</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 500i.</td>
+<td align="right">GQ105</td>
+<td align="right">29.1028 (1.4364)</td>
+<td align="right">18.3807 (1.2248)</td>
+<td align="right">67.8337 (1.4771)</td>
+<td align="right">32.1663 (1.4771)</td>
+</tr>
+<tr class="odd">
+<td align="right">50c. of 100i.</td>
+<td align="right">GQ15</td>
+<td align="right">51.9000 (1.5800)</td>
+<td align="right">37.8000 (1.5333)</td>
+<td align="right">94.8000 (0.7021)</td>
+<td align="right">85.6000 (1.1102)</td>
+</tr>
+<tr class="even">
+<td align="right">50c. of 100i.</td>
+<td align="right">GQ35</td>
+<td align="right">51.9000 (1.5800)</td>
+<td align="right">37.5000 (1.5309)</td>
+<td align="right">100.0000 (0.0000)</td>
+<td align="right">95.0000 (0.6892)</td>
+</tr>
+<tr class="odd">
+<td align="right">50c. of 100i.</td>
+<td align="right">GQ75</td>
+<td align="right">51.9000 (1.5800)</td>
+<td align="right">37.5000 (1.5309)</td>
+<td align="right">100.0000 (0.0000)</td>
+<td align="right">94.9000 (0.6957)</td>
+</tr>
+<tr class="even">
+<td align="right">50c. of 100i.</td>
+<td align="right">GQ105</td>
+<td align="right">51.9000 (1.5800)</td>
+<td align="right">37.5000 (1.5309)</td>
+<td align="right">100.0000 (0.0000)</td>
+<td align="right">94.9000 (0.6957)</td>
+</tr>
+<tr class="odd">
+<td align="right">50c. of 30i.</td>
+<td align="right">GQ15</td>
+<td align="right">73.9000 (1.3888)</td>
+<td align="right">74.1000 (1.3853)</td>
+<td align="right">99.4000 (0.2442)</td>
+<td align="right">97.2000 (0.5217)</td>
+</tr>
+<tr class="even">
+<td align="right">50c. of 30i.</td>
+<td align="right">GQ35</td>
+<td align="right">73.9000 (1.3888)</td>
+<td align="right">74.1000 (1.3853)</td>
+<td align="right">99.4000 (0.2442)</td>
+<td align="right">97.2000 (0.5217)</td>
+</tr>
+<tr class="odd">
+<td align="right">50c. of 30i.</td>
+<td align="right">GQ75</td>
+<td align="right">73.9000 (1.3888)</td>
+<td align="right">74.1000 (1.3853)</td>
+<td align="right">99.4000 (0.2442)</td>
+<td align="right">97.2000 (0.5217)</td>
+</tr>
+<tr class="even">
+<td align="right">50c. of 30i.</td>
+<td align="right">GQ105</td>
+<td align="right">73.9000 (1.3888)</td>
+<td align="right">74.1000 (1.3853)</td>
+<td align="right">99.4000 (0.2442)</td>
+<td align="right">97.2000 (0.5217)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption><span id="tab:sim1-normal-gq-scenario1-mse-t">Table A.7: </span>Mean squared error, comparison without analytical formulae, scenario with a small frailty variance and a negative regression coefficient.</caption>
+<thead>
+<tr class="header">
+<th align="right">Sample size</th>
+<th align="right">Method</th>
+<th align="right">Lambda</th>
+<th align="right">P</th>
+<th align="right">Beta</th>
+<th align="right">Sigma</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1000c. of 2i.</td>
+<td align="right">GQ15</td>
+<td align="right">0.0019</td>
+<td align="right">0.0024</td>
+<td align="right">0.0040</td>
+<td align="right">0.7180</td>
+</tr>
+<tr class="even">
+<td align="right">1000c. of 2i.</td>
+<td align="right">GQ35</td>
+<td align="right">0.0019</td>
+<td align="right">0.0024</td>
+<td align="right">0.0039</td>
+<td align="right">0.6198</td>
+</tr>
+<tr class="odd">
+<td align="right">1000c. of 2i.</td>
+<td align="right">GQ75</td>
+<td align="right">0.0019</td>
+<td align="right">0.0024</td>
+<td align="right">0.0039</td>
+<td align="right">0.7394</td>
+</tr>
+<tr class="even">
+<td align="right">1000c. of 2i.</td>
+<td align="right">GQ105</td>
+<td align="right">0.0019</td>
+<td align="right">0.0024</td>
+<td align="right">0.0039</td>
+<td align="right">0.6752</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 100i.</td>
+<td align="right">GQ15</td>
+<td align="right">0.0164</td>
+<td align="right">0.0021</td>
+<td align="right">0.0189</td>
+<td align="right">0.1285</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 100i.</td>
+<td align="right">GQ35</td>
+<td align="right">0.0164</td>
+<td align="right">0.0021</td>
+<td align="right">0.0063</td>
+<td align="right">0.0790</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 100i.</td>
+<td align="right">GQ75</td>
+<td align="right">0.0164</td>
+<td align="right">0.0022</td>
+<td align="right">0.0048</td>
+<td align="right">0.0665</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 100i.</td>
+<td align="right">GQ105</td>
+<td align="right">0.0164</td>
+<td align="right">0.0022</td>
+<td align="right">0.0048</td>
+<td align="right">0.0665</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 30i.</td>
+<td align="right">GQ15</td>
+<td align="right">0.0208</td>
+<td align="right">0.0041</td>
+<td align="right">0.0152</td>
+<td align="right">0.8029</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 30i.</td>
+<td align="right">GQ35</td>
+<td align="right">0.0208</td>
+<td align="right">0.0040</td>
+<td align="right">0.0149</td>
+<td align="right">0.7164</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 30i.</td>
+<td align="right">GQ75</td>
+<td align="right">0.0208</td>
+<td align="right">0.0041</td>
+<td align="right">0.0149</td>
+<td align="right">0.8228</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 30i.</td>
+<td align="right">GQ105</td>
+<td align="right">0.0207</td>
+<td align="right">0.0041</td>
+<td align="right">0.0149</td>
+<td align="right">0.7636</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 500i.</td>
+<td align="right">GQ15</td>
+<td align="right">0.0141</td>
+<td align="right">0.0020</td>
+<td align="right">0.0326</td>
+<td align="right">0.1666</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 500i.</td>
+<td align="right">GQ35</td>
+<td align="right">0.0146</td>
+<td align="right">0.0021</td>
+<td align="right">0.0234</td>
+<td align="right">0.2438</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 500i.</td>
+<td align="right">GQ75</td>
+<td align="right">0.0131</td>
+<td align="right">0.0019</td>
+<td align="right">0.0160</td>
+<td align="right">0.2881</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 500i.</td>
+<td align="right">GQ105</td>
+<td align="right">0.0129</td>
+<td align="right">0.0020</td>
+<td align="right">0.0113</td>
+<td align="right">0.2542</td>
+</tr>
+<tr class="odd">
+<td align="right">50c. of 100i.</td>
+<td align="right">GQ15</td>
+<td align="right">0.0048</td>
+<td align="right">0.0016</td>
+<td align="right">0.0046</td>
+<td align="right">0.0237</td>
+</tr>
+<tr class="even">
+<td align="right">50c. of 100i.</td>
+<td align="right">GQ35</td>
+<td align="right">0.0048</td>
+<td align="right">0.0016</td>
+<td align="right">0.0015</td>
+<td align="right">0.0153</td>
+</tr>
+<tr class="odd">
+<td align="right">50c. of 100i.</td>
+<td align="right">GQ75</td>
+<td align="right">0.0048</td>
+<td align="right">0.0016</td>
+<td align="right">0.0015</td>
+<td align="right">0.0153</td>
+</tr>
+<tr class="even">
+<td align="right">50c. of 100i.</td>
+<td align="right">GQ105</td>
+<td align="right">0.0048</td>
+<td align="right">0.0016</td>
+<td align="right">0.0015</td>
+<td align="right">0.0153</td>
+</tr>
+<tr class="odd">
+<td align="right">50c. of 30i.</td>
+<td align="right">GQ15</td>
+<td align="right">0.0066</td>
+<td align="right">0.0022</td>
+<td align="right">0.0043</td>
+<td align="right">0.0301</td>
+</tr>
+<tr class="even">
+<td align="right">50c. of 30i.</td>
+<td align="right">GQ35</td>
+<td align="right">0.0066</td>
+<td align="right">0.0022</td>
+<td align="right">0.0043</td>
+<td align="right">0.0300</td>
+</tr>
+<tr class="odd">
+<td align="right">50c. of 30i.</td>
+<td align="right">GQ75</td>
+<td align="right">0.0066</td>
+<td align="right">0.0022</td>
+<td align="right">0.0043</td>
+<td align="right">0.0300</td>
+</tr>
+<tr class="even">
+<td align="right">50c. of 30i.</td>
+<td align="right">GQ105</td>
+<td align="right">0.0066</td>
+<td align="right">0.0022</td>
+<td align="right">0.0043</td>
+<td align="right">0.0300</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption><span id="tab:sim1-normal-gq-scenario1-convergence-t">Table A.8: </span>Convergence rates, comparison without analytical formulae, scenario with a small frailty variance and a negative regression coefficient.</caption>
+<thead>
+<tr class="header">
+<th align="right">Sample size</th>
+<th align="right">GQ15</th>
+<th align="right">GQ35</th>
+<th align="right">GQ75</th>
+<th align="right">GQ105</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1000c. of 2i.</td>
+<td align="right">98.2%</td>
+<td align="right">97.9%</td>
+<td align="right">98.3%</td>
+<td align="right">98.1%</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 100i.</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+</tr>
+<tr class="odd">
+<td align="right">15c. of 30i.</td>
+<td align="right">99.6%</td>
+<td align="right">99.5%</td>
+<td align="right">99.7%</td>
+<td align="right">99.6%</td>
+</tr>
+<tr class="even">
+<td align="right">15c. of 500i.</td>
+<td align="right">49.2%</td>
+<td align="right">47.7%</td>
+<td align="right">47.5%</td>
+<td align="right">45.7%</td>
+</tr>
+<tr class="odd">
+<td align="right">50c. of 100i.</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+</tr>
+<tr class="even">
+<td align="right">50c. of 30i.</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption><span id="tab:sim2-miss-scenario1-convergence-t">Table A.9: </span>Convergence rates, simulation study on model misspecification in survival models with shared frailty terms, scenario with 15 clusters of 100 individuals each and a small frailty variance.</caption>
+<thead>
+<tr class="header">
+<th align="right">True frailty</th>
+<th align="right">Model frailty</th>
+<th align="right">Model baseline</th>
+<th align="right">Exponential</th>
+<th align="right">Weibull</th>
+<th align="right">Gompertz</th>
+<th align="right">Weibull-Weibull (1)</th>
+<th align="right">Weibull-Weibull (2)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">Cox</td>
+<td align="right">34.8%</td>
+<td align="right">47.0%</td>
+<td align="right">10.5%</td>
+<td align="right">1.5%</td>
+<td align="right">4.5%</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">Exp</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">Wei</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+<td align="right">97.9%</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">Gom</td>
+<td align="right">57.8%</td>
+<td align="right">37.6%</td>
+<td align="right">100.0%</td>
+<td align="right">96.8%</td>
+<td align="right">39.1%</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">RP(5)</td>
+<td align="right">99.8%</td>
+<td align="right">65.5%</td>
+<td align="right">99.8%</td>
+<td align="right">99.5%</td>
+<td align="right">22.0%</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">RP(9)</td>
+<td align="right">99.8%</td>
+<td align="right">65.5%</td>
+<td align="right">100.0%</td>
+<td align="right">99.2%</td>
+<td align="right">22.0%</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">RP(P)</td>
+<td align="right">99.4%</td>
+<td align="right">65.5%</td>
+<td align="right">99.9%</td>
+<td align="right">97.6%</td>
+<td align="right">22.0%</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">Cox</td>
+<td align="right">44.9%</td>
+<td align="right">61.4%</td>
+<td align="right">17.7%</td>
+<td align="right">4.1%</td>
+<td align="right">10.8%</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">Exp</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">Wei</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+<td align="right">97.8%</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">Gom</td>
+<td align="right">59.3%</td>
+<td align="right">37.7%</td>
+<td align="right">100.0%</td>
+<td align="right">99.6%</td>
+<td align="right">38.4%</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">RP(5)</td>
+<td align="right">99.9%</td>
+<td align="right">65.8%</td>
+<td align="right">99.8%</td>
+<td align="right">99.6%</td>
+<td align="right">23.4%</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">RP(9)</td>
+<td align="right">99.9%</td>
+<td align="right">65.8%</td>
+<td align="right">99.7%</td>
+<td align="right">99.0%</td>
+<td align="right">23.4%</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">RP(P)</td>
+<td align="right">99.9%</td>
+<td align="right">65.8%</td>
+<td align="right">99.9%</td>
+<td align="right">98.4%</td>
+<td align="right">23.4%</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">Cox</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">Exp</td>
+<td align="right">99.8%</td>
+<td align="right">99.9%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+<td align="right">99.9%</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">Wei</td>
+<td align="right">99.8%</td>
+<td align="right">99.9%</td>
+<td align="right">99.9%</td>
+<td align="right">99.7%</td>
+<td align="right">97.7%</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">Gom</td>
+<td align="right">59.1%</td>
+<td align="right">38.2%</td>
+<td align="right">99.8%</td>
+<td align="right">95.0%</td>
+<td align="right">38.2%</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(5)</td>
+<td align="right">99.8%</td>
+<td align="right">65.5%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+<td align="right">22.0%</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(9)</td>
+<td align="right">99.8%</td>
+<td align="right">65.5%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+<td align="right">22.0%</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(P)</td>
+<td align="right">99.8%</td>
+<td align="right">65.5%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+<td align="right">22.0%</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">Cox</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">Exp</td>
+<td align="right">99.9%</td>
+<td align="right">99.9%</td>
+<td align="right">100.0%</td>
+<td align="right">100.0%</td>
+<td align="right">99.6%</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">Wei</td>
+<td align="right">99.7%</td>
+<td align="right">99.9%</td>
+<td align="right">99.9%</td>
+<td align="right">99.7%</td>
+<td align="right">97.7%</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">Gom</td>
+<td align="right">60.9%</td>
+<td align="right">38.4%</td>
+<td align="right">99.8%</td>
+<td align="right">99.5%</td>
+<td align="right">39.6%</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(5)</td>
+<td align="right">99.9%</td>
+<td align="right">65.8%</td>
+<td align="right">99.8%</td>
+<td align="right">99.9%</td>
+<td align="right">23.4%</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(9)</td>
+<td align="right">99.9%</td>
+<td align="right">65.8%</td>
+<td align="right">99.8%</td>
+<td align="right">99.9%</td>
+<td align="right">23.4%</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(P)</td>
+<td align="right">99.9%</td>
+<td align="right">65.8%</td>
+<td align="right">99.9%</td>
+<td align="right">100.0%</td>
+<td align="right">23.4%</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption><span id="tab:sim2-miss-scenario1-trt-bias-t">Table A.10: </span>Bias with Monte Carlo standard error of estimated regression coefficient, simulation study on model misspecification in survival models with shared frailty terms, scenario with 15 clusters of 100 individuals each and a small frailty variance.</caption>
+<thead>
+<tr class="header">
+<th align="right">True frailty</th>
+<th align="right">Model frailty</th>
+<th align="right">Model baseline</th>
+<th align="right">Exponential</th>
+<th align="right">Weibull</th>
+<th align="right">Gompertz</th>
+<th align="right">Weibull-Weibull (1)</th>
+<th align="right">Weibull-Weibull (2)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">Cox</td>
+<td align="right">0.001 (0.002)</td>
+<td align="right">0.007 (0.002)</td>
+<td align="right">0.009 (0.002)</td>
+<td align="right">0.013 (0.002)</td>
+<td align="right">-0.007 (0.002)</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">Exp</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">-0.083 (0.003)</td>
+<td align="right">0.133 (0.002)</td>
+<td align="right">0.102 (0.002)</td>
+<td align="right">-0.116 (0.002)</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">Wei</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">0.002 (0.002)</td>
+<td align="right">0.034 (0.002)</td>
+<td align="right">-0.067 (0.002)</td>
+<td align="right">0.000 (0.002)</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">Gom</td>
+<td align="right">-0.006 (0.002)</td>
+<td align="right">-0.086 (0.003)</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">0.028 (0.002)</td>
+<td align="right">-0.114 (0.002)</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">RP(5)</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">-0.001 (0.002)</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">-0.001 (0.002)</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">RP(9)</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">-0.001 (0.002)</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">-0.001 (0.002)</td>
+<td align="right">-0.002 (0.002)</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">RP(P)</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">-0.001 (0.002)</td>
+<td align="right">0.003 (0.002)</td>
+<td align="right">0.000 (0.002)</td>
+<td align="right">-0.000 (0.002)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">Cox</td>
+<td align="right">0.004 (0.002)</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">0.000 (0.002)</td>
+<td align="right">-0.006 (0.002)</td>
+<td align="right">0.002 (0.002)</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">Exp</td>
+<td align="right">0.001 (0.002)</td>
+<td align="right">-0.085 (0.002)</td>
+<td align="right">0.136 (0.001)</td>
+<td align="right">0.100 (0.002)</td>
+<td align="right">-0.115 (0.002)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">Wei</td>
+<td align="right">0.001 (0.002)</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">0.038 (0.002)</td>
+<td align="right">-0.066 (0.002)</td>
+<td align="right">0.001 (0.002)</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">Gom</td>
+<td align="right">0.001 (0.002)</td>
+<td align="right">-0.085 (0.002)</td>
+<td align="right">0.003 (0.002)</td>
+<td align="right">0.022 (0.002)</td>
+<td align="right">-0.115 (0.002)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">RP(5)</td>
+<td align="right">0.002 (0.002)</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">0.003 (0.002)</td>
+<td align="right">0.001 (0.002)</td>
+<td align="right">0.008 (0.002)</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">RP(9)</td>
+<td align="right">0.002 (0.002)</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">0.003 (0.002)</td>
+<td align="right">0.002 (0.002)</td>
+<td align="right">0.007 (0.002)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">RP(P)</td>
+<td align="right">0.002 (0.002)</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">0.008 (0.002)</td>
+<td align="right">0.003 (0.002)</td>
+<td align="right">0.009 (0.002)</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">Cox</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">0.001 (0.002)</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">-0.001 (0.002)</td>
+<td align="right">0.001 (0.002)</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">Exp</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">-0.083 (0.003)</td>
+<td align="right">0.133 (0.002)</td>
+<td align="right">0.102 (0.002)</td>
+<td align="right">-0.116 (0.002)</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">Wei</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">0.001 (0.002)</td>
+<td align="right">0.034 (0.002)</td>
+<td align="right">-0.067 (0.002)</td>
+<td align="right">0.000 (0.002)</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">Gom</td>
+<td align="right">-0.005 (0.002)</td>
+<td align="right">-0.084 (0.003)</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">0.027 (0.002)</td>
+<td align="right">-0.115 (0.002)</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(5)</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">-0.001 (0.002)</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">-0.001 (0.002)</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(9)</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">-0.001 (0.002)</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">-0.001 (0.002)</td>
+<td align="right">-0.002 (0.002)</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(P)</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">-0.001 (0.002)</td>
+<td align="right">0.003 (0.002)</td>
+<td align="right">0.000 (0.002)</td>
+<td align="right">-0.000 (0.002)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">Cox</td>
+<td align="right">0.001 (0.002)</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">0.003 (0.002)</td>
+<td align="right">0.002 (0.002)</td>
+<td align="right">0.002 (0.002)</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">Exp</td>
+<td align="right">0.001 (0.002)</td>
+<td align="right">-0.086 (0.002)</td>
+<td align="right">0.136 (0.001)</td>
+<td align="right">0.100 (0.002)</td>
+<td align="right">-0.115 (0.002)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">Wei</td>
+<td align="right">0.001 (0.002)</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">0.038 (0.002)</td>
+<td align="right">-0.066 (0.002)</td>
+<td align="right">0.001 (0.002)</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">Gom</td>
+<td align="right">0.001 (0.002)</td>
+<td align="right">-0.084 (0.002)</td>
+<td align="right">0.003 (0.002)</td>
+<td align="right">0.022 (0.002)</td>
+<td align="right">-0.114 (0.002)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(5)</td>
+<td align="right">0.001 (0.002)</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">0.003 (0.002)</td>
+<td align="right">0.001 (0.002)</td>
+<td align="right">0.008 (0.002)</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(9)</td>
+<td align="right">0.001 (0.002)</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">0.003 (0.002)</td>
+<td align="right">0.002 (0.002)</td>
+<td align="right">0.007 (0.002)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(P)</td>
+<td align="right">0.001 (0.002)</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">0.007 (0.002)</td>
+<td align="right">0.003 (0.002)</td>
+<td align="right">0.009 (0.002)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption><span id="tab:sim2-miss-scenario1-trt-cov-t">Table A.11: </span>Coverage with Monte Carlo standard error of estimated regression coefficient, simulation study on model misspecification in survival models with shared frailty terms, scenario with 15 clusters of 100 individuals each and a small frailty variance.</caption>
+<thead>
+<tr class="header">
+<th align="right">True frailty</th>
+<th align="right">Model frailty</th>
+<th align="right">Model baseline</th>
+<th align="right">Exponential</th>
+<th align="right">Weibull</th>
+<th align="right">Gompertz</th>
+<th align="right">Weibull-Weibull (1)</th>
+<th align="right">Weibull-Weibull (2)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">Cox</td>
+<td align="right">93.68 (0.77)</td>
+<td align="right">96.17 (0.61)</td>
+<td align="right">93.33 (0.79)</td>
+<td align="right">93.33 (0.79)</td>
+<td align="right">93.33 (0.79)</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">Exp</td>
+<td align="right">95.20 (0.68)</td>
+<td align="right">72.60 (1.41)</td>
+<td align="right">35.30 (1.51)</td>
+<td align="right">53.80 (1.58)</td>
+<td align="right">49.20 (1.58)</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">Wei</td>
+<td align="right">95.20 (0.68)</td>
+<td align="right">95.50 (0.66)</td>
+<td align="right">91.70 (0.87)</td>
+<td align="right">72.80 (1.41)</td>
+<td align="right">94.59 (0.72)</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">Gom</td>
+<td align="right">95.67 (0.64)</td>
+<td align="right">70.21 (1.45)</td>
+<td align="right">94.80 (0.70)</td>
+<td align="right">89.98 (0.95)</td>
+<td align="right">49.87 (1.58)</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">RP(5)</td>
+<td align="right">95.09 (0.68)</td>
+<td align="right">95.27 (0.67)</td>
+<td align="right">94.89 (0.70)</td>
+<td align="right">94.27 (0.73)</td>
+<td align="right">93.64 (0.77)</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">RP(9)</td>
+<td align="right">95.09 (0.68)</td>
+<td align="right">95.27 (0.67)</td>
+<td align="right">95.00 (0.69)</td>
+<td align="right">94.35 (0.73)</td>
+<td align="right">93.64 (0.77)</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">RP(P)</td>
+<td align="right">95.17 (0.68)</td>
+<td align="right">95.42 (0.66)</td>
+<td align="right">94.59 (0.72)</td>
+<td align="right">94.36 (0.73)</td>
+<td align="right">93.64 (0.77)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">Cox</td>
+<td align="right">95.55 (0.65)</td>
+<td align="right">94.79 (0.70)</td>
+<td align="right">97.18 (0.52)</td>
+<td align="right">92.68 (0.82)</td>
+<td align="right">92.59 (0.83)</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">Exp</td>
+<td align="right">95.30 (0.67)</td>
+<td align="right">74.80 (1.37)</td>
+<td align="right">35.40 (1.51)</td>
+<td align="right">53.30 (1.58)</td>
+<td align="right">47.50 (1.58)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">Wei</td>
+<td align="right">95.50 (0.66)</td>
+<td align="right">95.00 (0.69)</td>
+<td align="right">91.50 (0.88)</td>
+<td align="right">74.10 (1.39)</td>
+<td align="right">94.68 (0.71)</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">Gom</td>
+<td align="right">95.28 (0.67)</td>
+<td align="right">76.13 (1.35)</td>
+<td align="right">95.40 (0.66)</td>
+<td align="right">93.17 (0.80)</td>
+<td align="right">49.22 (1.58)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">RP(5)</td>
+<td align="right">95.30 (0.67)</td>
+<td align="right">96.20 (0.60)</td>
+<td align="right">95.49 (0.66)</td>
+<td align="right">95.38 (0.66)</td>
+<td align="right">95.73 (0.64)</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">RP(9)</td>
+<td align="right">95.30 (0.67)</td>
+<td align="right">96.35 (0.59)</td>
+<td align="right">95.39 (0.66)</td>
+<td align="right">95.05 (0.69)</td>
+<td align="right">95.73 (0.64)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">RP(P)</td>
+<td align="right">95.60 (0.65)</td>
+<td align="right">96.20 (0.60)</td>
+<td align="right">95.60 (0.65)</td>
+<td align="right">94.92 (0.69)</td>
+<td align="right">95.30 (0.67)</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">Cox</td>
+<td align="right">95.20 (0.68)</td>
+<td align="right">95.30 (0.67)</td>
+<td align="right">95.00 (0.69)</td>
+<td align="right">94.30 (0.73)</td>
+<td align="right">94.70 (0.71)</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">Exp</td>
+<td align="right">95.19 (0.68)</td>
+<td align="right">72.37 (1.41)</td>
+<td align="right">35.30 (1.51)</td>
+<td align="right">53.80 (1.58)</td>
+<td align="right">48.95 (1.58)</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">Wei</td>
+<td align="right">95.19 (0.68)</td>
+<td align="right">95.50 (0.66)</td>
+<td align="right">91.69 (0.87)</td>
+<td align="right">73.22 (1.40)</td>
+<td align="right">94.68 (0.71)</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">Gom</td>
+<td align="right">95.94 (0.62)</td>
+<td align="right">71.47 (1.43)</td>
+<td align="right">94.99 (0.69)</td>
+<td align="right">90.42 (0.93)</td>
+<td align="right">49.48 (1.58)</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(5)</td>
+<td align="right">95.09 (0.68)</td>
+<td align="right">95.27 (0.67)</td>
+<td align="right">94.90 (0.70)</td>
+<td align="right">94.20 (0.74)</td>
+<td align="right">93.64 (0.77)</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(9)</td>
+<td align="right">95.09 (0.68)</td>
+<td align="right">95.27 (0.67)</td>
+<td align="right">94.90 (0.70)</td>
+<td align="right">94.30 (0.73)</td>
+<td align="right">93.64 (0.77)</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(P)</td>
+<td align="right">95.09 (0.68)</td>
+<td align="right">95.42 (0.66)</td>
+<td align="right">94.60 (0.71)</td>
+<td align="right">94.50 (0.72)</td>
+<td align="right">93.64 (0.77)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">Cox</td>
+<td align="right">95.20 (0.68)</td>
+<td align="right">95.40 (0.66)</td>
+<td align="right">95.30 (0.67)</td>
+<td align="right">95.10 (0.68)</td>
+<td align="right">94.80 (0.70)</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">Exp</td>
+<td align="right">95.30 (0.67)</td>
+<td align="right">74.87 (1.37)</td>
+<td align="right">35.40 (1.51)</td>
+<td align="right">53.20 (1.58)</td>
+<td align="right">47.59 (1.58)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">Wei</td>
+<td align="right">95.49 (0.66)</td>
+<td align="right">95.10 (0.68)</td>
+<td align="right">91.59 (0.88)</td>
+<td align="right">73.92 (1.39)</td>
+<td align="right">94.78 (0.70)</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">Gom</td>
+<td align="right">94.75 (0.71)</td>
+<td align="right">76.04 (1.35)</td>
+<td align="right">95.39 (0.66)</td>
+<td align="right">93.17 (0.80)</td>
+<td align="right">48.99 (1.58)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(5)</td>
+<td align="right">95.20 (0.68)</td>
+<td align="right">96.50 (0.58)</td>
+<td align="right">95.49 (0.66)</td>
+<td align="right">95.40 (0.66)</td>
+<td align="right">95.73 (0.64)</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(9)</td>
+<td align="right">95.30 (0.67)</td>
+<td align="right">96.35 (0.59)</td>
+<td align="right">95.39 (0.66)</td>
+<td align="right">95.10 (0.68)</td>
+<td align="right">95.73 (0.64)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(P)</td>
+<td align="right">95.40 (0.66)</td>
+<td align="right">96.05 (0.62)</td>
+<td align="right">95.70 (0.64)</td>
+<td align="right">94.90 (0.70)</td>
+<td align="right">95.73 (0.64)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption><span id="tab:sim2-miss-scenario1-trt-mse-t">Table A.12: </span>Mean squared error of estimated regression coefficient, simulation study on model misspecification in survival models with shared frailty terms, scenario with 15 clusters of 100 individuals each and a small frailty variance.</caption>
+<thead>
+<tr class="header">
+<th align="right">True frailty</th>
+<th align="right">Model frailty</th>
+<th align="right">Model baseline</th>
+<th align="right">Exponential</th>
+<th align="right">Weibull</th>
+<th align="right">Gompertz</th>
+<th align="right">Weibull-Weibull (1)</th>
+<th align="right">Weibull-Weibull (2)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">Cox</td>
+<td align="right">0.005</td>
+<td align="right">0.005</td>
+<td align="right">0.004</td>
+<td align="right">0.005</td>
+<td align="right">0.004</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">Exp</td>
+<td align="right">0.004</td>
+<td align="right">0.013</td>
+<td align="right">0.020</td>
+<td align="right">0.013</td>
+<td align="right">0.019</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">Wei</td>
+<td align="right">0.004</td>
+<td align="right">0.005</td>
+<td align="right">0.005</td>
+<td align="right">0.009</td>
+<td align="right">0.003</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">Gom</td>
+<td align="right">0.004</td>
+<td align="right">0.014</td>
+<td align="right">0.004</td>
+<td align="right">0.004</td>
+<td align="right">0.018</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">RP(5)</td>
+<td align="right">0.004</td>
+<td align="right">0.004</td>
+<td align="right">0.004</td>
+<td align="right">0.003</td>
+<td align="right">0.004</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">RP(9)</td>
+<td align="right">0.004</td>
+<td align="right">0.004</td>
+<td align="right">0.004</td>
+<td align="right">0.003</td>
+<td align="right">0.004</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">RP(P)</td>
+<td align="right">0.004</td>
+<td align="right">0.004</td>
+<td align="right">0.004</td>
+<td align="right">0.003</td>
+<td align="right">0.004</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">Cox</td>
+<td align="right">0.004</td>
+<td align="right">0.005</td>
+<td align="right">0.004</td>
+<td align="right">0.003</td>
+<td align="right">0.003</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">Exp</td>
+<td align="right">0.004</td>
+<td align="right">0.013</td>
+<td align="right">0.020</td>
+<td align="right">0.012</td>
+<td align="right">0.018</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">Wei</td>
+<td align="right">0.004</td>
+<td align="right">0.005</td>
+<td align="right">0.005</td>
+<td align="right">0.009</td>
+<td align="right">0.003</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">Gom</td>
+<td align="right">0.004</td>
+<td align="right">0.013</td>
+<td align="right">0.004</td>
+<td align="right">0.004</td>
+<td align="right">0.019</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">RP(5)</td>
+<td align="right">0.004</td>
+<td align="right">0.004</td>
+<td align="right">0.004</td>
+<td align="right">0.003</td>
+<td align="right">0.003</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">RP(9)</td>
+<td align="right">0.004</td>
+<td align="right">0.004</td>
+<td align="right">0.004</td>
+<td align="right">0.003</td>
+<td align="right">0.003</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">RP(P)</td>
+<td align="right">0.004</td>
+<td align="right">0.004</td>
+<td align="right">0.004</td>
+<td align="right">0.003</td>
+<td align="right">0.003</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">Cox</td>
+<td align="right">0.004</td>
+<td align="right">0.005</td>
+<td align="right">0.004</td>
+<td align="right">0.003</td>
+<td align="right">0.003</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">Exp</td>
+<td align="right">0.004</td>
+<td align="right">0.014</td>
+<td align="right">0.020</td>
+<td align="right">0.013</td>
+<td align="right">0.019</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">Wei</td>
+<td align="right">0.004</td>
+<td align="right">0.005</td>
+<td align="right">0.005</td>
+<td align="right">0.009</td>
+<td align="right">0.003</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">Gom</td>
+<td align="right">0.004</td>
+<td align="right">0.013</td>
+<td align="right">0.004</td>
+<td align="right">0.004</td>
+<td align="right">0.018</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(5)</td>
+<td align="right">0.004</td>
+<td align="right">0.004</td>
+<td align="right">0.004</td>
+<td align="right">0.003</td>
+<td align="right">0.004</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(9)</td>
+<td align="right">0.004</td>
+<td align="right">0.004</td>
+<td align="right">0.004</td>
+<td align="right">0.003</td>
+<td align="right">0.004</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(P)</td>
+<td align="right">0.004</td>
+<td align="right">0.004</td>
+<td align="right">0.004</td>
+<td align="right">0.003</td>
+<td align="right">0.004</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">Cox</td>
+<td align="right">0.004</td>
+<td align="right">0.005</td>
+<td align="right">0.004</td>
+<td align="right">0.003</td>
+<td align="right">0.003</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">Exp</td>
+<td align="right">0.004</td>
+<td align="right">0.014</td>
+<td align="right">0.020</td>
+<td align="right">0.012</td>
+<td align="right">0.018</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">Wei</td>
+<td align="right">0.004</td>
+<td align="right">0.005</td>
+<td align="right">0.005</td>
+<td align="right">0.009</td>
+<td align="right">0.003</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">Gom</td>
+<td align="right">0.004</td>
+<td align="right">0.013</td>
+<td align="right">0.004</td>
+<td align="right">0.004</td>
+<td align="right">0.018</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(5)</td>
+<td align="right">0.004</td>
+<td align="right">0.004</td>
+<td align="right">0.004</td>
+<td align="right">0.003</td>
+<td align="right">0.003</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(9)</td>
+<td align="right">0.004</td>
+<td align="right">0.004</td>
+<td align="right">0.004</td>
+<td align="right">0.003</td>
+<td align="right">0.003</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(P)</td>
+<td align="right">0.004</td>
+<td align="right">0.004</td>
+<td align="right">0.004</td>
+<td align="right">0.003</td>
+<td align="right">0.003</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption><span id="tab:sim2-miss-scenario1-fv-bias-t">Table A.13: </span>Bias with Monte Carlo standard error of estimated frailty variance, simulation study on model misspecification in survival models with shared frailty terms, scenario with 15 clusters of 100 individuals each and a small frailty variance.</caption>
+<thead>
+<tr class="header">
+<th align="right">True frailty</th>
+<th align="right">Model frailty</th>
+<th align="right">Model baseline</th>
+<th align="right">Exponential</th>
+<th align="right">Weibull</th>
+<th align="right">Gompertz</th>
+<th align="right">Weibull-Weibull (1)</th>
+<th align="right">Weibull-Weibull (2)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">Cox</td>
+<td align="right">-0.096 (0.002)</td>
+<td align="right">-0.087 (0.002)</td>
+<td align="right">-0.144 (0.001)</td>
+<td align="right">-0.177 (0.001)</td>
+<td align="right">-0.164 (0.001)</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">Exp</td>
+<td align="right">-0.014 (0.003)</td>
+<td align="right">0.056 (0.004)</td>
+<td align="right">-0.116 (0.002)</td>
+<td align="right">-0.090 (0.002)</td>
+<td align="right">0.091 (0.004)</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">Wei</td>
+<td align="right">-0.014 (0.003)</td>
+<td align="right">-0.020 (0.003)</td>
+<td align="right">-0.043 (0.003)</td>
+<td align="right">0.049 (0.003)</td>
+<td align="right">-0.015 (0.003)</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">Gom</td>
+<td align="right">-0.018 (0.003)</td>
+<td align="right">0.063 (0.004)</td>
+<td align="right">-0.013 (0.003)</td>
+<td align="right">-0.042 (0.002)</td>
+<td align="right">0.089 (0.004)</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">RP(5)</td>
+<td align="right">-0.014 (0.003)</td>
+<td align="right">-0.020 (0.003)</td>
+<td align="right">-0.013 (0.003)</td>
+<td align="right">-0.011 (0.003)</td>
+<td align="right">-0.024 (0.003)</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">RP(9)</td>
+<td align="right">-0.014 (0.003)</td>
+<td align="right">-0.020 (0.003)</td>
+<td align="right">-0.013 (0.003)</td>
+<td align="right">-0.012 (0.003)</td>
+<td align="right">-0.023 (0.003)</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">RP(P)</td>
+<td align="right">-0.015 (0.003)</td>
+<td align="right">-0.020 (0.003)</td>
+<td align="right">-0.018 (0.003)</td>
+<td align="right">-0.016 (0.003)</td>
+<td align="right">-0.024 (0.003)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">Cox</td>
+<td align="right">-0.113 (0.001)</td>
+<td align="right">-0.102 (0.001)</td>
+<td align="right">-0.148 (0.001)</td>
+<td align="right">-0.182 (0.001)</td>
+<td align="right">-0.168 (0.001)</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">Exp</td>
+<td align="right">-0.048 (0.003)</td>
+<td align="right">0.016 (0.004)</td>
+<td align="right">-0.147 (0.001)</td>
+<td align="right">-0.130 (0.001)</td>
+<td align="right">0.047 (0.004)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">Wei</td>
+<td align="right">-0.048 (0.003)</td>
+<td align="right">-0.057 (0.003)</td>
+<td align="right">-0.081 (0.002)</td>
+<td align="right">-0.009 (0.003)</td>
+<td align="right">-0.056 (0.002)</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">Gom</td>
+<td align="right">-0.054 (0.003)</td>
+<td align="right">0.022 (0.004)</td>
+<td align="right">-0.053 (0.003)</td>
+<td align="right">-0.080 (0.002)</td>
+<td align="right">0.040 (0.004)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">RP(5)</td>
+<td align="right">-0.048 (0.003)</td>
+<td align="right">-0.058 (0.003)</td>
+<td align="right">-0.053 (0.003)</td>
+<td align="right">-0.057 (0.002)</td>
+<td align="right">-0.065 (0.002)</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">RP(9)</td>
+<td align="right">-0.048 (0.003)</td>
+<td align="right">-0.058 (0.003)</td>
+<td align="right">-0.053 (0.003)</td>
+<td align="right">-0.057 (0.002)</td>
+<td align="right">-0.065 (0.002)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">RP(P)</td>
+<td align="right">-0.048 (0.003)</td>
+<td align="right">-0.058 (0.003)</td>
+<td align="right">-0.057 (0.002)</td>
+<td align="right">-0.059 (0.002)</td>
+<td align="right">-0.066 (0.002)</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">Cox</td>
+<td align="right">0.037 (0.004)</td>
+<td align="right">0.027 (0.004)</td>
+<td align="right">0.038 (0.004)</td>
+<td align="right">0.039 (0.004)</td>
+<td align="right">0.033 (0.004)</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">Exp</td>
+<td align="right">0.016 (0.004)</td>
+<td align="right">0.091 (0.005)</td>
+<td align="right">-0.101 (0.003)</td>
+<td align="right">-0.067 (0.003)</td>
+<td align="right">0.144 (0.005)</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">Wei</td>
+<td align="right">0.016 (0.004)</td>
+<td align="right">0.006 (0.004)</td>
+<td align="right">-0.018 (0.003)</td>
+<td align="right">0.104 (0.005)</td>
+<td align="right">0.019 (0.004)</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">Gom</td>
+<td align="right">0.014 (0.004)</td>
+<td align="right">0.089 (0.005)</td>
+<td align="right">0.017 (0.004)</td>
+<td align="right">-0.009 (0.003)</td>
+<td align="right">0.138 (0.005)</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(5)</td>
+<td align="right">0.016 (0.004)</td>
+<td align="right">0.007 (0.004)</td>
+<td align="right">0.017 (0.004)</td>
+<td align="right">0.019 (0.004)</td>
+<td align="right">0.007 (0.004)</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(9)</td>
+<td align="right">0.016 (0.004)</td>
+<td align="right">0.007 (0.004)</td>
+<td align="right">0.017 (0.004)</td>
+<td align="right">0.018 (0.004)</td>
+<td align="right">0.007 (0.004)</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(P)</td>
+<td align="right">0.016 (0.004)</td>
+<td align="right">0.007 (0.004)</td>
+<td align="right">0.012 (0.004)</td>
+<td align="right">0.017 (0.004)</td>
+<td align="right">0.006 (0.004)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">Cox</td>
+<td align="right">-0.023 (0.003)</td>
+<td align="right">-0.032 (0.003)</td>
+<td align="right">-0.028 (0.003)</td>
+<td align="right">-0.032 (0.003)</td>
+<td align="right">-0.029 (0.003)</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">Exp</td>
+<td align="right">-0.039 (0.003)</td>
+<td align="right">0.027 (0.004)</td>
+<td align="right">-0.142 (0.002)</td>
+<td align="right">-0.121 (0.002)</td>
+<td align="right">0.066 (0.004)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">Wei</td>
+<td align="right">-0.039 (0.003)</td>
+<td align="right">-0.048 (0.003)</td>
+<td align="right">-0.073 (0.002)</td>
+<td align="right">0.014 (0.003)</td>
+<td align="right">-0.043 (0.003)</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">Gom</td>
+<td align="right">-0.049 (0.003)</td>
+<td align="right">0.031 (0.004)</td>
+<td align="right">-0.043 (0.003)</td>
+<td align="right">-0.064 (0.002)</td>
+<td align="right">0.066 (0.004)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(5)</td>
+<td align="right">-0.039 (0.003)</td>
+<td align="right">-0.049 (0.003)</td>
+<td align="right">-0.043 (0.003)</td>
+<td align="right">-0.047 (0.002)</td>
+<td align="right">-0.056 (0.002)</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(9)</td>
+<td align="right">-0.039 (0.003)</td>
+<td align="right">-0.049 (0.003)</td>
+<td align="right">-0.043 (0.003)</td>
+<td align="right">-0.047 (0.002)</td>
+<td align="right">-0.056 (0.002)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(P)</td>
+<td align="right">-0.039 (0.003)</td>
+<td align="right">-0.048 (0.003)</td>
+<td align="right">-0.047 (0.003)</td>
+<td align="right">-0.048 (0.002)</td>
+<td align="right">-0.057 (0.002)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption><span id="tab:sim2-miss-scenario1-fv-cov-t">Table A.14: </span>Coverage with Monte Carlo standard error of estimated frailty variance, simulation study on model misspecification in survival models with shared frailty terms, scenario with 15 clusters of 100 individuals each and a small frailty variance.</caption>
+<thead>
+<tr class="header">
+<th align="right">True frailty</th>
+<th align="right">Model frailty</th>
+<th align="right">Model baseline</th>
+<th align="right">Exponential</th>
+<th align="right">Weibull</th>
+<th align="right">Gompertz</th>
+<th align="right">Weibull-Weibull (1)</th>
+<th align="right">Weibull-Weibull (2)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">Cox</td>
+<td align="right">59.48 (1.55)</td>
+<td align="right">64.26 (1.52)</td>
+<td align="right">5.71 (0.73)</td>
+<td align="right">0.00 (0.00)</td>
+<td align="right">2.22 (0.47)</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">Exp</td>
+<td align="right">85.70 (1.11)</td>
+<td align="right">94.50 (0.72)</td>
+<td align="right">38.10 (1.54)</td>
+<td align="right">54.90 (1.57)</td>
+<td align="right">96.80 (0.56)</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">Wei</td>
+<td align="right">86.10 (1.09)</td>
+<td align="right">83.30 (1.18)</td>
+<td align="right">77.20 (1.33)</td>
+<td align="right">95.80 (0.63)</td>
+<td align="right">85.60 (1.11)</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">Gom</td>
+<td align="right">82.35 (1.21)</td>
+<td align="right">96.28 (0.60)</td>
+<td align="right">85.70 (1.11)</td>
+<td align="right">83.06 (1.19)</td>
+<td align="right">96.42 (0.59)</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">RP(5)</td>
+<td align="right">85.97 (1.10)</td>
+<td align="right">83.36 (1.18)</td>
+<td align="right">85.77 (1.10)</td>
+<td align="right">86.83 (1.07)</td>
+<td align="right">80.45 (1.25)</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">RP(9)</td>
+<td align="right">85.87 (1.10)</td>
+<td align="right">83.36 (1.18)</td>
+<td align="right">85.80 (1.10)</td>
+<td align="right">86.90 (1.07)</td>
+<td align="right">81.36 (1.23)</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">RP(P)</td>
+<td align="right">86.02 (1.10)</td>
+<td align="right">83.36 (1.18)</td>
+<td align="right">85.09 (1.13)</td>
+<td align="right">86.37 (1.08)</td>
+<td align="right">80.45 (1.25)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">Cox</td>
+<td align="right">47.66 (1.58)</td>
+<td align="right">55.37 (1.57)</td>
+<td align="right">6.78 (0.79)</td>
+<td align="right">0.00 (0.00)</td>
+<td align="right">0.00 (0.00)</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">Exp</td>
+<td align="right">76.80 (1.33)</td>
+<td align="right">89.00 (0.99)</td>
+<td align="right">17.80 (1.21)</td>
+<td align="right">28.30 (1.42)</td>
+<td align="right">93.50 (0.78)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">Wei</td>
+<td align="right">77.10 (1.33)</td>
+<td align="right">72.60 (1.41)</td>
+<td align="right">61.70 (1.54)</td>
+<td align="right">90.20 (0.94)</td>
+<td align="right">73.62 (1.39)</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">Gom</td>
+<td align="right">74.20 (1.38)</td>
+<td align="right">90.98 (0.91)</td>
+<td align="right">74.70 (1.37)</td>
+<td align="right">66.47 (1.49)</td>
+<td align="right">91.41 (0.89)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">RP(5)</td>
+<td align="right">76.48 (1.34)</td>
+<td align="right">72.04 (1.42)</td>
+<td align="right">75.05 (1.37)</td>
+<td align="right">73.69 (1.39)</td>
+<td align="right">71.37 (1.43)</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">RP(9)</td>
+<td align="right">76.78 (1.34)</td>
+<td align="right">72.04 (1.42)</td>
+<td align="right">74.92 (1.37)</td>
+<td align="right">73.54 (1.40)</td>
+<td align="right">71.37 (1.43)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">RP(P)</td>
+<td align="right">76.98 (1.33)</td>
+<td align="right">72.04 (1.42)</td>
+<td align="right">73.17 (1.40)</td>
+<td align="right">72.36 (1.41)</td>
+<td align="right">71.37 (1.43)</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">Cox</td>
+<td align="right">84.50 (1.14)</td>
+<td align="right">82.20 (1.21)</td>
+<td align="right">83.30 (1.18)</td>
+<td align="right">84.40 (1.15)</td>
+<td align="right">82.50 (1.20)</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">Exp</td>
+<td align="right">87.78 (1.04)</td>
+<td align="right">96.00 (0.62)</td>
+<td align="right">45.70 (1.58)</td>
+<td align="right">63.30 (1.52)</td>
+<td align="right">96.80 (0.56)</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">Wei</td>
+<td align="right">87.88 (1.03)</td>
+<td align="right">85.89 (1.10)</td>
+<td align="right">80.88 (1.24)</td>
+<td align="right">96.99 (0.54)</td>
+<td align="right">88.23 (1.02)</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">Gom</td>
+<td align="right">86.29 (1.09)</td>
+<td align="right">96.60 (0.57)</td>
+<td align="right">88.08 (1.02)</td>
+<td align="right">86.84 (1.07)</td>
+<td align="right">97.38 (0.50)</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(5)</td>
+<td align="right">87.68 (1.04)</td>
+<td align="right">85.95 (1.10)</td>
+<td align="right">88.10 (1.02)</td>
+<td align="right">89.60 (0.97)</td>
+<td align="right">85.91 (1.10)</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(9)</td>
+<td align="right">87.68 (1.04)</td>
+<td align="right">85.95 (1.10)</td>
+<td align="right">88.20 (1.02)</td>
+<td align="right">89.50 (0.97)</td>
+<td align="right">85.91 (1.10)</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(P)</td>
+<td align="right">87.78 (1.04)</td>
+<td align="right">85.95 (1.10)</td>
+<td align="right">87.50 (1.05)</td>
+<td align="right">89.20 (0.98)</td>
+<td align="right">85.91 (1.10)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">Cox</td>
+<td align="right">76.70 (1.34)</td>
+<td align="right">73.80 (1.39)</td>
+<td align="right">76.00 (1.35)</td>
+<td align="right">74.00 (1.39)</td>
+<td align="right">72.60 (1.41)</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">Exp</td>
+<td align="right">80.18 (1.26)</td>
+<td align="right">91.09 (0.90)</td>
+<td align="right">21.70 (1.30)</td>
+<td align="right">36.50 (1.52)</td>
+<td align="right">94.38 (0.73)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">Wei</td>
+<td align="right">79.84 (1.27)</td>
+<td align="right">77.48 (1.32)</td>
+<td align="right">66.87 (1.49)</td>
+<td align="right">92.08 (0.85)</td>
+<td align="right">77.89 (1.31)</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">Gom</td>
+<td align="right">77.34 (1.32)</td>
+<td align="right">92.97 (0.81)</td>
+<td align="right">77.56 (1.32)</td>
+<td align="right">71.36 (1.43)</td>
+<td align="right">92.42 (0.84)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(5)</td>
+<td align="right">80.08 (1.26)</td>
+<td align="right">76.44 (1.34)</td>
+<td align="right">77.66 (1.32)</td>
+<td align="right">77.58 (1.32)</td>
+<td align="right">77.35 (1.32)</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(9)</td>
+<td align="right">79.98 (1.27)</td>
+<td align="right">76.44 (1.34)</td>
+<td align="right">77.66 (1.32)</td>
+<td align="right">77.38 (1.32)</td>
+<td align="right">77.35 (1.32)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(P)</td>
+<td align="right">79.88 (1.27)</td>
+<td align="right">76.60 (1.34)</td>
+<td align="right">76.78 (1.34)</td>
+<td align="right">77.20 (1.33)</td>
+<td align="right">77.35 (1.32)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption><span id="tab:sim2-miss-scenario1-fv-mse-t">Table A.15: </span>Mean squared error of estimated frailty variance, simulation study on model misspecification in survival models with shared frailty terms, scenario with 15 clusters of 100 individuals each and a small frailty variance.</caption>
+<thead>
+<tr class="header">
+<th align="right">True frailty</th>
+<th align="right">Model frailty</th>
+<th align="right">Model baseline</th>
+<th align="right">Exponential</th>
+<th align="right">Weibull</th>
+<th align="right">Gompertz</th>
+<th align="right">Weibull-Weibull (1)</th>
+<th align="right">Weibull-Weibull (2)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">Cox</td>
+<td align="right">0.012</td>
+<td align="right">0.010</td>
+<td align="right">0.021</td>
+<td align="right">0.032</td>
+<td align="right">0.027</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">Exp</td>
+<td align="right">0.009</td>
+<td align="right">0.017</td>
+<td align="right">0.017</td>
+<td align="right">0.013</td>
+<td align="right">0.023</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">Wei</td>
+<td align="right">0.009</td>
+<td align="right">0.009</td>
+<td align="right">0.009</td>
+<td align="right">0.013</td>
+<td align="right">0.008</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">Gom</td>
+<td align="right">0.009</td>
+<td align="right">0.017</td>
+<td align="right">0.009</td>
+<td align="right">0.006</td>
+<td align="right">0.022</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">RP(5)</td>
+<td align="right">0.009</td>
+<td align="right">0.009</td>
+<td align="right">0.009</td>
+<td align="right">0.008</td>
+<td align="right">0.008</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">RP(9)</td>
+<td align="right">0.009</td>
+<td align="right">0.009</td>
+<td align="right">0.009</td>
+<td align="right">0.008</td>
+<td align="right">0.008</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">RP(P)</td>
+<td align="right">0.009</td>
+<td align="right">0.009</td>
+<td align="right">0.009</td>
+<td align="right">0.008</td>
+<td align="right">0.008</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">Cox</td>
+<td align="right">0.014</td>
+<td align="right">0.012</td>
+<td align="right">0.023</td>
+<td align="right">0.033</td>
+<td align="right">0.028</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">Exp</td>
+<td align="right">0.009</td>
+<td align="right">0.014</td>
+<td align="right">0.024</td>
+<td align="right">0.019</td>
+<td align="right">0.015</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">Wei</td>
+<td align="right">0.009</td>
+<td align="right">0.010</td>
+<td align="right">0.011</td>
+<td align="right">0.007</td>
+<td align="right">0.009</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">Gom</td>
+<td align="right">0.009</td>
+<td align="right">0.015</td>
+<td align="right">0.009</td>
+<td align="right">0.010</td>
+<td align="right">0.015</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">RP(5)</td>
+<td align="right">0.009</td>
+<td align="right">0.010</td>
+<td align="right">0.009</td>
+<td align="right">0.009</td>
+<td align="right">0.009</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">RP(9)</td>
+<td align="right">0.009</td>
+<td align="right">0.010</td>
+<td align="right">0.009</td>
+<td align="right">0.009</td>
+<td align="right">0.009</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">RP(P)</td>
+<td align="right">0.009</td>
+<td align="right">0.010</td>
+<td align="right">0.009</td>
+<td align="right">0.009</td>
+<td align="right">0.009</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">Cox</td>
+<td align="right">0.018</td>
+<td align="right">0.017</td>
+<td align="right">0.019</td>
+<td align="right">0.016</td>
+<td align="right">0.017</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">Exp</td>
+<td align="right">0.014</td>
+<td align="right">0.030</td>
+<td align="right">0.017</td>
+<td align="right">0.012</td>
+<td align="right">0.048</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">Wei</td>
+<td align="right">0.014</td>
+<td align="right">0.014</td>
+<td align="right">0.012</td>
+<td align="right">0.032</td>
+<td align="right">0.015</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">Gom</td>
+<td align="right">0.014</td>
+<td align="right">0.030</td>
+<td align="right">0.015</td>
+<td align="right">0.009</td>
+<td align="right">0.045</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(5)</td>
+<td align="right">0.014</td>
+<td align="right">0.014</td>
+<td align="right">0.015</td>
+<td align="right">0.013</td>
+<td align="right">0.012</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(9)</td>
+<td align="right">0.014</td>
+<td align="right">0.014</td>
+<td align="right">0.015</td>
+<td align="right">0.013</td>
+<td align="right">0.012</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(P)</td>
+<td align="right">0.014</td>
+<td align="right">0.014</td>
+<td align="right">0.015</td>
+<td align="right">0.013</td>
+<td align="right">0.012</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">Cox</td>
+<td align="right">0.009</td>
+<td align="right">0.009</td>
+<td align="right">0.009</td>
+<td align="right">0.008</td>
+<td align="right">0.009</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">Exp</td>
+<td align="right">0.009</td>
+<td align="right">0.015</td>
+<td align="right">0.023</td>
+<td align="right">0.017</td>
+<td align="right">0.020</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">Wei</td>
+<td align="right">0.009</td>
+<td align="right">0.009</td>
+<td align="right">0.011</td>
+<td align="right">0.010</td>
+<td align="right">0.009</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">Gom</td>
+<td align="right">0.009</td>
+<td align="right">0.015</td>
+<td align="right">0.009</td>
+<td align="right">0.009</td>
+<td align="right">0.022</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(5)</td>
+<td align="right">0.009</td>
+<td align="right">0.010</td>
+<td align="right">0.009</td>
+<td align="right">0.008</td>
+<td align="right">0.009</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(9)</td>
+<td align="right">0.009</td>
+<td align="right">0.010</td>
+<td align="right">0.009</td>
+<td align="right">0.008</td>
+<td align="right">0.009</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(P)</td>
+<td align="right">0.009</td>
+<td align="right">0.010</td>
+<td align="right">0.009</td>
+<td align="right">0.008</td>
+<td align="right">0.009</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption><span id="tab:sim2-miss-scenario1-isdiff-bias-t">Table A.16: </span>Bias with Monte Carlo standard error of difference in 5-years life expectancy, simulation study on model misspecification in survival models with shared frailty terms, scenario with 15 clusters of 100 individuals each and a small frailty variance.</caption>
+<thead>
+<tr class="header">
+<th align="right">True frailty</th>
+<th align="right">Model frailty</th>
+<th align="right">Model baseline</th>
+<th align="right">Exponential</th>
+<th align="right">Weibull</th>
+<th align="right">Gompertz</th>
+<th align="right">Weibull-Weibull (1)</th>
+<th align="right">Weibull-Weibull (2)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">Cox</td>
+<td align="right">0.008 (0.003)</td>
+<td align="right">-0.000 (0.003)</td>
+<td align="right">0.003 (0.002)</td>
+<td align="right">0.009 (0.003)</td>
+<td align="right">0.053 (0.003)</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">Exp</td>
+<td align="right">0.001 (0.003)</td>
+<td align="right">0.024 (0.003)</td>
+<td align="right">-0.038 (0.002)</td>
+<td align="right">-0.008 (0.002)</td>
+<td align="right">0.072 (0.003)</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">Wei</td>
+<td align="right">0.001 (0.003)</td>
+<td align="right">-0.001 (0.003)</td>
+<td align="right">-0.023 (0.002)</td>
+<td align="right">0.061 (0.002)</td>
+<td align="right">0.019 (0.003)</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">Gom</td>
+<td align="right">0.005 (0.003)</td>
+<td align="right">0.030 (0.003)</td>
+<td align="right">0.001 (0.002)</td>
+<td align="right">0.037 (0.002)</td>
+<td align="right">0.069 (0.003)</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">RP(5)</td>
+<td align="right">0.001 (0.003)</td>
+<td align="right">0.000 (0.003)</td>
+<td align="right">0.000 (0.002)</td>
+<td align="right">-0.005 (0.002)</td>
+<td align="right">0.013 (0.003)</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">RP(9)</td>
+<td align="right">0.001 (0.003)</td>
+<td align="right">0.000 (0.003)</td>
+<td align="right">0.001 (0.002)</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">0.012 (0.003)</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">RP(P)</td>
+<td align="right">0.001 (0.003)</td>
+<td align="right">0.001 (0.003)</td>
+<td align="right">-0.003 (0.002)</td>
+<td align="right">-0.001 (0.002)</td>
+<td align="right">0.014 (0.003)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">Cox</td>
+<td align="right">0.001 (0.003)</td>
+<td align="right">0.008 (0.003)</td>
+<td align="right">0.006 (0.002)</td>
+<td align="right">0.032 (0.002)</td>
+<td align="right">0.033 (0.003)</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">Exp</td>
+<td align="right">-0.000 (0.003)</td>
+<td align="right">0.028 (0.003)</td>
+<td align="right">-0.040 (0.002)</td>
+<td align="right">-0.009 (0.002)</td>
+<td align="right">0.064 (0.003)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">Wei</td>
+<td align="right">-0.000 (0.003)</td>
+<td align="right">0.006 (0.003)</td>
+<td align="right">-0.025 (0.002)</td>
+<td align="right">0.060 (0.002)</td>
+<td align="right">0.013 (0.003)</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">Gom</td>
+<td align="right">-0.000 (0.003)</td>
+<td align="right">0.027 (0.003)</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">0.040 (0.002)</td>
+<td align="right">0.066 (0.003)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">RP(5)</td>
+<td align="right">-0.000 (0.003)</td>
+<td align="right">0.005 (0.003)</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">-0.011 (0.002)</td>
+<td align="right">-0.009 (0.002)</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">RP(9)</td>
+<td align="right">-0.000 (0.003)</td>
+<td align="right">0.005 (0.003)</td>
+<td align="right">-0.002 (0.002)</td>
+<td align="right">-0.009 (0.002)</td>
+<td align="right">-0.010 (0.002)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">RP(P)</td>
+<td align="right">-0.000 (0.003)</td>
+<td align="right">0.005 (0.003)</td>
+<td align="right">-0.006 (0.002)</td>
+<td align="right">-0.007 (0.002)</td>
+<td align="right">-0.008 (0.002)</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">Cox</td>
+<td align="right">-0.012 (0.003)</td>
+<td align="right">-0.016 (0.003)</td>
+<td align="right">-0.004 (0.002)</td>
+<td align="right">0.066 (0.002)</td>
+<td align="right">0.045 (0.003)</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">Exp</td>
+<td align="right">-0.022 (0.003)</td>
+<td align="right">-0.004 (0.003)</td>
+<td align="right">-0.048 (0.002)</td>
+<td align="right">0.003 (0.002)</td>
+<td align="right">0.118 (0.003)</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">Wei</td>
+<td align="right">-0.022 (0.003)</td>
+<td align="right">-0.025 (0.003)</td>
+<td align="right">-0.035 (0.002)</td>
+<td align="right">0.094 (0.002)</td>
+<td align="right">0.042 (0.003)</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">Gom</td>
+<td align="right">-0.020 (0.003)</td>
+<td align="right">-0.000 (0.004)</td>
+<td align="right">-0.016 (0.002)</td>
+<td align="right">0.056 (0.002)</td>
+<td align="right">0.116 (0.003)</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(5)</td>
+<td align="right">0.014 (0.003)</td>
+<td align="right">0.016 (0.003)</td>
+<td align="right">0.011 (0.002)</td>
+<td align="right">0.017 (0.002)</td>
+<td align="right">0.045 (0.003)</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(9)</td>
+<td align="right">0.014 (0.003)</td>
+<td align="right">0.016 (0.003)</td>
+<td align="right">0.011 (0.002)</td>
+<td align="right">0.020 (0.002)</td>
+<td align="right">0.044 (0.003)</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(P)</td>
+<td align="right">0.014 (0.003)</td>
+<td align="right">0.016 (0.003)</td>
+<td align="right">0.007 (0.002)</td>
+<td align="right">0.021 (0.002)</td>
+<td align="right">0.046 (0.003)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">Cox</td>
+<td align="right">-0.009 (0.003)</td>
+<td align="right">-0.006 (0.003)</td>
+<td align="right">-0.005 (0.002)</td>
+<td align="right">0.053 (0.002)</td>
+<td align="right">0.036 (0.003)</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">Exp</td>
+<td align="right">-0.017 (0.003)</td>
+<td align="right">0.008 (0.003)</td>
+<td align="right">-0.047 (0.002)</td>
+<td align="right">0.001 (0.002)</td>
+<td align="right">0.109 (0.003)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">Wei</td>
+<td align="right">-0.017 (0.003)</td>
+<td align="right">-0.012 (0.003)</td>
+<td align="right">-0.034 (0.002)</td>
+<td align="right">0.088 (0.002)</td>
+<td align="right">0.035 (0.003)</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">Gom</td>
+<td align="right">-0.016 (0.003)</td>
+<td align="right">0.005 (0.003)</td>
+<td align="right">-0.015 (0.002)</td>
+<td align="right">0.056 (0.002)</td>
+<td align="right">0.106 (0.003)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(5)</td>
+<td align="right">0.013 (0.003)</td>
+<td align="right">0.020 (0.003)</td>
+<td align="right">0.007 (0.002)</td>
+<td align="right">0.006 (0.002)</td>
+<td align="right">0.019 (0.003)</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(9)</td>
+<td align="right">0.013 (0.003)</td>
+<td align="right">0.020 (0.003)</td>
+<td align="right">0.007 (0.002)</td>
+<td align="right">0.009 (0.002)</td>
+<td align="right">0.018 (0.003)</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(P)</td>
+<td align="right">0.013 (0.003)</td>
+<td align="right">0.020 (0.003)</td>
+<td align="right">0.004 (0.002)</td>
+<td align="right">0.010 (0.002)</td>
+<td align="right">0.020 (0.003)</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption><span id="tab:sim2-miss-scenario1-isdiff-mse-t">Table A.17: </span>Mean squared error of difference in 5-years life expectancy, simulation study on model misspecification in survival models with shared frailty terms, scenario with 15 clusters of 100 individuals each and a small frailty variance.</caption>
+<thead>
+<tr class="header">
+<th align="right">True frailty</th>
+<th align="right">Model frailty</th>
+<th align="right">Model baseline</th>
+<th align="right">Exponential</th>
+<th align="right">Weibull</th>
+<th align="right">Gompertz</th>
+<th align="right">Weibull-Weibull (1)</th>
+<th align="right">Weibull-Weibull (2)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">Cox</td>
+<td align="right">0.008</td>
+<td align="right">0.010</td>
+<td align="right">0.005</td>
+<td align="right">0.009</td>
+<td align="right">0.010</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">Exp</td>
+<td align="right">0.007</td>
+<td align="right">0.012</td>
+<td align="right">0.005</td>
+<td align="right">0.005</td>
+<td align="right">0.014</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">Wei</td>
+<td align="right">0.007</td>
+<td align="right">0.010</td>
+<td align="right">0.004</td>
+<td align="right">0.010</td>
+<td align="right">0.008</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">Gom</td>
+<td align="right">0.007</td>
+<td align="right">0.013</td>
+<td align="right">0.004</td>
+<td align="right">0.007</td>
+<td align="right">0.014</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">RP(5)</td>
+<td align="right">0.007</td>
+<td align="right">0.009</td>
+<td align="right">0.005</td>
+<td align="right">0.005</td>
+<td align="right">0.009</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">RP(9)</td>
+<td align="right">0.007</td>
+<td align="right">0.009</td>
+<td align="right">0.004</td>
+<td align="right">0.005</td>
+<td align="right">0.009</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Gamma</td>
+<td align="right">RP(P)</td>
+<td align="right">0.007</td>
+<td align="right">0.009</td>
+<td align="right">0.004</td>
+<td align="right">0.005</td>
+<td align="right">0.009</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">Cox</td>
+<td align="right">0.008</td>
+<td align="right">0.010</td>
+<td align="right">0.004</td>
+<td align="right">0.006</td>
+<td align="right">0.008</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">Exp</td>
+<td align="right">0.007</td>
+<td align="right">0.011</td>
+<td align="right">0.005</td>
+<td align="right">0.005</td>
+<td align="right">0.014</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">Wei</td>
+<td align="right">0.007</td>
+<td align="right">0.009</td>
+<td align="right">0.005</td>
+<td align="right">0.010</td>
+<td align="right">0.008</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">Gom</td>
+<td align="right">0.007</td>
+<td align="right">0.011</td>
+<td align="right">0.004</td>
+<td align="right">0.007</td>
+<td align="right">0.014</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">RP(5)</td>
+<td align="right">0.007</td>
+<td align="right">0.009</td>
+<td align="right">0.004</td>
+<td align="right">0.005</td>
+<td align="right">0.006</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">RP(9)</td>
+<td align="right">0.007</td>
+<td align="right">0.009</td>
+<td align="right">0.004</td>
+<td align="right">0.005</td>
+<td align="right">0.006</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Gamma</td>
+<td align="right">RP(P)</td>
+<td align="right">0.007</td>
+<td align="right">0.009</td>
+<td align="right">0.004</td>
+<td align="right">0.005</td>
+<td align="right">0.006</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">Cox</td>
+<td align="right">0.007</td>
+<td align="right">0.010</td>
+<td align="right">0.004</td>
+<td align="right">0.009</td>
+<td align="right">0.009</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">Exp</td>
+<td align="right">0.008</td>
+<td align="right">0.012</td>
+<td align="right">0.006</td>
+<td align="right">0.005</td>
+<td align="right">0.023</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">Wei</td>
+<td align="right">0.008</td>
+<td align="right">0.011</td>
+<td align="right">0.005</td>
+<td align="right">0.015</td>
+<td align="right">0.009</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">Gom</td>
+<td align="right">0.008</td>
+<td align="right">0.013</td>
+<td align="right">0.005</td>
+<td align="right">0.009</td>
+<td align="right">0.022</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(5)</td>
+<td align="right">0.008</td>
+<td align="right">0.010</td>
+<td align="right">0.005</td>
+<td align="right">0.006</td>
+<td align="right">0.011</td>
+</tr>
+<tr class="even">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(9)</td>
+<td align="right">0.008</td>
+<td align="right">0.010</td>
+<td align="right">0.005</td>
+<td align="right">0.006</td>
+<td align="right">0.011</td>
+</tr>
+<tr class="odd">
+<td align="right">Gamma</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(P)</td>
+<td align="right">0.008</td>
+<td align="right">0.010</td>
+<td align="right">0.005</td>
+<td align="right">0.006</td>
+<td align="right">0.011</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">Cox</td>
+<td align="right">0.007</td>
+<td align="right">0.009</td>
+<td align="right">0.004</td>
+<td align="right">0.008</td>
+<td align="right">0.008</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">Exp</td>
+<td align="right">0.007</td>
+<td align="right">0.011</td>
+<td align="right">0.006</td>
+<td align="right">0.005</td>
+<td align="right">0.021</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">Wei</td>
+<td align="right">0.007</td>
+<td align="right">0.010</td>
+<td align="right">0.005</td>
+<td align="right">0.014</td>
+<td align="right">0.009</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">Gom</td>
+<td align="right">0.008</td>
+<td align="right">0.010</td>
+<td align="right">0.005</td>
+<td align="right">0.009</td>
+<td align="right">0.020</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(5)</td>
+<td align="right">0.008</td>
+<td align="right">0.009</td>
+<td align="right">0.005</td>
+<td align="right">0.005</td>
+<td align="right">0.007</td>
+</tr>
+<tr class="odd">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(9)</td>
+<td align="right">0.008</td>
+<td align="right">0.009</td>
+<td align="right">0.005</td>
+<td align="right">0.005</td>
+<td align="right">0.007</td>
+</tr>
+<tr class="even">
+<td align="right">Log-Normal</td>
+<td align="right">Log-Normal</td>
+<td align="right">RP(P)</td>
+<td align="right">0.008</td>
+<td align="right">0.009</td>
+<td align="right">0.004</td>
+<td align="right">0.005</td>
+<td align="right">0.007</td>
+</tr>
+</tbody>
+</table>
+
 </div>
             </section>
 
@@ -210,7 +4478,7 @@ code > span.in { color: #008000; } /* Information */
         </div>
       </div>
 <a href="conferences.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="ax-tables-simst1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="ax-plots.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -221,7 +4489,7 @@ code > span.in { color: #008000; } /* Information */
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,

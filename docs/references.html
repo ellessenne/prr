@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Probation review report</title>
   <meta name="description" content="Probation review report">
-  <meta name="generator" content="bookdown 0.4 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.5 and GitBook 2.6.7">
 
   <meta property="og:title" content="Probation review report" />
   <meta property="og:type" content="book" />
@@ -25,14 +25,14 @@
 <meta name="author" content="Alessandro Gasparini">
 
 
-<meta name="date" content="2017-08-20">
+<meta name="date" content="2017-08-21">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="ax-r-session.html">
+<link rel="prev" href="ax-manuscript.html">
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -49,38 +49,6 @@
 
 
 
-<style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #0000ff; } /* Keyword */
-code > span.ch { color: #008080; } /* Char */
-code > span.st { color: #008080; } /* String */
-code > span.co { color: #008000; } /* Comment */
-code > span.ot { color: #ff4000; } /* Other */
-code > span.al { color: #ff0000; } /* Alert */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #008000; font-weight: bold; } /* Warning */
-code > span.cn { } /* Constant */
-code > span.sc { color: #008080; } /* SpecialChar */
-code > span.vs { color: #008080; } /* VerbatimString */
-code > span.ss { color: #008080; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { } /* Variable */
-code > span.cf { color: #0000ff; } /* ControlFlow */
-code > span.op { } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #ff4000; } /* Preprocessor */
-code > span.do { color: #008000; } /* Documentation */
-code > span.an { color: #008000; } /* Annotation */
-code > span.cv { color: #008000; } /* CommentVar */
-code > span.at { } /* Attribute */
-code > span.in { color: #008000; } /* Information */
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -96,24 +64,7 @@ code > span.in { color: #008000; } /* Information */
 
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
-<li class="chapter" data-level="1" data-path="sa.html"><a href="sa.html"><i class="fa fa-check"></i><b>1</b> Introduction to survival analysis</a><ul>
-<li class="chapter" data-level="1.1" data-path="sa-survdata.html"><a href="sa-survdata.html"><i class="fa fa-check"></i><b>1.1</b> Survival data</a></li>
-<li class="chapter" data-level="1.2" data-path="sa-censoring.html"><a href="sa-censoring.html"><i class="fa fa-check"></i><b>1.2</b> Censoring</a></li>
-<li class="chapter" data-level="1.3" data-path="sa-terminology-notation.html"><a href="sa-terminology-notation.html"><i class="fa fa-check"></i><b>1.3</b> Terminology and notation</a></li>
-<li class="chapter" data-level="1.4" data-path="sa-estsurv.html"><a href="sa-estsurv.html"><i class="fa fa-check"></i><b>1.4</b> Estimation of the survival function</a></li>
-<li class="chapter" data-level="1.5" data-path="sa-parsa.html"><a href="sa-parsa.html"><i class="fa fa-check"></i><b>1.5</b> Parametric survival models</a><ul>
-<li class="chapter" data-level="1.5.1" data-path="sa-parsa.html"><a href="sa-parsa.html#sa-parsa-distributions"><i class="fa fa-check"></i><b>1.5.1</b> Failure time distributions</a></li>
-<li class="chapter" data-level="1.5.2" data-path="sa-parsa.html"><a href="sa-parsa.html#sa-parsa-estimation"><i class="fa fa-check"></i><b>1.5.2</b> Estimation procedure</a></li>
-<li class="chapter" data-level="1.5.3" data-path="sa-parsa.html"><a href="sa-parsa.html#sa-parsa-example"><i class="fa fa-check"></i><b>1.5.3</b> Data analysis example</a></li>
-</ul></li>
-<li class="chapter" data-level="1.6" data-path="sa-cox.html"><a href="sa-cox.html"><i class="fa fa-check"></i><b>1.6</b> The Cox proportional hazards model</a><ul>
-<li class="chapter" data-level="1.6.1" data-path="sa-cox.html"><a href="sa-cox.html#sa-cox-estimation"><i class="fa fa-check"></i><b>1.6.1</b> Estimation procedure</a></li>
-<li class="chapter" data-level="1.6.2" data-path="sa-cox.html"><a href="sa-cox.html#sa-cox-estimating-survival"><i class="fa fa-check"></i><b>1.6.2</b> Estimating the survival function</a></li>
-<li class="chapter" data-level="1.6.3" data-path="sa-cox.html"><a href="sa-cox.html#sa-model-assumptions"><i class="fa fa-check"></i><b>1.6.3</b> Model assumptions</a></li>
-<li class="chapter" data-level="1.6.4" data-path="sa-cox.html"><a href="sa-cox.html#sa-cox-example"><i class="fa fa-check"></i><b>1.6.4</b> Data analysis example</a></li>
-</ul></li>
-<li class="chapter" data-level="1.7" data-path="sa-advances.html"><a href="sa-advances.html"><i class="fa fa-check"></i><b>1.7</b> Advances in survival analysis</a></li>
-</ul></li>
+<li class="chapter" data-level="1" data-path="terminology-notation.html"><a href="terminology-notation.html"><i class="fa fa-check"></i><b>1</b> Terminology and notation</a></li>
 <li class="chapter" data-level="2" data-path="smre.html"><a href="smre.html"><i class="fa fa-check"></i><b>2</b> Survival models with random effects</a><ul>
 <li class="chapter" data-level="2.1" data-path="smre-univariate-frailty.html"><a href="smre-univariate-frailty.html"><i class="fa fa-check"></i><b>2.1</b> Univariate frailty models</a></li>
 <li class="chapter" data-level="2.2" data-path="smre-shared-frailty.html"><a href="smre-shared-frailty.html"><i class="fa fa-check"></i><b>2.2</b> Shared frailty models</a></li>
@@ -128,11 +79,8 @@ code > span.in { color: #008000; } /* Information */
 <li class="chapter" data-level="4.1.1" data-path="compch-numintgr.html"><a href="compch-numintgr.html#compch-numintgr-uni"><i class="fa fa-check"></i><b>4.1.1</b> Unidimensional functions</a></li>
 <li class="chapter" data-level="4.1.2" data-path="compch-numintgr.html"><a href="compch-numintgr.html#compch-numintgr-multi"><i class="fa fa-check"></i><b>4.1.2</b> Multidimensional functions</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="compch-other.html"><a href="compch-other.html"><i class="fa fa-check"></i><b>4.2</b> Other considerations</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="compch-other.html"><a href="compch-other.html#compch-other-precision"><i class="fa fa-check"></i><b>4.2.1</b> Cancellation error, precision, and arithmetic over- and under-flow</a></li>
-<li class="chapter" data-level="4.2.2" data-path="compch-other.html"><a href="compch-other.html#compch-other-numdiff"><i class="fa fa-check"></i><b>4.2.2</b> Numerical differentiation</a></li>
-<li class="chapter" data-level="4.2.3" data-path="compch-other.html"><a href="compch-other.html#compch-numroot"><i class="fa fa-check"></i><b>4.2.3</b> Numerical root finding</a></li>
-</ul></li>
+<li class="chapter" data-level="4.2" data-path="compch-numdiff.html"><a href="compch-numdiff.html"><i class="fa fa-check"></i><b>4.2</b> Numerical differentiation</a></li>
+<li class="chapter" data-level="4.3" data-path="compch-numroot.html"><a href="compch-numroot.html"><i class="fa fa-check"></i><b>4.3</b> Numerical root finding</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="simsurv.html"><a href="simsurv.html"><i class="fa fa-check"></i><b>5</b> Simulating survival data</a></li>
 <li class="chapter" data-level="6" data-path="simst1.html"><a href="simst1.html"><i class="fa fa-check"></i><b>6</b> Simulation study: accuracy of Gaussian quadrature</a><ul>
@@ -156,10 +104,7 @@ code > span.in { color: #008000; } /* Information */
 <li class="chapter" data-level="7.6" data-path="simst2-res.html"><a href="simst2-res.html"><i class="fa fa-check"></i><b>7.6</b> Results</a></li>
 <li class="chapter" data-level="7.7" data-path="simst2-conclusions.html"><a href="simst2-conclusions.html"><i class="fa fa-check"></i><b>7.7</b> Conclusions</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="sirex.html"><a href="sirex.html"><i class="fa fa-check"></i><b>8</b> Exploring results from simulation studies interactively</a><ul>
-<li class="chapter" data-level="8.1" data-path="sirex-rationale.html"><a href="sirex-rationale.html"><i class="fa fa-check"></i><b>8.1</b> Rationale</a></li>
-<li class="chapter" data-level="8.2" data-path="sirex-sirex.html"><a href="sirex-sirex.html"><i class="fa fa-check"></i><b>8.2</b> SiReX</a></li>
-</ul></li>
+<li class="chapter" data-level="8" data-path="sirex.html"><a href="sirex.html"><i class="fa fa-check"></i><b>8</b> Exploring results from simulation studies interactively</a></li>
 <li class="chapter" data-level="9" data-path="infvp.html"><a href="infvp.html"><i class="fa fa-check"></i><b>9</b> Informative visiting process</a></li>
 <li class="chapter" data-level="10" data-path="future.html"><a href="future.html"><i class="fa fa-check"></i><b>10</b> Future research developments</a></li>
 <li class="chapter" data-level="11" data-path="pdevelop.html"><a href="pdevelop.html"><i class="fa fa-check"></i><b>11</b> Personal development</a><ul>
@@ -168,21 +113,14 @@ code > span.in { color: #008000; } /* Information */
 <li class="chapter" data-level="11.3" data-path="conferences.html"><a href="conferences.html"><i class="fa fa-check"></i><b>11.3</b> Conferences</a></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
-<li class="chapter" data-level="A" data-path="ax-tables.html"><a href="ax-tables.html"><i class="fa fa-check"></i><b>A</b> Tables</a><ul>
-<li class="chapter" data-level="A.1" data-path="ax-tables-simst1.html"><a href="ax-tables-simst1.html"><i class="fa fa-check"></i><b>A.1</b> Simulation study 1</a></li>
-<li class="chapter" data-level="A.2" data-path="ax-tables-simst2.html"><a href="ax-tables-simst2.html"><i class="fa fa-check"></i><b>A.2</b> Simulation study 2</a></li>
-</ul></li>
-<li class="chapter" data-level="B" data-path="ax-plots.html"><a href="ax-plots.html"><i class="fa fa-check"></i><b>B</b> Plots</a><ul>
-<li class="chapter" data-level="B.1" data-path="ax-plots-simst1.html"><a href="ax-plots-simst1.html"><i class="fa fa-check"></i><b>B.1</b> Simulation study 1</a></li>
-<li class="chapter" data-level="B.2" data-path="ax-plots-simst2.html"><a href="ax-plots-simst2.html"><i class="fa fa-check"></i><b>B.2</b> Simulation study 2</a></li>
-</ul></li>
+<li class="chapter" data-level="A" data-path="ax-tables.html"><a href="ax-tables.html"><i class="fa fa-check"></i><b>A</b> Tables</a></li>
+<li class="chapter" data-level="B" data-path="ax-plots.html"><a href="ax-plots.html"><i class="fa fa-check"></i><b>B</b> Plots</a></li>
 <li class="chapter" data-level="C" data-path="ax-slides.html"><a href="ax-slides.html"><i class="fa fa-check"></i><b>C</b> Slides</a><ul>
 <li class="chapter" data-level="C.1" data-path="ax-slides-safjr.html"><a href="ax-slides-safjr.html"><i class="fa fa-check"></i><b>C.1</b> 2017 SAfJR Conference</a></li>
 <li class="chapter" data-level="C.2" data-path="ax-slides-sam-iscb.html"><a href="ax-slides-sam-iscb.html"><i class="fa fa-check"></i><b>C.2</b> 2017 SAM Conference and ISCB Conference</a></li>
-<li class="chapter" data-level="C.3" data-path="ax-slides-students-day.html"><a href="ax-slides-students-day.html"><i class="fa fa-check"></i><b>C.3</b> Students’ Day at the ISCB Conference</a></li>
+<li class="chapter" data-level="C.3" data-path="ax-slides-students-day.html"><a href="ax-slides-students-day.html"><i class="fa fa-check"></i><b>C.3</b> Students’ Day at the 2017 ISCB Conference</a></li>
 </ul></li>
-<li class="chapter" data-level="D" data-path="ax-manuscript.html"><a href="ax-manuscript.html"><i class="fa fa-check"></i><b>D</b> Manuscript</a></li>
-<li class="chapter" data-level="E" data-path="ax-r-session.html"><a href="ax-r-session.html"><i class="fa fa-check"></i><b>E</b> R Session</a></li>
+<li class="chapter" data-level="D" data-path="ax-manuscript.html"><a href="ax-manuscript.html"><i class="fa fa-check"></i><b>D</b> Manuscript draft</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
@@ -212,22 +150,7 @@ code > span.in { color: #008000; } /* Information */
 <p>Brent, Richard P. 1973. <em>Algorithms for Minimization Without Derivatives</em>. Prentice-Hall.</p>
 </div>
 <div>
-<p>Breslow, N. 1974. “Covariance Analysis of Censored Survival Data.” <em>Biometrics</em> 30 (1): 89–99. doi:<a href="https://doi.org/10.2307/2529620">10.2307/2529620</a>.</p>
-</div>
-<div>
-<p>Clayton, David G. 1991. “A Monte Carlo Method for Bayesian Inference in Frailty Models.” <em>Biometrics</em> 47 (2): 467. doi:<a href="https://doi.org/10.2307/2532139">10.2307/2532139</a>.</p>
-</div>
-<div>
-<p>Commenges, Daniel, Hélène Jacqmin-Gadda, Cécile Proust, and Jérémie Guedj. 2006. “A Newton-Like Algorithm for Likelihood Maximization: The Robust-Variance Scoring Algorithm.” <em>ArXiv Mathematics E-Prints</em>, October. <a href="https://arxiv.org/abs/math/0610402v2" class="uri">https://arxiv.org/abs/math/0610402v2</a>.</p>
-</div>
-<div>
 <p>Cox, David R. 1972. “Regression Models and Life-Tables.” <em>Journal of the Royal Statistical Society: Series B (Statistical Methodology)</em> 34 (2): 187–220. <a href="http://www.jstor.org/stable/2985181" class="uri">http://www.jstor.org/stable/2985181</a>.</p>
-</div>
-<div>
-<p>———. 1975. “Partial Likelihood.” <em>Biometrika</em> 62 (2): 269–76. doi:<a href="https://doi.org/10.1093/biomet/62.2.269">10.1093/biomet/62.2.269</a>.</p>
-</div>
-<div>
-<p>Crowder, Martin. 2016. <em>Multivariate Survival Analysis and Competing Risks</em>. Text in Statistical Sciences. Chapman &amp; Hall / CRC.</p>
 </div>
 <div>
 <p>Crowther, Michael J, Keith R Abrams, and Paul C Lambert. 2012. “Flexible Parametric Joint Modelling of Longitudinal and Survival Data.” <em>Statistics in Medicine</em> 31 (30): 4456–71. doi:<a href="https://doi.org/10.1002/sim.5644">10.1002/sim.5644</a>.</p>
@@ -246,12 +169,6 @@ code > span.in { color: #008000; } /* Information */
 </div>
 <div>
 <p>Diggle, Peter J, Patrick Heagerty, Kung-Yee Liang, and Scott L Zeger. 2013. <em>Analysis of Longitudinal Data</em>. 2nd ed. Oxford Statistical Science Series. OUP Oxford.</p>
-</div>
-<div>
-<p>Efron, Bradley. 1977. “The Efficiency of Cox’s Likelihood Function for Censored Data.” <em>Journal of the American Statistical Association</em> 72 (359): 557–65. doi:<a href="https://doi.org/10.2307/2286217">10.2307/2286217</a>.</p>
-</div>
-<div>
-<p>Geskus, Ronald B. 2015. <em>Data Analysis with Competing Risks and Intermediate States</em>. The Biostatistics Series. Chapman &amp; Hall / CRC.</p>
 </div>
 <div>
 <p>Ghosh, Pulak, Kaushik Ghosh, and Ram C Tiwari. 2011. “Joint Modeling of Longitudinal Data and Informative Dropout Time in the Presence of Multiple Changepoints.” <em>Statistics in Medicine</em> 30: 611–26. doi:<a href="https://doi.org/10.1002/sim.4119">10.1002/sim.4119</a>.</p>
@@ -284,18 +201,6 @@ code > span.in { color: #008000; } /* Information */
 <p>Ibrahim, Joseph G, Haitao Chu, and Liddy M Chen. 2010. “Basic Concepts and Methods for Joint Models of Longitudinal and Survival Data.” <em>Journal of Clinical Oncology</em> 28 (16): 2796–2801. doi:<a href="https://doi.org/10.1200/jco.2009.25.0654">10.1200/jco.2009.25.0654</a>.</p>
 </div>
 <div>
-<p>International Stroke Trial Collaborative Group. 1997. “The International Stroke Trial (Ist): A Randomised Trial of Aspirin, Subcutaneous Heparin, Both, or Neither Among 19 435 Patients with Acute Ischaemic Stroke.” <em>The Lancet</em> 349 (9065): 1569–81. doi:<a href="https://doi.org/10.1016/S0140-6736(97)04011-7">10.1016/S0140-6736(97)04011-7</a>.</p>
-</div>
-<div>
-<p>Kalbfleisch, John D, and Ross L Prentice. 2011. <em>The Statistical Analysis of Failure Time Data</em>. 2nd ed. Wiley Series in Probability and Statistics. John Wiley &amp; Sons, Inc. doi:<a href="https://doi.org/10.1002/9781118032985">10.1002/9781118032985</a>.</p>
-</div>
-<div>
-<p>Kaplan, Edward L, and Paul Meier. 1958. “Nonparametric Estimation from Incomplete Observations.” <em>Journal of the American Statistical Association</em> 53 (282): 457–81. doi:<a href="https://doi.org/10.2307/2281868">10.2307/2281868</a>.</p>
-</div>
-<div>
-<p>Kleinbaum, David G, and Mitchel Klein. 2012. <em>Survival Analysis: A Self-Learning Text</em>. 3rd ed. Springer-Verlag New York. doi:<a href="https://doi.org/10.1007/978-1-4419-6646-9">10.1007/978-1-4419-6646-9</a>.</p>
-</div>
-<div>
 <p>Lange, Jane M, Rebecca A Hubbard, Lurdes YT Inoue, and Vladimir N Minin. 2015. “A Joint Model for Multistate Disease Processes and Random Informative Observation Times, with Applications to Electronic Medical Records Data.” <em>Biometrics</em> 71: 90–101. doi:<a href="https://doi.org/10.1111/biom.12252">10.1111/biom.12252</a>.</p>
 </div>
 <div>
@@ -314,9 +219,6 @@ code > span.in { color: #008000; } /* Information */
 <p>Liu, Xing-Rong, Yudi Pawitan, and Mark Clements. 2016. “Parametric and Penalized Generalized Survival Models.” <em>Statistical Methods in Medical Research</em>. doi:<a href="https://doi.org/10.1177/0962280216664760">10.1177/0962280216664760</a>.</p>
 </div>
 <div>
-<p>Marquardt, Donald W. 1963. “An Algorithm for Least-Squares Estimation of Nonlinear Parameters.” <em>Journal of the Society for Industrial and Applied Mathematics</em> 11 (2): 431–41. doi:<a href="https://doi.org/10.1137/0111030">10.1137/0111030</a>.</p>
-</div>
-<div>
 <p>McLachlan, GJ, and DC McGiffin. 1994. “On the Role of Finite Mixture Models in Survival Analysis.” <em>Statistical Methods in Medical Research</em> 3 (3): 221–26. doi:<a href="https://doi.org/10.1177/096228029400300302">10.1177/096228029400300302</a>.</p>
 </div>
 <div>
@@ -327,9 +229,6 @@ code > span.in { color: #008000; } /* Information */
 </div>
 <div>
 <p>Pawitan, Yudi, and Steve Self. 1993. “Modeling Disease Marker Processes in Aids.” <em>Journal of the American Statistical Association</em> 88 (423): 719–26. doi:<a href="https://doi.org/10.2307/2290756">10.2307/2290756</a>.</p>
-</div>
-<div>
-<p>Peto, R. 1972. “Contribution to Discussion of Paper by D.R. Cox.” <em>Journal of the Royal Statistical Society: Series B (Statistical Methodology)</em> 34: 205–7.</p>
 </div>
 <div>
 <p>Pickles, Andrew, and Robert Crouchley. 1995. “A Comparison of Frailty Models for Multivariate Survival Data.” <em>Statistics in Medicine</em> 14 (13): 1447–61. doi:<a href="https://doi.org/10.1002/sim.4780141305">10.1002/sim.4780141305</a>.</p>
@@ -348,12 +247,6 @@ code > span.in { color: #008000; } /* Information */
 </div>
 <div>
 <p>Rutherford, Mark J, Michael J Crowther, and Paul C Lambert. 2015. “The Use of Restricted Cubic Splines to Approximate Complex Hazard Functions in the Analysis of Time-to-Event Data: A Simulation Study.” <em>Journal of Statistical Computation and Simulation</em> 85 (4): 777–93. doi:<a href="https://doi.org/10.1080/00949655.2013.845890">10.1080/00949655.2013.845890</a>.</p>
-</div>
-<div>
-<p>Sandercock, Peter, Maciej Niewada, and Anna Czlonkowska. 2011. “International Stroke Trial Database (Version 2).” University of Edinburgh, Department of Clinical Neuroscience. doi:<a href="https://doi.org/10.7488/ds/104.">10.7488/ds/104.</a></p>
-</div>
-<div>
-<p>Sinha, Debajyoti, Tapabrata Maiti, Joseph G Ibrahim, and Bichun Ouyang. 2008. “Current Methods for Recurrent Events Data with Dependent Termination.” <em>Journal of the American Statistical Association</em> 103 (482): 866–78. doi:<a href="https://doi.org/10.1198/016214508000000201">10.1198/016214508000000201</a>.</p>
 </div>
 <div>
 <p>Sweeting, Michael J, and Simon G Thompson. 2011. “Joint Modelling of Longitudinal and Time-to-Event Data with Application to Predicting Abdominal Aortic Aneurysm Growth and Rupture.” <em>Biometrical Journal</em> 53 (5): 750–63. doi:<a href="https://doi.org/10.1002/bimj.201100052">10.1002/bimj.201100052</a>.</p>
@@ -401,7 +294,7 @@ code > span.in { color: #008000; } /* Information */
           </div>
         </div>
       </div>
-<a href="ax-r-session.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ax-manuscript.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>
@@ -413,7 +306,7 @@ code > span.in { color: #008000; } /* Information */
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-require(["gitbook"], function(gitbook) {
+gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": true,
