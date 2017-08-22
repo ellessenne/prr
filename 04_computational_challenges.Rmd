@@ -49,9 +49,9 @@ A first method that is only slightly more complicated but yields better results 
 \[
 \int_a^b f(x) \ dx \approx \frac{b - a}{6} \left[ f(a) + 4f((a + b) / 2) + f(b) \right]
 \]
-Analogously as the trapezoidal rule, it is possible to obtain greater accuracy by splitting the integration interval into many subintervals, applying the Simpson's rule to each subinterval, and sum the results.
+Analogously as the trapezoidal rule, it is possible to obtain greater accuracy by splitting the integration interval into many subintervals, applying the Simpson's rule to each subinterval, and adding up the results.
 
-Second, it is possible to show that by choosing carefully the points at which to evaluate \(f(x)\) and the weights assigned to each point it is possible to obtain an exact approximation of the integral of any polynomial of degree \(2N - 1\) or less with \(N\) function evaluations (proof in @monahan_2011). Let \(f(x)\) be a function of order \(2N - 1\) or less to integrate over a domain \([a,b]\); let \(w(x)\) be a weight function. The quadrature formula is defined as:
+Second, it is possible to show that by choosing carefully the points at which to evaluate \(f(x)\) and the weights assigned to each point it is possible to obtain an exact approximation of the integral of any polynomial of degree \(2N - 1\) or less with \(N\) function evaluations (proof in @monahan_2011). Methods that exploit this feature are commonly named Gaussian quadrature methods. Let \(f(x)\) be a function of order \(2N - 1\) or less to integrate over a domain \([a,b]\); let \(w(x)\) be a weight function. The quadrature formula is defined as:
 \[
 \int_a^b f(x) w(x) \ dx = \sum_{i = 1} ^ N w_i f(x_i)
 \]
@@ -73,7 +73,7 @@ A slightly more complicated version of Gaussian quadrature is given by the _Gaus
 
 ### Multidimensional functions {#compch-numintgr-multi}
 
-Finally, all the methods I presented so far only only apply to the integration of unidimensional functions. It is of course possible to extend quadrature rules to multidimensional settings, by recursively applying unidimensional quadrature rules. Say I want to approximate the integral of a bidimensional function \(f(x, y)\); the bidimensional Gaussian quadrature rule has the form:
+All the methods I presented so far only only apply to the integration of unidimensional functions. It is of course possible to extend quadrature rules to multidimensional settings, by recursively applying unidimensional quadrature rules. Say I want to approximate the integral of a bidimensional function \(f(x, y)\); the bidimensional Gaussian quadrature rule has the form:
 \[
 \int_X \int_Y f(x, y) \ dx \ dy \approx \sum_j \sum_i w_j w_i f(x_j, y_i)
 \]
@@ -87,7 +87,11 @@ with \(U \sim\) uniform over \(\Omega\). Drawing \(N\) uniform random vectors \(
 \[
 \hat{I}_{\Omega} = \frac{V(\Omega)}{N} \sum_{i = 1} ^ N f(u_i),
 \]
-and this defines Monte Carlo integration. The variance of the estimated integral \(\hat{I}_{\Omega}\) follows, assuming the \(u_i\) are independenent, as \(var(\hat{I}_{\Omega}) = \frac{V(\Omega)^2}{N^2} N var(f(u_i))\). More details in @monahan_2011.
+and this defines Monte Carlo integration. The variance of the estimated integral \(\hat{I}_{\Omega}\) follows, assuming the \(u_i\) are independenent, as
+\[
+V(\hat{I}_{\Omega}) = \frac{V(\Omega)^2}{N^2} N V(f(u_i)).
+\]
+More details in @monahan_2011.
 
 Luckily, both Gaussian quadrature and Monte Carlo integration can be tweaked to improve accuracy and convergence rates: two appealing options are, respectively, adaptive Gaussian quadrature and importance sampling. Adaptive Gaussian quadrature works best when using the Gauss-Hermite rule with the normal density kernel as weighting function; in a multivariate setting, using an iterative algorithm, it is possible to update the mean vector \(M\) and variance-covariance matrix \(\Sigma\) of the multivariate normal density at each step (e.g. using empirical Bayes estimates of \(M, \Sigma\)) to better adapt the grid of quadrature points to the actual shape of the integral to approximate.  Conversely, Monte Carlo integration works best when it is possible to draw a sample from the target distribution (i.e. the distribution of the integral to approximate); unfortunately, that is rarely the case in practice. The idea of importance sampling consists then in drawing a sample from a proposal distribution and then re-weight the estimated integral using importance weights to better adapt to the target distribution.
 

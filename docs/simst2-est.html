@@ -25,7 +25,7 @@
 <meta name="author" content="Alessandro Gasparini">
 
 
-<meta name="date" content="2017-08-21">
+<meta name="date" content="2017-08-22">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -141,9 +141,16 @@
             <section class="normal" id="section-">
 <div id="simst2-est" class="section level2">
 <h2><span class="header-section-number">7.4</span> Estimands</h2>
-<p>The first estimand of interest is the regression coefficient <span class="math inline">\(\beta\)</span> associated with the simulated binary treatment. This coefficient can be interpreted as log-treatment effect, and it would be interesting to see if and how misspecification of the baseline hazard or frailty distribution affects relative risk estimates. Second, I am interested in comparing estimates of the frailty variance obtained from each model - a quantity often used to quantify dependence between clustered observations. Finally, I am going to compare two measures of absolute risk: marginal survival difference at time <span class="math inline">\(t\)</span>, defined as <span class="math inline">\(S(t)_{\text{diff}} = S(t | x = 1) - S(t | x = 0)\)</span>, and integrated marginal survival difference, defined as <span class="math inline">\(iS_{\text{diff}} = iS(x = 1) - iS(x = 0)\)</span>. The former is obtained by fixing the time <span class="math inline">\(t\)</span> (I am using 1, 2, 3, and 4 years), and then integrating out the frailty term from the conditional survival function as explained in Chapter <a href="smre.html#smre">2</a>. Conversely, the latter requires integrating the marginal survival function for both treatment groups and then computing their difference. I estimate it as follows:</p>
+<p>The first estimand of interest is the regression coefficient <span class="math inline">\(\beta\)</span> associated with the simulated binary treatment, to see if and how misspecification of the baseline hazard or frailty distribution affects relative risk estimates. Second, I am interested in comparing estimates of the frailty variance - and therefore of the unobserved heterogeneity - obtained from each model. Finally, I am going to compare two measures of absolute risk:</p>
 <ol style="list-style-type: decimal">
-<li><p>I estimate marginal survival for a treatment group at 1000 equally spaced values of follow-up time <span class="math inline">\(t\)</span>;</p></li>
+<li><p>marginal survival difference at time <span class="math inline">\(t\)</span>, defined as <span class="math inline">\(S(t)_{\text{diff}} = S(t | x = 1) - S(t | x = 0)\)</span>;</p></li>
+<li><p>integrated marginal survival difference, defined as <span class="math inline">\(iS_{\text{diff}} = iS(x = 1) - iS(x = 0)\)</span>.</p></li>
+</ol>
+<ol style="list-style-type: decimal">
+<li>is obtained by fixing the time <span class="math inline">\(t\)</span> (I am using 1, 2, 3, and 4 years), and then integrating out the frailty term from the conditional survival function as explained in Chapter <a href="smre.html#smre">2</a>. Conversely, (2) requires integrating the marginal survival function for both treatment groups and then computing their difference. I estimate it as follows:</li>
+</ol>
+<ol style="list-style-type: decimal">
+<li><p>I estimate marginal survival for a treatment group at 1000 equally spaced values over the follow-up time <span class="math inline">\(t\)</span>;</p></li>
 <li><p>I fit an interpolating natural spline over the 1000 estimates from step (1) using the <code>splinefun</code> R function;</p></li>
 <li><p>I integrate the resulting spline function using Gauss-Kronrod quadrature as implemented in the <code>integrate</code> function;</p></li>
 <li><p>I compute the difference of the integrated marginal survival for the two treatment groups.</p></li>

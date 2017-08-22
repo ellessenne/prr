@@ -37,7 +37,7 @@ Finally, regarding \(h_0(t)\): the choice of the baseline hazard function follow
 
 ## Estimation process {#jm-estimation}
 
-Estimation of a joint model for longitudinal and survival data is a non-trivial task. The complexity of jointly modelling the longitudinal component and the survival component motivated using a two-stages procedure as mentioned in Section \@ref(jm). With that approach, the longitudinal component is modelled and estimated separately; consequently, subject-specific predictions from the longitudinal model are produced and plugged into the survival model as time-varying covariates. Despite the simplicity of this approach, though, it has been showed that it produces substantial bias and poor coverage [@tsiatis_2001; @sweeting_2011]. Therefore, an approach that models both processes jointly is required. in particular, two approaches are predominant: a full likelihood approach, and a Bayesian approach; both have appealing characteristics, but they share the feature of being computationally intensive.
+Estimation of a joint model for longitudinal and survival data is a non-trivial task. The complexity of jointly modelling the longitudinal component and the survival component motivated the use of two-stages procedures as mentioned in Section \@ref(jm). With that approach, the longitudinal component is modelled and estimated separately; consequently, subject-specific predictions from the longitudinal model are produced and plugged into the survival model as time-varying covariates. Despite the simplicity of this approach, though, it has been showed that it produces substantial bias and poor coverage [@tsiatis_2001; @sweeting_2011]. Therefore, an approach that models both processes jointly is required. in particular, two approaches are predominant: a full likelihood approach, and a Bayesian approach; both have appealing characteristics, but they share the feature of being computationally intensive.
 
 Focusing on the full likelihood approach, it is possible to formulate the joint likelihood [@rizopoulos_2012] for the overall parameter vector \(\theta = \{\theta_t, \theta_y, \theta_b\}\), formed by the parameters of the survival component, the parameters of the longitudinal component, and the elements of the variance-covariance matrix of the random effects, respectively. The joint distribution of the survival time \(T_i\), the event indicator \(d_i\), and the longitudinal response \(y_i\), conditional on the random effects \(b_i\), can be expressed as:
 \[
@@ -67,8 +67,8 @@ P(y_i(t_{ij}) | b_i, \theta_y) = (2 \pi \sigma ^ 2) ^ {-1/2} \exp \left[ -\frac{
 \]
 and \(P(b_i | \theta_b)\) the density of the random effects:
 \[
-P(b_i | \theta_b) = (2 \pi) ^ {-q_b / 2} | \Sigma | ^ {-1 / 2} \exp \left[- \frac{b_i^T \Sigma ^ {-1} b_i}{2}\right]
+P(b_i | \theta_b) = (2 \pi) ^ {-q_b / 2} | \Sigma | ^ {-1 / 2} \exp \left[- \frac{b_i^T \Sigma ^ {-1} b_i}{2}\right],
 \]
-\(q_b\) being the dimension of the random effects.
+with \(q_b\) being the dimension of the random effects.
 
 Historically, the predominant method for maximisign the full joint likelihood has been the Expectation-Maximisation algorithm [@dempster_1977]; alternatively, it is possible to use general purpose optimisers to maximise the full joint likelihood via algorithms such as the Newton-Raphson algorithm. Nevertheless, significant computational challenges persist.

@@ -25,7 +25,7 @@
 <meta name="author" content="Alessandro Gasparini">
 
 
-<meta name="date" content="2017-08-21">
+<meta name="date" content="2017-08-22">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -143,11 +143,11 @@
 <h2><span class="header-section-number">6.3</span> Methods</h2>
 <p>I fitted a set of models for each simulated dataset under each data-generating mechanism. Specifically, for the data generated assuming a Gamma frailty, I compared the following models:</p>
 <ul>
-<li><p>a shared Gamma frailty model with a baseline Weibull hazard using the analytical formulation of the likelihood (method <em>AN</em>);</p></li>
+<li><p>a shared Gamma frailty model with a baseline Weibull hazard using the analytical formulation of the likelihood (method <em>AF</em>);</p></li>
 <li><p>a shared Gamma frailty model with a baseline Weibull hazard using the likelihood approximated numerically via Gaussian quadrature (specifically, a Gauss-Laguerre quadrature rule) with 15, 35, 75, and 105 nodes (methods <em>GQ15</em>, <em>GQ35</em>, <em>GQ75</em>, <em>GQ105</em>);</p></li>
 <li><p>a shared Gamma frailty model with a baseline Weibull hazard using the likelihood approximated numerically via Gauss-Kronrod quadrature (as implemented in R’s <code>integrate()</code> function; method <em>IN</em>).</p></li>
 </ul>
-<p>Then, for data generated assuming a log-normal frailty, I fitted a Weibull model with a random intercept using the likelihood approximated via Gauss-Hermite quadrature using 15, 35, 75, and 105 nodes.</p>
+<p>Then, for data generated assuming a log-normal frailty, I fitted a Weibull model with a random intercept using the likelihood approximated via Gauss-Hermite quadrature using 15, 35, 75, and 105 nodes (methods <em>GQ15</em>, <em>GQ35</em>, <em>GQ75</em>, <em>GQ105</em>).</p>
 </div>
             </section>
 

@@ -1,6 +1,6 @@
 # Future research developments {#future}
 
-In this Chapter I will present my plans for research during the second year of my PhD. I also included a Gantt chart in Figure \@ref(fig:gantt-chart).
+In this Chapter I will present my plans for research during the second year of my PhD. I also included a Gantt chart laying out the projects planned for years 2 and 3 of my PhD Figure \@ref(fig:gantt-chart).
 
 First of all, I plan to conclude the simulation study on the impact of model misspecification in survival models with frailty terms. Simulations for some scenarios are currently still running on the University high-performance computing (HPC) facilities at the time of writing, and should finish soon. Consequently, I will summarise relevant results and I will finish writing up the project into a paper that will be submitted to a journal for publication by the end of the year. Current potential target journals are the Biometrical Journal and Statistics in Medicine.
 

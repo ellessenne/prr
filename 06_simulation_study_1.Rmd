@@ -1,7 +1,7 @@
 # Simulation study: accuracy of Gaussian quadrature {#simst1}
 \chaptermark{Accuracy of Gaussian quadrature}
 
-In this Chapter I will present the first simulation study I run during my first year, on accuracy on Gaussian quadrature methods. I presented part of this work as an oral presentation at the 2017 Survival Analysis for Junior Researchers conference (more details in Chapter \@ref(pdevelop) and slides available in Appendix \@ref(ax-slides-safjr)). The Chapter is partitioned into seven Sections, and in each Section I will present an aspect of the simulation study: the aim of the study (Section \@ref(simst1-aim)), the data-generating mechanisms (Section \@ref(simst1-dgms)), the methods that I will compare (Section \@ref(simst1-methods)) and the estimands of interest (Section \@ref(simst1-est)), the performance measures I will use to compare the methods (Section \@ref(simst1-pm)), the results of the study (Section \@ref(simst1-res)), and finally a brief discussion in Section \@ref(simst1-conclusions).
+In this Chapter I will present the first simulation study I run during my first year, on accuracy on Gaussian quadrature methods. I presented part of this work as an oral presentation at the 2017 Survival Analysis for Junior Researchers conference (more details in Chapter \@ref(pdevelop) and slides available in Appendix \@ref(ax-slides-safjr)). I will introduce the aims of this study in Section \@ref(simst1-aim), the data-generating mechanisms in Section \@ref(simst1-dgms), the methods included in the comparison in Section \@ref(simst1-methods), the estimands of interest in Section \@ref(simst1-est), the performance measures of interest in Section \@ref(simst1-pm), the results of the study in Section \@ref(simst1-res), and finally a brief discussion in Section \@ref(simst1-conclusions).
 
 ## Aim {#simst1-aim}
 
@@ -22,23 +22,17 @@ The 54 simulated scenarios with a Gamma frailty will be used to answer the first
 
 I fitted a set of models for each simulated dataset under each data-generating mechanism. Specifically, for the data generated assuming a Gamma frailty, I compared the following models:
 
-* a shared Gamma frailty model with a baseline Weibull hazard using the analytical formulation of the likelihood (method _AN_);
+* a shared Gamma frailty model with a baseline Weibull hazard using the analytical formulation of the likelihood (method _AF_);
 
 * a shared Gamma frailty model with a baseline Weibull hazard using the likelihood approximated numerically via Gaussian quadrature (specifically, a Gauss-Laguerre quadrature rule) with 15, 35, 75, and 105 nodes (methods _GQ15_, _GQ35_, _GQ75_, _GQ105_);
 
 * a shared Gamma frailty model with a baseline Weibull hazard using the likelihood approximated numerically via Gauss-Kronrod quadrature (as implemented in R's `integrate()` function; method _IN_).
 
-Then, for data generated assuming a log-normal frailty, I fitted a Weibull model with a random intercept using the likelihood approximated via Gauss-Hermite quadrature using 15, 35, 75, and 105 nodes.
+Then, for data generated assuming a log-normal frailty, I fitted a Weibull model with a random intercept using the likelihood approximated via Gauss-Hermite quadrature using 15, 35, 75, and 105 nodes (methods _GQ15_, _GQ35_, _GQ75_, _GQ105_).
 
 ## Estimands {#simst1-est}
 
-For each model fitted under each scenario, I compared:
-
-1. the estimated parameters of the Weibull distribution, i.e. \(\hat{\lambda}\) and \(\hat{p}\);
-
-2. the estimated log-treatment effect, i.e. \(\hat{\beta}\);
-
-3. the estimated variance of the frailty term, i.e. \(\hat{\theta}\).
+For each model fitted under each scenario, I compared the estimated parameters of the Weibull distribution \(\hat{\lambda}\) and \(\hat{p}\), the estimated log-treatment effect \(\hat{\beta}\), and the estimated variance of the frailty component \(\hat{\theta}\).
 
 ## Performance measures {#simst1-pm}
 
@@ -73,4 +67,4 @@ Bias, coverage, mean squared error, and convergence rates for scenario 1 are pre
 
 ## Conclusions {#simst1-conclusions}
 
-I showed in the previous Section how Gaussian quadrature performs (1) compared to analytical formulae and (2) when it is not possible to obtain analytical formulae. Overall, Gaussian quadrature performs well with a sufficient number of quadrature nodes but the variability is great. The regression coefficient \(\beta\) is the most robust estimand across different scenarios, it is mostly unbiased (or with little bias) and with good coverage and accuracy (in terms of mean squared error). The frailty variance is the least robust estimand, with precision and accuracy greatly depending on many factors: among others, important ones seems to be the number of quadrature nodes and the number of clusters. The latter makes sense on a theoretical level: with more clusters it should be easier to estimate a properly the variance of the frailty. Accuracy and precision of the parameters of the Weibull baseline hazard also varies greatly. In conclusion, using a shared frailty model to do inference on a regression coefficient seems to be robust to the accuracy of numerical integration methods; nevertheless, if the principal research interest lays in relative risk estimates, using a parametric model may not be the best choice after all. A semiparametric Cox model - even with frailty terms if necessary - could be utilised instead. If the research objectives include absolute risk estimations, though, a parametric model is immediately more appealing. However, checking the convergence, precision, and accuracy of numerical integration by evauating and comparing an increasing number of quadrature knots appears to be fundamental.
+I showed in the previous Section how Gaussian quadrature performs (1) compared to analytical formulae and (2) when it is not possible to obtain analytical formulae. Overall, Gaussian quadrature performs well with a sufficient number of quadrature nodes but the variability is great. The regression coefficient \(\beta\) is the most robust estimand across different scenarios, it is mostly unbiased (or with little bias) and with good coverage and accuracy (in terms of mean squared error). The frailty variance is the least robust estimand, with precision and accuracy greatly depending on many factors such as the number of quadrature nodes and the number of clusters. The latter makes sense theoretically: with more clusters it should be easier to properly estimate a variance term. Accuracy and precision of the maximum likelihood estimator for the parameters of the Weibull baseline hazard also varied greatly. In conclusion, using a shared frailty model to do inference on a regression coefficient seems to be robust to the accuracy of numerical integration methods; nevertheless, if the principal research interest lays in relative risk estimates, using a parametric model may not be the best choice after all. A semiparametric Cox model - even with frailty terms if necessary - could be utilised instead. If the research objectives include absolute risk estimations, though, a parametric model is immediately more appealing. However, checking the convergence, precision, and accuracy of numerical integration by evauating and comparing an increasing number of quadrature knots appears to be fundamental.

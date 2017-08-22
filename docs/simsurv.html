@@ -25,7 +25,7 @@
 <meta name="author" content="Alessandro Gasparini">
 
 
-<meta name="date" content="2017-08-21">
+<meta name="date" content="2017-08-22">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -191,7 +191,7 @@ F(\tau) = u, \ u \sim U(0, 1)
 </tr>
 </tbody>
 </table>
-<p>The requirement requirement for <span class="math inline">\(H_0(t)\)</span> to be directly invertible impedes the use of distributions other than the exponential, Weibull, or Gompertz - which could be appropriate in some setting but too restricting in others. <span class="citation">Crowther and Lambert (<a href="#ref-crowther_2013b">2013</a>)</span> generalised this method in order to accommodate more complex distributions, even with turning points, under a proportional hazards model. In brief, when the cumulative baseline hazard function is not invertible it is not possible to solve the equation <span class="math inline">\(F(\tau) = u\)</span> for <span class="math inline">\(\tau\)</span>; assuming it is possible to write <span class="math inline">\(H_0(t)\)</span> analytically - a broader assumption compared to assuming <span class="math inline">\(H_0(t)\)</span> is invertible - it is possible to use root-finding methods to solve for <span class="math inline">\(\tau\)</span> numerically (Section <a href="compch-numroot.html#compch-numroot">4.3</a>). Formally, the survival time <span class="math inline">\(\tau\)</span> can be simulated as the root of the equation <span class="math inline">\(S(\tau) - u = 0\)</span>.</p>
+<p>The requirement for <span class="math inline">\(H_0(t)\)</span> to be directly invertible impedes the use of distributions other than the exponential, Weibull, or Gompertz - which could be appropriate in some settings but too restricting in others. <span class="citation">Crowther and Lambert (<a href="#ref-crowther_2013b">2013</a>)</span> generalised this method in order to accommodate more complex distributions, even with turning points, under a proportional hazards model. In brief, when the cumulative baseline hazard function is not invertible it is not possible to solve the equation <span class="math inline">\(F(\tau) = u\)</span> for <span class="math inline">\(\tau\)</span>; assuming it is possible to write <span class="math inline">\(H_0(t)\)</span> analytically - a broader assumption compared to assuming <span class="math inline">\(H_0(t)\)</span> is invertible - it is possible to use root-finding methods to solve for <span class="math inline">\(\tau\)</span> numerically (Section <a href="compch-numroot.html#compch-numroot">4.3</a>). Formally, the survival time <span class="math inline">\(\tau\)</span> can be simulated as the root of the equation <span class="math inline">\(S(\tau) - u = 0\)</span>.</p>
 <p><span class="citation">Crowther and Lambert (<a href="#ref-crowther_2013b">2013</a>)</span> present an example of their method by simulating from a two-components mixture distribution <span class="citation">(McLachlan and McGiffin <a href="#ref-mclachlan_1994">1994</a>)</span>, defined by additive components on the survival scale: <span class="math display">\[
 S_0(t) = \pi S_1(t) + (1 - \pi) S_2(t),
 \]</span> with <span class="math inline">\(\pi \in [0, 1]\)</span> mixing parameter. <span class="math inline">\(S_i(t)\)</span> can be any standard parametric distribution. Choosing two Weibull components for the mixture distribution, it can be showed that a proportional hazards model has the form <span class="math display">\[

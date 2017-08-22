@@ -25,7 +25,7 @@
 <meta name="author" content="Alessandro Gasparini">
 
 
-<meta name="date" content="2017-08-21">
+<meta name="date" content="2017-08-22">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -144,7 +144,7 @@
 <p>In those settings where risk factors are not measured, their relevance is unknown, or it is not known whether such risk factor exist at all or not, it is useful to consider two sources of variability in survival analysis: variability accounted for by observable risk factors included in the model and heterogeneity caused by unknown covariates. The unobserved heterogeneity is described by the frailty term, which is assumed to follow some distribution. Formally: <span class="math display">\[
 h(t|\alpha) = \alpha h_0(t),
 \]</span> where <span class="math inline">\(\alpha\)</span> is a non-observed frailty effect and <span class="math inline">\(h_0(t)\)</span> is the baseline hazard function. The random variable <span class="math inline">\(\alpha\)</span>, the frailty term, is chosen to have a distribution <span class="math inline">\(f(\alpha)\)</span> with expectation <span class="math inline">\(E(\alpha) = 1\)</span> and variance <span class="math inline">\(V(\alpha) = \sigma ^ 2\)</span>. <span class="math inline">\(V(\alpha)\)</span> is interpretable as a measure of heterogeneity across the population in baseline risk: as <span class="math inline">\(\sigma ^ 2\)</span> increases the values of <span class="math inline">\(\alpha\)</span> are more dispersed, with greater heterogeneity in <span class="math inline">\(\alpha h_0(t)\)</span>. Underlying assumptions are: the frailty is time independent, and it acts multiplicatively on the underlying baseline hazard function.</p>
-<p>Introducing observed covariates into the model: <span class="math display">\[
+<p>Introducing observed covariates into the model and inducing proportional hazards: <span class="math display">\[
 h(t|X,\alpha) = \alpha h_0(t) \exp(X \beta) = \alpha h(t | X),
 \]</span> with <span class="math inline">\(X\)</span> and <span class="math inline">\(\beta\)</span> covariates and regression coefficients, respectively. Given the relationship between hazard and survival function, it can be showed that the individual survival function conditional on the frailty is <span class="math inline">\(S(t | \alpha) = S(t) ^ \alpha\)</span>. The population (i.e. marginal, or unconditional) survival function is obtained by integrating out the frailty from the conditional survival function: <span class="math display">\[
 S(t) = \int_0^{+\infty} \left[ S(t) \right] ^ \alpha f(\alpha) \ d\alpha
@@ -152,7 +152,7 @@ S(t) = \int_0^{+\infty} \left[ S(t) \right] ^ \alpha f(\alpha) \ d\alpha
 <p>The individual contribution to the likelihood (assuming no delayed entry) is conditional on the unobserved frailty <span class="math inline">\(\alpha\)</span> <span class="math display">\[
 L_i = \prod_{i = 1} ^ {n} \left( \alpha h_0(t_i)\exp(X_i \beta) \right) ^ {d_i} \exp(-\alpha H_0(t_i) \exp(X_i \beta)),
 \]</span> with <span class="math inline">\(d_i\)</span> event indicator variable, <span class="math inline">\(H_0(t_i)\)</span> cumulative baseline hazard, and <span class="math inline">\(t_i\)</span> observed survival time - all relative to the <span class="math inline">\(i\)</span>-th individual.</p>
-<p>Different choices for the frailty distribution are possible. Assigning a probability distribution implies that the frailty can be integrated out of the likelihood function. After this integration, the likelihood can be maximized in the usual way if its explicit form exists. Otherwise, more sophisticated approaches like numerical integration or Markov Chain Monte Carlo methods are required. The most often used frailty distributions are the gamma and the log-normal distribution; the positive stable and the inverse Gaussian distribution are also common.</p>
+<p>Different choices for the frailty distribution are possible. Assigning a probability distribution implies that the frailty can be integrated out of the likelihood function. After this integration, the likelihood can be maximized in the usual way if an explicit form exists. Otherwise, more sophisticated approaches like numerical integration or Markov Chain Monte Carlo methods are required. The most often used frailty distributions are the gamma and the log-normal distribution; the positive stable and the inverse Gaussian distribution are also common.</p>
 <p>Assuming that the frailty <span class="math inline">\(\alpha\)</span> has a Gamma distribution is convenient: it has the appropriate range <span class="math inline">\((0, \infty)\)</span> and it is mathematically tractable. A Gamma distribution with parameters <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> has density <span class="math display">\[
 f(x) = \frac{x ^ {a - 1} \exp(- x / b)}{\Gamma(a)b ^ a};
 \]</span> by choosing <span class="math inline">\(a = 1 / \theta\)</span> and <span class="math inline">\(b = \theta\)</span> the resulting distribution has expectation <span class="math inline">\(1\)</span> and finite variance <span class="math inline">\(\theta\)</span>. In these settings, the model is analytically tractable: the population survival function has the form <span class="math display">\[
