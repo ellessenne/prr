@@ -1,39 +1,21 @@
 # Computational challenges in survival models with random effects {#compch}
 \chaptermark{Computational challenges}
 
-The models I presented in Chapter \@ref(smre) and \@ref(jm) present significant computational challenges during the estimation process. I showed how frailty models with a Gamma frailty are analytically tractable, as it is possible to obtain closed-form expressions for the marginal survival function and therefore the likelihood; conversely, including a log-normal frailty (or, correspondingly, random effects) in a survival model yields a survival function - and likelihood - that does not have a closed form. Recall the \(i\)^th^-custer-specific contribution to the likelihood for a shared frailty model:
-\[
-L_i(\alpha_i) = \alpha_i ^ {D_i} \prod_{j = 1} ^ {n_i} S_{ij}(t_{ij}) ^ {\alpha_i} h_{ij}(t_{ij}) ^ {d_{ij}}
-\]
-The marginal survival function has the form
-\[
-S_{ij}(t_{ij}) = \int_0^{+\infty} \left[ S_{ij}(t_{ij}) \right] ^ \alpha_i f(\alpha_i) \ d\alpha_i
-\]
-with \(f(\alpha_i)\) a log-normal density function. This integral has no closed form, hence it is necessary to approximate it in order to obtain (1) marginal survival and (2) the likelihood.
-
-Analogously, recall the joint likelihood in joint models for longitudinal and survival data:
-\[
-\log L(\theta) = \log \int_{-\infty} ^ {+\infty} P(T_i, d_i, y_i, b_i; \theta) \ db_i.
-\]
-Evaluating this likelihood requires evaluating an analytically intractable integral over a possibly multi-dimentional integral over the infinite domain; it is therefore necessary to use some method to approximate it numerically.
+The models I presented in Chapter \@ref(smre) and \@ref(jm) present significant computational challenges during the estimation process. I showed how frailty models with a Gamma frailty are analytically tractable, as it is possible to obtain closed-form expressions for the marginal survival function and therefore the likelihood; conversely, including a log-normal frailty (or, correspondingly, random effects) in a survival model yields a survival function - and likelihood - that does not have a closed form. Analogously, the joint likelihood of joint models for longitudinal and survival data \(\log L(\theta) = \log \int_{-\infty} ^ {+\infty} P(T_i, d_i, y_i, b_i; \theta) \ db_i\) requires evaluating an analytically intractable integral over a possibly multi-dimentional integral over the infinite domain; it is therefore necessary to use some method to approximate it numerically.
 
 Methods for approximating intractable integrals form the majority of this Chapter, with more details in Section \@ref(compch-numintgr). I will also be introducing numerical methods for differentiating a function and for root-finding in Sections \@ref(compch-numdiff) and \@ref(compch-numroot).
 
 ## Numerical integration {#compch-numintgr}
 
-The term _numerical integration_ implies the approximation of the integral of a function; generally, it aims to use the minimum number of function evaluations possible as it tends to be numerically expensive. There is a variety of methods being proposed in literature to perform numerical integration; throughout this Section, I will focus on _quadrature rules_, i.e. any method that evaluates the function to be integrated at some points over the integration domain and combines the resulting values to obtain an approximation of the integral. Quadrature rules vary in complexity and accuracy, and generally accuracy improves as rules get more complex. Additionally, integration of functions in few dimensions is generally not too problematic; the task becomes more difficult when integrating over many dimensions as obtaining an acceptable level of accuracy often requires an unfeasible number of function evaluations.
+The term numerical integration implies the approximation of the integral of a function; generally, it aims to use the minimum number of function evaluations possible as it tends to be numerically expensive. There is a variety of methods being proposed in literature to perform numerical integration; throughout this Section, I will focus on quadrature rules, i.e. any method that evaluates the function to be integrated at some points over the integration domain and combines the resulting values to obtain an approximation of the integral. Quadrature rules vary in complexity and accuracy, and generally accuracy improves as rules get more complex. Additionally, integration of functions in few dimensions is generally not too problematic; the task becomes more difficult when integrating over many dimensions as obtaining an acceptable level of accuracy often requires an unfeasible number of function evaluations.
 
 ### Unidimensional functions {#compch-numintgr-uni}
 
-The simplest method to approximate the integral of a unidimensional function numerically is given by the _Riemann sum_. A Riemann sum is an approximation of the integral of a continuous function \(f(x)\) over an integration domain \([a,b]\) by a finite sum, defined as:
-\[
-\int_a^b f(x) \ dx \approx \sum_{i = 1} ^ N f(x_i^{*})\Delta(x_i),
-\]
-with \(P = \{[x_0, x_1], [x_1, x_2], \dots, [x_{N-1}, x_N]\}\) a partition of \([a,b]\) such that \(a = x_0 < x_1 < x_2 < \dots < x_{N-1} < x_N = b\), \(\Delta(x_i) = x_i - x_{i-1}\), and \(x_i^{*} \in [x_{i-1}, x_i]\). \(x_i^{*}\) can be defined in many ways: it could be the left extremity of \(\Delta(x_i)\), the right extremity, the midpoint, or many more. In particular, when choosing \(x_i^{*}\) as the midpoint of the interval, I obtain the so called _midpoint rule_; it approximates the integral of a continuous function \(f(x)\) by the area under a set of \(N\) step functions, with the midpoint of each matching \(f\):
+The simplest method to approximate numerically the integral of a unidimensional function \(f(x)\) over an integration domain \([a, b]\) is given by the Riemann sum. A particular form of Riemann sum is given by the midpoint rule, which approximates the integral of a continuous function by the area under a set of \(N\) step functions, with the midpoint of each matching \(f\):
 \[
 \int_a^b f(x) \ dx \approx \frac{b - a}{N} \sum_{i = 1}^N f(a + (i - 0.5)(b - a) / N)
 \]
-An alternative to the midpoint rule is given by the _trapezoidal rule_, which approximates the area under a continuous function \(f(x)\) as a trapezoid and then computes its area:
+Alternativeley, the trapezoidal rule approximates the area under a continuous function as a trapezoid and then computes its area:
 \[
 \int_a^b f(x) \ dx \approx (b - a) \left[ \frac{f(a) + f(b)}{2} \right]
 \]
@@ -45,7 +27,7 @@ with \({x_k}\) a partition of \([a, b]\) such that \(a = x_0 < x_1 < x_2 < \dots
 
 Accuracy of the midpoint and trapezoidal rules depends on the number of steps (subintervals) \(N\) used to approximate the function, but so does complexity (computationally speaking). The only requirement for applying these rules is that one needs to be able to evaluate the function \(f(x)\) at a given point over its domain. If \(f(x)\) is cheap to evaluate, than the midpoint and trapezoidal rules may be just fine; otherwise, it would be better to move onto more complicated methods that yield more accurate results.
 
-A first method that is only slightly more complicated but yields better results is the _Simpson's rule_. It works analogously to the midpoint and trapezoidal rule, but using a smooth quadratic interpolant which takes the same values as \(f(x)\) at the extremities of the integration interval \([a, b]\) and at the midpoint \(m = (a + b) / 2\):
+A first method that is only slightly more complicated but yields better results is the Simpson's rule. It works analogously to the midpoint and trapezoidal rule, but using a smooth quadratic interpolant which takes the same values as \(f(x)\) at the extremities of the integration interval \([a, b]\) and at the midpoint \(m = (a + b) / 2\):
 \[
 \int_a^b f(x) \ dx \approx \frac{b - a}{6} \left[ f(a) + 4f((a + b) / 2) + f(b) \right]
 \]
@@ -55,25 +37,13 @@ Second, it is possible to show that by choosing carefully the points at which to
 \[
 \int_a^b f(x) w(x) \ dx = \sum_{i = 1} ^ N w_i f(x_i)
 \]
-Depending on the choice of the weighting function \(w(x)\), different Gaussian quadrature rules can be obtained. When \(w(x) = 1\), the associated polynomials are Legendre polynomials, the quadrature rule is then named _Gauss-Legendre_ quadrature rule, and it allows integrating over the interval \([-1,1]\). The integration points are then obtained as the the \(N\) roots of the Legendre polynomials: \(x = \{x_1, x_2, \dots, x_N\}\). When choosing the weight function \(\exp(-x)\) the associated polynomials are Laguerre polynomials, the quadrature rule is named _Gauss-Laguerre_ quadrature rule, and the integration domain is \([0, +\infty)\). Finally, when choosing the weight function \(\exp(-x^2)\) the associated polynomials are Hermite polynomials, the quadrature rule is named _Gauss-Hermite_ quadrature rule, and the integration domain is \((-\infty, +\infty)\). Interestingly, the Gauss-Hermite quadrature can be re-formulated using a normal density kernel with mean \(\mu\) and standard deviation \(\sigma\) as weighting function:
-\[
-\int_{-\infty}^{+\infty} f(x) \phi(x | \mu, \sigma^2) \ dx = \frac{1}{\sqrt{2 \pi} \sigma} \int_{-\infty}^{+\infty} f(x) \exp\left[ -\frac{(x - \mu) ^ 2}{2 \sigma ^ 2} \right] \ dx
-\]
-By applying the change of variable \(x = \mu + \sigma \sqrt{2} r\), the integral to approximate becomes
-\[
-\int_{-\infty}^{+\infty} f(x) \phi(x | \mu, \sigma^2) \ dx = \frac{\sqrt{2} \sigma}{\sqrt{2 \pi} \sigma} \int_{-\infty}^{+\infty} f(\mu + \sigma \sqrt{2} r) \exp (-r^2) \ dr,
-\]
-which can then be approximated by the quadrature rule
-\[
-\frac{\sqrt{2} \sigma}{\sqrt{2 \pi} \sigma} \int_{-\infty}^{+\infty} f(\mu + \sigma \sqrt{2} r) \exp (-r^2) \ dr \approx \sum_{i = 1} ^ N f(\mu + \sigma \sqrt{2} r) \frac{w_i}{\sqrt{\pi}}.
-\]
-That is, a quadrature rule based on the normal kernel as weight function with nodes \(\mu + \sigma \sqrt{2} x_i\) and weights \(w_i / \sqrt{\pi}\) (\(x_i\) and \(w_i\) being the nodes and weights of the corresponding \(N\)-points Gauss-Hermite quadrature rule based on the usual weighting function).
+Depending on the choice of the weighting function \(w(x)\), different Gaussian quadrature rules can be obtained. When \(w(x) = 1\), the associated polynomials are Legendre polynomials, the quadrature rule is then named Gauss-Legendre quadrature rule, and it allows integrating over the interval \([-1,1]\). The integration points are then obtained as the the \(N\) roots of the Legendre polynomials: \(x = \{x_1, x_2, \dots, x_N\}\). When choosing the weight function \(\exp(-x)\) the associated polynomials are Laguerre polynomials, the quadrature rule is named Gauss-Laguerre quadrature rule, and the integration domain is \([0, +\infty)\). Finally, when choosing the weight function \(\exp(-x^2)\) the associated polynomials are Hermite polynomials, the quadrature rule is named Gauss-Hermite quadrature rule, and the integration domain is \((-\infty, +\infty)\).
 
-A slightly more complicated version of Gaussian quadrature is given by the _Gauss–Kronrod_ quadrature formula. In the Gauss-Kronrod quadrature rule the evaluation points are chosen dynamically so that an accurate approximation can be computed by re-using the information produced by the computation of a less accurate approximation. In practice, integration points from previous iterations can be reused as part of the new set of points, whereas usual Gaussian quadrature would require recomputation of all abscissas at each iteration. This is particularly important when some specified degree of accuracy is needed but the number of points needed to achieve this accuracy is not known ahead of time. Despite this, the quadrature rule is the same as before, i.e. \(\int_{a}^{b} f(x) \ dx \approx \sum_{i = 1} ^ {n} w_{i} f(x_{i})\). Gauss-Kronrod quadrature rule is implemented in R as the `integrate()` function.
+Finally, a slightly more complicated version of Gaussian quadrature is given by the Gauss–Kronrod quadrature formula. In the Gauss-Kronrod quadrature rule the evaluation points are chosen dynamically so that an accurate approximation can be computed by re-using the information produced by the computation of a less accurate approximation. In practice, integration points from previous iterations can be reused as part of the new set of points, whereas usual Gaussian quadrature would require recomputation of all abscissas at each iteration. This is particularly important when some specified degree of accuracy is needed but the number of points needed to achieve this accuracy is not known ahead of time. Gauss-Kronrod quadrature rule is implemented in R as the `integrate()` function.
 
 ### Multidimensional functions {#compch-numintgr-multi}
 
-All the methods I presented so far only only apply to the integration of unidimensional functions. It is of course possible to extend quadrature rules to multidimensional settings, by recursively applying unidimensional quadrature rules. Say I want to approximate the integral of a bidimensional function \(f(x, y)\); the bidimensional Gaussian quadrature rule has the form:
+All the methods presented so far only apply to the integration of unidimensional functions. It is of course possible to extend quadrature rules to multidimensional settings, by recursively applying unidimensional quadrature rules. Say I want to approximate the integral of a bidimensional function \(f(x, y)\); the bidimensional Gaussian quadrature rule has the form:
 \[
 \int_X \int_Y f(x, y) \ dx \ dy \approx \sum_j \sum_i w_j w_i f(x_j, y_i)
 \]
@@ -85,27 +55,23 @@ I_{\Omega} = \int_{\Omega} f(x) \ dx = E[f(U)] V(\Omega),
 \]
 with \(U \sim\) uniform over \(\Omega\). Drawing \(N\) uniform random vectors \(u_i\) an estimator for \(I_{\Omega}\) is
 \[
-\hat{I}_{\Omega} = \frac{V(\Omega)}{N} \sum_{i = 1} ^ N f(u_i),
+\hat{I}_{\Omega} = \frac{V(\Omega)}{N} \sum_{i = 1} ^ N f(u_i);
 \]
-and this defines Monte Carlo integration. The variance of the estimated integral \(\hat{I}_{\Omega}\) follows, assuming the \(u_i\) are independenent, as
-\[
-V(\hat{I}_{\Omega}) = \frac{V(\Omega)^2}{N^2} N V(f(u_i)).
-\]
-More details in @monahan_2011.
+this estimator defines Monte Carlo integration. More details in @monahan_2011.
 
-Luckily, both Gaussian quadrature and Monte Carlo integration can be tweaked to improve accuracy and convergence rates: two appealing options are, respectively, adaptive Gaussian quadrature and importance sampling. Adaptive Gaussian quadrature works best when using the Gauss-Hermite rule with the normal density kernel as weighting function; in a multivariate setting, using an iterative algorithm, it is possible to update the mean vector \(M\) and variance-covariance matrix \(\Sigma\) of the multivariate normal density at each step (e.g. using empirical Bayes estimates of \(M, \Sigma\)) to better adapt the grid of quadrature points to the actual shape of the integral to approximate.  Conversely, Monte Carlo integration works best when it is possible to draw a sample from the target distribution (i.e. the distribution of the integral to approximate); unfortunately, that is rarely the case in practice. The idea of importance sampling consists then in drawing a sample from a proposal distribution and then re-weight the estimated integral using importance weights to better adapt to the target distribution.
+Both Gaussian quadrature and Monte Carlo integration can be tweaked to improve accuracy and convergence rates: two appealing options are, respectively, adaptive Gaussian quadrature and importance sampling. Adaptive Gaussian quadrature works best when using the Gauss-Hermite rule with the normal density kernel as weighting function; in a multivariate setting, using an iterative algorithm, it is possible to update the mean vector \(M\) and variance-covariance matrix \(\Sigma\) of the multivariate normal density at each step (e.g. using empirical Bayes estimates of \(M, \Sigma\)) to better adapt the grid of quadrature points to the actual shape of the integral to approximate.  Conversely, Monte Carlo integration works best when it is possible to draw a sample from the target distribution (i.e. the distribution of the integral to approximate); unfortunately, that is rarely the case in practice. The idea of importance sampling consists then in drawing a sample from a proposal distribution and then re-weight the estimated integral using importance weights to better adapt to the target distribution.
 
 ## Numerical differentiation {#compch-numdiff}
 
 Numerical differentiation is a series of algorithms to numerically estimate the derivative of a function. They tend to be computationally less demanding than numerical integration methods, but they are more sensitive to cancellation error.
 
-The easiest method for approximating the derivative of a function is to use finite difference approximation. Say I want to estimate the first derivative of a function \(f(\cdot)\) at \(x\); the finite difference approximation of the derivative \(f'(x)\) is calculated as
+The easiest method for approximating the derivative of a function is to use finite difference approximation. The finite difference approximation of the derivative of a continuous function \(f(x)\) at \(x\), \(f'(x)\), is calculated as
 \[
 f'(x) \approx \frac{f(x + h) - f(x)}{h},
 \]
 for a small \(h\). This formula is affected by both truncation error (as it derives from a truncated Taylor series expansion of \(f(x)\)) and cancellation error (as a machine works with finite-precision arithmetic). It is necessary to choose a value \(h\) that gives a good balance between the two errors: it can be showed that a good choice in most cases is \(h = \sqrt{\epsilon}\), with \(\epsilon\) being the machine precision.
 
-The formula I presented for finite difference approximation is also known as _forward differencing_; alternatively, it is possible to use methods such as _central differencing_ (\([f(x + h) - f(x - h)] / 2h\), more accurate but more computationally expensive) and _backward differencing_ (\([f(x) - f(x - h)] / h\)). Other methods are the _complex method_, which requires the function to be able to handle complex values and it is extremely powerful but with limited applicability, and the _Richardson's extrapolation method_, which is more accurate but slower than finite differencing. All these methods are implemented in R in the `numDeriv` package, which sets the standard for numerical differentiation.
+This formula for finite different approximation is also known as forward differencing; other options are central differencing (\([f(x + h) - f(x - h)] / 2h\), more accurate but more computationally expensive), backward differencing (\([f(x) - f(x - h)] / h\)), the complex method (extremely powerful but with limited applicability), and the Richardson's extrapolation method, which is more accurate but slower than finite differencing.
 
 ## Numerical root finding {#compch-numroot}
 
@@ -123,13 +89,6 @@ x = x_1 - f(x_1) \frac{x_1 - x_0}{f(x_1) - f(x_0)}
 \]
 Now, we set \(x_2 = x\) and we iterate this method until the difference between the extremities of the interval is small enough (e.g. \(<1 \times 10^{-8}\)).
 
-The secant method is also known as a _linear interpolation_ method; it is also possible to use higher order interpolation, specifically _quadratic interpolation_, to find the root of a function using the same rationale presented for the secant method. Specifically, starting with three starting values \(x_0\), \(x_1\), \(x_2\) and their function values \(f(x_0)\), \(f(x_1)\), \(f(x_2)\), applying the Lagrange interpolation formula to interpolate the inverse of \(f(x)\) yields the equation
-\[
-\begin{aligned}
-f^{-1}(y) &= \frac{(y - f(x_1))(y - f(x_2))}{(f(x_0) - f(x_1))(f(x_0) - f(x_2))}x_{0} + \frac{(y - f(x_0))(y - f(x_2))}{(f(x_1) - f(x_0))(f(x_1) - f(x_2))}x_{1} + \\
-          &\frac{(y - f(x_0))(y - f(x_1))}{(f(x_2) - f(x_0))(f(x_2) - f(x_1))}x_{2}
-\end{aligned}
-\]
-Substituting \(y = 0\) in the above equation yields the recursion formula, to be iterated until a desired precision is reached.
+The secant method is also known as a _linear interpolation_ method; it is also possible to use higher order interpolation, specifically _quadratic interpolation_, to find the root of a function using the same rationale presented for the secant method.
 
 Finally, a well-established and robust method is the _Brent-Dekker_ method, implemented in R with the `uniroot()` function. It combines the three methods presented before, trying to use the secant or quadratic interpolation method first - as they tend to converge faster to a solution - but falling back to the bisection method if necessary, for its robustness properties. More details on the Brent-Dekker method in @brent_1973.

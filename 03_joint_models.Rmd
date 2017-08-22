@@ -26,7 +26,7 @@ The survival component of the joint model is modelled using a proportional hazar
 \[
 h(t | M_i(t)) = h_0(t) \exp(W \psi + \alpha m_i(t)),
 \]
-where \(h_0(t)\) is the baseline hazard function and \(W\) is a vector of time-fixed covariates with their regression parameters \(\psi\). \(\alpha\) is the association parameter that links the longitudinal component and the survival component of the joint model; it can be intepreted as the change in log-hazard ratio for a unit increase in the true longitudinal trajectory \(m_i(t)\), at time \(t\). This specific form of the association parameter is also known as the _current value_ parametrisation; additional association structures are available, allowing for instance interactions, association with the slope of the trajectory or its cumulative effect, and so on. Further details in @rizopoulos_2012.
+where \(h_0(t)\) is the baseline hazard function and \(W\) is a vector of time-fixed covariates with their regression parameters \(\psi\). \(\alpha\) is the association parameter that links the longitudinal component and the survival component of the joint model; it can be intepreted as the change in log-hazard ratio for a unit increase in the true longitudinal trajectory \(m_i(t)\), at time \(t\). This specific form of the association parameter is also known as the current value parametrisation; additional association structures are available, allowing for instance interactions, association with the slope of the trajectory or its cumulative effect, and so on. Further details in @rizopoulos_2012.
 
 The survival function follows as
 \[

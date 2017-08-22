@@ -2,11 +2,11 @@
 
 I will introduce in this Section some notation that I will be using throughout this report.
 
-I denote the random variable for an individual's survival time with \(S\); since it denotes time, \(S\) can assume any non-negative value. The lower-case \(s\) represent a specific value of interest drawn from \(S\) for a given individual. In the case of right censoring, I denote with \(C\) the random variable representing censoring time, and \(c\) its realisation. The observed time is denoted with \(T = \min(S, C)\), and its realisation is \(t\). Finally, I denote with \(D = I(S \le C)\) the random variable indicating either occurrence of the event of interest or censorship; analogously as before, its realisation is lower-case \(d\).
+I denote the random variable for an individual's survival time with \(S\); it denotes time and can therefore assume any non-negative value. Lower-case \(s\) represent a realisation of \(S\) for a given individual. In the case of right censoring, I denote with \(C\) the random variable representing censoring time, and \(c\) its realisation. The observed time is denoted with \(T = \min(S, C)\), and its realisation is \(t\). Finally, I denote with \(D = I(S \le C)\) the random variable indicating either occurrence of the event of interest or censoring; analogously as before, its realisation is lower-case \(d\).
 
-Next, I will define two of the main quantities of interest in survival analysis, the _survival function_ and the _hazard function_. They are both functions of the observed time \(t\) and are denoted by \(S(t)\) and \(h(t)\), respectively.
+Next, I will define two of the main quantities of interest in survival analysis, the survival function and the hazard function. They are both functions of the observed time \(t\) and are denoted by \(S(t)\) and \(h(t)\), respectively.
 
-The survival function is the complement of the cumulative distribution function of the observed time \(T\) and represent the probability that a given individual survives^[I use the term _survives_ loosely speaking, for conciseness - formally, I refer to _not experiencing the event of interest_.] longer than a specified time \(t\):
+The survival function is the complement of the cumulative distribution function of the observed time \(T\) and represent the probability that a given individual survives (loosely speaking) longer than \(t\):
 \[
 S(t) = 1 - F_T(t) = 1 - P(T \le t) = P(T > t)
 \]
@@ -26,8 +26,8 @@ S(t) = \exp \left[ -\int_0^t h(u) \ du \right]
 h(t) =  -\left[ \frac{d S(t) / dt}{S(t)} \right]
 \]
 
-Finally, a third quantity of interest in survival analysis that is strictly related to the survival and hazard functions is the cumulative hazard function \(H(t)\). The cumulative hazard function represents the accumulation of hazard (e.g. \(h(t)\)) over time, and can be defined as
+A third quantity of interest strictly related to the survival and hazard functions is the cumulative hazard function \(H(t)\). The cumulative hazard function represents the accumulation of hazard \(h(t)\) over time, and is defined as
 \[
 H(t) = \int_0^t h(u) \ du;
 \]
-it can conveniently be expressed in terms of survival function via the relationship \(H(t) = - \log S(t)\), or alternatively with \(S(t) = \exp(-H(t))\).
+it can be expressed in terms of survival function, via the relationships \(H(t) = - \log S(t)\) or alternatively \(S(t) = \exp(-H(t))\).

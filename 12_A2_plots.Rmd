@@ -1,0 +1,192 @@
+# Plots {#ax-plots}
+
+```{r sim1-an-vs-gq-scenario1-bias, fig.height = 12, fig.width = 8, fig.cap = "Bias, comparison with analytical formulae, scenario with a small frailty variance and a negative regression coefficient. "}
+summary_an_vs_gq %>%
+  filter(fv == 0.25 & treatment_effect == -0.50) %>%
+  mutate(n_individuals = paste0("N. ind.: ", n_individuals),
+         n_clusters = paste0("N. cl.: ", n_clusters)) %>%
+  ggplot(aes(x = bias, y = method)) +
+  geom_vline(xintercept = 0, color = "red", lty = "dashed") +
+  geom_point() +
+  geom_errorbarh(aes(xmin = bias - 1.96 * bias_mcse, xmax = bias + 1.96 * bias_mcse, y = method, height = 1/3)) +
+  facet_grid(n_individuals + n_clusters ~ par) +
+  theme_bw() +
+  labs(x = "Bias", y = "", subtitle = "Comparison with analytical formulae. Scenario: frailty variance = 0.25, beta = -0.50")
+```
+
+```{r sim1-an-vs-gq-scenario1-cov, fig.height = 12, fig.width = 8, fig.cap = "Coverage, comparison with analytical formulae, scenario with a small frailty variance and a negative regression coefficient. "}
+summary_an_vs_gq %>%
+  filter(fv == 0.25 & treatment_effect == -0.50) %>%
+  mutate(n_individuals = paste0("N. ind.: ", n_individuals),
+         n_clusters = paste0("N. cl.: ", n_clusters)) %>%
+  ggplot(aes(x = cov, y = method)) +
+  geom_vline(xintercept = 95, color = "red", lty = "dashed") +
+  geom_point() +
+  geom_errorbarh(aes(xmin = cov - 1.96 * cov_mcse, xmax = cov + 1.96 * cov_mcse, y = method, height = 1/3)) +
+  facet_grid(n_individuals + n_clusters ~ par) +
+  theme_bw() +
+  labs(x = "Coverage (%)", y = "", subtitle = "Comparison with analytical formulae. Scenario: frailty variance = 0.25, beta = -0.50")
+```
+
+```{r sim1-an-vs-gq-scenario1-mse, fig.height = 12, fig.width = 8, fig.cap = "Mean squared error, comparison with analytical formulae, scenario with a small frailty variance and a negative regression coefficient. "}
+summary_an_vs_gq %>%
+  filter(fv == 0.25 & treatment_effect == -0.50) %>%
+  mutate(n_individuals = paste0("N. ind.: ", n_individuals),
+         n_clusters = paste0("N. cl.: ", n_clusters)) %>%
+  ggplot(aes(x = mse, y = method)) +
+  geom_vline(xintercept = 0, color = "red", lty = "dashed") +
+  geom_point() +
+  facet_grid(n_individuals + n_clusters ~ par) +
+  theme_bw() +
+  labs(x = "Mean squared error", y = "", subtitle = "Comparison with analytical formulae. Scenario: frailty variance = 0.25, beta = -0.50")
+```
+
+```{r sim1-normal-gq-scenario1-bias, fig.height = 12, fig.width = 8, fig.cap = "Bias, comparison without analytical formulae, scenario with a small frailty variance and a negative regression coefficient. "}
+summary_normal_gq %>%
+  filter(fv == 0.25 & treatment_effect == -0.50) %>%
+  mutate(n_individuals = paste0("N. ind.: ", n_individuals),
+         n_clusters = paste0("N. cl.: ", n_clusters)) %>%
+  ggplot(aes(x = bias, y = method)) +
+  geom_vline(xintercept = 0, color = "red", lty = "dashed") +
+  geom_point() +
+  geom_errorbarh(aes(xmin = bias - 1.96 * bias_mcse, xmax = bias + 1.96 * bias_mcse, y = method, height = 1/3)) +
+  facet_grid(n_individuals + n_clusters ~ par) +
+  theme_bw() +
+  labs(x = "Bias", y = "", subtitle = "Comparison without analytical formulae. Scenario: frailty variance = 0.25, beta = -0.50")
+```
+
+```{r sim1-normal-gq-scenario1-cov, fig.height = 12, fig.width = 8, fig.cap = "Coverage, comparison without analytical formulae, scenario with a small frailty variance and a negative regression coefficient. "}
+summary_normal_gq %>%
+  filter(fv == 0.25 & treatment_effect == -0.50) %>%
+  mutate(n_individuals = paste0("N. ind.: ", n_individuals),
+         n_clusters = paste0("N. cl.: ", n_clusters)) %>%
+  ggplot(aes(x = cov, y = method)) +
+  geom_vline(xintercept = 95, color = "red", lty = "dashed") +
+  geom_point() +
+  geom_errorbarh(aes(xmin = cov - 1.96 * cov_mcse, xmax = cov + 1.96 * cov_mcse, y = method, height = 1/3)) +
+  facet_grid(n_individuals + n_clusters ~ par) +
+  theme_bw() +
+  labs(x = "Coverage (%)", y = "", subtitle = "Comparison without analytical formulae. Scenario: frailty variance = 0.25, beta = -0.50")
+```
+
+```{r sim1-normal-gq-scenario1-mse, fig.height = 12, fig.width = 8, fig.cap = "Mean squared error, comparison without analytical formulae, scenario with a small frailty variance and a negative regression coefficient. "}
+summary_normal_gq %>%
+  filter(fv == 0.25 & treatment_effect == -0.50) %>%
+  mutate(n_individuals = paste0("N. ind.: ", n_individuals),
+         n_clusters = paste0("N. cl.: ", n_clusters)) %>%
+  ggplot(aes(x = mse, y = method)) +
+  geom_vline(xintercept = 0, color = "red", lty = "dashed") +
+  geom_point() +
+  facet_grid(n_individuals + n_clusters ~ par) +
+  theme_bw() +
+  labs(x = "Mean squared error", y = "", subtitle = "Comparison without analytical formulae. Scenario: frailty variance = 0.25, beta = -0.50")
+```
+
+```{r sim2-miss-scenario1-trt-bias, fig.height = 8, fig.width = 10, fig.cap = "Bias of estimated regression coefficient, simulation study on model misspecification in survival models with shared frailty terms, scenario with 15 clusters of 100 individuals each and a small frailty variance.", out.width = ifelse(knitr:::is_latex_output(), ".9\\textheight", "100%"), out.extra = if (knitr:::is_latex_output()) {"angle = 90"}}
+summary_miss_subset %>%
+  filter(par == "trt") %>%
+  mutate(model_frailty = paste("Model frailty:", model_frailty),
+         fv_dist = paste("True frailty:", fv_dist)) %>%
+  ggplot(aes(x = bias, y = model_baseline)) +
+  geom_vline(xintercept = 0, color = "red", lty = "dashed") +
+  geom_point() +
+  geom_errorbarh(aes(xmin = bias - 1.96 * bias_mcse, xmax = bias + 1.96 * bias_mcse, y = model_baseline, height = 1/3)) +
+  facet_grid(model_frailty + fv_dist ~ baseline) +
+  theme_bw() +
+  labs(x = "Bias of regression coefficient", y = "", subtitle = "Scenario: 15 clusters of 100 individuals, frailty variance = 0.25")
+```
+
+```{r sim2-miss-scenario1-trt-cov, fig.height = 8, fig.width = 10, fig.cap = "Coverage of estimated regression coefficient, simulation study on model misspecification in survival models with shared frailty terms, scenario with 15 clusters of 100 individuals each and a small frailty variance.", out.width = ifelse(knitr:::is_latex_output(), ".9\\textheight", "100%"), out.extra = if (knitr:::is_latex_output()) {"angle = 90"}}
+summary_miss_subset %>%
+  filter(par == "trt") %>%
+  mutate(model_frailty = paste("Model frailty:", model_frailty),
+         fv_dist = paste("True frailty:", fv_dist)) %>%
+  ggplot(aes(x = cov, y = model_baseline)) +
+  geom_vline(xintercept = 95, color = "red", lty = "dashed") +
+  geom_point() +
+  geom_errorbarh(aes(xmin = cov - 1.96 * cov_mcse, xmax = cov + 1.96 * cov_mcse, y = model_baseline, height = 1/3)) +
+  facet_grid(model_frailty + fv_dist ~ baseline) +
+  theme_bw() +
+  labs(x = "Coverage of regression coefficient", y = "", subtitle = "Scenario: 15 clusters of 100 individuals, frailty variance = 0.25")
+```
+
+```{r sim2-miss-scenario1-trt-mse, fig.height = 8, fig.width = 10, fig.cap = "Mean squared error of estimated regression coefficient, simulation study on model misspecification in survival models with shared frailty terms, scenario with 15 clusters of 100 individuals each and a small frailty variance.", out.width = ifelse(knitr:::is_latex_output(), ".9\\textheight", "100%"), out.extra = if (knitr:::is_latex_output()) {"angle = 90"}}
+summary_miss_subset %>%
+  filter(par == "trt") %>%
+  mutate(model_frailty = paste("Model frailty:", model_frailty),
+         fv_dist = paste("True frailty:", fv_dist)) %>%
+  ggplot(aes(x = mse, y = model_baseline)) +
+  geom_vline(xintercept = 0, color = "red", lty = "dashed") +
+  geom_point() +
+  facet_grid(model_frailty + fv_dist ~ baseline) +
+  theme_bw() +
+  labs(x = "Mean squared error of regression coefficient", y = "", subtitle = "Scenario: 15 clusters of 100 individuals, frailty variance = 0.25")
+```
+
+```{r sim2-miss-scenario1-fv-bias, fig.height = 8, fig.width = 10, fig.cap = "Bias of estimated frailty variance, simulation study on model misspecification in survival models with shared frailty terms, scenario with 15 clusters of 100 individuals each and a small frailty variance.", out.width = ifelse(knitr:::is_latex_output(), ".9\\textheight", "100%"), out.extra = if (knitr:::is_latex_output()) {"angle = 90"}}
+summary_miss_subset %>%
+  filter(par == "fv") %>%
+  mutate(model_frailty = paste("Model frailty:", model_frailty),
+         fv_dist = paste("True frailty:", fv_dist)) %>%
+  ggplot(aes(x = bias, y = model_baseline)) +
+  geom_vline(xintercept = 0, color = "red", lty = "dashed") +
+  geom_point() +
+  geom_errorbarh(aes(xmin = bias - 1.96 * bias_mcse, xmax = bias + 1.96 * bias_mcse, y = model_baseline, height = 1/3)) +
+  facet_grid(model_frailty + fv_dist ~ baseline) +
+  theme_bw() +
+  labs(x = "Bias of frailty variance", y = "", subtitle = "Scenario: 15 clusters of 100 individuals, frailty variance = 0.25")
+```
+
+```{r sim2-miss-scenario1-fv-cov, fig.height = 8, fig.width = 10, fig.cap = "Coverage of estimated frailty variance, simulation study on model misspecification in survival models with shared frailty terms, scenario with 15 clusters of 100 individuals each and a small frailty variance.", out.width = ifelse(knitr:::is_latex_output(), ".9\\textheight", "100%"), out.extra = if (knitr:::is_latex_output()) {"angle = 90"}}
+summary_miss_subset %>%
+  filter(par == "fv") %>%
+  mutate(model_frailty = paste("Model frailty:", model_frailty),
+         fv_dist = paste("True frailty:", fv_dist)) %>%
+  ggplot(aes(x = cov, y = model_baseline)) +
+  geom_vline(xintercept = 95, color = "red", lty = "dashed") +
+  geom_point() +
+  geom_errorbarh(aes(xmin = cov - 1.96 * cov_mcse, xmax = cov + 1.96 * cov_mcse, y = model_baseline, height = 1/3)) +
+  facet_grid(model_frailty + fv_dist ~ baseline) +
+  theme_bw() +
+  labs(x = "Coverage of frailty variance", y = "", subtitle = "Scenario: 15 clusters of 100 individuals, frailty variance = 0.25")
+```
+
+```{r sim2-miss-scenario1-fv-mse, fig.height = 8, fig.width = 10, fig.cap = "Mean squared error of estimated frailty variance, simulation study on model misspecification in survival models with shared frailty terms, scenario with 15 clusters of 100 individuals each and a small frailty variance.", out.width = ifelse(knitr:::is_latex_output(), ".9\\textheight", "100%"), out.extra = if (knitr:::is_latex_output()) {"angle = 90"}}
+summary_miss_subset %>%
+  filter(par == "fv") %>%
+  mutate(model_frailty = paste("Model frailty:", model_frailty),
+         fv_dist = paste("True frailty:", fv_dist)) %>%
+  ggplot(aes(x = mse, y = model_baseline)) +
+  geom_vline(xintercept = 0, color = "red", lty = "dashed") +
+  geom_point() +
+  facet_grid(model_frailty + fv_dist ~ baseline) +
+  theme_bw() +
+  labs(x = "Mean squared error of frailty variance", y = "", subtitle = "Scenario: 15 clusters of 100 individuals, frailty variance = 0.25")
+```
+
+```{r sim2-miss-scenario1-isdiff-bias, fig.height = 8, fig.width = 10, fig.cap = "Bias of estimated difference in 5-years life expectancy, simulation study on model misspecification in survival models with shared frailty terms, scenario with 15 clusters of 100 individuals each and a small frailty variance.", out.width = ifelse(knitr:::is_latex_output(), ".9\\textheight", "100%"), out.extra = if (knitr:::is_latex_output()) {"angle = 90"}}
+summary_miss_subset %>%
+  filter(par == "isdiff") %>%
+  mutate(model_frailty = paste("Model frailty:", model_frailty),
+         fv_dist = paste("True frailty:", fv_dist)) %>%
+  ggplot(aes(x = bias, y = model_baseline)) +
+  geom_vline(xintercept = 0, color = "red", lty = "dashed") +
+  geom_point() +
+  geom_errorbarh(aes(xmin = bias - 1.96 * bias_mcse, xmax = bias + 1.96 * bias_mcse, y = model_baseline, height = 1/3)) +
+  facet_grid(model_frailty + fv_dist ~ baseline) +
+  theme_bw() +
+  labs(x = "Bias of difference in 5-years life expectancy", y = "", subtitle = "Scenario: 15 clusters of 100 individuals, frailty variance = 0.25")
+```
+
+```{r sim2-miss-scenario1-isdiff-mse, fig.height = 8, fig.width = 10, fig.cap = "Mean squared error of estimated difference in 5-years life expectancy, simulation study on model misspecification in survival models with shared frailty terms, scenario with 15 clusters of 100 individuals each and a small frailty variance.", out.width = ifelse(knitr:::is_latex_output(), ".9\\textheight", "100%"), out.extra = if (knitr:::is_latex_output()) {"angle = 90"}}
+summary_miss_subset %>%
+  filter(par == "isdiff") %>%
+  mutate(model_frailty = paste("Model frailty:", model_frailty),
+         fv_dist = paste("True frailty:", fv_dist)) %>%
+  ggplot(aes(x = mse, y = model_baseline)) +
+  geom_vline(xintercept = 0, color = "red", lty = "dashed") +
+  geom_point() +
+  facet_grid(model_frailty + fv_dist ~ baseline) +
+  theme_bw() +
+  labs(x = "Mean squared error of difference in 5-years life expectancy", y = "", subtitle = "Scenario: 15 clusters of 100 individuals, frailty variance = 0.25")
+```
