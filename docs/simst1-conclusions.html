@@ -25,7 +25,7 @@
 <meta name="author" content="Alessandro Gasparini">
 
 
-<meta name="date" content="2017-08-22">
+<meta name="date" content="2017-08-29">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -84,7 +84,7 @@
 </ul></li>
 <li class="chapter" data-level="5" data-path="simst1.html"><a href="simst1.html"><i class="fa fa-check"></i><b>5</b> Simulation study: accuracy of Gaussian quadrature</a><ul>
 <li class="chapter" data-level="5.1" data-path="simst1-dgms.html"><a href="simst1-dgms.html"><i class="fa fa-check"></i><b>5.1</b> Data-generating mechanisms</a></li>
-<li class="chapter" data-level="5.2" data-path="simst2-methods-est-pm.html"><a href="simst2-methods-est-pm.html"><i class="fa fa-check"></i><b>5.2</b> Methods, estimands, and performance measures</a></li>
+<li class="chapter" data-level="5.2" data-path="simst1-methods-est-pm.html"><a href="simst1-methods-est-pm.html"><i class="fa fa-check"></i><b>5.2</b> Methods, estimands, and performance measures</a></li>
 <li class="chapter" data-level="5.3" data-path="simst1-res.html"><a href="simst1-res.html"><i class="fa fa-check"></i><b>5.3</b> Results</a><ul>
 <li class="chapter" data-level="5.3.1" data-path="simst1-res.html"><a href="simst1-res.html#aim-1-accuracy-compared-to-analytical-formulae"><i class="fa fa-check"></i><b>5.3.1</b> Aim 1: accuracy compared to analytical formulae</a></li>
 <li class="chapter" data-level="5.3.2" data-path="simst1-res.html"><a href="simst1-res.html#aim-2-accuracy-when-analytical-formulae-are-not-available"><i class="fa fa-check"></i><b>5.3.2</b> Aim 2: accuracy when analytical formulae are not available</a></li>
@@ -137,7 +137,7 @@
             <section class="normal" id="section-">
 <div id="simst1-conclusions" class="section level2">
 <h2><span class="header-section-number">5.4</span> Conclusions</h2>
-<p>I showed in the previous Section how Gaussian quadrature performs (1) compared to analytical formulae and (2) when it is not possible to obtain analytical formulae. Overall, Gaussian quadrature performs well with a sufficient number of quadrature nodes but the variability is great. The regression coefficient <span class="math inline">\(\beta\)</span> is the most robust estimand across different scenarios, it is mostly unbiased (or with little bias) and with good coverage and accuracy (in terms of mean squared error). The frailty variance is the least robust estimand, with precision and accuracy greatly depending on many factors such as the number of quadrature nodes and the number of clusters. The latter makes sense theoretically: with more clusters it should be easier to properly estimate a variance term. Accuracy and precision of the maximum likelihood estimator for the parameters of the Weibull baseline hazard also varied greatly. In conclusion, using a shared frailty model to do inference on a regression coefficient seems to be robust to the accuracy of numerical integration methods; nevertheless, if the principal research interest lays in relative risk estimates, using a parametric model may not be the best choice after all. A semiparametric Cox model - even with frailty terms if necessary - could be utilised instead. If the research objectives include absolute risk estimations, though, a parametric model is immediately more appealing. However, checking the convergence, precision, and accuracy of numerical integration by evauating and comparing an increasing number of quadrature knots appears to be fundamental.</p>
+<p>I showed in the previous Section how Gaussian quadrature performs (1) compared to analytical formulae and (2) when it is not possible to obtain analytical formulae. Overall, Gaussian quadrature performs well with a sufficient number of quadrature nodes but the variability is great. The regression coefficient <span class="math inline">\(\beta\)</span> is the most robust estimand across different scenarios, it is mostly unbiased (or with little bias) and with good coverage and accuracy (in terms of mean squared error). The frailty variance is the least robust estimand, with precision and accuracy greatly depending on many factors such as the number of quadrature nodes and the number of clusters. The latter makes sense theoretically: with more clusters, it should be easier to properly estimate a variance term. Accuracy and precision of the maximum likelihood estimator for the parameters of the Weibull baseline hazard also varied greatly. In conclusion, using a shared frailty model to do inference on a regression coefficient seems to be robust to the accuracy of numerical integration methods; nevertheless, if the principal research interest lays in relative risk estimates, using a parametric model may not be the best choice after all. A semi parametric Cox model - even with frailty terms if necessary - could be utilised instead. If the research objectives include absolute risk estimations, though, a parametric model is immediately more appealing. However, checking the convergence, precision, and accuracy of numerical integration by evaluating and comparing an increasing number of quadrature knots appears to be fundamental.</p>
 
 </div>
 <!-- </div> -->

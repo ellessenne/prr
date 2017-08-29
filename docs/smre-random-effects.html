@@ -25,7 +25,7 @@
 <meta name="author" content="Alessandro Gasparini">
 
 
-<meta name="date" content="2017-08-22">
+<meta name="date" content="2017-08-29">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -84,7 +84,7 @@
 </ul></li>
 <li class="chapter" data-level="5" data-path="simst1.html"><a href="simst1.html"><i class="fa fa-check"></i><b>5</b> Simulation study: accuracy of Gaussian quadrature</a><ul>
 <li class="chapter" data-level="5.1" data-path="simst1-dgms.html"><a href="simst1-dgms.html"><i class="fa fa-check"></i><b>5.1</b> Data-generating mechanisms</a></li>
-<li class="chapter" data-level="5.2" data-path="simst2-methods-est-pm.html"><a href="simst2-methods-est-pm.html"><i class="fa fa-check"></i><b>5.2</b> Methods, estimands, and performance measures</a></li>
+<li class="chapter" data-level="5.2" data-path="simst1-methods-est-pm.html"><a href="simst1-methods-est-pm.html"><i class="fa fa-check"></i><b>5.2</b> Methods, estimands, and performance measures</a></li>
 <li class="chapter" data-level="5.3" data-path="simst1-res.html"><a href="simst1-res.html"><i class="fa fa-check"></i><b>5.3</b> Results</a><ul>
 <li class="chapter" data-level="5.3.1" data-path="simst1-res.html"><a href="simst1-res.html#aim-1-accuracy-compared-to-analytical-formulae"><i class="fa fa-check"></i><b>5.3.1</b> Aim 1: accuracy compared to analytical formulae</a></li>
 <li class="chapter" data-level="5.3.2" data-path="simst1-res.html"><a href="simst1-res.html#aim-2-accuracy-when-analytical-formulae-are-not-available"><i class="fa fa-check"></i><b>5.3.2</b> Aim 2: accuracy when analytical formulae are not available</a></li>
@@ -146,9 +146,9 @@ E(\alpha_i) = \exp(\mu + \sigma ^ 2 / 2)
 \]</span> and <span class="math display">\[
 Var(\alpha_i) = \exp(2 \mu + \sigma ^ 2) (\exp(\sigma ^ 2) - 1)
 \]</span></p>
-<p>By formulating the model on the log-hazard scale, the frailty term has a direct interpretation as a random intercept in the model. It is possible to further extend this model by allowing random covariates effects, potentially ranging over multiple levels of clustering. Using the usual mixed-effects models notation: <span class="math display">\[
+<p>By formulating the model on the log-hazard scale, the frailty term has a direct interpretation as a random intercept in the model. It is possible to further extend this model by allowing random covariates effects, potentially ranging over multiple levels of clustering. Using the usual mixed-effects model notation: <span class="math display">\[
 h_{ij}(t | b_i) = h_0(t) \exp(X_{ij} \beta + Z_{i} b_i),
-\]</span> with <span class="math inline">\(X_{ij}\)</span> representing the design matrix for the fixed effects <span class="math inline">\(\beta\)</span> and <span class="math inline">\(Z_i\)</span> representing the design matrix for the random effects <span class="math inline">\(b_i\)</span>. Any distribution or functional form can be assumed for <span class="math inline">\(h_0(t)\)</span> <span class="citation">(Crowther, Look, and Riley <a href="#ref-crowther_2014">2014</a>)</span>, or it is possible to leave it unspecified altogether yielding a semiparametric Cox model with random effects <span class="citation">(Ripatti and Palmgren <a href="#ref-ripatti_2000">2000</a>; Therneau, Grambsch, and Pankratz <a href="#ref-therneau_2003">2003</a>)</span>.</p>
+\]</span> with <span class="math inline">\(X_{ij}\)</span> representing the design matrix for the fixed effects <span class="math inline">\(\beta\)</span> and <span class="math inline">\(Z_i\)</span> representing the design matrix for the random effects <span class="math inline">\(b_i\)</span>. Any distribution or functional form can be assumed for <span class="math inline">\(h_0(t)\)</span> <span class="citation">(Crowther, Look, and Riley <a href="#ref-crowther_2014">2014</a>)</span>, or it is possible to leave it unspecified altogether yielding a semi-parametric Cox model with random effects <span class="citation">(Ripatti and Palmgren <a href="#ref-ripatti_2000">2000</a>; Therneau, Grambsch, and Pankratz <a href="#ref-therneau_2003">2003</a>)</span>.</p>
 
 </div>
 <!-- </div> -->

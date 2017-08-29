@@ -25,7 +25,7 @@
 <meta name="author" content="Alessandro Gasparini">
 
 
-<meta name="date" content="2017-08-22">
+<meta name="date" content="2017-08-29">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -84,7 +84,7 @@
 </ul></li>
 <li class="chapter" data-level="5" data-path="simst1.html"><a href="simst1.html"><i class="fa fa-check"></i><b>5</b> Simulation study: accuracy of Gaussian quadrature</a><ul>
 <li class="chapter" data-level="5.1" data-path="simst1-dgms.html"><a href="simst1-dgms.html"><i class="fa fa-check"></i><b>5.1</b> Data-generating mechanisms</a></li>
-<li class="chapter" data-level="5.2" data-path="simst2-methods-est-pm.html"><a href="simst2-methods-est-pm.html"><i class="fa fa-check"></i><b>5.2</b> Methods, estimands, and performance measures</a></li>
+<li class="chapter" data-level="5.2" data-path="simst1-methods-est-pm.html"><a href="simst1-methods-est-pm.html"><i class="fa fa-check"></i><b>5.2</b> Methods, estimands, and performance measures</a></li>
 <li class="chapter" data-level="5.3" data-path="simst1-res.html"><a href="simst1-res.html"><i class="fa fa-check"></i><b>5.3</b> Results</a><ul>
 <li class="chapter" data-level="5.3.1" data-path="simst1-res.html"><a href="simst1-res.html#aim-1-accuracy-compared-to-analytical-formulae"><i class="fa fa-check"></i><b>5.3.1</b> Aim 1: accuracy compared to analytical formulae</a></li>
 <li class="chapter" data-level="5.3.2" data-path="simst1-res.html"><a href="simst1-res.html#aim-2-accuracy-when-analytical-formulae-are-not-available"><i class="fa fa-check"></i><b>5.3.2</b> Aim 2: accuracy when analytical formulae are not available</a></li>
@@ -138,7 +138,7 @@
 <div id="compch" class="section level1">
 <h1><span class="header-section-number">4</span> Computational challenges in survival models with random effects</h1>
 
-<p>The models I presented in Chapter <a href="smre.html#smre">2</a> and <a href="jm.html#jm">3</a> present significant computational challenges during the estimation process. I showed how frailty models with a Gamma frailty are analytically tractable, as it is possible to obtain closed-form expressions for the marginal survival function and therefore the likelihood; conversely, including a log-normal frailty (or, correspondingly, random effects) in a survival model yields a survival function - and likelihood - that does not have a closed form. Analogously, the joint likelihood of joint models for longitudinal and survival data <span class="math inline">\(\log L(\theta) = \log \int_{-\infty} ^ {+\infty} P(T_i, d_i, y_i, b_i; \theta) \ db_i\)</span> requires evaluating an analytically intractable integral over a possibly multi-dimentional integral over the infinite domain; it is therefore necessary to use some method to approximate it numerically.</p>
+<p>The models I presented in Chapter <a href="smre.html#smre">2</a> and <a href="jm.html#jm">3</a> present significant computational challenges during the estimation process. I showed how frailty models with a Gamma frailty are analytically tractable, as it is possible to obtain closed-form expressions for the marginal survival function and therefore the likelihood; conversely, including a log-normal frailty (or, correspondingly, random effects) in a survival model yields a survival function - and likelihood - that does not have a closed form. Analogously, the joint likelihood of joint models for longitudinal and survival data <span class="math inline">\(\log L(\theta) = \log \int_{-\infty} ^ {+\infty} f(T_i, d_i, y_i, b_i; \theta) \ db_i\)</span> requires evaluating an analytically intractable integral over a possibly multi-dimensional integral over the infinite domain; it is therefore necessary to use some method to approximate it numerically.</p>
 <p>Methods for approximating intractable integrals form the majority of this Chapter, with more details in Section <a href="compch-numintgr.html#compch-numintgr">4.1</a>. I will also be introducing numerical methods for differentiating a function and for root-finding in Sections <a href="compch-numdiff.html#compch-numdiff">4.2</a> and <a href="compch-numroot.html#compch-numroot">4.3</a>.</p> 
 </div>
             </section>

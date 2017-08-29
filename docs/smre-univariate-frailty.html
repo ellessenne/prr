@@ -25,7 +25,7 @@
 <meta name="author" content="Alessandro Gasparini">
 
 
-<meta name="date" content="2017-08-22">
+<meta name="date" content="2017-08-29">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -84,7 +84,7 @@
 </ul></li>
 <li class="chapter" data-level="5" data-path="simst1.html"><a href="simst1.html"><i class="fa fa-check"></i><b>5</b> Simulation study: accuracy of Gaussian quadrature</a><ul>
 <li class="chapter" data-level="5.1" data-path="simst1-dgms.html"><a href="simst1-dgms.html"><i class="fa fa-check"></i><b>5.1</b> Data-generating mechanisms</a></li>
-<li class="chapter" data-level="5.2" data-path="simst2-methods-est-pm.html"><a href="simst2-methods-est-pm.html"><i class="fa fa-check"></i><b>5.2</b> Methods, estimands, and performance measures</a></li>
+<li class="chapter" data-level="5.2" data-path="simst1-methods-est-pm.html"><a href="simst1-methods-est-pm.html"><i class="fa fa-check"></i><b>5.2</b> Methods, estimands, and performance measures</a></li>
 <li class="chapter" data-level="5.3" data-path="simst1-res.html"><a href="simst1-res.html"><i class="fa fa-check"></i><b>5.3</b> Results</a><ul>
 <li class="chapter" data-level="5.3.1" data-path="simst1-res.html"><a href="simst1-res.html#aim-1-accuracy-compared-to-analytical-formulae"><i class="fa fa-check"></i><b>5.3.1</b> Aim 1: accuracy compared to analytical formulae</a></li>
 <li class="chapter" data-level="5.3.2" data-path="simst1-res.html"><a href="simst1-res.html#aim-2-accuracy-when-analytical-formulae-are-not-available"><i class="fa fa-check"></i><b>5.3.2</b> Aim 2: accuracy when analytical formulae are not available</a></li>
@@ -137,7 +137,7 @@
             <section class="normal" id="section-">
 <div id="smre-univariate-frailty" class="section level2">
 <h2><span class="header-section-number">2.1</span> Univariate frailty models</h2>
-<p>In those settings where risk factors are not measured, their relevance is unknown, or it is not known whether such risk factor exist at all or not, it is useful to consider two sources of variability in survival analysis: variability accounted for by observable risk factors included in the model and heterogeneity caused by unknown covariates. The unobserved heterogeneity is described by the frailty term, which is assumed to follow some distribution. Formally: <span class="math display">\[
+<p>In those settings where risk factors are not measured, their relevance is unknown, or it is not known whether such risk factors exist at all or not, it is useful to consider two sources of variability in survival analysis: variability accounted for by observable risk factors included in the model and heterogeneity caused by unknown covariates. The unobserved heterogeneity is described by the frailty term, which is assumed to follow some distribution. Formally: <span class="math display">\[
 h(t|\alpha) = \alpha h_0(t),
 \]</span> where <span class="math inline">\(\alpha\)</span> is a non-observed frailty effect and <span class="math inline">\(h_0(t)\)</span> is the baseline hazard function. The random variable <span class="math inline">\(\alpha\)</span>, the frailty term, is chosen to have a distribution <span class="math inline">\(f(\alpha)\)</span> with expectation <span class="math inline">\(E(\alpha) = 1\)</span> and variance <span class="math inline">\(V(\alpha) = \sigma ^ 2\)</span>. <span class="math inline">\(V(\alpha)\)</span> is interpretable as a measure of heterogeneity across the population in baseline risk: as <span class="math inline">\(\sigma ^ 2\)</span> increases the values of <span class="math inline">\(\alpha\)</span> are more dispersed, with greater heterogeneity in <span class="math inline">\(\alpha h_0(t)\)</span>. Underlying assumptions are: the frailty is time independent, and it acts multiplicatively on the underlying baseline hazard function.</p>
 <p>Introducing observed covariates into the model and inducing proportional hazards: <span class="math display">\[

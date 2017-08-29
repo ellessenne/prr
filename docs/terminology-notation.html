@@ -25,7 +25,7 @@
 <meta name="author" content="Alessandro Gasparini">
 
 
-<meta name="date" content="2017-08-22">
+<meta name="date" content="2017-08-29">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -84,7 +84,7 @@
 </ul></li>
 <li class="chapter" data-level="5" data-path="simst1.html"><a href="simst1.html"><i class="fa fa-check"></i><b>5</b> Simulation study: accuracy of Gaussian quadrature</a><ul>
 <li class="chapter" data-level="5.1" data-path="simst1-dgms.html"><a href="simst1-dgms.html"><i class="fa fa-check"></i><b>5.1</b> Data-generating mechanisms</a></li>
-<li class="chapter" data-level="5.2" data-path="simst2-methods-est-pm.html"><a href="simst2-methods-est-pm.html"><i class="fa fa-check"></i><b>5.2</b> Methods, estimands, and performance measures</a></li>
+<li class="chapter" data-level="5.2" data-path="simst1-methods-est-pm.html"><a href="simst1-methods-est-pm.html"><i class="fa fa-check"></i><b>5.2</b> Methods, estimands, and performance measures</a></li>
 <li class="chapter" data-level="5.3" data-path="simst1-res.html"><a href="simst1-res.html"><i class="fa fa-check"></i><b>5.3</b> Results</a><ul>
 <li class="chapter" data-level="5.3.1" data-path="simst1-res.html"><a href="simst1-res.html#aim-1-accuracy-compared-to-analytical-formulae"><i class="fa fa-check"></i><b>5.3.1</b> Aim 1: accuracy compared to analytical formulae</a></li>
 <li class="chapter" data-level="5.3.2" data-path="simst1-res.html"><a href="simst1-res.html#aim-2-accuracy-when-analytical-formulae-are-not-available"><i class="fa fa-check"></i><b>5.3.2</b> Aim 2: accuracy when analytical formulae are not available</a></li>
@@ -138,14 +138,14 @@
 <div id="terminology-notation" class="section level1">
 <h1><span class="header-section-number">1</span> Terminology and notation</h1>
 <p>I will introduce in this Section some notation that I will be using throughout this report.</p>
-<p>I denote the random variable for an individual’s survival time with <span class="math inline">\(S\)</span>; it denotes time and can therefore assume any non-negative value. Lower-case <span class="math inline">\(s\)</span> represent a realisation of <span class="math inline">\(S\)</span> for a given individual. In the case of right censoring, I denote with <span class="math inline">\(C\)</span> the random variable representing censoring time, and <span class="math inline">\(c\)</span> its realisation. The observed time is denoted with <span class="math inline">\(T = \min(S, C)\)</span>, and its realisation is <span class="math inline">\(t\)</span>. Finally, I denote with <span class="math inline">\(D = I(S \le C)\)</span> the random variable indicating either occurrence of the event of interest or censoring; analogously as before, its realisation is lower-case <span class="math inline">\(d\)</span>.</p>
+<p>I denote the random variable for an individual’s survival time with <span class="math inline">\(T^*\)</span>; it denotes time and can, therefore, assume any non-negative value. Lower-case <span class="math inline">\(t^*\)</span> represents a realisation of <span class="math inline">\(T^*\)</span> for a given individual. In the case of right censoring, I denote with <span class="math inline">\(C\)</span> the random variable representing censoring time, and <span class="math inline">\(c\)</span> its realisation. The observed time is denoted with <span class="math inline">\(T = \min(T^*, C)\)</span>, and its realisation is <span class="math inline">\(t\)</span>. Finally, I denote with <span class="math inline">\(D = I(T^* \le C)\)</span> the random variable indicating either occurrence of the event of interest or censoring; analogously as before, its realisation is lower-case <span class="math inline">\(d\)</span>.</p>
 <p>Next, I will define two of the main quantities of interest in survival analysis, the survival function and the hazard function. They are both functions of the observed time <span class="math inline">\(t\)</span> and are denoted by <span class="math inline">\(S(t)\)</span> and <span class="math inline">\(h(t)\)</span>, respectively.</p>
-<p>The survival function is the complement of the cumulative distribution function of the observed time <span class="math inline">\(T\)</span> and represent the probability that a given individual survives (loosely speaking) longer than <span class="math inline">\(t\)</span>: <span class="math display">\[
+<p>The survival function is the complement of the cumulative distribution function of the observed time <span class="math inline">\(T\)</span> and represents the probability that a given individual survives (loosely speaking) longer than <span class="math inline">\(t\)</span>: <span class="math display">\[
 S(t) = 1 - F_T(t) = 1 - P(T \le t) = P(T &gt; t)
 \]</span> <span class="math inline">\(t\)</span> ranges (theoretically) between 0 and infinity, hence the survival function can be plotted as a smooth, continuous function that tends to 0 as <span class="math inline">\(t\)</span> goes to infinity. In practice, though, the survival function appears as a step function as (1) individuals can be observed at discrete times only and (2) not all individuals may experience the event before the end of the study.</p>
-<p>The hazard function <span class="math inline">\(h(t)\)</span> is the limit of the probability of the survival time <span class="math inline">\(T\)</span> laying within an interval <span class="math inline">\([t, t + \Delta(t))\)</span> given that an individual survived up to time <span class="math inline">\(t\)</span> divided by the length of the interval <span class="math inline">\(\Delta(t)\)</span>, for <span class="math inline">\(\Delta(t)\)</span> approaching zero: <span class="math display">\[
-h(t) = \lim_{\Delta(t) \to 0} \frac{P(t \le T &lt; t + \Delta(t) | T \ge t)}{\Delta(t)}
-\]</span> It represent the instantaneous potential (e.g. risk) for the event to occur within the interval <span class="math inline">\([t, t + \Delta(t))\)</span> (with <span class="math inline">\(\Delta(t) \to 0\)</span>), given that the individual survived up to time <span class="math inline">\(t\)</span>. The hazard function is always non-negative, it can assume different shapes over time, and it has no upper bound.</p>
+<p>The hazard function <span class="math inline">\(h(t)\)</span> is the limit of the probability of the survival time <span class="math inline">\(T\)</span> laying within an interval <span class="math inline">\([t, t + \Delta_t)\)</span> given that an individual survived up to time <span class="math inline">\(t\)</span> divided by the length of the interval <span class="math inline">\(\Delta_t\)</span>, for <span class="math inline">\(\Delta_t\)</span> approaching zero: <span class="math display">\[
+h(t) = \lim_{\Delta_t \to 0} \frac{P(t \le T &lt; t + \Delta_t | T \ge t)}{\Delta_t}
+\]</span> It represents the instantaneous potential (e.g. risk) for the event to occur within the interval <span class="math inline">\([t, t + \Delta_t)\)</span> (with <span class="math inline">\(\Delta_t \to 0\)</span>), given that the individual survived up to time <span class="math inline">\(t\)</span>. The hazard function is always non-negative, it can assume different shapes over time, and it has no upper bound.</p>
 <p>The survival function and the hazard function are strictly related. In fact, there is a clearly defined mathematical relationship between them, and it is possible to derive the form of <span class="math inline">\(S(t)\)</span> when knowing the form of <span class="math inline">\(h(t)\)</span> (and vice versa). Formally: <span class="math display">\[
 S(t) = \exp \left[ -\int_0^t h(u) \ du \right]
 \]</span> <span class="math display">\[
@@ -154,7 +154,23 @@ h(t) =  -\left[ \frac{d S(t) / dt}{S(t)} \right]
 <p>A third quantity of interest strictly related to the survival and hazard functions is the cumulative hazard function <span class="math inline">\(H(t)\)</span>. The cumulative hazard function represents the accumulation of hazard <span class="math inline">\(h(t)\)</span> over time, and is defined as <span class="math display">\[
 H(t) = \int_0^t h(u) \ du;
 \]</span> it can be expressed in terms of survival function, via the relationships <span class="math inline">\(H(t) = - \log S(t)\)</span> or alternatively <span class="math inline">\(S(t) = \exp(-H(t))\)</span>.</p>
+<p>The notation presented in this Chapter follows <span class="citation">Collett (<a href="#ref-collett_2014">2014</a>)</span>, where further details can be found. Other seminal books covering the topic of survival analysis are <span class="citation">Cox and Oakes (<a href="#ref-cox_1984">1984</a>)</span>, <span class="citation">Kalbfleisch and Prentice (<a href="#ref-kalbfleisch_2011">2011</a>)</span>, and <span class="citation">Kleinbaum and Klein (<a href="#ref-kleinbaum_2012">2012</a>)</span>. The hazard function <span class="math inline">\(h(t)\)</span> and the survival function <span class="math inline">\(S(t)\)</span> form building blocks for the models that I will be presenting in the following Sections <a href="smre.html#smre">2</a> and <a href="jm.html#jm">3</a> and it is crucial to keep their formulation and interpretation clear in mind.</p>
 
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-collett_2014">
+<p>Collett, David. 2014. <em>Modelling Survival Data in Medical Research</em>. 3rd ed. Chapman &amp; Hall / CRC.</p>
+</div>
+<div id="ref-cox_1984">
+<p>Cox, David R, and David Oakes. 1984. <em>Analysis of Survival Data</em>. Monographs on Statistics and Applied Probability. Chapman; Hall / CRC.</p>
+</div>
+<div id="ref-kalbfleisch_2011">
+<p>Kalbfleisch, John D, and Ross L Prentice. 2011. <em>The Statistical Analysis of Failure Time Data</em>. 2nd ed. Wiley Series in Probability and Statistics. John Wiley &amp; Sons, Inc. doi:<a href="https://doi.org/10.1002/9781118032985">10.1002/9781118032985</a>.</p>
+</div>
+<div id="ref-kleinbaum_2012">
+<p>Kleinbaum, David G, and Mitchel Klein. 2012. <em>Survival Analysis: A Self-Learning Text</em>. 3rd ed. Springer-Verlag New York. doi:<a href="https://doi.org/10.1007/978-1-4419-6646-9">10.1007/978-1-4419-6646-9</a>.</p>
+</div>
 </div>
             </section>
 
