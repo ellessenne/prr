@@ -35,7 +35,7 @@ The survival function follows as
 S(t | M_i(t)) = \exp \left( -\int_0 ^ t h_0(u) \exp(W \psi + \alpha m_i(u)) \ du \right)
 \]
 
-Finally, regarding \(h_0(t)\): the choice of the baseline hazard function follows the usual rationale. It can be left unspecified, therefore resulting in a Cox model for the survival component of the joint model, or it can be specified using a parametric distribution (e.g. a Weibull distribution) or some flexible alternative [@crowther_2012]. Nevertheless, @hsieh_2006 showed that choosing the Cox model for the survival component yields standard errors that are underestimated; consequently, bootstrapping is required to obtain correct standard errors in that situation.
+Finally, regarding \(h_0(t)\): the choice of the baseline hazard function follows the usual rationale. It can be left unspecified, therefore resulting in a Cox model for the survival component of the joint model, or it can be specified using a parametric distribution (e.g. a Weibull distribution) or some flexible alternative [@crowther_2012]. @hsieh_2006 showed that choosing the Cox model for the survival component yields standard errors that are underestimated; consequently, bootstrapping is required to obtain correct standard errors in that situation.
 
 ## Estimation process {#jm-estimation}
 

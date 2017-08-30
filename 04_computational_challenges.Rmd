@@ -1,14 +1,9 @@
----
-output: html_document
-editor_options: 
-  chunk_output_type: console
----
 # Computational challenges in survival models with random effects {#compch}
 \chaptermark{Computational challenges}
 
-The models I presented in Chapter \@ref(smre) and \@ref(jm) present significant computational challenges during the estimation process. I showed how frailty models with a Gamma frailty are analytically tractable, as it is possible to obtain closed-form expressions for the marginal survival function and therefore the likelihood; conversely, including a log-normal frailty (or, correspondingly, random effects) in a survival model yields a survival function - and likelihood - that does not have a closed form. Analogously, the joint likelihood of joint models for longitudinal and survival data \(\log L(\theta) = \log \int_{-\infty} ^ {+\infty} f(T_i, d_i, y_i, b_i; \theta) \ db_i\) requires evaluating an analytically intractable integral over a possibly multi-dimensional integral over the infinite domain; it is therefore necessary to use some method to approximate it numerically.
+The models I presented in Chapter \@ref(smre) and \@ref(jm) present significant computational challenges during the estimation process. I showed how frailty models with a Gamma frailty are analytically tractable, as it is possible to obtain closed-form expressions for the marginal survival function and therefore the likelihood; conversely, including a log-normal frailty (or, correspondingly, random effects) in a survival model yields a survival function - and likelihood - that does not have a closed form. Analogously, the joint likelihood of joint models for longitudinal and survival data \(\log L(\theta) = \log \int_{-\infty} ^ {+\infty} f(T_i, d_i, y_i, b_i; \theta) \ db_i\) requires evaluating an analytically intractable integral over a possibly multi-dimensional and infinite domain; it is therefore necessary to use some method to approximate it numerically.
 
-Methods for approximating intractable integrals form the majority of this Chapter, with more details in Section \@ref(compch-numintgr). I will also be introducing numerical methods for differentiating a function and for root-finding in Sections \@ref(compch-numdiff) and \@ref(compch-numroot).
+Methods for approximating intractable integrals form the majority of this Chapter and are presented in Section \@ref(compch-numintgr). I will also be introducing numerical methods for differentiating a function and for root-finding in Sections \@ref(compch-numdiff) and \@ref(compch-numroot).
 
 ## Numerical integration {#compch-numintgr}
 
@@ -20,11 +15,11 @@ The simplest method to approximate numerically the integral of a unidimensional 
 \[
 \int_a^b f(x) \ dx \approx \frac{b - a}{N} \sum_{i = 1}^N f(a + (i - 0.5)(b - a) / N)
 \]
-Alternativeley, the trapezoidal rule approximates the area under a continuous function as a trapezoid and then computes its area:
+Alternatively, the trapezoidal rule approximates the area under a continuous function as a trapezoid and then computes its area:
 \[
 \int_a^b f(x) \ dx \approx (b - a) \left[ \frac{f(a) + f(b)}{2} \right]
 \]
-it works best when partitioning the integration area into many subinterval, applying the trapezoidal rule to all of them, and then sum the results:
+it works best when partitioning the integration area into many subintervals, applying the trapezoidal rule to all of them, and then summing the results:
 \[
 \int_a^b f(x) \ dx \approx \sum_{i = 1} ^ N \frac{f(x_{k - 1}) + f(x)}{2} \Delta(x_k),
 \]
@@ -64,7 +59,7 @@ All the methods presented so far only apply to the integration of unidimensional
 \[
 \int_X \int_Y f(x, y) \ dx \ dy \approx \sum_j \sum_i w_j w_i f(x_j, y_i)
 \]
-This can be extended to any number of dimensions \(d\), but it gets very computationally expensive very quickly as a \(N\)-points rule requires \(N^d\) function evaluations. Two simple tricks for improving accuracy and efficiency are given in @jackel_2005 and consist in pruning and/or rotating the matrix of location nodes (Figure \@ref(fig:pruning-rotating)). With pruning, nodes with extremely low weights that contribute very little to the total integral value can be removed to spare some computational cost. With rotating, the correlation between the \(d\) dimensions is taken into account. For instance, assume I am integrating over the random effects of a joint model for longitudinal and survival data; the random effects variance-covariance matrix can be decomposed using either the Cholesky decomposition or the spectral decomposition, and consequently the matrix of location nodes can be pre-multiplied by such decomposition to rotate the grid of integration points, better adapting to the shape of the multidimensional function to integrate.
+This can be extended to any number of dimensions \(d\), but it gets very computationally expensive very quickly as a \(N\)-points rule requires \(N^d\) function evaluations. Two simple tricks for improving accuracy and efficiency are given in @jackel_2005 and consist in pruning and/or rotating the matrix of location nodes. When pruning the matrix of nodes, those with extremely low weights that therefore contribute very little to the total integral value can be removed to spare some computational cost. Conversely, when rotating the matrix of nodes the correlation between the \(d\) dimensions is taken into account. For instance, assume I am integrating over the random effects of a joint model for longitudinal and survival data; the random effects variance-covariance matrix can be decomposed using either the Cholesky decomposition or the spectral decomposition, and consequently the matrix of location nodes can be pre-multiplied by such decomposition to rotate the grid of integration points, better adapting to the shape of the multidimensional function to integrate.
 
 A better option when the number of dimensions \(d\) to integrate over is high is given by _Monte Carlo_ integration. Consider integrating a multidimensional function \(f(x)\) over some region \(\Omega\) of volume \(V(\Omega)\):
 \[
@@ -76,11 +71,11 @@ with \(U \sim\) uniform over \(\Omega\). Drawing \(N\) uniform random vectors \(
 \]
 this estimator defines Monte Carlo integration. More details in @monahan_2011.
 
-Both Gaussian quadrature and Monte Carlo integration can be further tweaked to improve accuracy and convergence rates: two appealing options are, respectively, adaptive Gaussian quadrature and importance sampling. Adaptive Gaussian quadrature works best when using the Gauss-Hermite rule with the normal density kernel as weighting function. Recall using the spectral or Cholesky decomposition of the random effects variance-covariance to pre-multiply the matrix of location nodes. This will not place the nodes in optimum locations for each subject: if between-subject variability is large, then a common matrix of location nodes is likely to be quite inefficient. Adaptive Gauss-Hermite quadrature, first proposed by @pinheiro_1995, aims to solve this problem. In brief, the idea consists in applying subject-specific (or cluster-specific) centring and scaling of the quadrature nodes to place the quadrature nodes at an optimal position for each subject. That is achieved by using an alternative normal kernel distribution \(\phi(x; \hat{M}_i, \hat{\Sigma}_i)\) with subject-specific mean vector \(\hat{M}_i\) and variance-covariance matrix \(\hat{\Sigma}_i\):
+Both Gaussian quadrature and Monte Carlo integration can be further tweaked to improve accuracy and convergence rates: two appealing options are, respectively, adaptive Gaussian quadrature and importance sampling. Adaptive Gaussian quadrature works best when using the Gauss-Hermite rule with the normal density kernel as weighting function. Recall using the spectral or Cholesky decomposition of the random effects variance-covariance to pre-multiply the matrix of location nodes. This will not place the nodes in optimum locations for each subject: if between-subject variability is large, then a common matrix of location nodes is likely to be quite inefficient. Adaptive Gauss-Hermite quadrature, as proposed by @pinheiro_1995, aims to solve this problem. In brief, the idea consists in applying subject-specific (or cluster-specific) centring and scaling of the quadrature nodes to place the quadrature nodes at an optimal position for each subject. That is achieved by using an alternative normal kernel distribution \(\phi(x; \hat{M}_i, \hat{\Sigma}_i)\) with subject-specific mean vector \(\hat{M}_i\) and variance-covariance matrix \(\hat{\Sigma}_i\):
 \[
 f(x) = \frac{f(x)}{\phi(x; \hat{M}_i, \hat{\Sigma}_i)} \phi(x; \hat{M}_i, \hat{\Sigma}_i)
 \]
-This yields a quadrature rule based on the subject-specific normal kernel: the location nodes and weights then depend on \(\hat{M}_i\) and \(\hat{\Sigma}_i\). Further, \(\hat{M}_i\) and \(\hat{\Sigma}_i\) can be updated iteratively (e.g. using empirical Bayes estimates) to better adapt the grid of quadrature points to the actual shape of the integral to approximate. Conversely, Monte Carlo integration works best when it is possible to draw a sample from the target distribution (i.e. the distribution of the integral to approximate); unfortunately, that is rarely the case in practice. The idea of importance sampling consists then in drawing a sample from a proposal distribution and then re-weight the estimated integral using importance weights to better adapt to the target distribution.
+This yields a quadrature rule based on the subject-specific normal kernel: the location nodes and weights then depend on \(\hat{M}_i\) and \(\hat{\Sigma}_i\). Further, \(\hat{M}_i\) and \(\hat{\Sigma}_i\) can be updated iteratively (e.g. using empirical Bayes estimates) to better adapt the grid of quadrature points to the actual shape of the integral to approximate as the accuracy of predicting \(\hat{M}_i\) and \(\hat{\Sigma}_i\) increases. Conversely, Monte Carlo integration works best when it is possible to draw a sample from the target distribution (i.e. the distribution of the integral to approximate); unfortunately, that is rarely the case in practice. The idea of importance sampling consists then in drawing a sample from a proposal distribution and then re-weight the estimated integral using importance weights to better adapt to the target distribution.
 
 ## Numerical differentiation {#compch-numdiff}
 
@@ -96,11 +91,11 @@ This formula for finite different approximation is also known as forward differe
 
 ## Numerical root finding {#compch-numroot}
 
-Root-finding algorithms are algorithms for finding the values \(x\) such that \(f(x) = 0\), for a given continuous function \(f(\cdot)\). Such values \(x\) are named roots (or zeros) of a function. Most root-finding algorithms are based on the intermediate value theorem, which states that if a continuous function has values of opposite sign at the end points of an interval then the function has at least one root in the interval.
+Root-finding algorithms are algorithms for finding the values \(x\) such that \(f(x) = 0\), for a given continuous function \(f(x)\). Such values \(x\) are named roots (or zeros) of a function. Most root-finding algorithms are based on the intermediate value theorem, which states that if a continuous function has values of opposite sign at the end points of an interval then the function has at least one root in the interval.
 
-For instance, the easiest root-finding method is the _bisection method_: let \(f(x)\) be a continuous function, for which one knows an interval \([a, b]\) such that \(f(a)\) and \(f(b)\) have opposite sign. Let \(c = (a + b) / 2\) be the midpoint the bisect the interval: now, either \(f(a)\) and \(f(c)\) or \(f(c)\) and \(f(b)\) have opposite sign, and one has in fact divided by two the size of the interval. One can iterate this method until the difference between the extremities of the interval is small enough (e.g. \(<1 \times 10^{-8}\)).
+For instance, the easiest root-finding method is the bisection method: let \(f(x)\) be a continuous function, for which one knows an interval \([a, b]\) such that \(f(a)\) and \(f(b)\) have opposite sign. Let \(c = (a + b) / 2\) be the midpoint the bisect the interval: now, either \(f(a)\) and \(f(c)\) or \(f(c)\) and \(f(b)\) have opposite sign, and one has in fact divided by two the size of the interval. One can iterate this method until the difference between the extremities of the interval is small enough (e.g. \(<1 \times 10^{-8}\)).
 
-Another well established method is the _secant method_: it uses a succession of roots of secant lines to approximate the root of a function \(f(x)\). Starting with values \(x_0\) and \(x_1\), a line is constructed between \((x_0, f(x_0))\) and \((x_1, f(x_1))\):
+Another well established method is the secant method: it uses a succession of roots of secant lines to approximate the root of a function \(f(x)\). Starting with values \(x_0\) and \(x_1\), a line is constructed between \((x_0, f(x_0))\) and \((x_1, f(x_1))\):
 \[
 y = \frac{f(x_1) - f(x_0)}{x_1 - x_0}(x - x_1) + f(x_1)
 \]
@@ -110,6 +105,6 @@ x = x_1 - f(x_1) \frac{x_1 - x_0}{f(x_1) - f(x_0)}
 \]
 Now, we set \(x_2 = x\) and we iterate this method until the difference between the extremities of the interval is small enough (e.g. \(<1 \times 10^{-8}\)).
 
-The secant method is also known as a _linear interpolation_ method; it is also possible to use higher order interpolation, specifically _quadratic interpolation_, to find the root of a function using the same rationale presented for the secant method.
+The secant method is also known as a linear interpolation method; it is also possible to use higher order interpolation, specifically quadratic interpolation, to find the root of a function using the same rationale presented for the secant method.
 
-Finally, a well-established and robust method is the _Brent-Dekker_ method, implemented in R with the `uniroot()` function. It combines the three methods presented before, trying to use the secant or quadratic interpolation method first - as they tend to converge faster to a solution - but falling back to the bisection method if necessary, for its robustness properties. More details on the Brent-Dekker method in @brent_1973.
+Finally, a well-established and robust method is the Brent-Dekker method, implemented in R with the `uniroot()` function. It combines the three methods presented before, trying to use the secant or quadratic interpolation method first - as they tend to converge faster to a solution - but falling back to the bisection method if necessary, for its robustness properties. More details on the Brent-Dekker method in @brent_1973.

@@ -50,7 +50,7 @@ ggplot(out, aes(x = t, y = h0, color = dist)) +
   theme_bw() +
   scale_linetype_discrete() +
   theme(legend.position = c(1, 1), legend.justification = c(1, 1), legend.background = element_blank(), legend.key = element_blank(), legend.direction = "vertical") +
-  labs(x = "Follow-up time t", y = expression(h[0](t)), color = "Baseline hazard")
+  labs(x = "Follow-up time t", y = expression(h[0](t)), color = "")
 ```
 
 ```{r simst2-frailty-distributions, fig.cap = "Frailty distributions chosen for this simulation study."}
@@ -141,7 +141,7 @@ rm(t, out, h0_exp, h0_wei, h0_gom, h0_wwm, theta, thetalabels, true_ms, isdiff, 
 
 ## Methods {#simst2-methods}
 
-In this Section I will introduce the models I fitted in this simulation study. First, I fit a Cox model with a shared frailty term:
+In this Section I will introduce the models I fitted in this simulation study. I start by fitting a Cox model with a shared frailty term:
 \[
 h_{ij}(t | \alpha_i) = \alpha_i h_0(t_{ij}) \exp(X_{ij} \beta),
 \]
@@ -159,9 +159,9 @@ The first estimand of interest is the regression coefficient \(\beta\) associate
 
 2. integrated marginal survival difference, defined as \(iS_{\text{diff}} = iS(x = 1) - iS(x = 0)\).
 
-(1) is obtained by fixing the time \(t\) (I am using 1, 2, 3, and 4 years), and then integrating out the frailty term from the conditional survival function as explained in Chapter \@ref(smre). Conversely, (2) requires integrating the marginal survival function for both treatment groups and then computing their difference. I estimate it as follows:
+\(S(t)_{\text{diff}}\) is obtained by fixing the time \(t\) (I am using 1, 2, 3, and 4 years), and then integrating out the frailty term from the conditional survival function as explained in Chapter \@ref(smre). Conversely,  \(iS_{\text{diff}}\) requires integrating the marginal survival function for both treatment groups and then computing their difference. I estimate it as follows:
 
-1. I estimate marginal survival for a treatment group at 1000 equally spaced values over the follow-up time \(t\);
+1. I estimate marginal survival for a treatment arm (e.g. for \(x = 0\)) at 1000 equally spaced values over the follow-up time \(t\);
 
 2. I fit an interpolating natural spline over the 1000 estimates from step (1) using the `splinefun` R function;
 

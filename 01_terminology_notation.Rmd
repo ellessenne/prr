@@ -32,4 +32,4 @@ H(t) = \int_0^t h(u) \ du;
 \]
 it can be expressed in terms of survival function, via the relationships \(H(t) = - \log S(t)\) or alternatively \(S(t) = \exp(-H(t))\).
 
-The notation presented in this Chapter follows @collett_2014, where further details can be found. Other seminal books covering the topic of survival analysis are @cox_1984, @kalbfleisch_2011, and @kleinbaum_2012. The hazard function \(h(t)\) and the survival function \(S(t)\) form building blocks for the models that I will be presenting in the following Sections \@ref(smre) and \@ref(jm) and it is crucial to keep their formulation and interpretation clear in mind.
+The notation presented in this Chapter follows @collett_2014, where further details can be found. Other seminal books covering the topic of survival analysis are books by @cox_1984, @kalbfleisch_2011, and @kleinbaum_2012. The hazard function \(h(t)\) and the survival function \(S(t)\) form building blocks for the models that I will be presenting in the following Sections \@ref(smre) and \@ref(jm) and it is crucial to keep clear in mind their formulation and interpretation.

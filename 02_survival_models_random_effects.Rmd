@@ -74,7 +74,7 @@ with \(D_i = \sum_{j = 1} ^ {n_i} d_{ij}\). Analogously as before, analytical fo
 \[
 L_i = \left[ \prod_{j = 1} ^ {n_i} h_{ij}(t_{ij}) ^ {d_{ij}} \right] \frac{\Gamma (1 / \theta + D_i)}{\Gamma (1 / \theta)} \left[ 1 - \theta \sum_{j = 1} ^ {n_i} \log S_{ij}(t_{ij}) \right] ^ {-1 / \theta - D_i};
 \]
-further details in @gutierrez_2002. As in the univariate frailty model, assuming a log-normal distribution requires some numerical approximation to be performed, being the resulting model analytically intractable.
+further details in @gutierrez_2002. As in the univariate setting, assuming a log-normal distribution requires some numerical approximation to be performed, being the resulting model analytically intractable.
 
 ## Alternative formulation {#smre-random-effects}
 
