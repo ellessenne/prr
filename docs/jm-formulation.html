@@ -25,7 +25,7 @@
 <meta name="author" content="Alessandro Gasparini">
 
 
-<meta name="date" content="2017-08-29">
+<meta name="date" content="2017-08-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -150,7 +150,7 @@ h(t | M_i(t)) = h_0(t) \exp(W \psi + \alpha m_i(t)),
 <p>The survival function follows as <span class="math display">\[
 S(t | M_i(t)) = \exp \left( -\int_0 ^ t h_0(u) \exp(W \psi + \alpha m_i(u)) \ du \right)
 \]</span></p>
-<p>Finally, regarding <span class="math inline">\(h_0(t)\)</span>: the choice of the baseline hazard function follows the usual rationale. It can be left unspecified, therefore resulting in a Cox model for the survival component of the joint model, or it can be specified using a parametric distribution (e.g. a Weibull distribution) or some flexible alternative <span class="citation">(Crowther, Abrams, and Lambert <a href="#ref-crowther_2012">2012</a>)</span>. Nevertheless, <span class="citation">Hsieh, Tseng, and Wang (<a href="#ref-hsieh_2006">2006</a>)</span> showed that choosing the Cox model for the survival component yields standard errors that are underestimated; consequently, bootstrapping is required to obtain correct standard errors in that situation.</p>
+<p>Finally, regarding <span class="math inline">\(h_0(t)\)</span>: the choice of the baseline hazard function follows the usual rationale. It can be left unspecified, therefore resulting in a Cox model for the survival component of the joint model, or it can be specified using a parametric distribution (e.g. a Weibull distribution) or some flexible alternative <span class="citation">(Crowther, Abrams, and Lambert <a href="#ref-crowther_2012">2012</a>)</span>. <span class="citation">Hsieh, Tseng, and Wang (<a href="#ref-hsieh_2006">2006</a>)</span> showed that choosing the Cox model for the survival component yields standard errors that are underestimated; consequently, bootstrapping is required to obtain correct standard errors in that situation.</p>
 </div>
 <h3>References</h3>
 <div id="refs" class="references">

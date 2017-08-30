@@ -25,7 +25,7 @@
 <meta name="author" content="Alessandro Gasparini">
 
 
-<meta name="date" content="2017-08-29">
+<meta name="date" content="2017-08-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -137,7 +137,7 @@
             <section class="normal" id="section-">
 <div id="sirex" class="section level1">
 <h1><span class="header-section-number">7</span> Exploring results from simulation studies interactively</h1>
-<p>The simulation studies I presented in Chapters <a href="simst1.html#simst1">5</a> and <a href="simst2.html#simst2">6</a> presented multiple challenges, one of them being how to present the results effectively given the amount of simulated scenarios (108 and 150 scenarios for simulation 1 and 2, respectively). Each scenario would require producing a variety of tables and plot for bias, coverage, and any other summary statistics I may be interested in: the amount of tables and plots would grow dramatically to an unsustainable number. A straightforward (and often used in practice) option could be selecting a handful of scenarios to present, limiting the number of tables and plots to what is believed to be most interesting. However, a reader may find other scenarios more interesting, or would like to compare different factors or even deep down more into the results; presenting only a subset of results may result limiting to some extent then. Therefore, facing this problem myself, I set out to develop an interactive tool to aid exploration and dissemination of results from simulation studies. Part of this work was presented in oral form at the Students’ Day of the 38<sup>th</sup> Conference of the International Society for Clinical Biostatistics; slides are attached in Appendix <a href="ax-slides-students-day.html#ax-slides-students-day">C.3</a>.</p>
+<p>The simulation studies I presented in Chapters <a href="simst1.html#simst1">5</a> and <a href="simst2.html#simst2">6</a> presented multiple challenges, one of them being how to present the results effectively given the amount of simulated scenarios (108 and 150 scenarios for simulation 1 and 2, respectively). Each scenario would require producing a variety of tables and plot for bias, coverage, and any other summary statistics I may be interested in: the amount of tables and plots would grow dramatically to an unsustainable number. A straightforward (and often used in practice) option could be selecting a handful of scenarios to present, limiting the number of tables and plots to what is believed to be most interesting. However, a reader may find other scenarios more interesting, or would like to compare different factors or even dig deeper into the results; presenting only a subset of results may result limiting to some extent then. Facing this problem myself, I set out to develop an interactive tool to aid exploration and dissemination of results from simulation studies. Part of this work was presented in oral form at the Students’ Day of the 38<sup>th</sup> Conference of the International Society for Clinical Biostatistics; slides are attached in Appendix <a href="ax-slides-students-day.html#ax-slides-students-day">C.3</a>.</p>
 <p>Simulation studies represent a powerful tool with a multiplicity of aims: among others, evaluating new or existing statistical methods, comparing them, assessing the impact of modelling assumption violations, and helping with the understanding of statistical concepts. The increased availability of powerful computational tools (both personal and high-performance cluster computers) to the average researcher surely contributed to the rise of simulation studies in the current literature. Searching on PubMed and Scopus with the query “simulation study” it is indeed possible to appreciate the greater use of this tool (Figure <a href="sirex.html#fig:simst-count">7.1</a>). Additionally, increased computational capabilities allow researchers to simulate an ever-growing number of scenarios, exploring multiple data-generating mechanisms, factors, and methods at once - making reporting results a non-trivial task.</p>
 <div class="figure" style="text-align: center"><span id="fig:simst-count"></span>
 <img src="figs/simst-count-1.png" alt="Numer of results querying 'simulation study' on Pubmed and Scopus." width="768" />
@@ -198,7 +198,7 @@ Figure 7.5: SiReX: export tables in LaTeX format
 Figure 7.6: SiReX: export plots
 </p>
 </div>
-<p>A current live demo of the tool is available at <a href="https://ag475.shinyapps.io/sirex-demo/" class="uri">https://ag475.shinyapps.io/sirex-demo/</a>, using an example dataset from a simulation study on multiple imputation.</p>
+<p>A current live demo of the tool is available at <a href="https://ag475.shinyapps.io/sirex-demo/" class="uri">https://ag475.shinyapps.io/sirex-demo/</a>, using an example dataset from a simulation study on multiple imputation. Nevetheless, SiReX is still under active development and changes are implemented on a constant basis; in Section <a href="future.html#future">9</a> I will present how I aim to polish it and expand it in the next months.</p>
 
 </div>
             </section>

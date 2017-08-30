@@ -25,7 +25,7 @@
 <meta name="author" content="Alessandro Gasparini">
 
 
-<meta name="date" content="2017-08-29">
+<meta name="date" content="2017-08-30">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -144,7 +144,7 @@
 <li><p>a shared Gamma frailty model with a baseline Weibull hazard using the likelihood approximated numerically via Gauss-Kronrod quadrature (as implemented in R’s <code>integrate()</code> function; method <em>IN</em>).</p></li>
 </ul>
 <p>Then, for data generated assuming a log-normal frailty, I fitted a Weibull model with a random intercept using the likelihood approximated via Gauss-Hermite quadrature using 15, 35, 75, and 105 nodes (methods <em>GQ15</em>, <em>GQ35</em>, <em>GQ75</em>, <em>GQ105</em>).</p>
-<p>For each model I compared the estimated parameters of the Weibull distribution <span class="math inline">\(\hat{\lambda}\)</span> and <span class="math inline">\(\hat{p}\)</span>, the estimated log-treatment effect <span class="math inline">\(\hat{\beta}\)</span>, and the estimated variance of the frailty component <span class="math inline">\(\hat{\theta}\)</span>.</p>
+<p>For each model I compared the estimated parameters of the Weibull distribution <span class="math inline">\(\hat{\lambda}\)</span> and <span class="math inline">\(\hat{p}\)</span>, the estimated log-treatment effect <span class="math inline">\(\hat{\beta}\)</span>, and the estimated variance of the frailty <span class="math inline">\(\hat{\theta}\)</span>.</p>
 <p>In terms of performance measures, I am interested first of all in the performance of the maximum likelihood estimation procedure; that is, how precise is the maximum likelihood estimator. I will assess this by computing bias for each estimand, defined as <span class="math inline">\(b = E(\hat{\beta}) - \beta\)</span>.</p>
 <p>Next, I am interested in coverage, i.e. the proportion of times the <span class="math inline">\(100 \times (1 - \alpha)\%\)</span> confidence interval <span class="math inline">\(\hat{\beta} \pm Z_{1 - \alpha / 2} \times SE(\hat{\beta})\)</span> includes the true value <span class="math inline">\(\beta\)</span>. This allow to assess whether the empirical coverage rate approaches the nominal coverage rate (<span class="math inline">\(100 \times (1 - \alpha)\%\)</span>), to properly control the type I error rate for testing a null hypotesis of no effect.</p>
 <p>Finally, I am interested in overall accuracy and therefore I will compute the mean squared error, defined as the sum of bias and variability: <span class="math inline">\((\bar{\hat{\beta}} - \beta) ^ 2 + (SE(\hat{\beta})) ^ 2\)</span>.</p>
