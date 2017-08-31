@@ -8,4 +8,5 @@ The [GitBook](https://www.gitbook.com/) version of this report is hosted using [
 
 ## Build status
 
-[![Build Status](https://travis-ci.org/ellessenne/prr.svg?branch=master)](https://travis-ci.org/ellessenne/prr)
+[![Travis Build Status](https://travis-ci.org/ellessenne/prr.svg?branch=master)](https://travis-ci.org/ellessenne/prr)
+[![Appveyor Build status](https://ci.appveyor.com/api/projects/status/ib2jtosdk7io4c1c/branch/master?svg=true)](https://ci.appveyor.com/project/ellessenne/prr/branch/master)
