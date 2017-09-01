@@ -42,7 +42,7 @@ summary_normal_gq = read_csv("data/summary_normal_qg.csv.gz") %>%
          par = factor(par, levels = c("lambda", "p", "trt", "sigma"), labels = c("Lambda", "P", "Beta", "Sigma")))
 ```
 
-I selected a single scenario for each aim of this simulation study (out of 54) to present, for conciseness. Specifically, I will present results for the setting of a small frailty variance (0.25) with a negative regression coefficient (-0.50). The full results can be explored online interactively by clicking [here](https://ag475.shinyapps.io/PRR-SiReX/).
+I selected a single scenario for each aim of this simulation study (out of 54) to present, for conciseness. Specifically, I will present results for the setting of a small frailty variance (0.25) with a negative regression coefficient (-0.50). The full results can be explored online interactively at [https://ag475.shinyapps.io/PRR-SiReX/](https://ag475.shinyapps.io/PRR-SiReX/).
 
 ### Aim 1: accuracy compared to analytical formulae
 
