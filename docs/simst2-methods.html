@@ -25,7 +25,7 @@
 <meta name="author" content="Alessandro Gasparini">
 
 
-<meta name="date" content="2017-08-30">
+<meta name="date" content="2017-09-01">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -139,7 +139,7 @@
 <h2><span class="header-section-number">6.3</span> Methods</h2>
 <p>In this Section I will introduce the models I fitted in this simulation study. I start by fitting a Cox model with a shared frailty term: <span class="math display">\[
 h_{ij}(t | \alpha_i) = \alpha_i h_0(t_{ij}) \exp(X_{ij} \beta),
-\]</span> with <span class="math inline">\(h_0(\cdot)\)</span> left unspecified. The Cox model with a shared Gamma frailty is implemented in the R package <code>frailtyEM</code>, while the Cox model with a shared log-normal frailty is implemented in the R package <code>coxme</code>. Since the <code>coxme</code> package does not return a standard error for the estimated frailty variance by default, I used bootstrap with 1000 replications to estimate it; I resampled clusters of individuals rather than individuals to preserve the correlation within a cluster. Then, I fitted fully parametric survival models with a shared frailty term, using the same model formulation of the Cox model but specifying the baseline hazard function. I fitted six models, for each combination of baseline hazard (Exponential, Weibull, or Gompertz) and frailty distribution (Gamma, log-normal). These models are implemented in the R package <code>parfm</code>. Finally, I fit flexible Royston-Parmar models with a shared frailty term, either Gamma or log-normal: <span class="math display">\[
+\]</span> with <span class="math inline">\(h_0(\cdot)\)</span> left unspecified. The Cox model with a shared Gamma frailty is implemented in the R package <code>frailtyEM</code>, while the Cox model with a shared log-normal frailty is implemented in the R package <code>coxme</code>. Since the <code>coxme</code> package does not return a standard error for the estimated frailty variance by default, I used bootstrap with 1000 replications to estimate it; I resampled clusters of individuals rather than individuals to preserve the correlation within a cluster. Then, I fitted fully parametric survival models with a shared frailty term, using the same model formulation of the Cox model but specifying the baseline hazard function. I fitted six models, for each combination of baseline hazard (Exponential, Weibull, or Gompertz) and frailty distribution (Gamma, log-normal). These models are implemented in the R package <code>parfm</code>. Finally, I fitted flexible Royston-Parmar models with a shared frailty term, either Gamma or log-normal: <span class="math display">\[
 \log H(t_{ij}|\alpha_i) = s(z; \gamma) + X \beta + \log(\alpha_i),
 \]</span> with <span class="math inline">\(s(\cdot)\)</span> a restricted cubic spline function of log-time that smooths the logarithm of the baseline cumulative hazard <span class="math inline">\(H_0(\cdot)\)</span>. This model requires choosing the number of degrees of freedom of the spline term, hence I varied between 3, 5, 7, and 9 degrees of freedom. I also fitted the same model using penalised likelihood <span class="citation">(X. Liu, Pawitan, and Clements <a href="#ref-liu_2016">2016</a>)</span>, applying a penalty to the likelihood to avoid both overfitting and having to choose the number of degrees of freedom for the spline term. These flexible parametric models are implemented in the R package <code>rstpm2</code>.</p>
 </div>
