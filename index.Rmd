@@ -7,7 +7,7 @@ documentclass: book
 bibliography: bibliography.bib
 biblio-style: apalike
 link-citations: yes
-colorlinks: yes
+colorlinks: no
 github-repo: ellessenne/prr
 fontsize: 12pt
 ---
