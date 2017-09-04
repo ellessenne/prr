@@ -5,5 +5,7 @@ Imports: bookdown
 Remotes: rstudio/bookdown
 License: CC-BY-4.0, GPL-3.0
 Description: Probation review report, written using R, R Markdown, and Bookdown.
-Author: Alessandro Gasparini
-Maintainer: Alessandro Gasparini
+Authors@R: c(
+    person("Alessandro", "Gasparini", role = c("aut", "cre"), email = "ag475@le.ac.uk"),
+    person()
+    )
