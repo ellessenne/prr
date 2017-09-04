@@ -36,7 +36,8 @@ pacman::p_load(
   "readr",
   "scales",
   "tidyr",
-  "kableExtra")
+  "kableExtra",
+  "formattable")
 ```
 
 # Introduction {-}

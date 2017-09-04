@@ -3,3 +3,7 @@ Title: placeholder
 Version: 0.0.1
 Imports: bookdown
 Remotes: rstudio/bookdown
+License: CC-BY-4.0, GPL-3.0
+Description: Probation review report, written using R, R Markdown, and Bookdown.
+Author: Alessandro Gasparini
+Maintainer: Alessandro Gasparini
